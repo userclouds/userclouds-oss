@@ -1,0 +1,70 @@
+:global(#root) {
+  #homePageContent {
+    align-content: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    height: 100%;
+  }
+
+  #homePageContent > aside {
+    flex: 1;
+  }
+
+  #homePageContent > aside > section {
+    margin: 0 0 20px;
+
+    label + div p {
+      font-weight: 600;
+    }
+  }
+
+  #homePageTitle {
+    height: auto;
+    float: left;
+  }
+
+  #homePageButton {
+    float: right;
+  }
+
+  #hero {
+    background: #eaf1fb url('../../public/home-page-hero-bg.png') no-repeat
+      right bottom;
+    border-radius: 10px;
+    flex: 2;
+    /* 50px is header and 20px is gap */
+    height: calc(100% - 50px - 20px);
+    padding: 50px 150px 50px 27px;
+  }
+
+  #hero h1 {
+    color: #3b76b0;
+    font-size: 36px;
+    font-weight: 500;
+  }
+
+  #hero h1 > em {
+    color: #283354;
+    font-style: normal;
+  }
+
+  .card {
+    gap: 12px;
+  }
+
+  .resourceList {
+    width: 100%;
+  }
+
+  .resourceList > li {
+    border-bottom: 1px solid #e5e5e5;
+    line-height: 50px;
+
+    svg {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+}

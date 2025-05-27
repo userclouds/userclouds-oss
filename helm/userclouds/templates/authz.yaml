@@ -1,0 +1,104 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ template "authz.serviceAccount" . }}
+  labels:
+     {{- include "userclouds.labels" . | nindent 4 }}
+  annotations:
+    eks.amazonaws.com/role-arn: {{ .Values.roles.authz }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authz
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.authz.replicas | default .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "authz.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        userclouds.sla: critical
+        {{- include "authz.selectorLabels" . | nindent 8 }}
+    spec:
+      nodeSelector:
+        {{- include "userclouds.nodeSelector" . | nindent 8 }}
+      affinity:
+        {{- include "userclouds.maybeNoT3Nodes" .Values.authz | nindent 8 }}
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  {{- include "authz.selectorLabels" . | nindent 18 }}
+      serviceAccountName: {{ template "authz.serviceAccount" . }}
+      volumes:
+        - name: configmap
+          configMap:
+            name: userclouds-configs
+            items:
+              - key: base
+                path: {{ printf "base_%s.yaml" .Values.uc_universe }}
+              - key: authz
+                path: {{ printf "authz/%s.yaml" .Values.uc_universe }}
+      containers:
+        - name: authz
+          image: "{{ include "userclouds.image" . }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - authz
+          {{- include "userclouds.envConfigMap" . | nindent 10 }}
+          env:
+            {{- include "userclouds.envVars" . | nindent 10 }}
+          {{- with .Values.authz.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- include "userclouds.lifecycleDrain" . | nindent 10 }}
+          volumeMounts:
+            - name: configmap
+              mountPath: /userclouds/configmaps
+          ports:
+            - name: authz
+              containerPort: 5000
+              protocol: TCP
+            - name: internal
+              containerPort: 5001
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 15
+            httpGet:
+              path: /healthcheck
+              port: authz
+          readinessProbe:
+            initialDelaySeconds: 15
+            httpGet:
+              path: /healthcheck
+              port: authz
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authz
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+      {{- include "authz.selectorLabels" . | nindent 6 }}
+  ports:
+    - name: service
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+    - name: internal
+      protocol: TCP
+      port: 5001
+

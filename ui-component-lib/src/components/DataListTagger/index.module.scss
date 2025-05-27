@@ -1,0 +1,17 @@
+@use '../../_variables.module.css';
+
+.datalisttagger fieldset {
+  display: flex;
+  gap: var(--space-4);
+}
+.datalisttagger input[type='text'] {
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--border-radius-default);
+  flex: 1;
+  padding-left: var(--input-padding-default);
+  padding-right: var(--input-padding-default);
+
+  &:focus {
+    border-color: var(--color-neutral-600);
+  }
+}

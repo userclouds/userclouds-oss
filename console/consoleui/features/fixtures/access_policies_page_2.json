@@ -1,0 +1,124 @@
+{
+  "data": [
+    {
+      "id": "c9c14750-b8f3-4507-bd3f-5c6562f0a6e6",
+      "name": "DenyAll",
+      "description": "This policy denies all access.",
+      "policy_type": "composite_or",
+      "tag_ids": null,
+      "version": 0,
+      "is_system": true,
+      "components": [
+        {
+          "template": {
+            "id": "c88d97a6-a3ae-4af8-b018-2bcddf1fa606",
+            "name": "DenyAll"
+          }
+        }
+      ],
+      "required_context": {}
+    },
+    {
+      "id": "c9bb52b7-3c97-4b58-be68-e466d4c3ea8f",
+      "name": "aaaa",
+      "description": "",
+      "policy_type": "composite_and",
+      "tag_ids": [],
+      "version": 0,
+      "is_system": false,
+      "components": [
+        {
+          "policy": {
+            "id": "42a16658-cc04-48af-8546-82704e6e1166",
+            "name": "qwe"
+          }
+        }
+      ],
+      "required_context": {}
+    },
+    {
+      "id": "e234c37f-f410-4f2c-a1d4-8444308bbf35",
+      "name": "asdf",
+      "description": "",
+      "policy_type": "composite_and",
+      "tag_ids": [],
+      "version": 0,
+      "is_system": false,
+      "components": [
+        {
+          "policy": {
+            "id": "aeaf2aac-f732-4370-9ac5-ead2636dc9c9",
+            "name": "asf_policy_332622a1"
+          }
+        }
+      ],
+      "required_context": {}
+    },
+    {
+      "id": "aeaf2aac-f732-4370-9ac5-ead2636dc9c9",
+      "name": "asf_policy_332622a1",
+      "description": "",
+      "policy_type": "composite_and",
+      "tag_ids": [],
+      "version": 0,
+      "is_system": false,
+      "components": [
+        {
+          "policy": {
+            "id": "a76cc3a6-e47d-4dd8-991c-3a1b7a47e996",
+            "name": "gdsag"
+          }
+        },
+        {
+          "policy": {
+            "id": "3f380e42-0b21-4570-a312-91e1b80386fa",
+            "name": "AllowAll"
+          }
+        }
+      ],
+      "required_context": {}
+    },
+    {
+      "id": "c6e600d4-b929-4bd7-8e2b-0dd569f97d79",
+      "name": "bcbcb",
+      "description": "",
+      "policy_type": "composite_and",
+      "tag_ids": [],
+      "version": 0,
+      "is_system": false,
+      "components": [
+        {
+          "template": {
+            "id": "aad2bf25-311f-467e-9169-a6a89b6d34a6",
+            "name": "CheckAttribute"
+          },
+          "template_parameters": "{}"
+        }
+      ],
+      "required_context": {}
+    },
+    {
+      "id": "a76cc3a6-e47d-4dd8-991c-3a1b7a47e996",
+      "name": "gdsagaa",
+      "description": "",
+      "policy_type": "composite_and",
+      "tag_ids": [],
+      "version": 0,
+      "is_system": false,
+      "components": [
+        {
+          "template": {
+            "id": "aad2bf25-311f-467e-9169-a6a89b6d34a6",
+            "name": "CheckAttribute"
+          },
+          "template_parameters": "{}"
+        }
+      ],
+      "required_context": {}
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": true,
+  "prev": "id:c9c14750-b8f3-4507-bd3f-5c6562f0a6e6"
+}

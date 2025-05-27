@@ -1,0 +1,26 @@
+log_db:
+  user: usercloud
+  password: aws://secrets/prod/logserver/rdb_password_only
+  dbname: status_00000000000000000000000000000000
+  dbdriver: postgres
+  dbproduct: aws-rds-postgres
+  host: status-postgre.c3cgcihdah0v.us-west-2.rds.amazonaws.com
+  port: 5432
+
+svc_listener:
+  protocol: http
+  host: 0.0.0.0
+  port: 5500
+
+kinesis_aws_region: us-west-2
+console_tenant_id: 804718b8-5788-4c31-9f5e-1ac55782728c
+
+logger:
+  transports:
+    - type: kinesis
+      aws_region: 'us-west-2'
+      stream_name: 'prod-log'
+      shard_count: 2
+      transportconfig:
+        required: true
+        max_log_level: 5

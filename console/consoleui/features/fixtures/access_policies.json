@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "id": "0c0b7371-5175-405b-a17c-fec5969914b8",
+      "name": "Allow_all",
+      "description": "Allow everything",
+      "policy_type": "composite_and",
+      "tag_ids": null,
+      "version": 0,
+      "components": [
+        {
+          "template": {
+            "id": "1e742248-fdde-4c88-9ea7-2c2106ec7aa8",
+            "name": "AllowAll"
+          },
+          "template_parameters": {}
+        }
+      ],
+      "required_context": {}
+    },
+    {
+      "id": "00000000-5175-405b-a17c-fec5969914b8",
+      "name": "Dont_Allow_Any",
+      "description": "Don't allow a thing",
+      "policy_type": "composite_or",
+      "tag_ids": null,
+      "version": 1,
+      "components": {},
+      "required_context": {}
+    }
+  ],
+  "has_next": true,
+  "next": "id:7def2e9f-0c6a-489a-8549-4a673ad001e9",
+  "has_prev": false
+}

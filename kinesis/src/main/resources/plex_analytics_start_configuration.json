@@ -1,0 +1,8 @@
+{
+  "ApplicationName": "plex_analytics_0",
+  "RunConfiguration": {
+    "ApplicationRestoreConfiguration": {
+      "ApplicationRestoreType": "SKIP_RESTORE_FROM_SNAPSHOT"
+    }
+  }
+}

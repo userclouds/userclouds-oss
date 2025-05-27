@@ -1,0 +1,15 @@
+{
+  "user_profile": {
+    "id": "ee58238a-34d5-42f2-930a-a50fbcdf7043",
+    "updated_at": 0,
+    "profile": {
+      "email": "kyle@userclouds.com",
+      "email_verified": false,
+      "name": "Kyle Jacobson",
+      "picture": ""
+    },
+    "require_mfa": false,
+    "organization_id": "00000000-0000-0000-0000-000000000000",
+    "authns": null
+  }
+}

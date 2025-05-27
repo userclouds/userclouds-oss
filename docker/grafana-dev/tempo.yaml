@@ -1,0 +1,57 @@
+# For more information on this configuration, see the complete reference guide at
+# https://grafana.com/docs/tempo/latest/configuration/
+# https://github.com/grafana/helm-charts/tree/main/charts/tempo#values
+
+nodeSelector:
+  ${node_selector_key}: '${node_selector_value}'
+
+server:
+  http_listen_port: 3200
+
+query_frontend:
+  search:
+    duration_slo: 5s
+    throughput_bytes_slo: 1.073741824e+09
+  trace_by_id:
+    duration_slo: 5s
+
+distributor:
+  # this configuration will listen on all ports and protocols that tempo is capable of.
+  # the receives all come from the OpenTelemetry collector.  more configuration information can
+  # be found there: https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver
+  # for a production deployment you should only enable the receivers you need!
+  receivers:
+    jaeger:
+      protocols:
+        thrift_http:
+        grpc:
+        thrift_binary:
+        thrift_compact:
+    zipkin:
+    otlp:
+      protocols:
+        http:
+        grpc:
+    opencensus:
+
+metrics_generator:
+  registry:
+    external_labels:
+      source: tempo
+      cluster: docker-compose
+  storage:
+    path: /tmp/tempo/generator/wal
+    remote_write:
+      - url: http://prometheus:9090/api/v1/write
+        send_exemplars: true
+
+storage:
+  trace:
+    backend: local # backend configuration to use
+    wal:
+      path: /tmp/tempo/wal # where to store the wal locally
+    local:
+      path: /tmp/tempo/blocks
+
+overrides:
+  metrics_generator_processors: [service-graphs, span-metrics] # enables metrics generator

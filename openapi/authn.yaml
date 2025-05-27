@@ -1,0 +1,396 @@
+openapi: 3.0.3
+info:
+  description: AuthN OpenAPI Spec
+  title: Authentication
+  version: 1.0.0
+paths:
+  /authn/baseprofiles:
+    get:
+      description: This endpoint returns a paginated list of user base profiles in
+        a tenant. The list can be filtered to only include users inside a specified
+        organization.
+      parameters:
+      - description: Filter the users based on a list of user IDs
+        in: query
+        name: user_ids
+        schema:
+          description: Filter the users based on a list of user IDs
+          items:
+            type: string
+          type: array
+      - description: Filter the users based on an organization ID
+        in: query
+        name: organization_id
+        schema:
+          description: Filter the users based on an organization ID
+          nullable: true
+          type: string
+      - description: A cursor value after which the returned list will start
+        in: query
+        name: starting_after
+        schema:
+          description: A cursor value after which the returned list will start
+          nullable: true
+          type: string
+      - description: A cursor value before which the returned list will end
+        in: query
+        name: ending_before
+        schema:
+          description: A cursor value before which the returned list will end
+          nullable: true
+          type: string
+      - description: The maximum number of results to be returned per page
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of results to be returned per page
+          nullable: true
+          type: string
+      - description: A filter clause to use in the pagination query
+        in: query
+        name: filter
+        schema:
+          description: A filter clause to use in the pagination query
+          nullable: true
+          type: string
+      - description: A comma-delimited list of field names to sort the returned results
+          by - the last field name must be 'id'
+        in: query
+        name: sort_key
+        schema:
+          description: A comma-delimited list of field names to sort the returned
+            results by - the last field name must be 'id'
+          nullable: true
+          type: string
+      - description: The order in which results should be sorted (ascending or descending)
+        in: query
+        name: sort_order
+        schema:
+          description: The order in which results should be sorted (ascending or descending)
+          nullable: true
+          type: string
+      - description: The version of the API to be called
+        in: query
+        name: version
+        schema:
+          description: The version of the API to be called
+          nullable: true
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdpListUserBaseProfilesResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: List User Base Profiles
+      tags:
+      - Users
+  /authn/users:
+    get:
+      description: This endpoint returns a paginated list of users in a tenant. The
+        list can be filtered to only include users inside a specified organization.
+      parameters:
+      - description: A cursor value after which the returned list will start
+        in: query
+        name: starting_after
+        schema:
+          description: A cursor value after which the returned list will start
+          nullable: true
+          type: string
+      - description: A cursor value before which the returned list will end
+        in: query
+        name: ending_before
+        schema:
+          description: A cursor value before which the returned list will end
+          nullable: true
+          type: string
+      - description: The maximum number of results to be returned per page
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of results to be returned per page
+          nullable: true
+          type: string
+      - description: A filter clause to use in the pagination query
+        in: query
+        name: filter
+        schema:
+          description: A filter clause to use in the pagination query
+          nullable: true
+          type: string
+      - description: A comma-delimited list of field names to sort the returned results
+          by - the last field name must be 'id'
+        in: query
+        name: sort_key
+        schema:
+          description: A comma-delimited list of field names to sort the returned
+            results by - the last field name must be 'id'
+          nullable: true
+          type: string
+      - description: The order in which results should be sorted (ascending or descending)
+        in: query
+        name: sort_order
+        schema:
+          description: The order in which results should be sorted (ascending or descending)
+          nullable: true
+          type: string
+      - description: The version of the API to be called
+        in: query
+        name: version
+        schema:
+          description: The version of the API to be called
+          nullable: true
+          type: string
+      - description: Filter the users based on an organization ID
+        in: query
+        name: organization_id
+        schema:
+          description: Filter the users based on an organization ID
+          nullable: true
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdpListUsersResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: List Users
+      tags:
+      - Users
+    post:
+      description: This endpoint creates a user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IdpCreateUserAndAuthnRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdpUserResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+      summary: Create User
+      tags:
+      - Users
+  /authn/users/{id}:
+    delete:
+      description: This endpoint deletes a user by ID.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "204":
+          description: No Content
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete User
+      tags:
+      - Users
+    get:
+      description: This endpoint gets a user by ID.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdpUserResponse'
+          description: OK
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Get User
+      tags:
+      - Users
+    put:
+      description: This endpoint updates a specified user.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthnUpdateUserRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdpUserResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+      summary: Update User
+      tags:
+      - Users
+components:
+  schemas:
+    AuthnUpdateUserRequest:
+      properties:
+        profile:
+          $ref: '#/components/schemas/UserstoreRecord'
+        region:
+          type: string
+      type: object
+    IdpCreateUserAndAuthnRequest:
+      properties:
+        authn_type:
+          type: string
+        id:
+          $ref: '#/components/schemas/UuidUUID'
+        oidc_issuer_url:
+          type: string
+        oidc_provider:
+          $ref: '#/components/schemas/OidcProviderType'
+        oidc_subject:
+          type: string
+        organization_id:
+          $ref: '#/components/schemas/UuidUUID'
+        password:
+          type: string
+        profile:
+          $ref: '#/components/schemas/UserstoreRecord'
+        region:
+          type: string
+        username:
+          type: string
+      type: object
+    IdpListUserBaseProfilesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/IdpUserBaseProfileResponse'
+          nullable: true
+          type: array
+        has_next:
+          type: boolean
+        has_prev:
+          type: boolean
+        next:
+          type: string
+        prev:
+          $ref: '#/components/schemas/PaginationCursor'
+      type: object
+    IdpListUsersResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/IdpUserResponse'
+          nullable: true
+          type: array
+        has_next:
+          type: boolean
+        has_prev:
+          type: boolean
+        next:
+          type: string
+        prev:
+          $ref: '#/components/schemas/PaginationCursor'
+      type: object
+    IdpUserBaseProfileResponse:
+      properties:
+        email:
+          type: string
+        email_verified:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        nickname:
+          type: string
+        organization_id:
+          type: string
+        picture:
+          type: string
+        updated_at:
+          type: integer
+      type: object
+    IdpUserResponse:
+      properties:
+        id:
+          $ref: '#/components/schemas/UuidUUID'
+        organization_id:
+          $ref: '#/components/schemas/UuidUUID'
+        profile:
+          $ref: '#/components/schemas/UserstoreRecord'
+        updated_at:
+          type: integer
+      type: object
+    OidcProviderType:
+      enum:
+      - custom
+      - facebook
+      - google
+      - linkedin
+      - microsoft
+      - none
+      - unsupported
+      type: integer
+    PaginationCursor: {}
+    UserstoreRecord:
+      additionalProperties: {}
+      type: object
+    UuidUUID:
+      example: 248df4b7-aa70-47b8-a036-33ac447e668d
+      format: uuid
+      type: string
+servers:
+- url: https://your-tenant-name.tenant.userclouds.com
+x-readme:
+  explorer-enabled: false

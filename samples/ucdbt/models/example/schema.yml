@@ -1,0 +1,64 @@
+
+version: 2
+
+models:
+  - name: raw_users
+    description: "Raw user data from prod"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: email
+
+  - name: all_users
+    description: "Normalized user data"
+    config:
+      materialized: view
+      userclouds:
+        email:
+          access_policy_id: 3f380e42-0b21-4570-a312-91e1b80386fa
+          transformer_id: 0cedf7a4-86ab-450a-9426-478ad0a60faa
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: email
+
+  - name: orders
+    description: "Raw order data from prod"
+    columns:
+      - name: user_id
+        description: "User ID"
+      - name: total
+        description: "Order size"
+
+  - name: ltv
+    description: "Customer lifetime value model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: total_order_value
+
+  - name: average
+    description: "average cart size"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: average_order_total
+
+  - name: resolve
+    config:
+      userclouds:
+        email:
+          context: {"pipeline": "audit"}
+          purposes: [{"name": "marketing"}]

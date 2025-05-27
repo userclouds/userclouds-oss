@@ -1,0 +1,21 @@
+:global(#root) {
+  .copyIcon {
+    color: #1e3a8a;
+    padding: 0;
+  }
+
+  .link {
+    color: var(--primary-button-background);
+  }
+
+  .auditLogTable {
+    grid-template-columns:
+      fit-content(15%) 1fr fit-content(25%) fit-content(20%)
+      60px;
+  }
+
+  .primaryCell {
+    font-weight: bold;
+    margin-right: 20px;
+  }
+}

@@ -1,0 +1,215 @@
+import EdgeType, {
+  Attribute,
+  blankAttribute,
+  changeAttributeFlavor,
+  getEdgeTypeWithoutAttribute,
+} from '../models/authz/EdgeType';
+
+export const CHANGE_CURRENT_OBJECT_SEARCH_FILTER =
+  'CHANGE_CURRENT_OBJECT_SEARCH_FILTER';
+
+export const CHANGE_CURRENT_EDGE_SEARCH_FILTER =
+  'CHANGE_CURRENT_EDGE_SEARCH_FILTER';
+
+export const CHANGE_CURRENT_OBJECT_TYPE_SEARCH_FILTER =
+  'CHANGE_CURRENT_OBJECT_TYPE_SEARCH_FILTER';
+export const CHANGE_CURRENT_EDGE_TYPE_SEARCH_FILTER =
+  'CHANGE_CURRENT_EDGE_TYPE_SEARCH_FILTER';
+
+export const CHECK_AUTHORIZATION_REQUEST = 'CHECK_AUTHORIZATION_REQUEST';
+export const CHECK_AUTHORIZATION_RESULT = 'CHECK_AUTHORIZATION_RESULT';
+export const CHECK_AUTHORIZATION_ERROR = 'CHECK_AUTHORIZATION_ERROR';
+export const CHANGE_AUTHORIZATION_REQUEST = 'CHANGE_AUTHORIZATION_REQUEST';
+
+export const CREATE_EDGE_TYPE_REQUEST = 'CREATE_EDGE_TYPE_REQUEST';
+export const CREATE_EDGE_TYPE_SUCCESS = 'CREATE_EDGE_TYPE_SUCCESS';
+export const CREATE_EDGE_TYPE_ERROR = 'CREATE_EDGE_TYPE_ERROR';
+export const UPDATE_EDGE_TYPE_REQUEST = 'UPDATE_EDGE_TYPE_REQUEST';
+export const UPDATE_EDGE_TYPE_SUCCESS = 'UPDATE_EDGE_TYPE_SUCCESS';
+export const UPDATE_EDGE_TYPE_ERROR = 'UPDATE_EDGE_TYPE_ERROR';
+export const CHANGE_EDGE_TYPE = 'CHANGE_EDGE_TYPE';
+export const CHANGE_EDGE_TYPE_ATTRIBUTE = 'CHANGE_EDGE_TYPE_ATTRIBUTE';
+export const CHANGE_EDGE_TYPE_DELETE_ATTRIBUTE =
+  'CHANGE_EDGE_TYPE_DELETE_ATTRIBUTE';
+export const GET_EDGE_TYPE_REQUEST = 'GET_EDGE_TYPE_REQUEST';
+export const GET_EDGE_TYPE_SUCCESS = 'GET_EDGE_TYPE_SUCCESS';
+export const RETRIEVE_BLANK_EDGE_TYPE = 'RETRIEVE_BLANK_EDGE_TYPE';
+export const VALIDATE_CURRENT_EDGE_TYPE = 'VALIDATE_CURRENT_EDGE_TYPE';
+export const TOGGLE_EDGE_TYPE_EDIT_MODE = 'TOGGLE_EDGE_TYPE_EDIT_MODE';
+export const TOGGLE_EDGE_TYPE_FOR_DELETE = 'TOGGLE_EDGE_TYPE_FOR_DELETE';
+export const DELETE_EDGE_TYPES_REQUEST = 'DELETE_EDGE_TYPES_REQUEST';
+export const DELETE_EDGE_TYPES_SUCCESS = 'DELETE_EDGE_TYPES_SUCCESS';
+export const DELETE_EDGE_TYPES_ERROR = 'DELETE_EDGE_TYPES_ERROR';
+export const GET_EDGE_TYPE_ERROR = 'GET_EDGE_TYPE_ERROR';
+export const GET_EDGE_TYPES_REQUEST = 'GET_EDGE_TYPES_REQUEST';
+export const GET_EDGE_TYPES_SUCCESS = 'GET_EDGE_TYPES_SUCCESS';
+export const GET_EDGE_TYPES_ERROR = 'GET_EDGE_TYPES_ERROR';
+export const BULK_UPDATE_EDGE_TYPES_START = 'BULK_UPDATE_EDGE_TYPES_START';
+export const BULK_UPDATE_EDGE_TYPES_END = 'BULK_UPDATE_EDGE_TYPES_END';
+export const TOGGLE_SELECT_ALL_EDGE_TYPES = 'TOGGLE_SELECT_ALL_EDGE_TYPES';
+
+export const GET_OBJECT_TYPES_REQUEST = 'GET_OBJECT_TYPES_REQUEST';
+export const GET_OBJECT_TYPES_SUCCESS = 'GET_OBJECT_TYPES_SUCCESS';
+export const GET_OBJECT_TYPES_ERROR = 'GET_OBJECT_TYPES_ERROR';
+export const CHANGE_OBJECT_TYPE = 'CHANGE_OBJECT_TYPE';
+export const CREATE_OBJECT_TYPE_REQUEST = 'CREATE_OBJECT_TYPE_REQUEST';
+export const CREATE_OBJECT_TYPE_SUCCESS = 'CREATE_OBJECT_TYPE_SUCCESS';
+export const CREATE_OBJECT_TYPE_ERROR = 'CREATE_OBJECT_TYPE_ERROR';
+export const UPDATE_OBJECT_TYPE_SUCCESS = 'UPDATE_OBJECT_TYPE_SUCCESS';
+export const UPDATE_OBJECT_TYPE_ERROR = 'UPDATE_OBJECT_TYPE_ERROR';
+export const GET_OBJECT_TYPE_REQUEST = 'GET_OBJECT_TYPE_REQUEST';
+export const GET_OBJECT_TYPE_SUCCESS = 'GET_OBJECT_TYPE_SUCCESS';
+export const VALIDATE_CURRENT_OBJECT_TYPE = 'VALIDATE_CURRENT_OBJECT_TYPE';
+export const TOGGLE_OBJECT_TYPE_EDIT_MODE = 'TOGGLE_OBJECT_TYPE_EDIT_MODE';
+export const TOGGLE_OBJECT_TYPE_FOR_DELETE = 'TOGGLE_OBJECT_TYPE_FOR_DELETE';
+export const DELETE_OBJECT_TYPES_REQUEST = 'DELETE_OBJECT_TYPES_REQUEST';
+export const DELETE_OBJECT_TYPES_SUCCESS = 'DELETE_OBJECT_TYPES_SUCCESS';
+export const DELETE_OBJECT_TYPES_ERROR = 'DELETE_OBJECT_TYPES_ERROR';
+export const TOGGLE_SELECT_ALL_OBJECT_TYPES = 'TOGGLE_SELECT_ALL_OBJECT_TYPES';
+
+export const GET_OBJECT_TYPE_ERROR = 'GET_OBJECT_TYPE_ERROR';
+export const RETRIEVE_BLANK_OBJECT_TYPE = 'RETRIEVE_BLANK_OBJECT_TYPE';
+export const BULK_UPDATE_OBJECT_TYPES_START = 'BULK_UPDATE_OBJECT_TYPES_START';
+export const BULK_UPDATE_OBJECT_TYPES_END = 'BULK_UPDATE_OBJECT_TYPES_END';
+export const GET_DISPLAY_EDGES_REQUEST = 'GET_DISPLAY_EDGES_REQUEST';
+export const GET_DISPLAY_EDGES_SUCCESS = 'GET_DISPLAY_EDGES_SUCCESS';
+export const GET_DISPLAY_EDGES_ERROR = 'GET_DISPLAY_EDGES_ERROR';
+export const TOGGLE_EDGE_EDIT_MODE = 'TOGGLE_EDGE_EDIT_MODE';
+export const TOGGLE_EDGE_FOR_DELETE = 'TOGGLE_EDGE_FOR_DELETE';
+export const TOGGLE_SELECT_ALL_EDGES = 'TOGGLE_SELECT_ALL_EDGES';
+export const DELETE_EDGE_SUCCESS = 'DELETE_EDGE_SUCCESS';
+export const DELETE_EDGE_ERROR = 'DELETE_EDGE_ERROR';
+export const BULK_UPDATE_EDGES_START = 'BULK_UPDATE_EDGES_START';
+export const BULK_UPDATE_EDGES_END = 'BULK_UPDATE_EDGES_END';
+
+export const GET_DISPLAY_OBJECTS_REQUEST = 'GET_DISPLAY_OBJECTS_REQUEST';
+export const GET_DISPLAY_OBJECTS_SUCCESS = 'GET_DISPLAY_OBJECTS_SUCCESS';
+export const GET_DISPLAY_OBJECTS_ERROR = 'GET_DISPLAY_OBJECTS_ERROR';
+
+export const GET_OBJECT_REQUEST = 'GET_OBJECT_REQUEST';
+export const GET_OBJECT_SUCCESS = 'GET_OBJECT_SUCCESS';
+export const GET_OBJECT_ERROR = 'GET_OBJECT_ERROR';
+export const CHANGE_OBJECT = 'CHANGE_OBJECT';
+export const CREATE_OBJECT_REQUEST = 'CREATE_OBJECT_REQUEST';
+export const CREATE_OBJECT_SUCCESS = 'CREATE_OBJECT_SUCCESS';
+export const CREATE_OBJECT_ERROR = 'CREATE_OBJECT_ERROR';
+export const UPDATE_OBJECT_SUCCESS = 'CREATE_OBJECT_SUCCESS';
+export const UPDATE_OBJECT_ERROR = 'CREATE_OBJECT_ERROR';
+export const VALIDATE_CURRENT_OBJECT = 'VALIDATE_CURRENT_OBJECT';
+export const TOGGLE_OBJECT_EDIT_MODE = 'TOGGLE_OBJECT_EDIT_MODE';
+export const TOGGLE_OBJECT_FOR_DELETE = 'TOGGLE_OBJECT_FOR_DELETE';
+export const DELETE_OBJECT_REQUEST = 'DELETE_OBJECT_REQUEST';
+export const DELETE_OBJECT_SUCCESS = 'DELETE_OBJECT_SUCCESS';
+export const DELETE_OBJECT_ERROR = 'DELETE_OBJECT_ERROR';
+export const RETRIEVE_BLANK_OBJECT = 'RETRIEVE_BLANK_OBJECT';
+export const BULK_UPDATE_OBJECT_START = 'BULK_UPDATE_OBJECT_START';
+export const BULK_UPDATE_OBJECT_END = 'BULK_UPDATE_OBJECT_END';
+export const BULK_UPDATE_OBJECTS_START = 'BULK_UPDATE_OBJECTS_START';
+export const BULK_UPDATE_OBJECTS_END = 'BULK_UPDATE_OBJECTS_END';
+export const TOGGLE_SELECT_ALL_OBJECTS = 'TOGGLE_SELECT_ALL_OBJECTS';
+
+export const GET_EDGES_REQUEST = 'GET_EDGES_REQUEST';
+export const GET_EDGES_SUCCESS = 'GET_EDGES_SUCCESS';
+export const GET_EDGES_ERROR = 'GET_EDGES_ERROR';
+export const GET_EDGE_REQUEST = 'GET_EDGE_REQUEST';
+export const GET_EDGE_SUCCESS = 'GET_EDGE_SUCCESS';
+export const GET_EDGE_ERROR = 'GET_EDGE_ERROR';
+export const CREATE_EDGE_REQUEST = 'CREATE_EDGE_REQUEST';
+export const CREATE_EDGE_SUCCESS = 'CREATE_EDGE_SUCCESS';
+export const CREATE_EDGE_ERROR = 'CREATE_EDGE_ERROR';
+export const RETRIEVE_BLANK_EDGE = 'RETRIEVE_BLANK_EDGE';
+export const CHANGE_EDGE = 'CHANGE_EDGE';
+
+export const changeCurrentObjectSearchFilter = (
+  changes: Record<string, string>
+) => ({
+  type: CHANGE_CURRENT_OBJECT_SEARCH_FILTER,
+  data: changes,
+});
+
+export const changeCurrentEdgeSearchFilter = (
+  changes: Record<string, string>
+) => ({
+  type: CHANGE_CURRENT_EDGE_SEARCH_FILTER,
+  data: changes,
+});
+
+export const changeCurrentEdgeTypeSearchFilter = (
+  changes: Record<string, string>
+) => ({
+  type: CHANGE_CURRENT_EDGE_TYPE_SEARCH_FILTER,
+  data: changes,
+});
+
+export const changeCurrentObjectTypeSearchFilter = (
+  changes: Record<string, string>
+) => ({
+  type: CHANGE_CURRENT_OBJECT_TYPE_SEARCH_FILTER,
+  data: changes,
+});
+
+export const addRowToEdgeType = () => ({
+  type: CHANGE_EDGE_TYPE_ATTRIBUTE,
+  data: blankAttribute(),
+});
+
+export const changeAttributeFlavorForEdgeType = (
+  attribute: Attribute,
+  flavor: string
+) => ({
+  type: CHANGE_EDGE_TYPE_ATTRIBUTE,
+  data: changeAttributeFlavor(attribute, flavor),
+});
+
+export const deleteAttributeForEdgeType = (
+  attribute: Attribute,
+  edgeType: EdgeType
+) => ({
+  type: CHANGE_EDGE_TYPE,
+  data: getEdgeTypeWithoutAttribute(attribute, edgeType),
+});
+
+export const changeEdgeTypeAttribute = (attribute: Attribute) => ({
+  type: CHANGE_EDGE_TYPE_ATTRIBUTE,
+  data: attribute,
+});
+
+export const changeEdgeType = (changes: Record<string, any>) => ({
+  type: CHANGE_EDGE_TYPE,
+  data: changes,
+});
+
+export const retrieveBlankEdgeType = () => ({
+  type: RETRIEVE_BLANK_EDGE_TYPE,
+});
+
+export const toggleEdgeTypeEditMode = (val?: boolean) => ({
+  type: TOGGLE_EDGE_TYPE_EDIT_MODE,
+  data: val,
+});
+
+export const toggleEdgeTypeForDelete = (id: string) => ({
+  type: TOGGLE_EDGE_TYPE_FOR_DELETE,
+  data: id,
+});
+
+export const retrieveBlankObjectType = () => ({
+  type: RETRIEVE_BLANK_OBJECT_TYPE,
+});
+
+export const changeObjectType = (changes: Record<string, any>) => ({
+  type: CHANGE_OBJECT_TYPE,
+  data: changes,
+});
+
+export const toggleSelectAllObjectTypes = () => ({
+  type: TOGGLE_SELECT_ALL_OBJECT_TYPES,
+});
+
+export const toggleSelectAllObjects = () => ({
+  type: TOGGLE_SELECT_ALL_OBJECTS,
+});
+
+export const toggleSelectAllEdgeTypes = () => ({
+  type: TOGGLE_SELECT_ALL_EDGE_TYPES,
+});

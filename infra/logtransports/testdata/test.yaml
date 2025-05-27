@@ -1,0 +1,7 @@
+transports:
+  - type: kinesis
+    aws_region: 'mars'
+    stream_name: 'newman'
+    shard_count: 3
+  - type: file
+    filename: bar

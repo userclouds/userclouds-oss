@@ -1,0 +1,56 @@
+{
+  "data": [
+    {
+      "id": "1bf2b775-e521-41d3-8b7e-78e89427e6fe",
+      "created": "2023-08-14T15:10:27.061358Z",
+      "updated": "2023-08-30T16:55:22.171765Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_user"
+    },
+    {
+      "id": "23e22596-c1f0-43f6-9173-fa0449b2d1ad",
+      "created": "2023-08-14T15:10:27.172867Z",
+      "updated": "2023-08-30T16:55:22.266374Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_access_policy_template"
+    },
+    {
+      "id": "260c7221-729c-478b-843b-e00168a0cdc6",
+      "created": "2023-08-14T15:10:27.182808Z",
+      "updated": "2023-08-30T16:55:22.291089Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_transformer"
+    },
+    {
+      "id": "9b90794f-0ed0-48d6-99a5-6fd578a9134d",
+      "created": "2023-08-14T15:10:27.074694Z",
+      "updated": "2023-08-30T16:55:22.194058Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_login_app"
+    },
+    {
+      "id": "9bb5d92b-41df-4dc2-8ac1-418365c408ab",
+      "created": "2023-08-14T15:10:27.17776Z",
+      "updated": "2023-08-30T16:55:22.274051Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_access_policy"
+    },
+    {
+      "id": "e410fb38-2158-4431-8b66-fb547b55f2da",
+      "created": "2023-08-14T15:10:27.167917Z",
+      "updated": "2023-08-30T16:55:22.258177Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_policies"
+    },
+    {
+      "id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "created": "2023-08-14T15:10:27.069962Z",
+      "updated": "2023-08-30T16:55:22.178143Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_group"
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": false
+}

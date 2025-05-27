@@ -1,0 +1,5 @@
+:global(#root) {
+  .purposestable {
+    grid-template-columns: 50px fit-content(25%) 2fr 1fr 60px;
+  }
+}

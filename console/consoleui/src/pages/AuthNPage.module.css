@@ -1,0 +1,102 @@
+:global(#root) {
+  .activeprovider {
+    display: inline-block;
+    margin: 10px 0 0 0;
+  }
+
+  .activeproviderlabel {
+    display: inline-block;
+    font-size: 16px;
+    color: #808080;
+    margin: 5px 10px 0 0;
+  }
+
+  .controlblock {
+    margin: 20px 0;
+  }
+
+  .idblock {
+    display: inline-block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    margin-right: 20px;
+  }
+
+  .oidcForm {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    text-align: left;
+    vertical-align: center;
+    padding: 5px;
+  }
+
+  .addScopeButton {
+    margin: 5px;
+    width: fit-content;
+    align-items: center;
+    text-align: center;
+    vertical-align: center;
+  }
+
+  .clientDataRow {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    grid-auto-rows: 100px;
+    display: block;
+    align-items: left;
+    grid-auto-rows: min-content;
+    width: 100%;
+  }
+
+  .clientDataElement {
+    gap: 0;
+    display: inline-block;
+    width: 36rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    resize: horizontal;
+    padding-right: 8px;
+    padding-top: 0;
+    padding-bottom: 5px;
+  }
+
+  .socialProviders {
+    display: inline-block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    text-align: center;
+    vertical-align: center;
+  }
+
+  .socialProviderName {
+    display: inline-block;
+    font-size: 16px;
+    color: #808080;
+    vertical-align: center;
+    padding-left: 4px;
+  }
+
+  .socialImg {
+    display: inline-block;
+    height: 25px;
+    margin: 0 0 7px 0;
+    padding: 0;
+    background-size: contain;
+    vertical-align: middle;
+  }
+
+  .urlInput {
+    min-width: 50%;
+    max-width: 100%;
+  }
+
+  .publicKey {
+    white-space: break-spaces;
+  }
+}

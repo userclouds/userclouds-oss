@@ -1,0 +1,90 @@
+resources:
+  - uc_terraform_type: userstore_column_data_type
+    manifest_id: userstore_column_data_type_canonical_address
+    resource_uuids:
+      __DEFAULT: 33dc5de6-94b6-4f08-94b6-e04d1f981671
+      stagingtests-stagingsqlshimtest: 33dc5de6-94b6-4f08-94b6-e04d1f981671
+    attributes:
+      composite_attributes:
+        fields:
+          - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+            name: Administrative_Area
+          - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+            name: Country
+          - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+            name: Dependent_Locality
+          - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+            ignore_for_uniqueness: true
+            name: ID
+            required: true
+          - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+            name: Locality
+          - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+            name: Name
+          - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+            name: Organization
+          - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+            name: Post_Code
+          - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+            name: Sorting_Code
+          - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+            name: Street_Address_Line_1
+          - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+            name: Street_Address_Line_2
+        include_id: true
+      description: a canonical address
+      name: canonical_address
+  - uc_terraform_type: userstore_purpose
+    manifest_id: userstore_purpose_analytics
+    resource_uuids:
+      __DEFAULT: 1bc65251-1dc3-4993-9d30-92e2593a18ef
+      stagingtests-stagingsqlshimtest: 1bc65251-1dc3-4993-9d30-92e2593a18ef
+    attributes:
+      description: Purpose is for product improvement analytics
+      name: analytics
+  - uc_terraform_type: userstore_purpose
+    manifest_id: userstore_purpose_security
+    resource_uuids:
+      __DEFAULT: 3f929a5c-0a3e-4e36-b911-25ff43000bf9
+      stagingtests-stagingsqlshimtest: 3f929a5c-0a3e-4e36-b911-25ff43000bf9
+    attributes:
+      description: Purpose is for security, fraud, and site integrity usage
+      name: security
+  - uc_terraform_type: userstore_purpose
+    manifest_id: userstore_purpose_support
+    resource_uuids:
+      __DEFAULT: 8c88cd01-6001-4553-b003-87559f439061
+      stagingtests-stagingsqlshimtest: 8c88cd01-6001-4553-b003-87559f439061
+    attributes:
+      description: Purpose is for support
+      name: support
+  - uc_terraform_type: userstore_purpose
+    manifest_id: userstore_purpose_marketing
+    resource_uuids:
+      __DEFAULT: bc8e77f0-3104-4844-8a8c-c791908f947b
+      stagingtests-stagingsqlshimtest: bc8e77f0-3104-4844-8a8c-c791908f947b
+    attributes:
+      description: Purpose is for marketing to users
+      name: marketing
+  - uc_terraform_type: access_policy
+    manifest_id: access_policy_GlobalBaselinePolicyForMutators
+    resource_uuids:
+      __DEFAULT: 804e84f1-7fa4-4bb4-b785-4c89e1ceaba0
+      stagingtests-stagingsqlshimtest: 804e84f1-7fa4-4bb4-b785-4c89e1ceaba0
+    attributes:
+      components:
+        - template: '@UC_SYSTEM_OBJECT("access_policy_template", "AllowAll")'
+      description: This policy applies to all mutators.
+      name: GlobalBaselinePolicyForMutators
+      policy_type: composite_and
+  - uc_terraform_type: access_policy
+    manifest_id: access_policy_GlobalBaselinePolicyForAccessors
+    resource_uuids:
+      __DEFAULT: a78f1f88-3684-4e59-a01d-c121e259ec96
+      stagingtests-stagingsqlshimtest: a78f1f88-3684-4e59-a01d-c121e259ec96
+    attributes:
+      components:
+        - template: '@UC_SYSTEM_OBJECT("access_policy_template", "AllowAll")'
+      description: This policy applies to all accessors.
+      name: GlobalBaselinePolicyForAccessors
+      policy_type: composite_and

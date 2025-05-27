@@ -1,0 +1,47 @@
+{
+  "data": [
+    {
+      "id": "1ee4497e-c326-4068-94ed-3dcdaaaa53bc",
+      "created": "2023-02-05T05:42:17.043874Z",
+      "updated": "2023-02-15T23:21:48.628481Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "UserClouds Dev",
+      "region": "aws-us-east-1"
+    },
+    {
+      "id": "50862005-5a77-4256-be38-b51e769de3a3",
+      "created": "2023-02-15T23:22:02.541229Z",
+      "updated": "2023-02-15T23:22:02.541229Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "Hobart and William and Smith",
+      "region": "aws-us-west-2"
+    },
+    {
+      "id": "5ded72de-c606-48ce-9675-df88557d56fe",
+      "created": "2023-02-15T23:22:02.59543Z",
+      "updated": "2023-02-15T23:22:02.59543Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "Test Test Test",
+      "region": "aws-us-east-1"
+    },
+    {
+      "id": "79b600f1-87a8-4a77-a206-9111b52efa84",
+      "created": "2023-02-15T23:22:02.665474Z",
+      "updated": "2023-02-15T23:22:02.665474Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "Buzz Org",
+      "region": "aws-us-east-1"
+    },
+    {
+      "id": "7def2e9f-0c6a-489a-8549-4a673ad001e9",
+      "created": "2023-03-20T22:00:01.894696Z",
+      "updated": "2023-03-20T22:00:01.894696Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "Foo",
+      "region": "aws-us-west-2"
+    }
+  ],
+  "has_next": true,
+  "next": "id:7def2e9f-0c6a-489a-8549-4a673ad001e9",
+  "has_prev": false
+}

@@ -1,0 +1,8 @@
+transports:
+  - type: goLogJSON
+  - type: kinesis
+    aws_region: 'mars'
+    stream_name: 'jerry'
+    shard_count: 9
+  - type: file
+    filename: foo

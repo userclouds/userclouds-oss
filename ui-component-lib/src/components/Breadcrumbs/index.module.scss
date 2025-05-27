@@ -1,0 +1,26 @@
+@use '../../_variables.module.css';
+
+.root {
+  font-size: var(--text-2-font-size);
+  display: flex;
+  gap: var(--space-1);
+  align-items: center;
+  font-family: var(--font-family);
+}
+
+.crumb {
+  align-items: center;
+  display: flex;
+  gap: var(--space-1);
+  color: var(--color-neutral-700);
+  font-weight: 500;
+}
+
+.icon {
+  color: var(--color-neutral-700);
+  display: flex;
+}
+
+.iconHome {
+  display: block;
+}

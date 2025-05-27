@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ template "userstore.serviceAccount" . }}
+  labels:
+     {{- include "userclouds.labels" . | nindent 4 }}
+  annotations:
+    eks.amazonaws.com/role-arn: {{ .Values.roles.userstore }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userstore
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.userstore.replicas | default .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "userstore.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        userclouds.sla: critical
+        {{- include "userstore.selectorLabels" . | nindent 8 }}
+    spec:
+      nodeSelector:
+        {{- include "userclouds.nodeSelector" . | nindent 8 }}
+      affinity:
+        {{- include "userclouds.maybeNoT3Nodes" .Values.userstore | nindent 8 }}
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  {{- include "userstore.selectorLabels" . | nindent 18 }}
+      serviceAccountName: {{ template "userstore.serviceAccount" . }}
+      volumes:
+        - name: configmap
+          configMap:
+            name: userclouds-configs
+            items:
+              - key: base
+                path: {{ printf "base_%s.yaml" .Values.uc_universe }}
+              - key: idp
+                path: {{ printf "idp/%s.yaml" .Values.uc_universe }}
+      containers:
+        - name: userstore
+          image: "{{ include "userclouds.image" . }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - idp
+          {{- include "userclouds.envConfigMap" . | nindent 10 }}
+          env:
+            {{- include "userclouds.envVars" . | nindent 12 }}
+            - name: UC_DISABLE_SQL_SHIM
+              value: "true"
+          {{- with .Values.userstore.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: configmap
+              mountPath: /userclouds/configmaps
+          ports:
+            - name: userstore
+              containerPort: 5000
+              protocol: TCP
+            - name: internal
+              containerPort: 5001
+              protocol: TCP
+
+          {{- include "userclouds.lifecycleDrain" . | nindent 10 }}
+          livenessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: userstore
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 1
+            httpGet:
+              path: /healthcheck
+              port: userstore
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userstore
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+      {{- include "userstore.selectorLabels" . | nindent 6 }}
+  ports:
+    - name: service
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+    - name: internal
+      protocol: TCP
+      port: 5001

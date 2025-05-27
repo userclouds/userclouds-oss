@@ -1,0 +1,9 @@
+db:
+  # Using postgres in container env, user/pw must match docker/userclouds-headless/docker-compose.yaml
+  user: uc_root_user
+  password: dev-literal://uc87871fakepw
+  dbname: defaultdb
+  host: postgres
+  dbdriver: postgres
+  dbproduct: postgres
+  port: 5432

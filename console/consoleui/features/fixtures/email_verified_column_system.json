@@ -1,0 +1,12 @@
+{
+  "id": "032cae17-df3a-4e87-82a0-c706ed0679ee",
+  "name": "email_verified",
+  "data_type": {
+    "id": "e16b5ead-54db-4b42-a55f-f21907cda9e4",
+    "name": "boolean"
+  },
+  "is_array": false,
+  "default_value": "",
+  "index_type": "none",
+  "is_system": "true"
+}

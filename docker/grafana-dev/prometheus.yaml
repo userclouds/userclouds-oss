@@ -1,0 +1,31 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'tempo'
+    static_configs:
+      - targets: ['tempo:3200']
+  # NOTE: KEEP IN SYNC WITH config/awseb/all/grafana-agent.config
+  - job_name: 'uc_plex'
+    static_configs:
+      - targets: ['host.docker.internal:5001']
+  - job_name: 'uc_idp'
+    static_configs:
+      - targets: ['host.docker.internal:5101']
+  - job_name: 'uc_authz'
+    static_configs:
+      - targets: ['host.docker.internal:5201']
+  - job_name: 'uc_console'
+    static_configs:
+      - targets: ['host.docker.internal:5301']
+  - job_name: 'uc_logserver'
+    static_configs:
+      - targets: ['host.docker.internal:5501']
+  - job_name: 'uc_worker'
+    static_configs:
+      - targets: ['host.docker.internal:3014']
+  # NOTE: KEEP IN SYNC WITH config/awseb/all/grafana-agent.config

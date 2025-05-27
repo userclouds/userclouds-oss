@@ -1,0 +1,33 @@
+@use '../src/shared/_mixin' as mixin;
+@use '../src/_variables.module.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: 0;
+  padding-bottom: var(--space-4);
+  height: var(--footer-height);
+
+  @include mixin.respond-above(768px) {
+    flex-direction: row;
+    gap: var(--space-6);
+    align-items: baseline;
+  }
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+
+  @include mixin.respond-above(768px) {
+    gap: var(--space-4);
+    flex-direction: row;
+    align-items: baseline;
+  }
+}
+
+.copyright {
+  color: var(--color-neutral-700);
+}

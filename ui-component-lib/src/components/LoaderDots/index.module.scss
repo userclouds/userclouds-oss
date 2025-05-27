@@ -1,0 +1,112 @@
+@use '../../_variables.module.css';
+
+.root {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination {
+  gap: var(--space-1);
+
+  .dot {
+    width: 4px; // Custom size
+    height: 4px; // Custom size
+  }
+}
+
+.small {
+  gap: var(--space-2);
+
+  .dot {
+    width: 8px; // Custom size
+    height: 8px; // Custom size
+  }
+}
+
+.medium {
+  gap: var(--space-3);
+
+  .dot {
+    width: 14px; // Custom size
+    height: 14px; // Custom size
+  }
+}
+
+.dot {
+  border-radius: var(--border-radius-full);
+  animation: loader-animation-1 1.3s infinite ease-in; // Custom speed
+  opacity: 0;
+}
+
+.dot:nth-child(2) {
+  animation-name: loader-animation-2;
+}
+
+.dot:nth-child(3) {
+  animation-name: loader-animation-3;
+}
+
+.dotThemeBrand {
+  background-color: var(--color-blue-900);
+}
+
+.dotThemeInverse {
+  background-color: var(--color-white);
+}
+
+.dotThemeMuted {
+  background-color: var(--color-neutral-300);
+}
+
+/**
+ * Text only visible to screenreaders.
+ * http://webaim.org/techniques/css/invisiblecontent/
+ */
+.hiddenText {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@keyframes loader-animation-1 {
+  0%,
+  70%,
+  100% {
+    opacity: 0.2;
+  }
+
+  30% {
+    opacity: 1;
+  }
+}
+
+@keyframes loader-animation-2 {
+  0%,
+  15%,
+  85%,
+  100% {
+    opacity: 0.2;
+  }
+
+  45% {
+    opacity: 1;
+  }
+}
+
+@keyframes loader-animation-3 {
+  0%,
+  30%,
+  100% {
+    opacity: 0.2;
+  }
+
+  60% {
+    opacity: 1;
+  }
+}

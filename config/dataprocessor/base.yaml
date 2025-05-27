@@ -1,0 +1,20 @@
+enabled: false
+
+logger:
+  transports:
+    - type: file
+      filename: /tmp/user_cloud_log_dataprocessor
+      transportconfig:
+        required: false
+        max_log_level: 5
+    - type: go
+      transportconfig:
+        required: true
+        max_log_level: 5
+    - type: kinesis
+      aws_region: 'us-west-2'
+      stream_name: 'dataprocessor-dev'
+      shard_count: 1
+      transportconfig:
+        required: false
+        max_log_level: 5

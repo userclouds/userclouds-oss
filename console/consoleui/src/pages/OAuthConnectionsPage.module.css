@@ -1,0 +1,7 @@
+:global(#root) {
+  .oathconnectionstable {
+    grid-template-columns:
+      fit-content(100px) fit-content(250px)
+      1fr fit-content(100px);
+  }
+}

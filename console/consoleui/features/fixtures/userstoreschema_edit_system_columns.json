@@ -1,0 +1,91 @@
+{
+  "data": [
+    {
+      "id": "175565bf-4d3e-4b01-9908-529933dfbc5e",
+      "table": "users",
+      "name": "baz_column",
+      "data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "index_type": "unique",
+      "default_value": "",
+      "is_system": false
+    },
+    {
+      "id": "24b52969-7124-475f-b0e9-3fef50da6b3e",
+      "table": "users",
+      "name": "bar_column",
+      "data_type": {
+        "name": "timestamp",
+        "id": "66a87f97-32c4-4ccc-91da-d8c880e21e5a"
+      },
+      "index_type": "indexed",
+      "default_value": "",
+      "is_system": false
+    },
+    {
+      "id": "b0ee6ec3-3a8b-4bb7-bebb-5ca78e03e184",
+      "table": "users",
+      "name": "foo_column",
+      "data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "index_type": "none",
+      "default_value": "bar",
+      "is_system": false
+    },
+    {
+      "id": "b0ee6ec3-3a8b-4bb7-bebb-5ca78e03e185",
+      "table": "users",
+      "name": "foo_columnsys",
+      "data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "index_type": "none",
+      "default_value": "bar",
+      "is_system": true
+    },
+    {
+      "id": "b0ee6ec3-3a8b-4bb7-bebb-5ca78e03e185",
+      "table": "users",
+      "name": "foo_columnsys0",
+      "data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "index_type": "none",
+      "default_value": "bar",
+      "is_system": true
+    },
+    {
+      "id": "b0ee6ec3-3a8b-4bb7-bebb-5ca78e03e186",
+      "table": "users",
+      "name": "foo_columnsys1",
+      "data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "index_type": "none",
+      "default_value": "bar",
+      "is_system": true
+    },
+    {
+      "id": "b0ee6ec3-3a8b-4bb7-bebb-5ca78e03e187",
+      "table": "users",
+      "name": "foo_columnsys2",
+      "data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "index_type": "none",
+      "default_value": "bar",
+      "is_system": true
+    }
+  ],
+  "has_next": false,
+  "next": "",
+  "has_prev": false
+}

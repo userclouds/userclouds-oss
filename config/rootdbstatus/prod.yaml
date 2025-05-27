@@ -1,0 +1,8 @@
+db:
+  user: usercloud # this user needs to already exist and have SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, CREATE USER ON *.*
+  password: aws://secrets/prod/rootdbmysql/mysql_password
+  dbname: postgres
+  dbdriver: postgres
+  dbproduct: aws-rds-postgres
+  host: status-postgre.c3cgcihdah0v.us-west-2.rds.amazonaws.com
+  port: 5432

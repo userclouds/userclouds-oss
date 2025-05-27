@@ -1,0 +1,8 @@
+:global(#root) {
+  .eventslogtable {
+    grid-template-columns: max-content minmax(max-content, 1fr) repeat(
+        3,
+        minmax(max-content, 15%)
+      );
+  }
+}

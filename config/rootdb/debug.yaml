@@ -1,0 +1,8 @@
+db:
+  user: postgres
+  password: aws://secrets/debug/aurora_db_password
+  dbname: rootdb
+  host: aurora-global-debug.global-gpsigmvkwrkn.global.rds.amazonaws.com
+  dbdriver: postgres
+  dbproduct: aws-aurora-postgres
+  port: 5432

@@ -1,0 +1,7 @@
+db:
+  user: userclouds_dev_root
+  dbname: postgres
+  host: localhost
+  dbdriver: postgres
+  dbproduct: postgres
+  port: 5432

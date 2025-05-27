@@ -1,0 +1,178 @@
+{
+  "protocol": "https",
+  "sub_domain": "tenant.staging.userclouds.com",
+  "tenant": {
+    "id": "03c1d5f7-50ef-4723-9a37-3bf0dc301842",
+    "name": "Console",
+    "company_id": "74f313fc-806c-4ae2-abfd-76a972c29a2d",
+    "tenant_url": "https://console.tenant.staging.userclouds.com",
+    "use_organizations": true,
+    "state": "active"
+  },
+  "plex_config": {
+    "plex_map": {
+      "telephony_provider": {
+        "type": "none",
+        "properties": {}
+      },
+      "apps": [
+        {
+          "client_id": "console_plex_clientid_staging",
+          "client_secret": "6c51ca52cd3b7dc49ca2d6afb45dc09f265fb1a25fd93d5408101b21bcc6c386f9bf00570be47312284e90c668bb71a09ccdd76fdd78dd5d61187c2cb8909064",
+          "id": "32c4cf6e-61e3-491c-b13f-eecec6b3e366",
+          "organization_id": "74f313fc-806c-4ae2-abfd-76a972c29a2d",
+          "name": "UserClouds Console (staging)",
+          "provider_app_ids": ["7e94d04f-537a-4ffb-8ca8-56de48d25a9d"],
+          "token_validity": {
+            "access": 86400,
+            "refresh": 2592000,
+            "impersonate_user": 3600
+          },
+          "allowed_redirect_uris": [
+            "https://console.staging.userclouds.com/auth/callback",
+            "https://console.staging.userclouds.com/auth/invitecallback",
+            "https://console.aws-us-west-2.staging.userclouds.com/auth/callback",
+            "https://console.aws-us-west-2.staging.userclouds.com/auth/invitecallback",
+            "https://console.aws-us-east-1.staging.userclouds.com/auth/callback",
+            "https://console.aws-us-east-1.staging.userclouds.com/auth/invitecallback"
+          ],
+          "allowed_logout_uris": [
+            "https://console.staging.userclouds.com/",
+            "https://console.aws-us-west-2.staging.userclouds.com/",
+            "https://console.aws-us-east-1.staging.userclouds.com/"
+          ],
+          "grant_types": [
+            "authorization_code",
+            "refresh_token",
+            "client_credentials"
+          ],
+          "page_parameters": {
+            "every_page": {
+              "authenticationMethods": {
+                "parameter_name": "authenticationMethods",
+                "parameter_type": "selected_authentication_methods",
+                "parameter_value": "password,passwordless,facebook,google,linkedin"
+              }
+            }
+          }
+        }
+      ],
+      "employee_app": {
+        "id": "e5976050-f471-4365-8201-125344b6a47b",
+        "organization_id": "74f313fc-806c-4ae2-abfd-76a972c29a2d",
+        "name": "Employee Plex App",
+        "client_id": "a1d98333-bc3f-4096-a7e0-d5e373691da5",
+        "client_secret": "fb702edd-7172-43bb-9535-12c10e3d8721",
+        "provider_app_ids": ["d5fd2211-25fa-4462-891d-9cbc2b2c7183"],
+        "token_validity": {
+          "access": 86400,
+          "refresh": 2592000,
+          "impersonate_user": 3600
+        },
+        "grant_types": [
+          "authorization_code",
+          "refresh_token",
+          "client_credentials"
+        ],
+        "allowed_logout_uris": [],
+        "allowed_redirect_uris": []
+      },
+      "employee_provider": {
+        "id": "b515497e-7480-4482-81d7-962d6f5436ed",
+        "name": "Employee IDP Provider",
+        "type": "employee",
+        "uc": {
+          "idp_url": "",
+          "apps": [
+            {
+              "id": "d5fd2211-25fa-4462-891d-9cbc2b2c7183",
+              "name": "Employee IDP App"
+            }
+          ]
+        }
+      },
+      "policy": {
+        "active_provider_id": "413ad1dd-4d3a-427e-a2d2-d3c6d4e24f8d"
+      },
+      "providers": [
+        {
+          "id": "413ad1dd-4d3a-427e-a2d2-d3c6d4e24f8d",
+          "name": "UC IDP prod",
+          "type": "uc",
+          "uc": {
+            "apps": [
+              {
+                "id": "7e94d04f-537a-4ffb-8ca8-56de48d25a9d",
+                "name": "UC IDP Console App (staging)"
+              }
+            ],
+            "idp_url": "https://console.tenant.staging.userclouds.com"
+          }
+        }
+      ]
+    },
+    "oidc_providers": {
+      "providers": [
+        {
+          "type": "facebook",
+          "name": "facebook",
+          "description": "Facebook",
+          "issuer_url": "https://www.facebook.com",
+          "client_id": "1601764916932690",
+          "client_secret": "c9bbb122308b1d2019cd5984a7461038",
+          "can_use_local_host_redirect": true,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid public_profile email",
+          "is_native": true
+        },
+        {
+          "type": "google",
+          "name": "google",
+          "description": "Google",
+          "issuer_url": "https://accounts.google.com",
+          "client_id": "691629079706-tv7atvi01f55i0lmpng8cb5krtjimhij.apps.googleusercontent.com",
+          "client_secret": "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",
+          "can_use_local_host_redirect": false,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid profile email",
+          "is_native": true
+        },
+        {
+          "type": "linkedin",
+          "name": "linkedin",
+          "description": "LinkedIn",
+          "issuer_url": "https://www.linkedin.com",
+          "client_id": "78gqaqg3gpsiyi",
+          "client_secret": "HetnYvRWqDCA9RTk",
+          "can_use_local_host_redirect": false,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid profile email",
+          "is_native": true
+        },
+        {
+          "additional_scopes": "",
+          "can_use_local_host_redirect": false,
+          "client_id": "",
+          "client_secret": "",
+          "default_scopes": "openid profile email",
+          "description": "Microsoft",
+          "is_native": true,
+          "issuer_url": "https://login.microsoftonline.com/common/v2.0",
+          "name": "microsoft",
+          "type": "microsoft",
+          "use_local_host_redirect": false
+        }
+      ]
+    },
+    "verify_emails": true,
+    "disable_sign_ups": true,
+    "keys": {
+      "key_id": "fd5641a2",
+      "private_key": "dev-literal://-----BEGIN RSA PRIVATE KEY-----\n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\n-----END RSA PRIVATE KEY-----",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA61hdA8fRvjRynndI/oXc\nlnom45Ro04hYkShC4UFZnPh97yFtDQbfgtEfylG9AJdrq8a3FF1mjU0o4SQMpSn5\naX+44bUeWu1Qn+vEKKKr1TD6Iy9/3vYljEM/EQDv8NIhXmwSm9yTE40IZ2Qm3qjX\nO4aJBgmZZqozyOrZt4/NGa7VzrxurLhKwoU1g21NK3Rnve8+QyrUQIkyF4BO+u5g\nz/fDwBqnwPnq3PW7j5aFZ5u1SpyEQwKIg2EgIt75E7Q7RKtAC/w783BPS61l+gC5\nzdRnv2g8urATfxQbn3xu4xjWXg8t9grQtLHY0sK1r0LpPN4gDFTVQg3CipWxYfGQ\nIHVpolyEOmsMnOp7PJSvcA3rVTfH9EOugg64rnsbuppoqUq3KHsLQkNk3Kb9DREL\nyP3yUKLoLSg1JeEo6zo1k8YFeCYXplToO2FZ6HOwVSQ6rjSQCKH2JMr9HK8f9Ir5\n3sEc39WHIVoUOTqRLlYxdhkmUX3UdBgJvqkQ7i7T7HD7HUA0LS2NItwginZ3bFjW\nVywGpKmIZLNZR86jc+7q2BuMNzg2ZRrhV3u98OjrvkPr5sqDcY6ruzlHb4bwByZJ\nVumF0PF1M/bFzWZq1+YIZnjur/y2WBeHJ0uN31HVtXVOc1h+sP+5WiCU24v88W5P\n02rDPQ85lr3JGAaQbhGXGacCAwEAAQ==\n-----END PUBLIC KEY-----"
+    }
+  },
+  "user_store_schema": {
+    "fields": []
+  }
+}

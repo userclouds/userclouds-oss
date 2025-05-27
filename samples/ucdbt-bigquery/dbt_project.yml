@@ -1,0 +1,30 @@
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+name: 'ucdbt'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'ucdbt'
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ['models']
+analysis-paths: ['analyses']
+# name or the intended use of these models
+test-paths: ['tests']
+seed-paths: ['seeds']
+macro-paths: ['macros']
+snapshot-paths: ['snapshots']
+
+clean-targets: # directories to be removed by `dbt clean`
+  - 'target'
+  - 'dbt_packages'
+
+vars:
+  tenant_url: 'https://jwangllc-sample-app.tenant.staging.userclouds.com'
+  client_id: '5cf20866d41be80d1986992f7b388878'
+  client_secret: 'xtvsV5WUhfKbDXbElu7Pb+0qnlYOXQcwQnZtkCCcgv9SlpHeYRx/3zwB5UqTyskj'
+  email_transformer_id: '0cedf7a4-86ab-450a-9426-478ad0a60faa'
+  allow_all_access_policy_id: '3f380e42-0b21-4570-a312-91e1b80386fa'

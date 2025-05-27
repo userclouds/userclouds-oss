@@ -1,0 +1,1107 @@
+{
+  "tenant_app_message_elements": {
+    "tenant_id": "41ab79a8-0dff-418e-9d42-e1694469120a",
+    "app_message_elements": [
+      {
+        "app_id": "90ffb499-2549-470e-99cd-77f7008e2735",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "de44f355-326d-4ab9-91f0-26c575bed158",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "76344b61-a6ca-47a3-88f5-de1b1d3efd08",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "ac8a8498-c259-422e-af96-ef14105f453d",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "3f2fe511-1b8c-4103-89b2-c50684194bd3",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "5913aef8-890c-428c-a1c6-62da0c5c8d93",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "4fd85a3c-6862-490b-8139-222c56aa3e1c",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "beb15891-44e6-41c2-93e8-e098d03e884d",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "8ddd178e-6321-4ce5-84f2-7713143186e9",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "3a4d59cc-7f2b-45e5-a715-cea21ead12a5",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "431f1de3-4821-43ea-82f7-79e50b9e73b9",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "42ffcb6b-13a4-45ad-bceb-e506afc1812c",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "947599c0-96ac-4b3e-8300-2df209ac142d",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "5a277b03-8c6a-4e41-a82b-640d5d70d01f",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "24e3801a-15c3-4f93-adcf-d7d930b4cf23",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "1f500b3e-d4ee-4799-8c2c-546b18974b08",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "3e050d49-4d70-406c-a320-5ef99e1c51f7",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "077ec7de-2dd5-449d-b7c0-c7a393773491",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "20e0dc9e-7458-46b4-8120-e6998f2f2f84",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "app_id": "a1b7e9b7-93b9-42d5-8ce8-9356991456c8",
+        "message_type_message_elements": {
+          "sms_mfa_challenge": {
+            "type": "sms_mfa_challenge",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "Login Request to {{.AppName}}. Use code {{.Code}} to complete the sign in process."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          },
+          "sms_mfa_verify": {
+            "type": "sms_mfa_verify",
+            "message_elements": {
+              "sms_body_template": {
+                "type": "sms_body_template",
+                "custom_value": "",
+                "default_value": "MFA Verification Request for {{.AppName}}. Use code {{.Code}} to confirm your phone number for use with MFA."
+              },
+              "sms_sender": {
+                "type": "sms_sender",
+                "custom_value": "",
+                "default_value": "+1111111111"
+              }
+            },
+            "message_parameters": [
+              {
+                "name": "AppName",
+                "default_value": "app"
+              },
+              {
+                "name": "Code",
+                "default_value": "code"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+@use '../../_variables.module.css';
+
+.root {
+  font-size: var(--text-1-font-size);
+  line-height: var(--text-1-line-height);
+  margin-bottom: var(--space-1);
+  color: var(--color-neutral-500);
+  font-weight: 500;
+  display: block;
+  font-family: var(--font-family);
+
+  &.hasError {
+    color: var(--color-red-700);
+  }
+
+  &[disabled] {
+    color: var(--color-neutral-300);
+  }
+}

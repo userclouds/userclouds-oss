@@ -1,0 +1,15 @@
+company_db:
+  user: uc_pg_root
+  password: env://PG_PASSWORD
+  dbname: companyconfig
+  host: localhost
+  dbdriver: postgres
+  dbproduct: postgres
+  port: 5477
+
+logger:
+  transports:
+    - type: goLogJSON
+      transportconfig:
+        required: true
+        max_log_level: 5

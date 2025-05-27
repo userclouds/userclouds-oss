@@ -1,0 +1,16 @@
+Welcome, {% if user.is_authenticated %}{{ user.username }} ({{ user.employee.location | upper }}){% else %}Guest{% endif %}.
+{% if user.is_authenticated %}
+    <a href="{% url 'polls:logout_view' %}">Logout</a>
+{% else %}
+    <a href="/accounts/login/?next=/polls/">Login</a>
+{% endif %}<br />
+
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

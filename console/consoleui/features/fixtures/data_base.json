@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": "98a20792-4a18-4ac7-9043-097dd6242561",
+      "name": "database",
+      "type": "postgres",
+      "host": "databasehost",
+      "port": 456,
+      "schemas": null,
+      "username": "admin",
+      "password": "",
+      "proxy_host": "hostname",
+      "proxy_port": 123
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": false
+}

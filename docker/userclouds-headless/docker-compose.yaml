@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:14.9
+    container_name: postgres
+    restart: always
+    healthcheck:
+      test: ["CMD", "pg_isready", "--username=uc_root_user"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+    environment:
+      POSTGRES_USER: uc_root_user
+      POSTGRES_PASSWORD: uc87871fakepw
+    volumes:
+      - postgres-db-data-headless:/var/lib/postgresql/data
+      # https://github.com/docker-library/docs/blob/master/postgres/README.md#initialization-scripts
+      - ./db:/docker-entrypoint-initdb.d
+  userclouds:
+    container_name: userclouds-headless
+    depends_on:
+      postgres:
+        condition: service_healthy
+    image: ${IMAGE_NAME}
+    platform: ${PLATFORM:-linux/amd64}
+    environment:
+      UC_CONFIG_MANIFEST_FILE: container_dev_manifest_example.yaml
+      # UC_DB_HOST_OVERRIDE: postgres
+      # UC_DB_PORT_OVERRIDE: 5432
+    volumes:
+      - ./config/:/customer/config/
+      - ./logs/:/userclouds/logs/
+    ports:
+      - 3040:3040
+    build:
+      dockerfile: ./docker/userclouds-headless/Dockerfile
+      context: ./../../
+volumes:
+  postgres-db-data-headless:

@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "id": "1ee4497e-c326-4068-94ed-3dcdaaaa53bc",
+      "name": "Marketing",
+      "description": "barraging you with emails"
+    },
+    {
+      "id": "50862005-5a77-4256-be38-b51e769de3a3",
+      "name": "Analytics",
+      "description": "profiling you"
+    },
+    {
+      "id": "5ded72de-c606-48ce-9675-df88557d56fe",
+      "name": "Order fulfillment",
+      "description": "Sending you stuff"
+    },
+    {
+      "id": "7def2e9f-0c6a-489a-8549-4a673ad001e1",
+      "name": "Personalization",
+      "description": "Anything we want it to mean"
+    }
+  ],
+  "has_next": true,
+  "next": "id:7def2e9f-0c6a-489a-8549-4a673ad001e9",
+  "has_prev": false
+}

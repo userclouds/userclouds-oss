@@ -1,0 +1,109 @@
+[
+  {
+    "column": {
+      "id": "032cae17-df3a-4e87-82a0-c706ed0679ee",
+      "name": "email_verified"
+    },
+    "consented_purposes": [
+      {
+        "id": "7f55f479-3822-4976-a8a9-b789d5c6f152",
+        "name": "operational"
+      }
+    ]
+  },
+  {
+    "column": {
+      "id": "15772f46-12c1-49af-9e01-4d38545a70bd",
+      "name": "organization_id"
+    },
+    "consented_purposes": []
+  },
+  {
+    "column": {
+      "id": "23843bce-b9f1-4d32-9dad-a8c15bc9a17e",
+      "name": "created"
+    },
+    "consented_purposes": []
+  },
+  {
+    "column": {
+      "id": "2c7a7c9b-90e8-47e4-8f6e-ec73bd2dec16",
+      "name": "email"
+    },
+    "consented_purposes": [
+      {
+        "id": "7f55f479-3822-4976-a8a9-b789d5c6f152",
+        "name": "operational"
+      }
+    ]
+  },
+  {
+    "column": {
+      "id": "2ee3d57d-9756-464e-a5e9-04244936cb9e",
+      "name": "external_alias"
+    },
+    "consented_purposes": [
+      {
+        "id": "7f55f479-3822-4976-a8a9-b789d5c6f152",
+        "name": "operational"
+      }
+    ]
+  },
+  {
+    "column": {
+      "id": "4d4d0757-3bc2-424d-9caf-a930edb49b69",
+      "name": "picture"
+    },
+    "consented_purposes": [
+      {
+        "id": "7f55f479-3822-4976-a8a9-b789d5c6f152",
+        "name": "operational"
+      }
+    ]
+  },
+  {
+    "column": {
+      "id": "58616e49-ab3f-48ad-9209-d4b232a35a6d",
+      "name": "updated"
+    },
+    "consented_purposes": []
+  },
+  {
+    "column": {
+      "id": "83cc42b0-da8c-4a61-9db1-da70f21bab60",
+      "name": "nickname"
+    },
+    "consented_purposes": [
+      {
+        "id": "7f55f479-3822-4976-a8a9-b789d5c6f152",
+        "name": "operational"
+      }
+    ]
+  },
+  {
+    "column": {
+      "id": "b1d12a3e-dbf7-4405-b5fc-7e3919d8e089",
+      "name": "id"
+    },
+    "consented_purposes": []
+  },
+  {
+    "column": {
+      "id": "f94923b4-e403-4c95-bcbe-481aaba5fa63",
+      "name": "version"
+    },
+    "consented_purposes": []
+  },
+  {
+    "column": {
+      "id": "fe20fd48-a006-4ad8-9208-4aad540d8794",
+      "name": "name"
+    },
+    "consented_purposes": [
+      {
+        "id": "7f55f479-3822-4976-a8a9-b789d5c6f152",
+        "name": "operational"
+      }
+    ]
+  }
+]

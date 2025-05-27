@@ -1,0 +1,155 @@
+import { Meta } from '@storybook/addon-docs';
+import {
+  IconAdd,
+  IconArchive,
+  IconArrowDown,
+  IconArrowLeft,
+  IconArrowRight,
+  IconArrowUp,
+  IconBarChartBox,
+  IconCalendar2,
+  IconCheck,
+  IconClose,
+  IconDashboard3,
+  IconDatabase2,
+  IconDeleteBin,
+  IconEye,
+  IconEyeOff,
+  IconFacebook,
+  IconFileList2,
+  IconFocus3Line,
+  IconGoogle,
+  IconHome2,
+  IconLinkedIn,
+  IconLock2,
+  IconMenu,
+  IconOrganization,
+  IconSearch,
+  IconShieldKeyhole,
+  IconTeam,
+  IconTerminalBox,
+  IconUser3,
+  IconUserSearch,
+  IconUserReceived2,
+} from '../src/icons';
+
+import IconItem from './helpers/IconItem';
+
+<Meta title="Icons" />
+
+<style>{`
+
+.icon-section {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 12px;
+  column-gap: 12px;
+}
+  
+.icon-item {
+  border: 1px solid #ddd;
+  padding: 16px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: all 150ms;
+  color: #283354;
+}
+
+.icon-item:hover {
+  border-color: #6b7280;
+}
+.icon-item:hover svg {
+  color: #6b7280;
+}
+.icon-item:active {
+  background: #f8f8f8;
+}
+
+.icon-item svg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 8px;
+}
+  
+.icon-name {
+  font-size: 11px;
+  text-align: center;
+}
+  
+`}</style>
+
+# Icons
+
+Icons are taken from the [Remix Icon](https://remixicon.com/) collection.
+
+## Usage
+
+Icons come in three sizes,
+
+- `large` at `32px`
+- `medium` at `20px` and is the default
+- `small` at `16px`
+
+1. The `size` prop is available to change the size.
+2. The `className` prop is available to change the icon color.
+3. All icons except the "File formats" icons will inherit the `currentColor` via CSS. The "File formats" have hardcoded colors that cannot be overridden.
+
+Each icon is a component and is imported from the rollup file `src/icons/index.tsx` that exports all icons.
+
+```jsx
+import { IconName } from './src/icons'; // All icon exports
+
+<IconName />; // Icon color will inherit parent `color` value
+<IconName size="small" />; // Icon size is small, medium is default
+<IconName className="my-class" />; // Icon color can be changed via a class
+```
+
+## Adding icons
+
+1. Find the icon you want to use in the [Remix Icon](https://remixicon.com/) collection, click on it, and hit "Copy SVG". Use the "solid" variation for consistency whenever possible.
+2. Duplicate a React file in `/src/icons/remix`
+3. Rename the file correponsing to the name of the icon
+4. Open the new file and rename the component and its export.
+5. Paste the SVG code at the bottom of the file and pull out the single long `<path>`. That is the only code you need.
+6. Replace the `<path>` in the old SVG with this new one and save.
+7. Add a reference to this new icon file in `src/icons/index.tsx`
+
+## Icons
+
+Click on an icon to copy the React code to your clipboard.
+
+<div className="icon-section">
+  <IconItem icon={<IconAdd />} name="add" />
+  <IconItem icon={<IconArchive />} name="archive" />
+  <IconItem icon={<IconArrowDown />} name="arrowdown" />
+  <IconItem icon={<IconArrowLeft />} name="arrowleft" />
+  <IconItem icon={<IconArrowRight />} name="arrowright" />
+  <IconItem icon={<IconArrowUp />} name="arrowup" />
+  <IconItem icon={<IconBarChartBox />} name="bar-chart-box" />
+  <IconItem icon={<IconCalendar2 />} name="calendar-2" />
+  <IconItem icon={<IconCheck />} name="check" />
+  <IconItem icon={<IconClose />} name="close" />
+  <IconItem icon={<IconDashboard3 />} name="dashboard3" />
+  <IconItem icon={<IconDatabase2 />} name="database2" />
+  <IconItem icon={<IconDeleteBin />} name="delete-bin" />
+  <IconItem icon={<IconFacebook />} name="facebook" />
+  <IconItem icon={<IconFileList2 />} name="filelist2" />
+  <IconItem icon={<IconFocus3Line />} name="focus3line" />
+  <IconItem icon={<IconGoogle />} name="google" />
+  <IconItem icon={<IconHome2 />} name="home2" />
+  <IconItem icon={<IconLinkedIn />} name="linkedin" />
+  <IconItem icon={<IconLock2 />} name="lock2" />
+  <IconItem icon={<IconMenu />} name="menu" />
+  <IconItem icon={<IconOrganization />} name="organization-chart" />
+  <IconItem icon={<IconSearch />} name="search" />
+  <IconItem icon={<IconShieldKeyhole />} name="shield-keyhole" />
+  <IconItem icon={<IconTeam />} name="team" />
+  <IconItem icon={<IconTerminalBox />} name="terminal-box" />
+  <IconItem icon={<IconUser3 />} name="user3" />
+  <IconItem icon={<IconEye />} name="eye" />
+  <IconItem icon={<IconEyeOff />} name="eyeoff" />
+  <IconItem icon={<IconUserSearch />} name="usersearch" />
+  <IconItem icon={<IconUserReceived2 />} name="userreceived2" />
+</div>

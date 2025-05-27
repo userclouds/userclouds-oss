@@ -1,0 +1,11 @@
+{
+  "id": "900474aa-13ee-481a-8ea0-0f0f4374364b",
+  "created": "2023-09-11T22:16:25.394632Z",
+  "updated": "2023-09-11T22:16:25.394632Z",
+  "deleted": "0001-01-01T00:00:00Z",
+  "type_name": "new edge type",
+  "source_object_type_id": "076b0bbc-e1cf-455f-b123-edf116e484aa",
+  "target_object_type_id": "076b0bbc-e1cf-455f-b123-edf116e484aa",
+  "attributes": [],
+  "organization_id": "00000000-0000-0000-0000-000000000000"
+}

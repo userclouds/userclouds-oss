@@ -1,0 +1,29 @@
+name: SDK samples
+on:
+  push:
+    branches:
+      - master
+  pull_request: {}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+jobs:
+  compatibility:
+    name: Run samples
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout PR source code
+        uses: actions/checkout@v4
+      - name: Setup golang
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: go.mod
+      - name: Run basic sample
+        uses: ./.github/actions/run-sample
+        with:
+          module-path: ./samples/basic
+          tenant-id: ${{ vars.SAMPLE_APP_TENANT_ID }}
+          tenant-url: ${{ vars.SAMPLE_APP_TENANT_URL }}
+          client-id: ${{ secrets.SAMPLE_APP_CLIENT_ID }}
+          client-secret: ${{ secrets.SAMPLE_APP_CLIENT_SECRET }}

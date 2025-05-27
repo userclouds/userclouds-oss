@@ -1,0 +1,16 @@
+{
+  "id": "029232cf-4c01-494a-b3ab-874173dcccbd",
+  "updated_at": 1678766811,
+  "require_mfa": false,
+  "profile": {
+    "email": "testuser@userclouds.com",
+    "email_verified": false,
+    "name": "Vlad Federov",
+    "nickname": "Vlad the Lad",
+    "picture": ""
+  },
+  "organization_id": "00000000-0000-0000-0000-000000000000",
+  "authns": [
+    { "authn_type": "password", "username": "testuser@userclouds.com" }
+  ]
+}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{contact.name}}
+{% endblock title %}
+{% block content %}
+<!-- Main Section -->
+<div class="container">
+  <h2 class="heading font-weight-light text-center">{{contact.name}}</h2>
+  <hr />
+</div>
+<div class="container main-part">
+  <!-- Card for details -->
+  {% include 'partials/_card.html' %}
+</div>
+<div class="container mt-3">
+  <h5 class="text-center my-3 font-weight-light">Date Added [UTC]: &nbsp; {{contact.date_added}}</h5>
+  <p class="text-center text-light">
+    <a class="btn btn-info px-5 {% if contact.is_deleted %} disabled {% endif %}" href="{% url 'update' contact.contact_id %}">
+      <i class="far fa-edit"></i> &nbsp; Update
+    </a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-primary px-5 {% if contact.is_deleted %} disabled {% endif %}" href="{% url 'detail-resolve-marketing' contact.contact_id %}">
+      <i class="far fa-envelope"></i> &nbsp; Resolve [Marketing]
+    </a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-warning px-5" href="{% url 'detail-resolve-fraud' contact.contact_id %}">
+      <i class="far fa-dollar-sign"></i> &nbsp; Resolve [Fraud]
+    </a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-danger px-5 {% if contact.is_deleted %} disabled {% endif %}" href="{% url 'delete' contact.contact_id %}">
+      <i class="fas fa-trash-alt"></i> &nbsp; Delete [retain for fraud]
+    </a>
+  </p>
+</div>
+<!-- Main Section ends-->
+{% endblock content %}

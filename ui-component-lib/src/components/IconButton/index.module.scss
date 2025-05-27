@@ -1,0 +1,67 @@
+@use '../../shared/button-reset' as button;
+@use '../../_variables.module.css';
+
+.root {
+  @include button.button-reset;
+  border-radius: var(--border-radius-default);
+  transition: all var(--input-transition-default);
+
+  &[disabled] {
+    cursor: default;
+    color: var(--color-neutral-300);
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  &:focus-visible {
+    box-shadow: var(--input-focus-visible);
+  }
+
+  svg {
+    display: block; // Removes bottom margin from inline svg
+    // without this, browser will display tooltip for inner SVG,
+    // where title functions like alt text,
+    // rather than for button, where title describes button function
+    pointer-events: none;
+  }
+}
+
+// If element outputs an anchor instead of button
+a.root {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ghost {
+  &:hover,
+  &:active {
+    background-color: var(--color-neutral-100);
+  }
+}
+
+.clear {
+  &:hover,
+  &:active {
+    background-color: transparent;
+  }
+}
+
+.medium {
+  height: var(--input-height-medium);
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
+}
+
+.small {
+  height: var(--input-height-small);
+  padding-left: 6px; // Custom spacing to acheive square
+  padding-right: 6px; // Custom spacing to acheive square
+}
+
+.tiny {
+  height: var(--space-5);
+  padding-left: 2px; // Custom spacing to acheive square
+  padding-right: 2px; // Custom spacing to acheive square
+}

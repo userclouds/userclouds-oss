@@ -1,0 +1,1410 @@
+openapi: 3.0.3
+info:
+  description: AuthZ OpenAPI Spec
+  title: Authorization
+  version: 1.0.0
+paths:
+  /authz/checkattribute:
+    get:
+      description: This endpoint receives a source object ID, target object ID and
+        attribute. It returns a boolean indicating whether the source object has the
+        attribute permission on the target object.
+      parameters:
+      - description: The object for which permissions are to be checked
+        in: query
+        name: source_object_id
+        schema:
+          description: The object for which permissions are to be checked
+          nullable: true
+          type: string
+      - description: The object on which permissions are to be checked
+        in: query
+        name: target_object_id
+        schema:
+          description: The object on which permissions are to be checked
+          nullable: true
+          type: string
+      - description: The permission to check
+        in: query
+        name: attribute
+        schema:
+          description: The permission to check
+          nullable: true
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzCheckAttributeResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+      summary: Check Attribute
+      tags:
+      - Permissions
+  /authz/edges:
+    get:
+      description: This endpoint returns a paginated list of all edges in a tenant.
+        The list can be filtered to only include edges with a specified organization,
+        source object or target object.
+      parameters:
+      - description: A cursor value after which the returned list will start
+        in: query
+        name: starting_after
+        schema:
+          description: A cursor value after which the returned list will start
+          nullable: true
+          type: string
+      - description: A cursor value before which the returned list will end
+        in: query
+        name: ending_before
+        schema:
+          description: A cursor value before which the returned list will end
+          nullable: true
+          type: string
+      - description: The maximum number of results to be returned per page
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of results to be returned per page
+          nullable: true
+          type: string
+      - description: A filter clause to use in the pagination query
+        in: query
+        name: filter
+        schema:
+          description: A filter clause to use in the pagination query
+          nullable: true
+          type: string
+      - description: A comma-delimited list of field names to sort the returned results
+          by - the last field name must be 'id'
+        in: query
+        name: sort_key
+        schema:
+          description: A comma-delimited list of field names to sort the returned
+            results by - the last field name must be 'id'
+          nullable: true
+          type: string
+      - description: The order in which results should be sorted (ascending or descending)
+        in: query
+        name: sort_order
+        schema:
+          description: The order in which results should be sorted (ascending or descending)
+          nullable: true
+          type: string
+      - description: The version of the API to be called
+        in: query
+        name: version
+        schema:
+          description: The version of the API to be called
+          nullable: true
+          type: string
+      - description: Optional - allows filtering by source object ID
+        in: query
+        name: source_object_id
+        schema:
+          description: Optional - allows filtering by source object ID
+          nullable: true
+          type: string
+      - description: Optional - allows filtering by target object ID
+        in: query
+        name: target_object_id
+        schema:
+          description: Optional - allows filtering by target object ID
+          nullable: true
+          type: string
+      - description: Optional - allows filtering by edge ID
+        in: query
+        name: edge_type_id
+        schema:
+          description: Optional - allows filtering by edge ID
+          nullable: true
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzListEdgesResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: List Edges
+      tags:
+      - Edges
+    post:
+      description: This endpoint creates a directed edge of a given type between a
+        source object and target object, both of which are specified by ID.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthzCreateEdgeRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzEdge'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+      summary: Create Edge
+      tags:
+      - Edges
+  /authz/edges/{id}:
+    delete:
+      description: This endpoint deletes an edge by ID.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "204":
+          description: No Content
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete Edge
+      tags:
+      - Edges
+    get:
+      description: This endpoint gets an edge by ID.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzEdge'
+          description: OK
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Get Edge
+      tags:
+      - Edges
+  /authz/edgetypes:
+    get:
+      description: This endpoint returns a paginated list of edge types in a tenant.
+        The list can be filtered to only include edge types with a specified organization,
+        source object type or target object type.
+      parameters:
+      - description: A cursor value after which the returned list will start
+        in: query
+        name: starting_after
+        schema:
+          description: A cursor value after which the returned list will start
+          nullable: true
+          type: string
+      - description: A cursor value before which the returned list will end
+        in: query
+        name: ending_before
+        schema:
+          description: A cursor value before which the returned list will end
+          nullable: true
+          type: string
+      - description: The maximum number of results to be returned per page
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of results to be returned per page
+          nullable: true
+          type: string
+      - description: A filter clause to use in the pagination query
+        in: query
+        name: filter
+        schema:
+          description: A filter clause to use in the pagination query
+          nullable: true
+          type: string
+      - description: A comma-delimited list of field names to sort the returned results
+          by - the last field name must be 'id'
+        in: query
+        name: sort_key
+        schema:
+          description: A comma-delimited list of field names to sort the returned
+            results by - the last field name must be 'id'
+          nullable: true
+          type: string
+      - description: The order in which results should be sorted (ascending or descending)
+        in: query
+        name: sort_order
+        schema:
+          description: The order in which results should be sorted (ascending or descending)
+          nullable: true
+          type: string
+      - description: The version of the API to be called
+        in: query
+        name: version
+        schema:
+          description: The version of the API to be called
+          nullable: true
+          type: string
+      - description: The ID of the source object type
+        in: query
+        name: source_object_type_id
+        schema:
+          description: The ID of the source object type
+          nullable: true
+          type: string
+      - description: The ID of the target object type
+        in: query
+        name: target_object_type_id
+        schema:
+          description: The ID of the target object type
+          nullable: true
+          type: string
+      - description: The ID of the organization
+        in: query
+        name: organization_id
+        schema:
+          description: The ID of the organization
+          nullable: true
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzListEdgeTypesResponse'
+          description: This object contains an array of edge types and pagination
+            information
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
+      summary: List Edge Types
+      tags:
+      - Edge Types
+    post:
+      description: This endpoint creates a new edge type, complete with name, source
+        object type and target object type. Edges of a given type can only link source
+        objects and target objects of the specified types.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthzCreateEdgeTypeRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzEdgeType'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+      summary: Create Edge Type
+      tags:
+      - Edge Types
+  /authz/edgetypes/{id}:
+    delete:
+      description: This endpoint deletes an edge type by ID. It also deletes all edges
+        which use this edge type.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "204":
+          description: No Content
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete Edge Type
+      tags:
+      - Edge Types
+    get:
+      description: This endpoint gets an edge type by ID.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzEdgeType'
+          description: OK
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Get Edge Type
+      tags:
+      - Edge Types
+    put:
+      description: This endpoint updates an edge type. It is used to adjust the attributes
+        associated with the edge type.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiUpdateEdgeTypeRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzEdgeType'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Update Edge Type
+      tags:
+      - Edge Types
+  /authz/listattributes:
+    get:
+      description: This endpoint receives a source object ID and target object ID.
+        It returns a list of attributes that the source object has on the target object.
+      parameters:
+      - description: Optional - allows filtering to a particular source object ID
+        in: query
+        name: source_object_id
+        schema:
+          description: Optional - allows filtering to a particular source object ID
+          nullable: true
+          type: string
+      - description: Optional - allows filtering to a particular target object ID
+        in: query
+        name: target_object_id
+        schema:
+          description: Optional - allows filtering to a particular target object ID
+          nullable: true
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: List Attributes
+      tags:
+      - Permissions
+  /authz/listobjectsreachablewithattribute:
+    get:
+      description: This endpoint receives a source object ID and attribute. It returns
+        a list of objects reachable from the source object with the attribute.
+      parameters:
+      - description: The source object from which you are searching for reachable
+          target objects
+        in: query
+        name: source_object_id
+        schema:
+          description: The source object from which you are searching for reachable
+            target objects
+          nullable: true
+          type: string
+      - description: Optional - allows filtering to a particular target object type
+        in: query
+        name: target_object_type_id
+        schema:
+          description: Optional - allows filtering to a particular target object type
+          nullable: true
+          type: string
+      - description: The permission through which target objects are considered reachable
+          from the source object
+        in: query
+        name: attribute
+        schema:
+          description: The permission through which target objects are considered
+            reachable from the source object
+          nullable: true
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzListObjectsReachableWithAttributeResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
+      summary: List Objects Reachable with Attribute
+      tags:
+      - Permissions
+  /authz/objects:
+    get:
+      description: This endpoint returns a paginated list of objects in a tenant.
+        The list can be filtered to only include objects with a specified type, name
+        or organization.
+      parameters:
+      - description: A cursor value after which the returned list will start
+        in: query
+        name: starting_after
+        schema:
+          description: A cursor value after which the returned list will start
+          nullable: true
+          type: string
+      - description: A cursor value before which the returned list will end
+        in: query
+        name: ending_before
+        schema:
+          description: A cursor value before which the returned list will end
+          nullable: true
+          type: string
+      - description: The maximum number of results to be returned per page
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of results to be returned per page
+          nullable: true
+          type: string
+      - description: A filter clause to use in the pagination query
+        in: query
+        name: filter
+        schema:
+          description: A filter clause to use in the pagination query
+          nullable: true
+          type: string
+      - description: A comma-delimited list of field names to sort the returned results
+          by - the last field name must be 'id'
+        in: query
+        name: sort_key
+        schema:
+          description: A comma-delimited list of field names to sort the returned
+            results by - the last field name must be 'id'
+          nullable: true
+          type: string
+      - description: The order in which results should be sorted (ascending or descending)
+        in: query
+        name: sort_order
+        schema:
+          description: The order in which results should be sorted (ascending or descending)
+          nullable: true
+          type: string
+      - description: The version of the API to be called
+        in: query
+        name: version
+        schema:
+          description: The version of the API to be called
+          nullable: true
+          type: string
+      - description: Optional - allows filtering by object type ID
+        in: query
+        name: type_id
+        schema:
+          description: Optional - allows filtering by object type ID
+          nullable: true
+          type: string
+      - description: Optional - allows filtering by object name
+        in: query
+        name: name
+        schema:
+          description: Optional - allows filtering by object name
+          nullable: true
+          type: string
+      - description: Optional - allows filtering by organization ID.
+        in: query
+        name: organization_id
+        schema:
+          description: Optional - allows filtering by organization ID.
+          nullable: true
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzListObjectsResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
+      summary: List Objects
+      tags:
+      - Objects
+    post:
+      description: This endpoint creates an object with a given ID, Type ID, and Alias.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthzCreateObjectRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzObject'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+      summary: Create Object
+      tags:
+      - Objects
+  /authz/objects/{id}:
+    delete:
+      description: This endpoint deletes an object by ID. This also deletes all edges
+        that use that object.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "204":
+          description: No Content
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete Object
+      tags:
+      - Objects
+    get:
+      description: This endpoint gets an object by ID. If the ID provided is that
+        of a User in the IDP, it returns an object representing the user.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzObject'
+          description: OK
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Get Object
+      tags:
+      - Objects
+    put:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiUpdateObjectRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzObject'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+  /authz/objects/{id}/edges:
+    delete:
+      description: This endpoint deletes all edges associated with an object (specified
+        by ID).
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "204":
+          description: No Content
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete Edges on Object
+      tags:
+      - Edges
+    get:
+      description: This endpoint returns a paginated list of edges associated with
+        an object, which is specified by ID. The endpoint lists all incoming and outgoing
+        edges (i.e. all edges where the provided object is a source or target).
+      parameters:
+      - description: A cursor value after which the returned list will start
+        in: query
+        name: starting_after
+        schema:
+          description: A cursor value after which the returned list will start
+          nullable: true
+          type: string
+      - description: A cursor value before which the returned list will end
+        in: query
+        name: ending_before
+        schema:
+          description: A cursor value before which the returned list will end
+          nullable: true
+          type: string
+      - description: The maximum number of results to be returned per page
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of results to be returned per page
+          nullable: true
+          type: string
+      - description: A filter clause to use in the pagination query
+        in: query
+        name: filter
+        schema:
+          description: A filter clause to use in the pagination query
+          nullable: true
+          type: string
+      - description: A comma-delimited list of field names to sort the returned results
+          by - the last field name must be 'id'
+        in: query
+        name: sort_key
+        schema:
+          description: A comma-delimited list of field names to sort the returned
+            results by - the last field name must be 'id'
+          nullable: true
+          type: string
+      - description: The order in which results should be sorted (ascending or descending)
+        in: query
+        name: sort_order
+        schema:
+          description: The order in which results should be sorted (ascending or descending)
+          nullable: true
+          type: string
+      - description: The version of the API to be called
+        in: query
+        name: version
+        schema:
+          description: The version of the API to be called
+          nullable: true
+          type: string
+      - description: The object ID to list edges on
+        in: query
+        name: target_object_id
+        schema:
+          description: The object ID to list edges on
+          nullable: true
+          type: string
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzListEdgesResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: List Edges on Object
+      tags:
+      - Edges
+  /authz/objecttypes:
+    get:
+      description: This endpoint returns a paginated list of all object types in a
+        tenant.
+      parameters:
+      - description: A cursor value after which the returned list will start
+        in: query
+        name: starting_after
+        schema:
+          description: A cursor value after which the returned list will start
+          nullable: true
+          type: string
+      - description: A cursor value before which the returned list will end
+        in: query
+        name: ending_before
+        schema:
+          description: A cursor value before which the returned list will end
+          nullable: true
+          type: string
+      - description: The maximum number of results to be returned per page
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of results to be returned per page
+          nullable: true
+          type: string
+      - description: A filter clause to use in the pagination query
+        in: query
+        name: filter
+        schema:
+          description: A filter clause to use in the pagination query
+          nullable: true
+          type: string
+      - description: A comma-delimited list of field names to sort the returned results
+          by - the last field name must be 'id'
+        in: query
+        name: sort_key
+        schema:
+          description: A comma-delimited list of field names to sort the returned
+            results by - the last field name must be 'id'
+          nullable: true
+          type: string
+      - description: The order in which results should be sorted (ascending or descending)
+        in: query
+        name: sort_order
+        schema:
+          description: The order in which results should be sorted (ascending or descending)
+          nullable: true
+          type: string
+      - description: The version of the API to be called
+        in: query
+        name: version
+        schema:
+          description: The version of the API to be called
+          nullable: true
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzListObjectTypesResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: List Object Types
+      tags:
+      - Object Types
+    post:
+      description: This endpoint creates a new object type.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthzCreateObjectTypeRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzObjectType'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+      summary: Create Object Type
+      tags:
+      - Object Types
+  /authz/objecttypes/{id}:
+    delete:
+      description: This endpoint deletes an object type by ID. It also deletes all
+        objects, edge types and edges which use the object type.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete Object Type
+      tags:
+      - Object Types
+    get:
+      description: This endpoint gets an object type by ID.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzObjectType'
+          description: OK
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Get Object Type
+      tags:
+      - Object Types
+  /authz/organizations:
+    get:
+      description: This endpoint returns a paginated list of all organizations in
+        a tenant.
+      parameters:
+      - description: A cursor value after which the returned list will start
+        in: query
+        name: starting_after
+        schema:
+          description: A cursor value after which the returned list will start
+          nullable: true
+          type: string
+      - description: A cursor value before which the returned list will end
+        in: query
+        name: ending_before
+        schema:
+          description: A cursor value before which the returned list will end
+          nullable: true
+          type: string
+      - description: The maximum number of results to be returned per page
+        in: query
+        name: limit
+        schema:
+          description: The maximum number of results to be returned per page
+          nullable: true
+          type: string
+      - description: A filter clause to use in the pagination query
+        in: query
+        name: filter
+        schema:
+          description: A filter clause to use in the pagination query
+          nullable: true
+          type: string
+      - description: A comma-delimited list of field names to sort the returned results
+          by - the last field name must be 'id'
+        in: query
+        name: sort_key
+        schema:
+          description: A comma-delimited list of field names to sort the returned
+            results by - the last field name must be 'id'
+          nullable: true
+          type: string
+      - description: The order in which results should be sorted (ascending or descending)
+        in: query
+        name: sort_order
+        schema:
+          description: The order in which results should be sorted (ascending or descending)
+          nullable: true
+          type: string
+      - description: The version of the API to be called
+        in: query
+        name: version
+        schema:
+          description: The version of the API to be called
+          nullable: true
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzListOrganizationsResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
+      summary: List Organizations
+      tags:
+      - Organizations
+    post:
+      description: This endpoint creates an organization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthzCreateOrganizationRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzOrganization'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+      summary: Create Organization
+      tags:
+      - Organizations
+  /authz/organizations/{id}:
+    delete:
+      description: This endpoint deletes an organization by ID.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+        "501":
+          description: Not Implemented
+      summary: Delete Organization
+      tags:
+      - Organizations
+    get:
+      description: This endpoint gets an organization by ID.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzOrganization'
+          description: OK
+        "400":
+          description: Bad Request
+      summary: Get Organization
+      tags:
+      - Organizations
+    put:
+      description: This endpoint updates an organization, specified by ID.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidUUID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiUpdateOrganizationRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzOrganization'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+      summary: Update Organization
+      tags:
+      - Organizations
+components:
+  schemas:
+    ApiUpdateEdgeTypeRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthzAttributes'
+        type_name:
+          type: string
+      type: object
+    ApiUpdateObjectRequest:
+      properties:
+        alias:
+          nullable: true
+          type: string
+        id:
+          $ref: '#/components/schemas/UuidUUID'
+        source:
+          nullable: true
+          type: string
+      type: object
+    ApiUpdateOrganizationRequest:
+      properties:
+        name:
+          type: string
+        region:
+          type: string
+      type: object
+    AuthzAttribute:
+      properties:
+        direct:
+          type: boolean
+        inherit:
+          type: boolean
+        name:
+          type: string
+        propagate:
+          type: boolean
+      required:
+      - name
+      type: object
+    AuthzAttributePathNode:
+      properties:
+        edge_id:
+          $ref: '#/components/schemas/UuidUUID'
+        object_id:
+          $ref: '#/components/schemas/UuidUUID'
+      type: object
+    AuthzAttributes:
+      items:
+        $ref: '#/components/schemas/AuthzAttribute'
+      nullable: true
+      type: array
+    AuthzCheckAttributeResponse:
+      properties:
+        has_attribute:
+          type: boolean
+        path:
+          items:
+            $ref: '#/components/schemas/AuthzAttributePathNode'
+          nullable: true
+          type: array
+      type: object
+    AuthzCreateEdgeRequest:
+      properties:
+        edge:
+          $ref: '#/components/schemas/AuthzEdge'
+      type: object
+    AuthzCreateEdgeTypeRequest:
+      properties:
+        edge_type:
+          $ref: '#/components/schemas/AuthzEdgeType'
+      type: object
+    AuthzCreateObjectRequest:
+      properties:
+        object:
+          $ref: '#/components/schemas/AuthzObject'
+      type: object
+    AuthzCreateObjectTypeRequest:
+      properties:
+        object_type:
+          $ref: '#/components/schemas/AuthzObjectType'
+      type: object
+    AuthzCreateOrganizationRequest:
+      properties:
+        organization:
+          $ref: '#/components/schemas/AuthzOrganization'
+      type: object
+    AuthzEdge:
+      properties:
+        created:
+          format: date-time
+          type: string
+        deleted:
+          format: date-time
+          type: string
+        edge_type_id:
+          $ref: '#/components/schemas/UuidUUID'
+        id:
+          $ref: '#/components/schemas/UuidUUID'
+        source_object_id:
+          $ref: '#/components/schemas/UuidUUID'
+        target_object_id:
+          $ref: '#/components/schemas/UuidUUID'
+        updated:
+          format: date-time
+          type: string
+      required:
+      - edge_type_id
+      - source_object_id
+      - target_object_id
+      type: object
+    AuthzEdgeType:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthzAttributes'
+        created:
+          format: date-time
+          type: string
+        deleted:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/UuidUUID'
+        organization_id:
+          $ref: '#/components/schemas/UuidUUID'
+        source_object_type_id:
+          $ref: '#/components/schemas/UuidUUID'
+        target_object_type_id:
+          $ref: '#/components/schemas/UuidUUID'
+        type_name:
+          type: string
+        updated:
+          format: date-time
+          type: string
+      required:
+      - type_name
+      - source_object_type_id
+      - target_object_type_id
+      type: object
+    AuthzListEdgeTypesResponse:
+      description: This object contains an array of edge types and pagination information
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AuthzEdgeType'
+          nullable: true
+          type: array
+        has_next:
+          type: boolean
+        has_prev:
+          type: boolean
+        next:
+          type: string
+        prev:
+          $ref: '#/components/schemas/PaginationCursor'
+      type: object
+    AuthzListEdgesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AuthzEdge'
+          nullable: true
+          type: array
+        has_next:
+          type: boolean
+        has_prev:
+          type: boolean
+        next:
+          type: string
+        prev:
+          $ref: '#/components/schemas/PaginationCursor'
+      type: object
+    AuthzListObjectTypesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AuthzObjectType'
+          nullable: true
+          type: array
+        has_next:
+          type: boolean
+        has_prev:
+          type: boolean
+        next:
+          type: string
+        prev:
+          $ref: '#/components/schemas/PaginationCursor'
+      type: object
+    AuthzListObjectsReachableWithAttributeResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/UuidUUID'
+          nullable: true
+          type: array
+      type: object
+    AuthzListObjectsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AuthzObject'
+          nullable: true
+          type: array
+        has_next:
+          type: boolean
+        has_prev:
+          type: boolean
+        next:
+          type: string
+        prev:
+          $ref: '#/components/schemas/PaginationCursor'
+      type: object
+    AuthzListOrganizationsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AuthzOrganization'
+          nullable: true
+          type: array
+        has_next:
+          type: boolean
+        has_prev:
+          type: boolean
+        next:
+          type: string
+        prev:
+          $ref: '#/components/schemas/PaginationCursor'
+      type: object
+    AuthzObject:
+      properties:
+        alias:
+          nullable: true
+          type: string
+        created:
+          format: date-time
+          type: string
+        deleted:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/UuidUUID'
+        organization_id:
+          $ref: '#/components/schemas/UuidUUID'
+        type_id:
+          $ref: '#/components/schemas/UuidUUID'
+        updated:
+          format: date-time
+          type: string
+      required:
+      - type_id
+      type: object
+    AuthzObjectType:
+      properties:
+        created:
+          format: date-time
+          type: string
+        deleted:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/UuidUUID'
+        type_name:
+          type: string
+        updated:
+          format: date-time
+          type: string
+      required:
+      - type_name
+      type: object
+    AuthzOrganization:
+      properties:
+        created:
+          format: date-time
+          type: string
+        deleted:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/UuidUUID'
+        name:
+          type: string
+        region:
+          type: string
+        updated:
+          format: date-time
+          type: string
+      required:
+      - name
+      type: object
+    PaginationCursor: {}
+    UuidUUID:
+      example: 248df4b7-aa70-47b8-a036-33ac447e668d
+      format: uuid
+      type: string
+servers:
+- url: https://your-tenant-name.tenant.userclouds.com
+x-readme:
+  explorer-enabled: false

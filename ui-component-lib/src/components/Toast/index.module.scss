@@ -1,0 +1,64 @@
+@use '../../_variables.module.css';
+
+.root {
+  display: inline-flex;
+  max-width: 370px;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-family);
+  font-size: var(--text-2-font-size);
+  line-height: var(--text-2-line-height);
+  border-radius: var(--border-radius-small);
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow-default);
+  color: var(--color-black);
+  // border-left-width: 4px;
+  // border-left-style: solid;
+
+  a {
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: inherit;
+    color: inherit;
+  }
+}
+
+// .info {
+//   border-color: var(--color-black);
+// }
+
+// .alert {
+//   border-color: var(--color-red-700);
+// }
+
+// .success {
+//   border-color: var(--color-green-600);
+// }
+
+.icon {
+  flex: none;
+  position: relative;
+  top: -1px; // Slight horizontal adjustment
+
+  .info & {
+    color: var(--color-black);
+  }
+
+  .alert & {
+    color: var(--color-red-700);
+  }
+
+  .success & {
+    color: var(--color-green-600);
+  }
+}
+
+.iconClose {
+  margin-top: -3px;
+  margin-right: -3px;
+  color: var(--color-neutral-600);
+}
+
+// Themes

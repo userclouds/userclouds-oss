@@ -1,0 +1,20 @@
+:global(#root) {
+  .columnstable {
+    @media (max-width: 1500px) {
+      grid-template-columns:
+        50px
+        minmax(240px, 1fr)
+        repeat(3, minmax(max-content, 1fr))
+        80px
+        60px;
+    }
+    @media (min-width: 1501px) {
+      grid-template-columns: 50px repeat(3, 1fr) fit-content(20%) 80px 60px;
+    }
+  }
+
+  .saveErrorsDialogList {
+    list-style-type: disc;
+    padding-left: 1rem;
+  }
+}

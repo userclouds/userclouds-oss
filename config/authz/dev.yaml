@@ -1,0 +1,18 @@
+svc_listener:
+  protocol: http
+  host: localhost
+  port: 5200
+
+internal_server:
+  protocol: http
+  host: 127.0.0.1
+  port: 5201
+
+console_tenant_id: 41ab79a8-0dff-418e-9d42-e1694469120a
+
+check_attribute_service_map:
+  41ab79a8-0dff-418e-9d42-e1694469120a:
+    - region: themoon
+      service_name: checkattribute
+    - region: mars
+      service_name: checkattribute

@@ -1,0 +1,53 @@
+company_db:
+  user: userclouds
+  dbname: companyconfig
+  host: localhost
+  dbdriver: postgres
+  dbproduct: postgres
+  port: 5432
+
+tracing:
+  collector_host: localhost:4317
+
+featureflags:
+  api_key: env://STATSIG_DEV_API_KEY
+  verbose: false
+
+cache:
+  redis_caches:
+    - region: themoon
+      host: localhost
+      port: 6379
+      dbname: 0
+    - region: mars
+      host: localhost
+      port: 6379
+      dbname: 1
+
+sentry:
+  dsn: https://9aea83db3bc7b10198fd113031b708a0@o4505886270488576.ingest.sentry.io/4506154318823424
+  traces_sample_rate: 0.0
+
+logger:
+  transports:
+    - type: file
+      base_filename: /tmp/
+      transportconfig:
+        required: true
+        max_log_level: 5
+    - type: goLogJSON
+      transportconfig:
+        required: true
+        max_log_level: 4
+      supports_color: false
+    - type: server
+      transportconfig:
+        required: true
+        max_log_level: 5
+      tenant_id: 41ab79a8-0dff-418e-9d42-e1694469120a
+      log_service_url: 'https://logserver.dev.userclouds.tools:3333'
+      send_raw_data: false
+    - type: eventMetrics
+      transportconfig:
+        required: false
+        max_log_level: 5

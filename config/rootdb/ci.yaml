@@ -1,0 +1,9 @@
+# Credentials for the root database user. must match what we use in CI, defined in .github/workflows/golang-ci.yml
+db:
+  user: userclouds_test_root
+  password: dev-literal://m4u4N87cqcLJpGsQ
+  dbname: defaultdb
+  dbdriver: postgres
+  dbproduct: postgres
+  host: localhost
+  port: 5432

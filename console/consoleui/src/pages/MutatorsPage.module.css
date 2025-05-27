@@ -1,0 +1,34 @@
+:global(#root) {
+  .mutatorlisttable {
+    grid-template-columns:
+      50px
+      160px
+      fit-content(200px)
+      minmax(250px, 1fr)
+      fit-content(250px)
+      80px
+      60px;
+  }
+
+  .primaryCol {
+    font-weight: bold;
+  }
+
+  [data-extended='false'] .columnsCountText {
+    display: none;
+  }
+
+  [data-extended='true'] .mutatorList {
+    display: none;
+  }
+
+  [data-extended='true'] .mutatorTagsContainer {
+    display: flex;
+  }
+
+  .mutatorTagsContainer {
+    display: none;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}

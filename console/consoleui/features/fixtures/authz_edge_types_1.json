@@ -1,0 +1,341 @@
+{
+  "data": [
+    {
+      "id": "1569fa26-2458-4041-8cf3-5532f0d0670a",
+      "created": "2023-08-14T15:10:27.226381Z",
+      "updated": "2023-08-30T16:55:22.348191Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_group_policy_full",
+      "source_object_type_id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "target_object_type_id": "e410fb38-2158-4431-8b66-fb547b55f2da",
+      "attributes": [
+        {
+          "name": "_policy_create",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        },
+        {
+          "name": "_policy_read",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        },
+        {
+          "name": "_policy_update",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        },
+        {
+          "name": "_policy_delete",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "1eb8cb99-9a1f-4e14-9651-b32e1e2df614",
+      "created": "2023-08-14T15:10:27.234247Z",
+      "updated": "2023-08-30T16:55:22.356009Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_group_policy_read",
+      "source_object_type_id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "target_object_type_id": "e410fb38-2158-4431-8b66-fb547b55f2da",
+      "attributes": [
+        {
+          "name": "_policy_read",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "1eec16ec-6130-4f9e-a51f-21bc19b20d8f",
+      "created": "2023-08-14T15:10:27.106808Z",
+      "updated": "2023-08-30T16:55:22.226832Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_member_deprecated",
+      "source_object_type_id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "target_object_type_id": "1bf2b775-e521-41d3-8b7e-78e89427e6fe",
+      "attributes": null,
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "237aba41-90bd-47de-a6cd-bf75c3c76b74",
+      "created": "2023-08-14T15:10:27.112607Z",
+      "updated": "2023-08-30T16:55:22.235Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_admin",
+      "source_object_type_id": "1bf2b775-e521-41d3-8b7e-78e89427e6fe",
+      "target_object_type_id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "attributes": [
+        {
+          "name": "_admin",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        },
+        {
+          "name": "_policy_create",
+          "direct": false,
+          "inherit": true,
+          "propagate": false
+        },
+        {
+          "name": "_policy_read",
+          "direct": false,
+          "inherit": true,
+          "propagate": false
+        },
+        {
+          "name": "_policy_update",
+          "direct": false,
+          "inherit": true,
+          "propagate": false
+        },
+        {
+          "name": "_policy_delete",
+          "direct": false,
+          "inherit": true,
+          "propagate": false
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "2dbccbff-44fe-4ccf-b104-2ac5cb48bea0",
+      "created": "2023-08-14T15:10:27.196238Z",
+      "updated": "2023-08-30T16:55:22.308119Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_policy_exist_access",
+      "source_object_type_id": "e410fb38-2158-4431-8b66-fb547b55f2da",
+      "target_object_type_id": "9bb5d92b-41df-4dc2-8ac1-418365c408ab",
+      "attributes": [
+        {
+          "name": "_policy_create",
+          "direct": false,
+          "inherit": false,
+          "propagate": true
+        },
+        {
+          "name": "_policy_read",
+          "direct": false,
+          "inherit": false,
+          "propagate": true
+        },
+        {
+          "name": "_policy_update",
+          "direct": false,
+          "inherit": false,
+          "propagate": true
+        },
+        {
+          "name": "_policy_delete",
+          "direct": false,
+          "inherit": false,
+          "propagate": true
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "51734876-a296-469f-9978-c4d3565cd877",
+      "created": "2023-08-14T15:10:27.241224Z",
+      "updated": "2023-08-30T16:55:22.364135Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_user_group_policy_full",
+      "source_object_type_id": "1bf2b775-e521-41d3-8b7e-78e89427e6fe",
+      "target_object_type_id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "attributes": [
+        {
+          "name": "_policy_create",
+          "direct": false,
+          "inherit": true,
+          "propagate": false
+        },
+        {
+          "name": "_policy_read",
+          "direct": false,
+          "inherit": true,
+          "propagate": false
+        },
+        {
+          "name": "_policy_update",
+          "direct": false,
+          "inherit": true,
+          "propagate": false
+        },
+        {
+          "name": "_policy_delete",
+          "direct": false,
+          "inherit": true,
+          "propagate": false
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "58840f76-65b6-4006-8286-8927246ee9f9",
+      "created": "2023-08-14T15:10:27.210398Z",
+      "updated": "2023-08-30T16:55:22.332286Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_user_policy_full",
+      "source_object_type_id": "1bf2b775-e521-41d3-8b7e-78e89427e6fe",
+      "target_object_type_id": "e410fb38-2158-4431-8b66-fb547b55f2da",
+      "attributes": [
+        {
+          "name": "_policy_create",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        },
+        {
+          "name": "_policy_read",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        },
+        {
+          "name": "_policy_update",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        },
+        {
+          "name": "_policy_delete",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "60b69666-4a8a-4eb3-94dd-621298fb365d",
+      "created": "2023-08-14T15:10:27.100711Z",
+      "updated": "2023-08-30T16:55:22.210986Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_admin_deprecated",
+      "source_object_type_id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "target_object_type_id": "1bf2b775-e521-41d3-8b7e-78e89427e6fe",
+      "attributes": null,
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "bb2baf72-4acc-4b73-9ea5-8d936af91a55",
+      "created": "2023-08-14T15:10:27.218436Z",
+      "updated": "2023-08-30T16:55:22.340065Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_user_policy_read",
+      "source_object_type_id": "1bf2b775-e521-41d3-8b7e-78e89427e6fe",
+      "target_object_type_id": "e410fb38-2158-4431-8b66-fb547b55f2da",
+      "attributes": [
+        {
+          "name": "_policy_read",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "ca3d9771-1077-4fd8-a3f2-3ceaab1e63f3",
+      "created": "2023-08-14T15:10:27.203484Z",
+      "updated": "2023-08-30T16:55:22.316415Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_policy_exist_transformation",
+      "source_object_type_id": "e410fb38-2158-4431-8b66-fb547b55f2da",
+      "target_object_type_id": "260c7221-729c-478b-843b-e00168a0cdc6",
+      "attributes": [
+        {
+          "name": "_policy_create",
+          "direct": false,
+          "inherit": false,
+          "propagate": true
+        },
+        {
+          "name": "_policy_read",
+          "direct": false,
+          "inherit": false,
+          "propagate": true
+        },
+        {
+          "name": "_policy_update",
+          "direct": false,
+          "inherit": false,
+          "propagate": true
+        },
+        {
+          "name": "_policy_delete",
+          "direct": false,
+          "inherit": false,
+          "propagate": true
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "e5eb5062-8f08-4cd8-a43e-b4a81ab55f50",
+      "created": "2023-08-14T15:10:27.118521Z",
+      "updated": "2023-08-30T16:55:22.243055Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_member",
+      "source_object_type_id": "1bf2b775-e521-41d3-8b7e-78e89427e6fe",
+      "target_object_type_id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "attributes": [
+        {
+          "name": "_member",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "ea723951-fb93-4a29-b977-d27c01a61f58",
+      "created": "2023-08-14T15:10:27.091666Z",
+      "updated": "2023-08-30T16:55:22.203178Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_can_login",
+      "source_object_type_id": "1bf2b775-e521-41d3-8b7e-78e89427e6fe",
+      "target_object_type_id": "9b90794f-0ed0-48d6-99a5-6fd578a9134d",
+      "attributes": [
+        {
+          "name": "_can_login",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "f11c57e1-91fb-4fdc-9357-a955339eedb9",
+      "created": "2023-08-14T15:10:27.249356Z",
+      "updated": "2023-08-30T16:55:22.372069Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "_user_group_policy_read",
+      "source_object_type_id": "1bf2b775-e521-41d3-8b7e-78e89427e6fe",
+      "target_object_type_id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "attributes": [
+        {
+          "name": "_policy_read",
+          "direct": false,
+          "inherit": true,
+          "propagate": false
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": false
+}

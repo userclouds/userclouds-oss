@@ -1,0 +1,57 @@
+.dropdown {
+  position: absolute;
+  /* ensure that drop down renders on top of other elements */
+  z-index: 4;
+  font-size: 16px;
+  top: 30px;
+  white-space: nowrap;
+  min-width: 100%;
+  height: auto;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px 10px rgb(0 0 0 / 10%);
+  border-radius: 4px;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: all 0.2s ease;
+}
+
+.navmenudropdown {
+  position: absolute;
+  /* ensure that drop down renders on top of other elements */
+  z-index: 4;
+  overflow: visible;
+  font-size: 13px;
+  top: 30px;
+  white-space: nowrap;
+  min-width: 100%;
+  height: auto;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #283354;
+  color: #ffffff;
+  box-shadow: 0px 0px 10px 10px rgb(0 0 0 / 10%);
+  border-radius: 4px;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: all 0.2s ease;
+}
+
+/* grow to the left (anchor on the right) */
+.overflowleft {
+  right: 0px;
+}
+
+/* grow to the right (anchor on the left) */
+.overflowright {
+  left: 0px;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  height: 0px;
+}

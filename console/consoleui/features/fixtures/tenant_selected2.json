@@ -1,0 +1,13 @@
+{
+  "id": "9835e88f-bd66-4cd2-b1c4-dfc61de9a2e1",
+  "created": "2023-01-26T21:07:12.110636Z",
+  "updated": "2023-02-09T16:57:44.711035Z",
+  "deleted": "0001-01-01T00:00:00Z",
+  "name": "Food Tenant",
+  "company_id": "1ee4497e-c326-4068-94ed-3dcdaaaa53bc",
+  "tenant_url": "https://foodtenant.dev.userclouds.tools:3333",
+  "use_organizations": false,
+  "is_console_tenant": false,
+  "is_admin": true,
+  "is_member": true
+}

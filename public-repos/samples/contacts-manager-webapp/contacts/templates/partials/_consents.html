@@ -1,0 +1,10 @@
+<div>
+    <h4>Data usage consents</h4>
+    {% for cn, desc, cb in available_consents %}
+        <input type="checkbox" id="consent_{{cn}}" name="consent.{{cn}}" value="1" 
+        {% if cb %}checked {% endif %}
+        >
+    <label for="consent_{{cn}}">{{ desc }}</label><br>
+    {% endfor %}
+</div>
+<br>

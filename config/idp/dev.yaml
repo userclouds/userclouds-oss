@@ -1,0 +1,23 @@
+svc_listener:
+  protocol: http
+  host: localhost
+  port: 5100
+
+internal_server:
+  protocol: http
+  host: 127.0.0.1
+  port: 5101
+
+console_tenant_id: 41ab79a8-0dff-418e-9d42-e1694469120a
+
+sqlshim_config:
+  mysql_ports: [3307, 3308]
+  postgres_ports: [5433]
+
+data_import_config:
+  data_import_s3_bucket: userclouds-dev-data-import
+  url_expiration_minutes: 60
+
+worker_client:
+  type: http
+  url: http://localhost:3012

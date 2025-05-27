@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "id": "1ee4497e-c326-4068-94ed-3dcdaaaa53bc",
+      "created": "2023-02-05T05:42:17.043874Z",
+      "updated": "2023-02-15T23:21:48.628481Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "UserClouds Dev",
+      "region": "aws-us-east-1"
+    },
+    {
+      "id": "10ccc4fd-0d6b-4ded-889b-41eb119c650a",
+      "created": "2023-04-13T20:28:44.9275Z",
+      "updated": "2023-04-19T18:14:08.66067Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "Kyle's First Org",
+      "region": "aws-us-west-1"
+    },
+    {
+      "id": "1e01c626-4f69-44ae-822d-a76741e54bab",
+      "created": "2023-08-29T23:34:48.356896Z",
+      "updated": "2023-08-29T23:34:48.356896Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "Kyle's Second Org",
+      "region": "aws-us-east-2"
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": false
+}

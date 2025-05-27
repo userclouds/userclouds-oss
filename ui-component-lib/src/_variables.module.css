@@ -1,0 +1,116 @@
+/* This class is required to make this a "pure" CSS module */
+:global(:root) {
+  /* Typography */
+  --font-family:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --font-family-monospace: 'DM Mono', monospace;
+
+  --heading-1-font-size: 33px;
+  --heading-1-line-height: 38px;
+  --heading-2-font-size: 20px;
+  --heading-2-line-height: 27px;
+  --heading-3-font-size: 16px;
+  --heading-3-line-height: 22px;
+  --text-0-font-size: 13px;
+  --text-0-line-height: 22px;
+  --text-1-font-size: 14px;
+  --text-1-line-height: 21px;
+  --text-2-font-size: 13px;
+  --text-2-line-height: 18px;
+
+  /* new text sizes */
+  --new-text-1-font-size: 13px;
+
+  /* Colors */
+  --color-white: #ffffff;
+  --color-black: #0a0a0a; /* neutral-950 */
+
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --table-border-color: var(--color-neutral-200);
+
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+  --primary-button-background: #428ed3;
+  --secondary-button-background: #283354;
+  --secondary-button-background-active: #34436e;
+  --button-text-color: var(--color-white);
+
+  --color-red-100: #fee2e2;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+
+  --color-green-100: #eefbee;
+  --color-green-600: #199c16;
+  --color-green-800: #0b620a;
+
+  /* Custom colors */
+  --header-background: #eaf1fb;
+  --dialog-background: var(--header-background);
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 64px;
+
+  /* new spacing scale */
+  --new-space-1: 5px;
+  --new-space-2: 10px;
+  --new-space-3: 15px;
+  --new-space-4: 20px;
+  --new-min-card-width: 900px;
+
+  /* Breakpoints */
+  --break-medium: 768px;
+
+  /* Component shared values */
+  --border-radius-default: 8px;
+  --border-radius-medium: 6px;
+  --border-radius-small: 4px;
+  --border-radius-pill: 9999px;
+  --border-radius-full: 100%;
+  --max-reading-width: 700px;
+
+  --input-height-large: 40px;
+  --input-height-medium: 40px;
+  --input-width-medium: 180px;
+  --input-height-small: 30px;
+  --input-width-small: 90px;
+  --input-box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --input-padding-default: var(--space-3);
+  --input-min-width: 100px;
+
+  --input-transition-default: 150ms;
+  --input-focus-visible: inset var(--color-blue-900) 0px 0px 0px 2px;
+  --input-focus-visible-outer:
+    inset var(--color-white) 0px 0px 0px 2px,
+    var(--color-blue-900) 0px 0px 0px 4px;
+
+  --checkbox-radio-input-size: 16px;
+
+  --box-shadow-default: 0 2px 8px rgb(0 0 0 / 12%);
+
+  --baseline-z-index: 0;
+  --dialog-overlay-z-index: 10;
+  --dialog-z-index: 20;
+  --table-controls-z-index: 30;
+  --dropdown-z-index: 40;
+  --tooltip-z-index: 50;
+
+  --header-height: 55px;
+  --footer-height: 55px;
+
+  --card-control-view-height: 78px;
+  --table-header-row-height: 40px;
+}

@@ -1,0 +1,21 @@
+@use '../../_variables.module.css';
+
+.root {
+  align-items: center;
+  color: var(--color-black);
+  display: flex;
+  gap: var(--space-2);
+  font-family: var(--font-family);
+  max-width: 84ch;
+  white-space: wrap;
+}
+
+.monospace {
+  font-family: var(--font-family-monospace);
+}
+
+.icon {
+  position: relative;
+  top: 3px; // Align the icon with the text
+  flex: none;
+}

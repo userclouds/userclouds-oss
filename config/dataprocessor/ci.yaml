@@ -1,0 +1,8 @@
+db:
+  user: test
+  password: dev-literal://unused
+  dbname: status_00000000000000000000000000000000
+  host: test
+  port: 3306
+  dbdriver: postgres
+  dbproduct: postgres

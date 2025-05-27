@@ -1,0 +1,71 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Spacing" />
+
+<style>{`
+  
+.row {
+  display: flex;
+  margin-bottom: 8px;
+}  
+
+.bar-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.bar  {
+  background: #c1c9d1;
+  height: 20px;
+  margin-right: 8px;
+}
+  
+`}</style>
+
+# Spacing
+
+A system of spacer units is critical to maintain consistent layout spacing both inside and between components. A common approach is to use a `4px` base and increment up by 2x (more or less) at each step. These units are available as SCSS variables and as classes in the Tailwind CSS library.
+
+<div class="row">
+  <div style={{ width: '4px' }} class="bar"></div>
+  <div class="bar-name">4px</div>
+</div>
+<div class="row">
+  <div style={{ width: '8px' }} class="bar"></div>
+  <div class="bar-name">8px</div>
+</div>
+<div class="row">
+  <div style={{ width: '12px' }} class="bar"></div>
+  <div class="bar-name">12px</div>
+</div>
+<div class="row">
+  <div style={{ width: '16px' }} class="bar"></div>
+  <div class="bar-name">16px</div>
+</div>
+<div class="row">
+  <div style={{ width: '24px' }} class="bar"></div>
+  <div class="bar-name">24px</div>
+</div>
+<div class="row">
+  <div style={{ width: '32px' }} class="bar"></div>
+  <div class="bar-name">32px</div>
+</div>
+<div class="row">
+  <div style={{ width: '64px' }} class="bar"></div>
+  <div class="bar-name">64px</div>
+</div>
+<div class="row">
+  <div style={{ width: '128px' }} class="bar"></div>
+  <div class="bar-name">128px</div>
+</div>
+<div class="row">
+  <div style={{ width: '256px' }} class="bar"></div>
+  <div class="bar-name">256px</div>
+</div>
+
+<br />
+<br />
+
+## Can I use custom spacing?
+
+Occasionally a layout will need a tweak that doesn't align with these units. In high-touch situations you can use custom values.

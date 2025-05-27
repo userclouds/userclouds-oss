@@ -1,0 +1,78 @@
+.DS_Store
+
+# from testing
+cover.out
+heap_profiler/
+goroutine_dump
+console/consoleui/cucumber-report.json
+
+# Where we build our binaries and 3rd party binaries to.
+bin/
+
+# Used in our CLI.
+bypass_*
+
+# Common IDE-managed tools.
+bin/*
+!bin/*.sh
+
+# VIM
+*.swp
+*.swo
+
+# XCode
+xcuserdata/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+timeline.xctimeline
+playground.xcworkspace
+.build/
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# CockroachDB
+lib/
+
+
+# Node/React/JS/TS stuff
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+.rollup.cache
+
+# Editor specific
+.history
+
+# Python
+*.pyc
+.coverage
+.venv*
+*.egg-info/
+*.egg
+__pycache__/
+.pytest_cache
+
+# Terraform
+.terraform
+*.tfstate
+*.tfstate.*
+terragrunt_generated__*.tf
+.terragrunt-null-vars.auto.tfvars.json
+
+# User specific env
+.envrc.private
+
+# VS Code
+**__debug_bin**
+
+# rendered helm charts
+.k8s-manifests/
+
+**/.yarn/*

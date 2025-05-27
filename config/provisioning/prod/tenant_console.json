@@ -1,0 +1,178 @@
+{
+  "protocol": "https",
+  "sub_domain": "tenant.userclouds.com",
+  "tenant": {
+    "id": "804718b8-5788-4c31-9f5e-1ac55782728c",
+    "name": "Console",
+    "company_id": "c8564de2-6d04-4706-aef0-4e905b7d7196",
+    "tenant_url": "https://console.tenant.userclouds.com",
+    "use_organizations": true,
+    "state": "active"
+  },
+  "plex_config": {
+    "plex_map": {
+      "telephony_provider": {
+        "type": "none",
+        "properties": {}
+      },
+      "apps": [
+        {
+          "client_id": "console_plex_clientid_prod",
+          "client_secret": "acdb1e86c431ea57eadc9ad4b50b230c4c5577583de56299f1a5c688ef26bb15e7863effc440962c635843628fb7397accea47dbbfb82562e92005df8a64ec2c",
+          "id": "615fbb34-b241-4721-a711-8a50ef21af20",
+          "organization_id": "c8564de2-6d04-4706-aef0-4e905b7d7196",
+          "name": "UserClouds Console",
+          "provider_app_ids": ["acfafb07-2932-4b13-9728-0def2f504f84"],
+          "token_validity": {
+            "access": 86400,
+            "refresh": 2592000,
+            "impersonate_user": 3600
+          },
+          "allowed_redirect_uris": [
+            "https://console.userclouds.com/auth/callback",
+            "https://console.userclouds.com/auth/invitecallback",
+            "https://console.aws-us-west-2.userclouds.com/auth/callback",
+            "https://console.aws-us-west-2.userclouds.com/auth/invitecallback",
+            "https://console.aws-us-east-1.userclouds.com/auth/callback",
+            "https://console.aws-us-east-1.userclouds.com/auth/invitecallback"
+          ],
+          "allowed_logout_uris": [
+            "https://console.userclouds.com/",
+            "https://console.aws-us-west-2.userclouds.com/",
+            "https://console.aws-us-east-1.userclouds.com/"
+          ],
+          "grant_types": [
+            "authorization_code",
+            "refresh_token",
+            "client_credentials"
+          ],
+          "page_parameters": {
+            "every_page": {
+              "authenticationMethods": {
+                "parameter_name": "authenticationMethods",
+                "parameter_type": "selected_authentication_methods",
+                "parameter_value": "password,passwordless,facebook,google,linkedin"
+              }
+            }
+          }
+        }
+      ],
+      "employee_app": {
+        "id": "cee1e148-0254-4244-ab8c-ba138ff3ead7",
+        "organization_id": "c8564de2-6d04-4706-aef0-4e905b7d7196",
+        "name": "Employee Plex App",
+        "client_id": "9f05e689-72c2-4d07-a1bb-a255b652b172",
+        "client_secret": "108cdfbb-daca-4f6b-b620-5581e1d1dc81",
+        "provider_app_ids": ["5bc3a2aa-b1ea-4369-b840-440e8574608d"],
+        "token_validity": {
+          "access": 86400,
+          "refresh": 2592000,
+          "impersonate_user": 3600
+        },
+        "grant_types": [
+          "authorization_code",
+          "refresh_token",
+          "client_credentials"
+        ],
+        "allowed_logout_uris": [],
+        "allowed_redirect_uris": []
+      },
+      "employee_provider": {
+        "id": "a9473598-7332-46ce-82f7-4dd919de79a9",
+        "name": "Employee IDP Provider",
+        "type": "employee",
+        "uc": {
+          "idp_url": "",
+          "apps": [
+            {
+              "id": "5bc3a2aa-b1ea-4369-b840-440e8574608d",
+              "name": "Employee IDP App"
+            }
+          ]
+        }
+      },
+      "policy": {
+        "active_provider_id": "93c5f442-2fc6-4b92-ad07-f98e305dbf83"
+      },
+      "providers": [
+        {
+          "id": "93c5f442-2fc6-4b92-ad07-f98e305dbf83",
+          "name": "UC IDP prod",
+          "type": "uc",
+          "uc": {
+            "apps": [
+              {
+                "id": "acfafb07-2932-4b13-9728-0def2f504f84",
+                "name": "prod"
+              }
+            ],
+            "idp_url": "https://console.tenant.userclouds.com"
+          }
+        }
+      ]
+    },
+    "oidc_providers": {
+      "providers": [
+        {
+          "type": "facebook",
+          "name": "facebook",
+          "description": "Facebook",
+          "issuer_url": "https://www.facebook.com",
+          "client_id": "940570260249591",
+          "client_secret": "974cfab54d3b7fff88f995a526a10401",
+          "can_use_local_host_redirect": true,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid public_profile email",
+          "is_native": true
+        },
+        {
+          "type": "google",
+          "name": "google",
+          "description": "Google",
+          "issuer_url": "https://accounts.google.com",
+          "client_id": "691629079706-a0sem1ck3m0l24pd15m4rjqnv1skt05g.apps.googleusercontent.com",
+          "client_secret": "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",
+          "can_use_local_host_redirect": false,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid profile email",
+          "is_native": true
+        },
+        {
+          "type": "linkedin",
+          "name": "linkedin",
+          "description": "LinkedIn",
+          "issuer_url": "https://www.linkedin.com",
+          "client_id": "787igsnkmvd15c",
+          "client_secret": "300b35s2MUkxSD8k",
+          "can_use_local_host_redirect": false,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid profile email",
+          "is_native": true
+        },
+        {
+          "additional_scopes": "",
+          "can_use_local_host_redirect": false,
+          "client_id": "",
+          "client_secret": "",
+          "default_scopes": "openid profile email",
+          "description": "Microsoft",
+          "is_native": true,
+          "issuer_url": "https://login.microsoftonline.com/common/v2.0",
+          "name": "microsoft",
+          "type": "microsoft",
+          "use_local_host_redirect": false
+        }
+      ]
+    },
+    "verify_emails": true,
+    "disable_sign_ups": true,
+    "keys": {
+      "key_id": "71434fd73b2b58c8",
+      "private_key": "aws://secrets/prod/console/804718b8-5788-4c31-9f5e-1ac55782728c-private-key",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlzbKJ5mSQbkbpRzGwCdT\n2H6u3zPP8knEgdvWceYWbZqGB9KlDh09BKwpQaBz5a/fXAguuJ44r5lr9sdsCsVZ\nv4pwuili9YmbrpK1um1KJatWTXKn1nc27MjuAU6LqbBq4mxz2maOA5TRgs5xMq9S\nHciLpzc1aygStMFhagQ+RGdafnBQdujdAm2lg3+S2vyGfh5RG2vCNMzx9DyMg/4b\nEJYGfr3PM1iZyeJh2AQuRxajNKC7joi6gL4Xw8z/XzS5A4G5gxDZK9T8Ui+E1vx7\nxGSatgSErgHsIjLNc+4X6wlK9CpVD+3Dk5WOd9dip03KT8fas3EcFSiLoHrubCuA\nEwIDAQAB\n-----END PUBLIC KEY-----\n"
+    }
+  },
+  "user_store_schema": {
+    "fields": []
+  }
+}

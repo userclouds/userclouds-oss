@@ -1,0 +1,103 @@
+{{- $servicesPaths := list
+(tuple "authz" (list "/authz/" "/auditlog/"))
+(tuple "userstore" (list "/authn/" "/userevent/" "/userstore/" "/tokenizer/" "/s3shim/"))
+(tuple "logserver" (list "/logserver/"))
+-}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: userclouds-webapp-{{ .Values.uc_universe }}
+    annotations:
+        # I am not sure we need logserver, and idp eks regional host names here since we map the top level of those to the main domain in TF (CNAME logserver.staging.usercloud.com to staging.usercloud.com).
+        external-dns.alpha.kubernetes.io/hostname: "{{ printf "*.tenant-%s-eks.%s" .Values.region .Values.domain }},{{ printf "%s-eks.%s" .Values.region .Values.domain }},{{ printf "*.%s-eks.%s" .Values.region .Values.domain }},{{ printf "console.%s-eks.%s" .Values.region .Values.domain }},{{ printf "logserver.%s-eks.%s" .Values.region .Values.domain }},{{ printf "idp.%s-eks.%s" .Values.region .Values.domain }}"
+        alb.ingress.kubernetes.io/load-balancer-name: userclouds-webapp
+        alb.ingress.kubernetes.io/scheme: internet-facing
+        alb.ingress.kubernetes.io/target-type: ip
+        alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}, {"HTTPS":443}]'
+        alb.ingress.kubernetes.io/ssl-redirect: '443'
+        alb.ingress.kubernetes.io/backend-protocol: HTTP
+        alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS13-1-2-2021-06
+        # TODO: create & configure SG
+        # alb.ingress.kubernetes.io/security-groups: sg-XXXXX
+        alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+        alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+        alb.ingress.kubernetes.io/healthcheck-path: "/healthcheck"
+        alb.ingress.kubernetes.io/healthcheck-interval-seconds: "30"
+        alb.ingress.kubernetes.io/healthcheck-timeout-seconds: "5"
+        alb.ingress.kubernetes.io/success-codes: "200"
+        alb.ingress.kubernetes.io/healthy-threshold-count: "2"
+        alb.ingress.kubernetes.io/unhealthy-threshold-count: "2"
+        alb.ingress.kubernetes.io/load-balancer-attributes: 'access_logs.s3.enabled=true,access_logs.s3.bucket={{ .Values.alb_logs_bucket}},access_logs.s3.prefix=userclouds-webapp'
+        # "cwexport=true" tag gets this ALB Cloudwatch metrics exported via Cloudwatch Exporter (see: terraform/modules/userclouds/cloudwatch-exporter/values.tftpl.yaml)
+        alb.ingress.kubernetes.io/tags: 'cwexport=true,Name=userclouds-webapp,UC_UNIVERSE={{ .Values.uc_universe }}'
+        {{- if .Values.waf_acl_arn }}
+        alb.ingress.kubernetes.io/wafv2-acl-arn: "{{ .Values.waf_acl_arn }}"
+        {{- end }}
+        alb.ingress.kubernetes.io/target-group-attributes: "load_balancing.algorithm.type=least_outstanding_requests"
+spec:
+    ingressClassName: alb
+    defaultBackend:
+        service:
+            name: plex
+            port:
+                number: 80
+    rules:
+      # for now we use a host, but we need something better here to support a more dynamic host names (with console, tenant name, etc...)
+      # see: https://kubernetes.io/docs/concepts/services-networking/ingress/#hostname-wildcards
+    - host: "{{ printf "*.tenant.%s" .Values.domain }}"
+      http: &uc_http_routes
+        paths:
+{{- range $sp := $servicesPaths}}
+{{-  $service := first $sp -}}
+{{-  $paths := last $sp -}}
+{{- range $path := $paths}}
+        - backend:
+              service:
+                name: "{{ $service }}"
+                port:
+                    number: 80
+          pathType: Prefix
+          path: "{{ $path }}"
+
+{{- end }}
+{{- end }}
+    - host: "{{ printf "*.tenant-%s.%s" .Values.region .Values.domain }}"
+      http: *uc_http_routes
+    - host: "{{ printf "*.tenant-%s-eks.%s" .Values.region .Values.domain }}"
+      http: *uc_http_routes
+    - host: "{{ printf "*.%s-eks.%s" .Values.region .Values.domain }}"
+      http: *uc_http_routes
+    - host: "{{ printf "logserver.%s" .Values.domain }}"
+      http: &uc_log_server_routes
+        paths:
+          - backend:
+              service:
+                name: logserver
+                port:
+                  number: 80
+            pathType: Prefix
+            path: /
+    - host: "{{ printf "console.%s" .Values.domain }}"
+      http: &uc_console_routes
+        paths:
+          - backend:
+              service:
+                name: console
+                port:
+                  number: 80
+            pathType: Prefix
+            path: /
+    - host: "{{ printf "console.%s.%s" .Values.region .Values.domain }}"
+      http: *uc_console_routes
+    - host: "{{ printf "console.%s-eks.%s" .Values.region .Values.domain }}"
+      http: *uc_console_routes
+    - host: "{{ printf "idp.%s" .Values.domain }}"
+      http: &uc_idp_routes
+        paths:
+          - backend:
+              service:
+                name: userstore
+                port:
+                  number: 80
+            pathType: Prefix
+            path: /

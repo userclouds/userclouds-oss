@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "id": "032cae17-df3a-4e87-82a0-c706ed0679ee",
+      "table": "users",
+      "name": "email_verified",
+      "data_type": {
+        "name": "boolean",
+        "id": "e16b5ead-54db-4b42-a55f-f21907cda9e4"
+      },
+      "index_type": "indexed",
+      "default_value": ""
+    },
+    {
+      "id": "4d4d0757-3bc2-424d-9caf-a930edb49b69",
+      "table": "users",
+      "name": "picture",
+      "data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "index_type": "none",
+      "default_value": "foo.gif"
+    },
+    {
+      "id": "83cc42b0-da8c-4a61-9db1-da70f21bab60",
+      "table": "users",
+      "name": "nickname",
+      "data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "index_type": "none",
+      "default_value": ""
+    }
+  ],
+  "has_next": false,
+  "next": "",
+  "has_prev": false
+}

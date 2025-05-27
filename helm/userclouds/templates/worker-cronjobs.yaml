@@ -1,0 +1,45 @@
+# curl v8.12.1 https://quay.io/repository/curl/curl?tab=tags
+{{- $curlImage := "quay.io/curl/curl@sha256:84ec2a70279219a45d327ec1f2f112d019bc9dcdd0e19f1ba7689b646c2de0c2" }}
+{{- $workerBaseURL := printf "http://worker.%s.svc.cluster.local:5000" .Release.Namespace }}
+{{- $releaseName := .Release.Name }}
+{{- $jobs := list
+  (dict "path" "checkcnames" "cron" "5-59/15 * * * *" "name" "check-all-tenant-urls" )
+  (dict "path" "syncall" "cron" "*/15 * * * *" "name" "sync-all-tenant-idps")
+  (dict "path" "watchdog/slowprov" "cron" "0 9 * * *" "name" "watchdog-slow-provisioning")
+-}}
+{{- $extCtx := .  }}
+{{- if .Values.enableCronJobs }}
+{{- range $jobs }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: worker-{{ .name }}
+  labels:
+    {{- include "userclouds.labels" $extCtx | nindent 4 }}
+    app.kubernetes.io/component: worker-cronjob
+    app.kubernetes.io/instance: {{ $releaseName }}
+spec:
+  schedule: "{{ .cron }}"
+  jobTemplate:
+    metadata:
+      labels:
+        {{- include "userclouds.labels" $extCtx | nindent 8 }}
+        app.kubernetes.io/component: worker-cronjob
+        app.kubernetes.io/instance: {{ $releaseName }}
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: schedule-{{ .name }}
+              image: {{ $curlImage }}
+              imagePullPolicy: IfNotPresent
+              args:
+                - "--verbose"
+                - "--fail" # fail on HTTP errors
+                - "--silent" # don't show progress meter
+                - "--include" # include headers in the output
+                - "{{ printf "%s/%s" $workerBaseURL .path }}"
+---
+{{- end }}
+{{- end }}

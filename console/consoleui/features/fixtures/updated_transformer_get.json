@@ -1,0 +1,18 @@
+{
+  "id": "d2685634-ac22-4ce8-bdae-64892f17f4e9",
+  "name": "ObfuscateEmailNaive",
+  "description": "Takes foo@bar.com and returns foo[at]bar[dot]com",
+  "input_data_type": {
+    "name": "email",
+    "id": "8a84f041-c605-4ebf-b552-9e14f51c9e54"
+  },
+  "output_data_type": {
+    "name": "string",
+    "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+  },
+  "transform_type": "tokenizebyvalue",
+  "reuse_existing_token": false,
+  "function": "function transform(data, params) { const [name, host] = data.split('@'); return `${name}[at]${host.replaceAll('.', '[dot]')}`;}",
+  "parameters": "{}",
+  "version": 1
+}

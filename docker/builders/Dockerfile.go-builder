@@ -1,0 +1,9 @@
+# https://hub.docker.com/_/golang/tags
+FROM golang:1.24.2@sha256:1ecc479bc712a6bdb56df3e346e33edcc141f469f82840bab9f4bc2bc41bf91d AS builder
+VOLUME /userclouds/host_repo
+VOLUME /userclouds/.cache
+ENV GOMODCACHE=/userclouds/.cache/go/pkg/mod
+ENV GOCACHE=/userclouds/.cache/go-build
+ENV GOOS=linux
+ENV GOARCH=amd64
+WORKDIR /userclouds/host_repo

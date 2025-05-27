@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "id": "1ee4497e-c326-4068-94ed-3dcdaaaa53bc",
+      "created": "2023-09-15T15:43:25.782588Z",
+      "updated": "2023-09-16T17:10:12.553682Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "alias": "UserClouds Dev (1ee4497e-c326-4068-94ed-3dcdaaaa53bc)",
+      "type_id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "organization_id": "1ee4497e-c326-4068-94ed-3dcdaaaa53bc"
+    },
+    {
+      "id": "a400970c-5a1d-46df-8050-31566d7da586",
+      "created": "2023-09-16T17:09:59.398623Z",
+      "updated": "2023-09-16T17:09:59.434953Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "alias": "company1 (a400970c-5a1d-46df-8050-31566d7da586)",
+      "type_id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "organization_id": "a400970c-5a1d-46df-8050-31566d7da586"
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": false
+}

@@ -1,0 +1,9 @@
+:global(#root) {
+  .accesspoliciestable {
+    grid-template-columns:
+      50px
+      minmax(350px, 1fr)
+      minmax(max-content, 1fr)
+      minmax(max-content, 1fr) 60px;
+  }
+}

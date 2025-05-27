@@ -1,0 +1,41 @@
+@use '../../_variables.module.css';
+
+.root {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--border-radius-default);
+  min-height: 104px; // Custom min-height
+  outline: none;
+  border-color: var(--color-neutral-400);
+
+  &:hover {
+    border-color: var(--color-neutral-600);
+  }
+
+  &:focus {
+    border-color: var(--color-black);
+  }
+
+  &:focus-visible {
+    box-shadow: var(--input-focus-visible);
+  }
+
+  &.disabled {
+    border-color: var(--color-neutral-200);
+  }
+
+  &.error {
+    border-color: var(--color-red-700);
+  }
+
+  :global .cm-editor,
+  :global .cm-scroller {
+    border-radius: var(--border-radius-default);
+  }
+  :global .cm-editor.cm-focused {
+    outline: none;
+  }
+  :global .cm-content {
+    white-space: pre-wrap;
+  }
+}

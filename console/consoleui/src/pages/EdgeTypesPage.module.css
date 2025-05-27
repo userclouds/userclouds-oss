@@ -1,0 +1,11 @@
+:global(#root) {
+  .edgetypestable {
+    grid-template-columns:
+      50px
+      minmax(240px, 1fr)
+      minmax(max-content, 1fr)
+      minmax(max-content, 1fr)
+      minmax(max-content, 1fr)
+      60px;
+  }
+}

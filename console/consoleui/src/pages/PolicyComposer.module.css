@@ -1,0 +1,7 @@
+:global(#root) {
+  .policycomposertable {
+    align-items: center;
+    grid-template-columns: fit-content(80px) 240px 1fr 60px;
+    margin-top: 2em;
+  }
+}

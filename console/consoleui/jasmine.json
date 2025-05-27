@@ -1,0 +1,7 @@
+{
+  "spec_dir": "src",
+  "spec_files": ["**/*spec.ts"],
+  "jsLoader": "import",
+  "stopSpecOnExpectationFailure": false,
+  "random": true
+}

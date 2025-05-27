@@ -1,0 +1,43 @@
+@use '../../shared/button-reset' as button;
+@use '../../_variables.module.css';
+
+.root {
+  font-family: inherit;
+  text-decoration: none;
+  color: var(--color-black);
+  text-decoration: underline;
+
+  &:hover {
+    color: var(--color-neutral-700);
+  }
+
+  &:focus-visible {
+    box-shadow: var(--input-focus-visible);
+    border-radius: var(--border-radius-small);
+  }
+}
+
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.anchor {
+  display: inline-block;
+}
+
+.button {
+  @include button.button-reset;
+  vertical-align: baseline;
+  text-decoration: underline;
+}
+
+.noUnderline {
+  text-decoration: none;
+}
+
+.iconLeft,
+.iconRight {
+  display: flex;
+}

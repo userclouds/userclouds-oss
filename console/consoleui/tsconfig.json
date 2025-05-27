@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "build/",
+    "declarationDir": "build/"
+  },
+  "extends": "../../tsconfig.base.json",
+  "include": ["src"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es6"
+    }
+  }
+}

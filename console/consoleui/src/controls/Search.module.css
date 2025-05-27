@@ -1,0 +1,57 @@
+:global(#root) {
+  .root {
+    display: flex;
+    position: relative;
+    flex: 1;
+    gap: 2%;
+    z-index: 20;
+  }
+
+  .select {
+    flex: auto 1 32%;
+  }
+
+  .root > :not(:first-child) {
+    flex: 1 1 32%;
+  }
+
+  .appliedFilters {
+    width: 100%;
+    z-index: 1;
+  }
+
+  .appliedFilters > li {
+    display: inline-flex;
+    flex-direction: row;
+    margin: 10px 0 0px;
+    padding-right: 10px;
+    z-index: 2;
+  }
+
+  .appliedFiltersNavMenu {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    z-index: 2;
+    padding-left: 40px;
+    margin-top: 0;
+  }
+
+  .appliedFiltersNavMenu > li {
+    display: inline-flex;
+    flex-direction: row;
+    margin: 0;
+    padding-right: 10px;
+  }
+
+  .select {
+    width: fit-content;
+  }
+
+  .buttonGroup {
+    width: fit-content;
+    max-width: 200px;
+  }
+}

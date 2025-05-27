@@ -1,0 +1,26 @@
+log_db:
+  user: userclouddebug
+  password: aws://secrets/debug/logserver/rdb_password_only
+  dbname: status_00000000000000000000000000000000
+  dbdriver: postgres
+  dbproduct: aws-rds-postgres
+  host: status-debug-postgre.c3cgcihdah0v.us-west-2.rds.amazonaws.com
+  port: 5432
+
+svc_listener:
+  protocol: http
+  host: 0.0.0.0
+  port: 5500
+
+logger:
+  transports:
+    - type: kinesis
+      aws_region: 'us-west-2'
+      stream_name: 'debug-log'
+      shard_count: 1
+      transportconfig:
+        required: true
+        max_log_level: 5
+
+console_tenant_id: db1ea454-92ea-4738-8ab2-ddafc980ee44
+kinesis_aws_region: us-west-2

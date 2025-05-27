@@ -1,0 +1,23 @@
+@use '../../shared/checkbox-radio-styles';
+
+.root {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.justifyLeft {
+  justify-content: flex-start;
+}
+
+.justifyRight {
+  justify-content: flex-end;
+}
+
+.justifyBetween {
+  justify-content: space-between;
+}

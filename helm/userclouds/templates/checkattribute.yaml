@@ -1,0 +1,109 @@
+{{- $uc_universe := .Values.uc_universe }}
+{{- $outer_scope := . }}
+
+{{- if .Values.checkattribute.enabled }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ template "checkattribute.serviceAccount" $ }}
+  labels:
+     {{- include "userclouds.labels" $ | nindent 4 }}
+  annotations:
+    eks.amazonaws.com/role-arn: {{ $.Values.roles.checkattribute }}
+
+  {{- range .Values.checkattribute.deployments }}
+    {{- $instanceName := .name }}
+    {{- $serviceName := printf "checkattribute-%s"  $instanceName }}
+    {{- $numReplicas := .replicas | default $.Values.replicas }}
+    {{- $resources := .resources }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $serviceName }}
+  labels:
+    {{- include "userclouds.labels" $ | nindent 4 }}
+spec:
+  replicas: {{ $numReplicas }}
+  selector:
+    matchLabels:
+      uc.checkattribute/instance: {{ $instanceName }}
+      {{- include "checkattribute.selectorLabels" $ | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        userclouds.sla: critical
+        uc.checkattribute/instance: {{ $instanceName }}
+        {{- include "checkattribute.selectorLabels" $ | nindent 8 }}
+    spec:
+      nodeSelector:
+        {{- include "userclouds.nodeSelector" $ | nindent 8 }}
+      serviceAccountName: {{ template "checkattribute.serviceAccount" $ }}
+      volumes:
+        - name: configmap
+          configMap:
+            name: userclouds-configs
+            items:
+              - key: base
+                path: {{ printf "base_%s.yaml" $uc_universe }}
+              - key: checkattribute
+                path: {{ printf "checkattribute/%s.yaml" $uc_universe }}
+      containers:
+        - name: checkattribute
+          image: "{{ include "userclouds.image" $outer_scope }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - checkattribute
+          {{- include "userclouds.envConfigMap" $ | nindent 10 }}
+          env:
+            {{- include "userclouds.envVars" $ | nindent 12 }}
+            # See: authz/start/checkattribute.go:envServiceInstanceName
+            - name: SERVICE_INSTANCE_NAME
+              value: {{ $instanceName | quote }}
+          {{- with $resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: configmap
+              mountPath: /userclouds/configmaps
+          ports:
+            - name: checkattribute
+              containerPort: 5000
+              protocol: TCP
+            - name: internal
+              containerPort: 5001
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: checkattribute
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: checkattribute
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $serviceName }}
+  labels:
+    {{- include "userclouds.labels" $ | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    uc.checkattribute/instance: {{ $instanceName }}
+    {{- include "checkattribute.selectorLabels" $ | nindent 4 }}
+  ports:
+    - name: service
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+    - name: internal
+      protocol: TCP
+      port: 5001
+
+  {{- end }} # range .Values.checkattribute.deployments }}
+{{- end }} # if .Values.checkattribute.enabled

@@ -1,0 +1,50 @@
+{
+  "id": "0c0b7371-5175-405b-a17c-fec5969914b8",
+  "name": "hello2_policy",
+  "description": "",
+  "policy_type": "composite_or",
+  "tag_ids": [],
+  "version": 3,
+  "components": [
+    {
+      "template": {
+        "id": "b0a4c61b-d2e6-4a20-a9a6-2e89fe7f5f16",
+        "name": "hellopolicy2"
+      },
+      "template_parameters": "{}"
+    },
+    {
+      "policy": {
+        "id": "0ff44561-d498-49b2-8224-c8b273903e27",
+        "name": "hello2_policy"
+      }
+    },
+    {
+      "template": {
+        "id": "010f6071-8167-4767-a7f8-4e3615f05f15",
+        "name": "hellopolicy4"
+      },
+      "template_parameters": "{}"
+    },
+    {
+      "policy": {
+        "id": "b2c8e2b3-7232-435b-9ab2-ba9ed418d214",
+        "name": "jj_policy"
+      }
+    },
+    {
+      "policy": {
+        "id": "eff3f014-f8dd-47a8-b9e6-6f62e716ec2d",
+        "name": "hello3_policy_ed6a3776"
+      }
+    }
+  ],
+  "required_context": {},
+  "thresholds": {
+    "announce_max_execution_failure": true,
+    "announce_max_result_failure": false,
+    "max_executions": 32,
+    "max_execution_duration_seconds": 60,
+    "max_results_per_execution": 7
+  }
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "90ffb499-2549-470e-99cd-77f7008e2735",
+    "name": "UserClouds Console (dev)",
+    "description": "",
+    "organization_id": "1ee4497e-c326-4068-94ed-3dcdaaaa53bc",
+    "client_id": "console_plex_clientid_dev",
+    "client_secret": "7c365cb45ad67f1e99da4951a6f7ed680ad2d232dd22b75d6237355bc1aa04e91aa5fbab66da1e0d9630a3a515d595f2161bb9ecb1118497054a15720b5d2cb6",
+    "restricted_access": false,
+    "token_validity": {
+      "access": 86400,
+      "refresh": 2592000,
+      "impersonate_user": 3600
+    },
+    "provider_app_ids": ["3e3de5b2-f789-412b-8df9-859b73acbb98"],
+    "allowed_redirect_uris": [
+      "https://console.dev.userclouds.tools:3333/auth/callback",
+      "https://console.dev.userclouds.tools:3010/auth/callback",
+      "https://console.dev.userclouds.tools:3333/auth/invitecallback",
+      "https://console.dev.userclouds.tools:3010/auth/invitecallback"
+    ],
+    "allowed_logout_uris": [
+      "https://console.dev.userclouds.tools:3333/",
+      "https://console.dev.userclouds.tools:3010/"
+    ],
+    "message_elements": null,
+    "page_parameters": {
+      "every_page": {
+        "authenticationMethods": {
+          "parameter_name": "authenticationMethods",
+          "parameter_type": "selected_authentication_methods",
+          "parameter_value": "password,passwordless,facebook,google,linkedin"
+        }
+      }
+    },
+    "grant_types": [
+      "authorization_code",
+      "refresh_token",
+      "client_credentials"
+    ],
+    "synced_from_provider": "00000000-0000-0000-0000-000000000000",
+    "impersonate_user_config": {
+      "check_attribute": "",
+      "bypass_company_admin_check": false
+    }
+  },
+  {
+    "id": "00b28e2b-c2cb-4485-ad56-89be0bb0711f",
+    "name": "Login for The Gates Foundation",
+    "description": "Login app for The Gates Foundation",
+    "organization_id": "a50f8b82-8d2e-46e0-9a8c-ee16806c30bd",
+    "client_id": "4107691aefb39accecb1cfd1aa4e321e9d67f78552581e2b2f9bb281075a2db3",
+    "client_secret": "FDQtujdLF0+9p2roOEN8Qceowk87BkikoTWq6rAo0M/QW0SPCJhFcenwsK2bhIX/RHBgY7H5igNIO93gQgGVQA==",
+    "restricted_access": false,
+    "token_validity": {
+      "access": 86400,
+      "refresh": 2592000,
+      "impersonate_user": 3600
+    },
+    "provider_app_ids": ["3e3de5b2-f789-412b-8df9-859b73acbb98"],
+    "allowed_redirect_uris": [
+      "https://console.dev.userclouds.tools:3333/auth/callback",
+      "https://console.dev.userclouds.tools:3010/auth/callback",
+      "https://console.dev.userclouds.tools:3333/auth/invitecallback",
+      "https://console.dev.userclouds.tools:3010/auth/invitecallback"
+    ],
+    "allowed_logout_uris": [
+      "https://console.dev.userclouds.tools:3333/",
+      "https://console.dev.userclouds.tools:3010/"
+    ],
+    "message_elements": null,
+    "page_parameters": {
+      "every_page": {
+        "authenticationMethods": {
+          "parameter_name": "authenticationMethods",
+          "parameter_type": "selected_authentication_methods",
+          "parameter_value": "password,passwordless,facebook,google,linkedin"
+        }
+      }
+    },
+    "grant_types": [
+      "authorization_code",
+      "refresh_token",
+      "client_credentials"
+    ],
+    "synced_from_provider": "00000000-0000-0000-0000-000000000000",
+    "impersonate_user_config": {
+      "check_attribute": "",
+      "bypass_company_admin_check": false
+    }
+  }
+]

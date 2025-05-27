@@ -1,0 +1,58 @@
+log_db:
+  user: userclouds
+  dbname: status_00000000000000000000000000000000
+  host: localhost
+  dbdriver: postgres
+  dbproduct: postgres
+  port: 5432
+
+dns:
+  host_and_port: 1.1.1.1:53
+
+svc_listener:
+  protocol: http
+  host: localhost
+  port: 3012
+
+internal_server:
+  protocol: http
+  host: 127.0.0.1
+  port: 3014
+
+console_tenant_id: 41ab79a8-0dff-418e-9d42-e1694469120a
+
+worker_client:
+  type: http
+  url: http://localhost:3012
+
+acme:
+  account_url: 'https://acme-staging-v02.api.letsencrypt.org/acme/acct/90902943'
+  directory_url: 'https://acme-staging-v02.api.letsencrypt.org/directory'
+  private_key: |
+    dev-literal://-----BEGIN RSA PRIVATE KEY-----
+    MIIEowIBAAKCAQEAy1xRSpFG0JAgVZgIo5sW8Zj44b1AGP+T7Q9/X1zXlLOZVgAM
+    FXM5Ol+O+aIyQLGcFfa2wLbIo33Q6KtaXV6y+t25MMtkVYB1xGtSqcfhSNBEL5SA
+    PqVQNm2NIK7UVkMznlTy//5UclfBQZEBJjT9XPNABvfuaxtj4JxmedYMl3eQbaWb
+    qAVcOsCXipmB/TeJdwLLJbD9FRUkkynzXdcd4kiGTZMR3dutA38KtEuMZyv+UhQ7
+    r+ZGGju3FrpmsRsI7wyZy1m1n/2euJcqN3MRcNm8mnV2vs0V1P4qShqm/8IDxGMb
+    Ukhe8x/kIAzVLR4gdnjqMTEm5sh0Dh4yo+RQMwIDAQABAoIBAD1e9OFuClLyy+9I
+    3IKTUU9D/QgTFv70Um4eWTAsUpr7wHClvv/SMBkfsYRAoK3Ja/Ns6yYpg09jruIo
+    pDK9W4I925+QIg1zoRbP1LiMK77Pq2Q4iqNdPGHQmeCdIlOOIEvOEy+ST2XaeeYR
+    nqkrILMmbdIsjHUiZPfp+zsVj+M9lffeI1H/7kR851kUnYqM8cqeK2Oyj+3/vlC1
+    2Ao1BTVL/PrpbCaGslAZxkL+ozQ9hSKD08gYP3eEVwtvWHRKiLkwvyJkQco5EDQx
+    QQ6nwRPwtR6E+2fjbmF4Vhu2v/AdLxL0XdSzR9+x36jakHfG3TZeYFbNLYHhaxjs
+    n18ZSUECgYEA9M3Ou4tEob0KT4+xIDX68FU+MMctItfE+PoI2jSJo6+Rn5NInv0m
+    7TGg1cDoiHLUFXdOXZsRax5jd4JRE/kzA9BUXrei5w+nZXMUNeIKhQnptzm+OAwa
+    GwFHSR/H7+S/n9VHKZiqCIaMeDl+T28Wdrv05tKF8vnkeBBSXVxrjlECgYEA1KlJ
+    b/4PZYybpSy9ygmUZ1SPOSNWUkw6f59kWAqCROr3EosXzKE+xRCKRn4NvW0L9tVS
+    +cGGjUXikfTI89Hvq2XkDckJdn0kq3hjH2lOJZTdUQ54atMgCiqigvyLDPZxHv6E
+    9YRGs5R/V1zOp3gXSUGgiCgav1dGjPtkb2qDwUMCgYEAhZ0XKvG2gfil+grZiFUu
+    I6LDEOiFUDEohyQhVMe8ICUhfFFtH6nYZznhKQnjYSYbb6Pwl9KdTTQG4iG0kww+
+    teQtSI0+UpMOsKaA72/yge6JK8JOelTQotCt0dGQ1PSrSlekQaXbmE+nt67ZrA1b
+    2253Gszo41dVRdrSubZJ1iECgYAyUZgZ0sCr45hUfgCuVJPz2zNEbtMXCAhzeDCT
+    EHGAgyRRE+5eseybTm2Zfmwb3TiOgC1xAVSoCtgwdv4xiwQtxx8uD9qYWcYaeJLj
+    tNQT2mR/sG/Xvvr+zNXFLqJsP8fGcKzfNxxPk5yJ/GC9iZHg+JFWhj7F9Y2xAC7k
+    mgxw5wKBgFbuwNP483PNLoPYWS/794IfWVief5HokffcdBFMGlbHLnTmwKkm1lSk
+    Tm+jSnLjW5txR3eB4b2JD3U5SAR+1bod//kZ0i00/UqMzYIlmQNYp52/V3UPLtB2
+    kyETwk/CzvboctuE1BFxnUqm44LZQ+Icp4refH9DFFD2pCiXLBld
+    -----END RSA PRIVATE KEY-----

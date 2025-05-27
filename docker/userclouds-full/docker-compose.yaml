@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres:14.9
+    container_name: postgres
+    restart: always
+    ports:
+      - 5439:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "--username=uc_root_user"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+    environment:
+      POSTGRES_USER: uc_root_user
+      POSTGRES_PASSWORD: uc87871fakepw
+    volumes:
+      - postgres-db-data-full:/var/lib/postgresql/data
+      # https://github.com/docker-library/docs/blob/master/postgres/README.md#initialization-scripts
+      - ./db:/docker-entrypoint-initdb.d
+  userclouds:
+    container_name: userclouds
+    depends_on:
+      postgres:
+        condition: service_healthy
+    image: userclouds/userclouds:v0.1.0
+    platform: linux/amd64
+    environment:
+      UC_CONFIG_MANIFEST_FILE: container_dev_manifest_example.yaml
+      # UC_DB_HOST_OVERRIDE: postgres
+      # UC_DB_PORT_OVERRIDE: 5432
+    volumes:
+      - ./config/:/customer/config/
+      - /tmp/dockerlogs/:/userclouds/logs/
+    ports:
+      - 3040:3040
+    build:
+      dockerfile: ./docker/userclouds-full/Dockerfile
+      context: ./../../
+      tags:
+        - userclouds/userclouds:latest
+volumes:
+  postgres-db-data-full:

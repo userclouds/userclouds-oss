@@ -1,0 +1,59 @@
+:global(#root) {
+  .root {
+    display: flex;
+    color: #283354;
+    background-color: #f6f8fc;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .title {
+    flex-grow: 1;
+    font-size: 20px;
+    height: 100%;
+    overflow: hidden;
+  }
+  .title > h1 {
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .title > b {
+    font-weight: 600;
+  }
+
+  .contentInner {
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 44px;
+
+    & > section {
+      min-width: 100%;
+      overflow-x: auto;
+      width: auto;
+    }
+    & > section + section {
+      margin-top: 16px;
+    }
+  }
+
+  .main {
+    width: 100%;
+    isolation: isolate; /* Ensure specific z-indexes within the main content do not override layout */
+  }
+
+  .footer {
+    background-color: #f6f8fc;
+    bottom: 0;
+    height: 44px;
+    position: fixed;
+    padding-left: 10px;
+    width: 100%;
+    z-index: 3;
+  }
+
+  .footer > footer {
+    padding-top: 10px;
+  }
+}

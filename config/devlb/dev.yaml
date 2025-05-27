@@ -1,0 +1,16 @@
+svc_listener:
+  protocol: https
+  host: localhost
+  port: 3333
+
+logger:
+  transports:
+    - type: file
+      filename: /tmp/user_cloud_log_devlb
+      transportconfig:
+        required: false
+        max_log_level: 5
+    - type: go
+      transportconfig:
+        required: true
+        max_log_level: 5

@@ -1,0 +1,177 @@
+{
+  "data": [
+    {
+      "id": "010f6071-8167-4767-a7f8-4e3615f05f15",
+      "created": "2023-06-27T21:26:52.102313Z",
+      "updated": "2023-06-27T21:26:52.102313Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "hellopolicy4",
+      "description": "",
+      "function": "function policy(context, params) {\n  return true;\n  let sdgd\n}",
+      "version": 0
+    },
+    {
+      "id": "1e742248-fdde-4c88-9ea7-2c2106ec7aa8",
+      "created": "2023-06-27T17:26:07.54384Z",
+      "updated": "2023-06-27T17:26:07.54384Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "AllowAll",
+      "description": "This template allows all access.",
+      "function": "function policy(context, params) {\n\t\treturn true;\n\t}",
+      "version": 0
+    },
+    {
+      "id": "23a4909c-8c1a-450e-8f9b-abc90e9771d8",
+      "created": "2023-06-27T21:08:58.420573Z",
+      "updated": "2023-06-27T21:08:58.420573Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "jsljkdfkjnsdajnfl",
+      "description": "",
+      "function": "function policy(context, params) {\n  return true;\n  let asdfasdflksad;\n}",
+      "version": 0
+    },
+    {
+      "id": "23e84792-3971-4d08-80da-729b608f0b01",
+      "created": "2023-06-27T20:58:44.529822Z",
+      "updated": "2023-06-27T20:58:44.529822Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "hefa",
+      "description": "",
+      "function": "function policy(context, params) {\n  return true;\n  let asfdasdfasdfasdf;\n}",
+      "version": 0
+    },
+    {
+      "id": "3053a10b-49a9-4da0-a392-fb9228e98c00",
+      "created": "2023-06-27T17:51:17.234169Z",
+      "updated": "2023-06-27T17:51:17.234169Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "testwkyle",
+      "description": "doessomething",
+      "function": "function policy(context, params) {\n  return true;\n  let a=12341243;\n}",
+      "version": 0
+    },
+    {
+      "id": "61851da2-810c-4bf9-9656-583d94ba7d5f",
+      "created": "2023-06-28T03:43:32.492459Z",
+      "updated": "2023-06-28T03:43:32.492459Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "ksdfjasdfasdf",
+      "description": "",
+      "function": "function policy(context, params) {\n  return true;\n  let asdfsaaaa;;;\n}",
+      "version": 0
+    },
+    {
+      "id": "a3cde40f-1cbc-491a-b423-826f5041b858",
+      "created": "2023-06-27T17:52:08.819246Z",
+      "updated": "2023-06-27T17:52:08.819246Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "a",
+      "description": "",
+      "function": "function policy(context, params) {\n  return true;\n}",
+      "version": 0
+    },
+    {
+      "id": "b0a4c61b-d2e6-4a20-a9a6-2e89fe7f5f16",
+      "created": "2023-06-27T21:15:08.871369Z",
+      "updated": "2023-06-27T21:15:08.871369Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "hellopolicy2",
+      "description": "asdfasdf",
+      "function": "function policy(context, params) {\n  return true;\n  let asdflasdfa;\n}",
+      "version": 0
+    },
+    {
+      "id": "cafd385e-8b2b-49df-bbc7-69e55a163fe1",
+      "created": "2023-06-27T19:00:50.91867Z",
+      "updated": "2023-06-27T19:00:50.91867Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "somethinga",
+      "description": "doit",
+      "function": "function policy(context, params) {\n  return true;\n  let asfdas;\n}",
+      "version": 0
+    },
+    {
+      "id": "cc3051ef-1dd2-4aef-bd40-fd046f8a3cd5",
+      "created": "2023-06-27T21:11:31.634308Z",
+      "updated": "2023-06-27T21:11:31.634308Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "hellopolicy1",
+      "description": "something",
+      "function": "function policy(context, params) {\n  return true;\n  let sadfasfasdfasdfads;\n}",
+      "version": 0
+    },
+    {
+      "id": "d4a48099-3850-4b44-b282-8dc3d843a762",
+      "created": "2023-06-27T19:03:10.33298Z",
+      "updated": "2023-06-27T19:03:10.33298Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "aslkjdfhaslkjdhf",
+      "description": "",
+      "function": "function policy(context, params) {\n  return true;\n  let asdfasdf;\n}",
+      "version": 0
+    },
+    {
+      "id": "db97e49f-806e-473d-9ad3-b0d5303e2263",
+      "created": "2023-06-27T21:23:11.18328Z",
+      "updated": "2023-06-27T21:23:11.18328Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "tyler1",
+      "description": "asdfsadf",
+      "function": "function policy(context, params) {\n  return true;\n  let asdfasdfdfdfdfdfdfdfdfdfddf\n}",
+      "version": 0
+    },
+    {
+      "id": "e123f616-e546-4686-9009-d13f6908c721",
+      "created": "2023-06-27T21:15:56.339979Z",
+      "updated": "2023-06-27T21:15:56.339979Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "hellopolicy3",
+      "description": "asdfasdfas",
+      "function": "function policy(context, params) {\n  return true;\n  let aaaaaaa;\n}",
+      "version": 0
+    },
+    {
+      "id": "e7e7a8bc-1e68-4ee0-84cf-e373a1f19bd8",
+      "created": "2023-06-27T20:58:05.034549Z",
+      "updated": "2023-06-27T20:58:05.034549Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "henlo",
+      "description": "sadfkas",
+      "function": "function policy(context, params) {\n  return true;\n  let abcadca;\n}",
+      "version": 0
+    },
+    {
+      "id": "95235dfc-ba40-4828-a923-6ac7e616d281",
+      "created": "2023-06-28T15:42:29.583871Z",
+      "updated": "2023-06-28T15:42:29.583871Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "atemp",
+      "description": "asdf",
+      "function": "function policy(context, params) {\n  return true;\n  let asdfadsf\n}",
+      "version": 0
+    },
+    {
+      "id": "aa412fd1-7c82-4b54-9ffd-b50f589642c6",
+      "created": "2023-06-28T16:49:36.850785Z",
+      "updated": "2023-06-28T16:49:36.850785Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "checkIfEven",
+      "description": "asdfaf",
+      "function": "function policy(context, params) {\n  return params.num%2===0\n}",
+      "version": 0
+    },
+    {
+      "id": "aad2bf25-311f-467e-9169-a6a89b6d34a6",
+      "created": "2023-06-27T17:18:07.324702Z",
+      "updated": "2023-06-27T17:18:07.324702Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "CheckAttribute",
+      "description": "This template returns the value of checkAttribute on the given parameters.",
+      "function": "function policy(context, params) {\n\t\tconst id1 = params.userIDUsage === \"id1\" ? context.user.id : params.id1;\n\t\tconst id2 = params.userIDUsage === \"id2\" ? context.user.id : params.id2;\n\t\tconst attribute = params.attribute;\n\t\tif (!id1 || !id2 || !attribute) {\n\t\t\treturn false;\n\t\t}\n\t\treturn checkAttribute(id1, id2, attribute);\n\t}",
+      "version": 0
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": false
+}

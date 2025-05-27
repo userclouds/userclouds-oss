@@ -1,0 +1,7 @@
+:global(#root) {
+  .objectedgetable {
+    grid-template-columns:
+      minmax(max-content, 100px) minmax(max-content, 1fr)
+      minmax(max-content, 1fr) 60px;
+  }
+}

@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: tokenized_users
+    columns:
+      - name: id
+      - name: name
+      - name: email
+    config:
+      tenant_url: '{{var("tenant_url")}}'
+      client_id: '{{var("client_id")}}'
+      client_secret: '{{var("client_secret")}}'
+      email_transformer_id: '{{var("email_transformer_id")}}'
+      allow_all_access_policy_id: '{{var("allow_all_access_policy_id")}}'
+
+  - name: tokenized_average
+    columns:
+      - name: email
+      - name: average_order_amount
+
+  - name: resolved_average
+    columns:
+      - name: email
+      - name: average_order_amount
+    config:
+      tenant_url: '{{var("tenant_url")}}'
+      client_id: '{{var("client_id")}}'
+      client_secret: '{{var("client_secret")}}'

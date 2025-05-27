@@ -1,0 +1,30 @@
+name: Run sample program
+description: 'Ensures the SDK sample successfully runs'
+inputs:
+  module-path:
+    description: 'Path to sample to run, e.g. ./samples/basic'
+    required: true
+  tenant-id:
+    description: 'Tenant ID to run the sample against'
+    required: true
+  tenant-url:
+    description: 'Tenant URL to run the sample against'
+    required: true
+  client-id:
+    description: 'Client ID to run the sample with'
+    required: true
+  client-secret:
+    description: 'Client secret to run the sample with'
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Run sample
+      shell: bash
+      working-directory: ${{ inputs.module-path }}
+      run: |
+        echo 'USERCLOUDS_TENANT_ID="${{ inputs.tenant-id }}"' >> .env
+        echo 'USERCLOUDS_TENANT_URL="${{ inputs.tenant-url }}"' >> .env
+        echo 'USERCLOUDS_CLIENT_ID="${{ inputs.client-id }}"' >> .env
+        echo 'USERCLOUDS_CLIENT_SECRET="${{ inputs.client-secret }}"' >> .env
+        go run *.go

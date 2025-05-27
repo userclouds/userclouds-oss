@@ -1,0 +1,29 @@
+:global(#root) {
+  .copyIcon {
+    color: #1e3a8a;
+    padding: 0;
+  }
+
+  .iconCheck {
+    color: #4caf50;
+  }
+
+  .iconClose {
+    color: #f44336;
+  }
+
+  .dataAccessLogTable {
+    grid-template-columns:
+      1fr fit-content(80px) 1fr fit-content(200px) fit-content(100px)
+      fit-content(80px) 1fr 1fr;
+  }
+
+  .dataAccessLogTable td:first-child,
+  .dataAccessLogTable td:last-child {
+    font-weight: bold;
+  }
+
+  .rowcountstable {
+    grid-template-columns: 1fr fit-content(100px);
+  }
+}

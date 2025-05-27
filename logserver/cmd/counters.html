@@ -1,0 +1,397 @@
+<html>
+  <head>
+    <title>Debug Counter View</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
+    ></script>
+
+    <script type="text/javascript">
+      google.charts.load('current', { packages: ['corechart'] });
+    </script>
+  </head>
+
+  <body>
+    <div id="config">
+      <span
+        ><label for="environment">Choose a environment:</label>
+        <select
+          name="Environment"
+          id="environment"
+          onChange="populateDataView()"
+        >
+          <option value="local">Local</option>
+          <option value="staging">Staging</option>
+          <option value="production" selected>Production</option>
+        </select>
+        <select name="Service" id="service" onChange="populateDataView()">
+          <option value="plex" selected>Plex</option>
+          <option value="idp">IDP</option>
+          <option value="console">Console</option>
+        </select>
+      </span>
+      <label for="timeperiod">Choose a time period:</label>
+      <select name="Timeperiod" id="timeperiod" onChange="populateDataView()">
+        <option value="minutes">Last 10 minutes</option>
+        <option value="hour" selected>Last hour</option>
+        <option value="day">Last day</option>
+      </select>
+      <label for="refreshbutton" id="timelabel">End Time: none</label>
+      <button id="refreshbutton" type="button" onclick="populateDataView()">
+        Refresh
+      </button>
+    </div>
+
+    <div
+      id="graph_row1"
+      style="
+        width: 1100px;
+        height: 400px;
+        vertical-align: middle;
+        margin: 0 auto;
+      "
+    >
+      <div
+        id="containerHttp"
+        style="
+          width: 550px;
+          height: 400px;
+          vertical-align: middle;
+          margin: 0 auto;
+          float: left;
+        "
+      ></div>
+      <div
+        id="containerRequests"
+        style="
+          width: 550px;
+          height: 400px;
+          vertical-align: middle;
+          margin: 0 auto;
+          float: left;
+        "
+      ></div>
+    </div>
+    <div
+      id="graph_row2"
+      style="
+        width: 1100px;
+        height: 400px;
+        vertical-align: middle;
+        margin: 0 auto;
+      "
+    >
+      <div
+        id="containerAccCreation"
+        style="
+          width: 550px;
+          height: 400px;
+          vertical-align: middle;
+          margin: 0 auto;
+          float: left;
+        "
+      ></div>
+      <div
+        id="containerAuthAndToken"
+        style="
+          width: 550px;
+          height: 400px;
+          vertical-align: middle;
+          margin: 0 auto;
+          float: left;
+        "
+      ></div>
+    </div>
+
+    <script language="JavaScript">
+      function selectedEnvironment() {
+        // Choose between local host or prod
+        var localURL = 'http://logserver.dev.userclouds.tools:3333/query';
+        var prodURL = 'https://logserver.userclouds.com/query';
+        var stageURL = 'https://logserver.staging.userclouds.com/query';
+
+        var localTenantID = '41ab79a8-0dff-418e-9d42-e1694469120a';
+        var prodTenantID = '804718b8-5788-4c31-9f5e-1ac55782728c';
+        var stageTenantID = '03c1d5f7-50ef-4723-9a37-3bf0dc301842';
+
+        // Get the selected environment
+        var select = document.getElementById('environment');
+        var selectedEnvironment = select.options[select.selectedIndex].value;
+        console.log('Select Environment:' + selectedEnvironment);
+
+        var environmentURL = prodURL;
+        var tenantID = prodTenantID;
+
+        switch (selectedEnvironment) {
+          case 'local':
+            environmentURL = localURL;
+            tenantID = localTenantID;
+            break;
+          case 'staging':
+            environmentURL = stageURL;
+            tenantID = stageTenantID;
+            break;
+          case 'production':
+            environmentURL = prodURL;
+            tenantID = prodTenantID;
+        }
+
+        return { URL: environmentURL, TenantID: tenantID };
+      }
+
+      function selectedTimeperiod() {
+        // Different period options in nanoseconds
+        var minute = 60000000000;
+        var hour = minute * 60; //3600000000000
+        var day = hour * 24; //86400000000000
+
+        // Different start time options in ms
+        var dayBack = 86400000;
+        var hourBack = 3600000;
+        var minuteBack = 60000;
+
+        // Set default values
+        var endDate = new Date();
+        var startDate = new Date(endDate.getTime() - hourBack);
+        var timeperiod = minute * 5;
+
+        // Get the time period from selector
+        var select = document.getElementById('timeperiod');
+        var selectedTimeperiod = select.options[select.selectedIndex].value;
+        console.log(selectedTimeperiod);
+
+        switch (selectedTimeperiod) {
+          case 'minutes':
+            startDate = new Date(endDate.getTime() - 10 * minuteBack);
+            timeperiod = minute;
+            break;
+          case 'hour':
+            startDate = new Date(endDate.getTime() - hourBack);
+            timeperiod = minute * 5;
+            break;
+          case 'day':
+            startDate = new Date(endDate.getTime() - dayBack);
+            timeperiod = hour;
+        }
+
+        // Update the label next to the selector
+        document.getElementById('timelabel').innerHTML =
+          'End Time: ' + endDate.toLocaleString('en-US');
+
+        return {
+          selection: selectedTimeperiod,
+          startTime: startDate,
+          endTime: endDate,
+          period: timeperiod,
+        };
+      }
+
+      function renderCharts(chartData, selectedPeriod) {
+        var parsedResponse = JSON.parse(chartData);
+
+        console.log(parsedResponse[0]);
+
+        parsedResponse[0].cols[1].label = 'Request Count';
+
+        var hAxisTitle = 'Minutes Back';
+        var labelPeriod = 1;
+
+        switch (selectedPeriod) {
+          case 'minutes':
+            labelPeriod = 1;
+            break;
+          case 'hour':
+            labelPeriod = 5;
+            break;
+          case 'day':
+            labelPeriod = 1;
+            hAxisTitle = 'Hours Back';
+        }
+
+        // Rewrite the X-axis labels going backwards. Use "string" type to prevent the library from reordering them
+        for (let c = 0; c < parsedResponse.length; c++) {
+          parsedResponse[c].cols[0].type = 'string';
+          for (let i = 0; i < parsedResponse[0].rows.length; i++) {
+            parsedResponse[c].rows[i].c[0].v =
+              (parsedResponse[0].rows.length - i) * labelPeriod;
+          }
+        }
+        var dataHttp = new google.visualization.DataTable(parsedResponse[0]);
+
+        // Set chart options
+        var chartOptions = {
+          title: 'HTTP Return Codes For All Requests',
+          hAxis: {
+            title: hAxisTitle,
+          },
+          vAxis: {
+            title: 'Count',
+            format: 'short',
+          },
+          width: 550,
+          height: 400,
+          pointsVisible: true,
+        };
+
+        // TODO - all of below will become a for loop over chart config data
+
+        // Instantiate and draw the chart.
+        var chartHttp = new google.visualization.LineChart(
+          document.getElementById('containerHttp')
+        );
+        chartHttp.draw(dataHttp, chartOptions);
+
+        console.log(parsedResponse[1]);
+
+        parsedResponse[1].cols[1].label = 'Logins';
+        parsedResponse[1].cols[2].label = 'Logouts';
+
+        var dataReq = new google.visualization.DataTable(parsedResponse[1]);
+
+        // Set chart options
+        chartOptions.title = 'Logins and Logouts';
+
+        // Instantiate and draw the chart.
+        var chartHttp = new google.visualization.LineChart(
+          document.getElementById('containerRequests')
+        );
+        chartHttp.draw(dataReq, chartOptions);
+
+        parsedResponse[2].cols[1].label = 'Create Account Calls';
+
+        var dataAccCreate = new google.visualization.DataTable(
+          parsedResponse[2]
+        );
+
+        // Set chart options
+        chartOptions.title = 'Account Creation';
+
+        // Instantiate and draw the chart.
+        var chartAccCreate = new google.visualization.LineChart(
+          document.getElementById('containerAccCreation')
+        );
+        chartAccCreate.draw(dataAccCreate, chartOptions);
+
+        parsedResponse[3].cols[1].label = 'Authorize Calls';
+        parsedResponse[3].cols[2].label = 'Token Calls';
+
+        var dataAuthAndToken = new google.visualization.DataTable(
+          parsedResponse[3]
+        );
+
+        // Set chart options
+        chartOptions.title = 'Authorize and Token';
+
+        // Instantiate and draw the chart.
+        var chartAccCreate = new google.visualization.LineChart(
+          document.getElementById('containerAuthAndToken')
+        );
+        chartAccCreate.draw(dataAuthAndToken, chartOptions);
+      }
+
+      function resetCharts() {
+        var chartReplacementText =
+          "Couldn't connect to the environment. Make sure it is running";
+        document.getElementById('containerHttp').innerHTML =
+          chartReplacementText;
+        document.getElementById('containerRequests').innerHTML =
+          chartReplacementText;
+        document.getElementById('containerAccCreation').innerHTML =
+          chartReplacementText;
+        document.getElementById('containerAuthAndToken').innerHTML =
+          chartReplacementText;
+      }
+
+      function populateDataView() {
+        // Define the queries
+        var q = [
+          {
+            TenantID: '00000000-0000-0000-0000-000000000000',
+            Service: 'plex',
+            EventType: [99, 400, 304, 307, 200],
+            Start: '2021-10-02T22:35:40-07:00',
+            End: '2021-10-05T13:41:30-07:00',
+            Period: 3600000000000,
+          },
+          {
+            TenantID: '00000000-0000-0000-0000-000000000000',
+            Service: 'plex',
+            EventType: [1002, 1010, 1003, 1004, 1005, 1006],
+            Start: '2021-10-02T22:35:40-07:00',
+            End: '2021-10-05T13:41:30-07:00',
+            Period: 3600000000000,
+          },
+          {
+            TenantID: '00000000-0000-0000-0000-000000000000',
+            Service: 'plex',
+            EventType: [1030, 1031, 1032, 1033, 1034, 1035],
+            Start: '2021-10-02T22:35:40-07:00',
+            End: '2021-10-05T13:41:30-07:00',
+            Period: 3600000000000,
+          },
+          {
+            TenantID: '00000000-0000-0000-0000-000000000000',
+            Service: 'plex',
+            EventType: [1045, 1055],
+            Start: '2021-10-02T22:35:40-07:00',
+            End: '2021-10-05T13:41:30-07:00',
+            Period: 3600000000000,
+          },
+        ];
+
+        // Select the service
+
+        var select = document.getElementById('service');
+        var selectedService = select.options[select.selectedIndex].value;
+        console.log('Selected service: ' + selectedService);
+
+        var environment = selectedEnvironment();
+        var timePeriod = selectedTimeperiod();
+
+        console.log('Selected URL: ' + environment.URL);
+        console.log('Selected Tenant: ' + environment.TenantID);
+        console.log(
+          'Selected timeperiod start: ' + timePeriod.startTime.toString()
+        );
+        console.log(
+          'Selected timeperiod end: ' + timePeriod.endTime.toString()
+        );
+
+        // Copy the selected time period and service into the queries
+        for (let i = 0; i < q.length; i++) {
+          q[i].TenantID = environment.TenantID;
+          q[i].Start = timePeriod.startTime.toJSON();
+          q[i].End = timePeriod.endTime.toJSON();
+          q[i].Period = timePeriod.period;
+          q[i].Service = selectedService;
+        }
+
+        // Execute the query against logserver/query
+        var callFailed = false;
+        var jsonData = $.ajax({
+          method: 'post',
+          crossDomain: true,
+          url: environment.URL,
+          data: JSON.stringify(q),
+          dataType: 'json',
+          async: false,
+          error: function (jqXHR, textStatus, errorThrown) {
+            callFailed = true;
+          },
+        }).responseText;
+
+        if (!callFailed) {
+          renderCharts(jsonData, timePeriod.selection);
+        } else {
+          resetCharts();
+        }
+      }
+      google.charts.setOnLoadCallback(populateDataView);
+    </script>
+  </body>
+</html>

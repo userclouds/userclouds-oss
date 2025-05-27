@@ -1,0 +1,135 @@
+{
+  "data": [
+    {
+      "id": "032cae17-df3a-4e87-82a0-c706ed0679ee",
+      "table": "users",
+      "name": "email_verified",
+      "data_type": {
+        "name": "boolean",
+        "id": "e16b5ead-54db-4b42-a55f-f21907cda9e4"
+      },
+      "default_value": "",
+      "search_indexed": true,
+      "access_policy": {
+        "id": "ca8d9cd7-bc82-4c87-8b29-8102e2fe3096",
+        "name": "AccessPolicyForColumn_040d4711-87d9-4846-a95c-8dcb9ca67566-627670_gender"
+      },
+      "default_transformer": {
+        "id": "c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a",
+        "name": "PassthroughUnchangedData"
+      },
+      "default_token_access_policy": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": ""
+      },
+      "index_type": "none",
+      "is_system": false,
+      "constraints": {
+        "immutable_required": false,
+        "partial_updates": false,
+        "unique_id_required": false,
+        "unique_required": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "2c7a7c9b-90e8-47e4-8f6e-ec73bd2dec16",
+      "table": "users",
+      "name": "email",
+      "data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "default_value": "",
+      "search_indexed": true,
+      "access_policy": {
+        "id": "ca8d9cd7-bc82-4c87-8b29-8102e2fe3096",
+        "name": "AccessPolicyForColumn_040d4711-87d9-4846-a95c-8dcb9ca67566-627670_gender"
+      },
+      "default_transformer": {
+        "id": "c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a",
+        "name": "PassthroughUnchangedData"
+      },
+      "default_token_access_policy": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": ""
+      },
+      "index_type": "unique",
+      "is_system": false,
+      "constraints": {
+        "immutable_required": false,
+        "partial_updates": false,
+        "unique_id_required": false,
+        "unique_required": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "4d4d0757-3bc2-424d-9caf-a930edb49b69",
+      "table": "users",
+      "name": "picture",
+      "data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "default_value": "foo.gif",
+      "search_indexed": true,
+      "access_policy": {
+        "id": "ca8d9cd7-bc82-4c87-8b29-8102e2fe3096",
+        "name": "AccessPolicyForColumn_040d4711-87d9-4846-a95c-8dcb9ca67566-627670_gender"
+      },
+      "default_transformer": {
+        "id": "c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a",
+        "name": "PassthroughUnchangedData"
+      },
+      "default_token_access_policy": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": ""
+      },
+      "index_type": "none",
+      "is_system": false,
+      "constraints": {
+        "immutable_required": false,
+        "partial_updates": false,
+        "unique_id_required": false,
+        "unique_required": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "62fcf8b4-48d0-46d9-9f5b-d0813a478a2b",
+      "table": "users",
+      "name": "name",
+      "data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "default_value": "Jane Doe",
+      "search_indexed": true,
+      "access_policy": {
+        "id": "ca8d9cd7-bc82-4c87-8b29-8102e2fe3096",
+        "name": "AccessPolicyForColumn_040d4711-87d9-4846-a95c-8dcb9ca67566-627670_gender"
+      },
+      "default_transformer": {
+        "id": "c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a",
+        "name": "PassthroughUnchangedData"
+      },
+      "default_token_access_policy": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": ""
+      },
+      "index_type": "none",
+      "is_system": false,
+      "constraints": {
+        "immutable_required": false,
+        "partial_updates": false,
+        "unique_id_required": false,
+        "unique_required": false,
+        "fields": null
+      }
+    }
+  ],
+  "has_next": false,
+  "next": "",
+  "has_prev": false
+}

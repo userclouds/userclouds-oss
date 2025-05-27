@@ -1,0 +1,44 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="http://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript"></script>
+
+	<!-- font awesome from BootstrapCDN -->
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/3.4/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<script src="/public/js.cookie.js"></script>
+	<script src="/public/user.js"> </script>
+  <link href="/public/events.css" rel="stylesheet">
+</head>
+<body class="home">
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Welcome to Events, {{.name}}!</h1>
+			<img class="avatar img-center rounded-circle img-responsive" src="{{.picture}}"/>
+			<a class="btn btn-warning btn-logout" href="/logout" role="button">Logout</a>
+		</div>
+	</div>
+	<div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Events</h2>
+          <p>View & Create Events!</p>
+          <p><a class="btn btn-light" href="/events" role="button">Events »</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Invite Friends</h2>
+          <p>Coming soon!</p>
+          <p><a class="btn btn-light" href="#" role="button">View details »</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Calendar</h2>
+          <p>Coming soon!</p>
+          <p><a class="btn btn-light" href="#" role="button">View details »</a></p>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

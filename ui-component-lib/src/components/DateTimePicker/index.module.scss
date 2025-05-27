@@ -1,0 +1,305 @@
+@use '../../_variables.module.css';
+
+/* Calendar: https://github.com/wojtekmaj/react-calendar/blob/main/src/Calendar.css */
+:global .react-calendar {
+  width: 350px;
+  max-width: 100%;
+  background: white;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+}
+
+:global .react-calendar--doubleView {
+  width: 700px;
+}
+
+:global .react-calendar--doubleView .react-calendar__viewContainer {
+  display: flex;
+  margin: -0.5em;
+}
+
+:global .react-calendar--doubleView .react-calendar__viewContainer > * {
+  width: 50%;
+  margin: 0.5em;
+}
+
+:global .react-calendar,
+:global .react-calendar *,
+:global .react-calendar *:before,
+:global .react-calendar *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:global .react-calendar button {
+  margin: 0;
+  border: 0;
+  outline: none;
+}
+
+:global .react-calendar button:enabled:hover {
+  cursor: pointer;
+}
+
+:global .react-calendar__navigation {
+  display: flex;
+  height: 44px;
+  margin-bottom: 1em;
+}
+
+:global .react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+}
+
+:global .react-calendar__navigation button:disabled {
+  background-color: var(--color-neutral-100);
+}
+
+:global .react-calendar__navigation button:enabled:hover,
+:global .react-calendar__navigation button:enabled:focus {
+  background-color: var(--color-neutral-200);
+}
+
+:global .react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+}
+
+:global .react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
+}
+
+:global .react-calendar__month-view__weekNumbers .react-calendar__tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+:global .react-calendar__month-view__days__day--weekend {
+  font-weight: bold;
+}
+
+:global .react-calendar__month-view__days__day--neighboringMonth {
+  color: var(--color-neutral-500);
+}
+
+:global .react-calendar__year-view .react-calendar__tile,
+:global .react-calendar__decade-view .react-calendar__tile,
+:global .react-calendar__century-view .react-calendar__tile {
+  padding: 2em 0.5em;
+}
+
+:global .react-calendar__tile {
+  max-width: 100%;
+  padding: 10px 6.6667px;
+  background: none;
+  text-align: center;
+  line-height: 16px;
+}
+
+:global .react-calendar__tile:disabled {
+  background-color: var(--color-neutral-100);
+}
+
+:global .react-calendar__tile:enabled:hover,
+:global .react-calendar__tile:enabled:focus {
+  background-color: var(--color-neutral-200);
+}
+
+:global .react-calendar__tile--now {
+  background: #ffff76;
+}
+
+:global .react-calendar__tile--now:enabled:hover,
+:global .react-calendar__tile--now:enabled:focus {
+  background: #ffffa9;
+}
+
+:global .react-calendar__tile--hasActive {
+  background: #76baff;
+}
+
+:global .react-calendar__tile--hasActive:enabled:hover,
+:global .react-calendar__tile--hasActive:enabled:focus {
+  background: #a9d4ff;
+}
+
+:global .react-calendar__tile--active {
+  background: var(--color-blue-900);
+  color: white;
+}
+
+:global .react-calendar__tile--active:enabled:hover,
+:global .react-calendar__tile--active:enabled:focus {
+  background: var(--color-blue-800);
+}
+
+:global .react-calendar--selectRange .react-calendar__tile--hover {
+  background-color: var(--color-neutral-200);
+}
+
+/* Datetime picker: https://github.com/wojtekmaj/react-datetime-picker/blob/main/src/DateTimePicker.css */
+.react-datetime-picker {
+  background: var(--color-white);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--border-radius-default);
+  box-shadow: var(--input-box-shadow);
+  display: inline-flex;
+  position: relative;
+  transition: border-color var(--input-transition-default);
+  z-index: 1;
+}
+
+.react-datetime-picker,
+.react-datetime-picker *,
+.react-datetime-picker *:before,
+.react-datetime-picker *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:global .react-datetime-picker--disabled {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-600);
+}
+
+:global .react-datetime-picker__wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+:global .react-datetime-picker__wrapper:focus-within {
+  border-radius: 6px;
+  box-shadow: var(--input-focus-visible);
+  outline: 1px solid var(--color-black);
+}
+
+:global .react-datetime-picker__inputGroup {
+  min-width: calc(4px + (4px * 3) + 0.54em * 6 + 0.217em * 2);
+  flex-grow: 1;
+  padding: 0 14px;
+}
+
+:global .react-datetime-picker__inputGroup__divider {
+  padding: 1px 0;
+  white-space: pre;
+}
+
+:global .react-datetime-picker__inputGroup__divider,
+:global .react-datetime-picker__inputGroup__leadingZero {
+  display: inline-block;
+}
+
+:global .react-datetime-picker__inputGroup__input {
+  min-width: 0.54em;
+  height: calc(100% - 2px);
+  position: relative;
+  padding: 1px;
+  border: 0;
+  background: none;
+  color: currentColor;
+  font: inherit;
+  box-sizing: content-box;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+:global .react-datetime-picker__inputGroup__input:focus {
+  box-shadow: 0px 0px 7px -1px var(--color-neutral-500);
+  outline: none;
+}
+
+:global .react-datetime-picker__inputGroup__input::-webkit-outer-spin-button,
+:global .react-datetime-picker__inputGroup__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+:global .react-datetime-picker__inputGroup__input:invalid {
+  background: rgba(255, 0, 0, 0.1);
+}
+
+:global .react-datetime-picker__inputGroup__input--hasLeadingZero {
+  margin-left: -0.54em;
+  padding-left: calc(1px + 0.54em);
+}
+
+:global .react-datetime-picker__inputGroup__amPm {
+  font: inherit;
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist;
+  appearance: menulist;
+}
+
+:global .react-datetime-picker__button {
+  border: 0;
+  background: transparent;
+  padding: 4px 6px;
+}
+
+:global .react-datetime-picker__button:enabled {
+  cursor: pointer;
+}
+
+:global
+  .react-datetime-picker__button:enabled:hover
+  .react-datetime-picker__button__icon,
+:global
+  .react-datetime-picker__button:enabled:focus
+  .react-datetime-picker__button__icon {
+  stroke: var(--color-blue-800);
+}
+
+:global
+  .react-datetime-picker__button:disabled
+  .react-datetime-picker__button__icon {
+  stroke: var(--color-neutral-600);
+}
+
+:global .react-datetime-picker__button svg {
+  display: inherit;
+}
+
+:global .react-datetime-picker__calendar,
+:global .react-datetime-picker__clock {
+  z-index: 1;
+}
+
+:global .react-datetime-picker__calendar--closed,
+:global .react-datetime-picker__clock--closed {
+  display: none;
+}
+
+:global .react-datetime-picker__calendar {
+  width: 350px;
+  max-width: 100vw;
+  box-shadow:
+    0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  margin-top: 3px;
+}
+
+:global .react-datetime-picker__calendar .react-calendar {
+  border: none;
+  border-radius: 8px;
+}
+
+:global .react-datetime-picker__clock {
+  width: 200px;
+  height: 200px;
+  max-width: 100vw;
+  padding: 25px;
+  background-color: white;
+  border: thin solid var(--color-neutral-400);
+}

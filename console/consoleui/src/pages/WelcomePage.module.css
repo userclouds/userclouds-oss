@@ -1,0 +1,41 @@
+:global(#root) {
+  .welcomepage {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    max-width: 400px;
+  }
+
+  .label,
+  .accordion {
+    width: 100%;
+  }
+
+  .horizontalRule {
+    border-top: 1px solid var(--color-neutral-300);
+  }
+
+  .logoutLink {
+    display: flex;
+    align-items: center;
+    padding-block: 10px;
+    font-size: 14px;
+  }
+
+  .logoutLink a {
+    text-decoration: underline;
+    margin-left: 5px;
+  }
+
+  .userid {
+    display: block;
+    padding: 5px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: lightgray;
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "column_id": "032cae17-df3a-4e87-82a0-c706ed0679ee",
+  "duration_type": "columnpurpose",
+  "max_duration": {
+    "unit": "year",
+    "duration": 3
+  },
+  "supported_duration_units": ["year", "month", "week", "day", "hour"],
+  "purpose_retention_durations": [
+    {
+      "id": "7f55f479-aa23-4269-b098-b789d5c6f152",
+      "purpose_id": "0b112683-aa23-4269-b098-ae6fdc1a9d8d",
+      "purpose_name": "marketing",
+      "version": 2,
+      "duration": {
+        "unit": "month",
+        "duration": 3
+      },
+      "use_default": false,
+      "default_duration": {
+        "unit": "indefinite",
+        "duration": 0
+      }
+    },
+    {
+      "id": "0b112683-3822-4976-a8a9-ae6fdc1a9d8d",
+      "purpose_id": "7f55f479-3822-4976-a8a9-b789d5c6f152",
+      "purpose_name": "operational",
+      "version": 2,
+      "duration": {
+        "unit": "year",
+        "duration": 1
+      },
+      "use_default": false,
+      "default_duration": {
+        "unit": "indefinite",
+        "duration": 0
+      }
+    }
+  ]
+}

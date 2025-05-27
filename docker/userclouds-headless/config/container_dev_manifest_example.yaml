@@ -1,0 +1,428 @@
+resources:
+  - uc_terraform_type: userstore_column
+    manifest_id: userstore_column_email_verified
+    resource_uuids:
+      container-dev: 12b3f133-4ad1-4f11-9d7d-313eb7cb95fa
+    attributes:
+      data_type: e16b5ead-54db-4b42-a55f-f21907cda9e4
+      index_type: none
+      is_array: false
+      name: email_verified
+      type: boolean
+  - uc_terraform_type: userstore_column
+    manifest_id: userstore_column_email
+    resource_uuids:
+      container-dev: 2c7a7c9b-90e8-47e4-8f6e-ec73bd2dec16
+    attributes:
+      data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      index_type: indexed
+      is_array: false
+      name: email
+      type: string
+  - uc_terraform_type: userstore_column
+    manifest_id: userstore_column_external_alias
+    resource_uuids:
+      container-dev: 2ee3d57d-9756-464e-a5e9-04244936cb9e
+    attributes:
+      data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      index_type: unique
+      is_array: false
+      name: external_alias
+      type: string
+  - uc_terraform_type: userstore_column
+    manifest_id: userstore_column_picture
+    resource_uuids:
+      container-dev: 4d4d0757-3bc2-424d-9caf-a930edb49b69
+    attributes:
+      data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      index_type: none
+      is_array: false
+      name: picture
+      type: string
+  - uc_terraform_type: userstore_column
+    manifest_id: userstore_column_nickname
+    resource_uuids:
+      container-dev: 83cc42b0-da8c-4a61-9db1-da70f21bab60
+    attributes:
+      data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      index_type: none
+      is_array: false
+      name: nickname
+      type: string
+  - uc_terraform_type: userstore_column
+    manifest_id: userstore_column_name
+    resource_uuids:
+      container-dev: fe20fd48-a006-4ad8-9208-4aad540d8794
+    attributes:
+      data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      index_type: indexed
+      is_array: false
+      name: name
+      type: string
+  - uc_terraform_type: userstore_column
+    manifest_id: userstore_column_alias
+    resource_uuids:
+      container-dev: 83cc42b0-2241-4a61-9208-da70f21bab60
+    attributes:
+      data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      index_type: none
+      is_array: false
+      name: alias
+      type: string
+  - uc_terraform_type: transformer
+    manifest_id: transformer_EmailToID
+    resource_uuids:
+      container-dev: 0cedf7a4-86ab-450a-9426-478ad0a60faa
+    attributes:
+      description: This policy generates an email token for the given email.
+      function: |-
+        function id(len) {
+        	var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        	return Array(len).join().split(',').map(function() {
+        		return s.charAt(Math.floor(Math.random() * s.length));
+        	}).join('');
+        }
+
+        var commonValues = ["gmail", "hotmail", "yahoo", "msn", "aol", "orange", "wanadoo", "comcast", "live", "apple", "proton", "yandex", "ymail"]
+
+        function constructSegment(seg, config) {
+        	if (config.PreserveValue) {
+        		return seg
+        	}
+
+        	if (config.PreserveCommonValue && (commonValues.includes(seg))) {
+        		return seg
+        	}
+
+        	preserveCount = Math.min(config.PreserveChars, seg.length);
+        	newSeg = seg.slice(0, preserveCount)
+        	return newSeg + id(config.FinalLength - preserveCount)
+        }
+
+        function transform(data, params) {
+        	emailParts = data.split('@')
+
+        	// Make sure we have a username and a domain
+        	if (emailParts.length !== 2) {
+        		throw new Error('Invalid Data');
+        	}
+
+        	username = emailParts[0]
+        	domainParts = emailParts[1].split('.')
+
+        	// Check if the domain is valid
+        	if (domainParts.length < 2) {
+        		throw new Error('Invalid Data');
+        	}
+        	domainName = domainParts[0]
+        	domainExt = domainParts[1]
+
+        	if (params.length != 3) {
+        		throw new Error('Invalid Params');
+        	}
+        	return constructSegment(username, params[0]) + '@' +
+        		constructSegment(domainName, params[1]) + '.' +
+        		constructSegment(domainExt, params[2]);
+        };
+      input_data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      input_type: string
+      name: EmailToID
+      output_data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      output_type: string
+      parameters: |-
+        [{
+        	"PreserveValue": false,
+        	"PreserveChars": 0,
+        	"FinalLength": 12
+        }, {
+        	"PreserveValue": false,
+        	"PreserveCommonValue": true,
+        	"PreserveChars": 0,
+        	"FinalLength": 6
+        }, {
+        	"PreserveValue": true
+        }]
+      transform_type: tokenizebyvalue
+  - uc_terraform_type: transformer
+    manifest_id: transformer_SSNToID
+    resource_uuids:
+      container-dev: 3f65ee22-2241-4694-bbe3-72cefbe59ff2
+    attributes:
+      description: This policy generates a masked SSN.
+      function: |-
+        function id(len, decimalonly) {
+        	var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        	var d = "0123456789";
+        	if (decimalonly) {
+        		return Array(len).join().split(',').map(function() {
+        			return d.charAt(Math.floor(Math.random() * d.length));
+        		}).join('');
+        	}
+        	return Array(len).join().split(',').map(function() {
+        		return s.charAt(Math.floor(Math.random() * s.length));
+        	}).join('');
+        }
+
+        function constructSegment(seg, decimalonly, preserveS, preserveT) {
+        	preserveCountS = Math.min(Math.max(preserveS, 0), seg.length);
+        	preserveCountT = Math.min(Math.max(preserveT, 0), seg.length);
+
+        	preserveCount = preserveCountS + preserveCountT
+        	if (preserveCount >= seg.length) {
+        		return seg
+        	}
+
+        	newSegS = seg.slice(0, preserveCountS)
+        	newSegT = seg.slice(seg.length - preserveCountT, seg.length)
+        	return newSegS + id(seg.length - preserveCount, decimalonly) + newSegT;
+        }
+
+        function validate(str) {
+        	regexp = /^(?!000|666)[0-8][0-9]{2}(?!00)[0-9]{2}(?!0000)[0-9]{4}$/;
+
+        	return regexp.test(str);
+        }
+
+        function transform(data, params) {
+        	// Strip non numeric characters if present
+        	orig_data = data;
+        	data = data.replace(/\D/g, '');
+        	if (!validate(data)) {
+        		throw new Error('Invalid SSN Provided');
+        	}
+
+        	if ((params.PreserveCharsTrailing + params.PreserveCharsStart) > 9 ||
+        		params.PreserveCharsTrailing < 0 || params.PreserveCharsStart < 0) {
+        		throw new Error('Invalid Params Provided');
+        	}
+
+        	if (params.PreserveValue) {
+        		return orig_data;
+        	}
+
+        	seg1 = data.slice(0, 3);
+        	seg2 = data.slice(3, 5);
+        	seg3 = data.slice(5, 9);
+        	return constructSegment(
+        			seg1,
+        			params.DecimalOnly,
+        			params.PreserveCharsStart,
+        			params.PreserveCharsTrailing - 6
+        		) +
+        		'-' +
+        		constructSegment(
+        			seg2,
+        			params.DecimalOnly,
+        			params.PreserveCharsStart - 3,
+        			params.PreserveCharsTrailing - 4
+        		) +
+        		'-' +
+        		constructSegment(
+        			seg3,
+        			params.DecimalOnly,
+        			params.PreserveCharsStart - 5,
+        			params.PreserveCharsTrailing
+        		);
+        };
+      input_data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      input_type: string
+      name: SSNToID
+      output_data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      output_type: string
+      parameters: |-
+        {
+        	"PreserveValue": false,
+        	"DecimalOnly": true,
+        	"PreserveCharsTrailing": 0,
+        	"PreserveCharsStart": 3
+        }
+      transform_type: transform
+  - uc_terraform_type: transformer
+    manifest_id: transformer_CreditCardToID
+    resource_uuids:
+      container-dev: 618a4ae7-9979-4ee8-bac5-db87335fe4d9
+    attributes:
+      description: This policy generates a masked credit card number.
+      function: |4-
+
+            function id(len, decimalonly) {
+            	var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            	var d = "0123456789";
+
+            	if (decimalonly) {
+            		return Array(len).join().split(',').map(function() {
+            			return d.charAt(Math.floor(Math.random() * d.length));
+            		}).join('');
+            	}
+
+            	return Array(len).join().split(',').map(function() {
+            		return s.charAt(Math.floor(Math.random() * s.length));
+            	}).join('');
+            }
+
+            function constructSegment(seg, decimalonly, preserveS, preserveT) {
+            	preserveCountS = Math.min(Math.max(preserveS, 0), seg.length);
+            	preserveCountT = Math.min(Math.max(preserveT, 0), seg.length);
+
+            	preserveCount = preserveCountS + preserveCountT
+            	if (preserveCount >= seg.length) {
+            		return seg
+            	}
+
+            	newSegS = seg.slice(0, preserveCountS)
+            	newSegT = seg.slice(seg.length - preserveCountT, seg.length)
+            	return newSegS + id(seg.length - preserveCount, decimalonly) + newSegT;
+            }
+
+            function validate(str) {
+            	// there a lot of different regexes per type of card
+            	// for now just test the length
+            	return (str.length == 16);
+            }
+
+            function transform(data, params) {
+            	// Strip non numeric characters if present
+            	orig_data = data;
+            	data = data.replace(/\D/g, '');
+            	if (!validate(data)) {
+            		throw new Error('Invalid Credit Card Number Provided');
+            	}
+
+            	if ((params.PreserveCharsTrailing + params.PreserveCharsStart) > 9 ||
+            		params.PreserveCharsTrailing < 0 ||
+            		params.PreserveCharsStart < 0) {
+            		throw new Error('Invalid Params Provided');
+            	}
+
+            	if (params.PreserveValue) {
+            		return orig_data;
+            	}
+
+            	seg1 = data.slice(0, 4);
+            	seg2 = data.slice(4, 8);
+            	seg3 = data.slice(8, 12);
+            	seg4 = data.slice(12, 16);
+            	return constructSegment(
+            			seg1,
+            			params.DecimalOnly,
+            			params.PreserveCharsStart,
+            			params.PreserveCharsTrailing - 12
+            		) +
+            		'-' +
+            		constructSegment(
+            			seg2,
+            			params.DecimalOnly,
+            			params.PreserveCharsStart - 4,
+            			params.PreserveCharsTrailing - 8
+            		) +
+            		'-' +
+            		constructSegment(seg3,
+            			params.DecimalOnly,
+            			params.PreserveCharsStart - 8,
+            			params.PreserveCharsTrailing - 4
+            		) +
+            			'-' +
+            		constructSegment(
+            			seg4,
+            			params.DecimalOnly,
+            			params.PreserveCharsStart - 12,
+            			params.PreserveCharsTrailing
+            		);
+            };
+      input_data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      input_type: string
+      name: CreditCardToID
+      output_data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      output_type: string
+      parameters: |-
+        {
+        	"PreserveValue": false,
+        	"DecimalOnly": true,
+        	"PreserveCharsTrailing": 0,
+        	"PreserveCharsStart": 0
+        }
+      transform_type: transform
+  - uc_terraform_type: transformer
+    manifest_id: transformer_FullNameToID
+    resource_uuids:
+      container-dev: b9bf352f-b1ee-4fb2-a2eb-d0c346c6404b
+    attributes:
+      description: This policy generates a masked name.
+      function: |-
+        function id(len) {
+        	var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        	return Array(len).join().split(',').map(function() {
+        		return s.charAt(Math.floor(Math.random() * s.length));
+        	}).join('');
+        }
+
+        function constructSegment(seg, config) {
+        	if (config.PreserveValue) {
+        		return seg
+        	}
+        	preserveCount = Math.min(config.PreserveChars, seg.length);
+        	newSeg = seg.slice(0, preserveCount)
+        	return newSeg + id(config.FinalLength - preserveCount)
+        }
+
+        function transform(data, params) {
+        	nameParts = data.split(' ')
+
+        	// Assume that if we have a single name, treat it as a first name
+        	firstName = data;
+        	lastName = "";
+        	if (nameParts.length > 0) {
+        		firstName = nameParts[0]
+        	}
+
+        	// Skip middle name if provided
+        	if (nameParts.length > 1) {
+        		lastName = nameParts[nameParts.length - 1]
+        	}
+
+        	if (params.length != 2) {
+        		throw new Error('Invalid Params');
+        	}
+
+        	return constructSegment(firstName, params[0]) + ' ' +
+        		constructSegment(lastName, params[1]);
+        };
+      input_data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      input_type: string
+      name: FullNameToID
+      output_data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      output_type: string
+      parameters: |-
+        [{
+        	"PreserveValue": true
+        }, {
+        	"PreserveValue": false,
+        	"PreserveChars": 1,
+        	"FinalLength": 12
+        }]
+      transform_type: transform
+  - uc_terraform_type: transformer
+    manifest_id: transformer_UUID
+    resource_uuids:
+      container-dev: e3743f5b-521e-4305-b232-ee82549e1477
+    attributes:
+      description: This policy generates a UUID token for the data.
+      function: |-
+        function uuidv4() {
+        	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        		var r = Math.random() * 16 | 0, v = c === 'x' ? r : ((r & 0x3) | 0x8);
+        		return v.toString(16);
+        	});
+        };
+
+        function transform(data, params) {
+        	return JSON.stringify(uuidv4());
+        };
+      input_data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      input_type: string
+      name: UUID
+      output_data_type: d26b6d52-a8d7-4c2f-9efc-394eb90a3294
+      output_type: string
+      parameters: '{}'
+      transform_type: tokenizebyvalue

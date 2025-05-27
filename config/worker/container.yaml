@@ -1,0 +1,23 @@
+log_db:
+  user: uc_root_user
+  password: dev-literal://uc87871fakepw
+  dbname: status_00000000000000000000000000000000
+  host: postgres
+  dbdriver: postgres
+  dbproduct: postgres
+  port: 5432
+
+svc_listener:
+  protocol: http
+  host: localhost
+  port: 3012
+
+# Should match config/provisioning/container/tenant_console.json
+console_tenant_id: 41ab79a8-0dff-418e-9d42-e1694469120a
+
+dns:
+  host_and_port: 1.1.1.1:53
+
+worker_client:
+  type: http
+  url: http://localhost:3012

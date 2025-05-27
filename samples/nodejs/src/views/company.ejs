@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>Sample App</title>
+    <base href="/" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>List of Organizations</h1>
+
+    <h2>Organizations</h2>
+    <table>
+        <tr>
+            <td>Name</td>
+        </tr>
+        <% orgs.forEach(function(org) { %>
+            <tr>
+                <td><a href="/org/<%= org.id %>"><%= org.name %></a></td>
+            </tr>
+        <% }); %>
+    </table>
+
+    <h2> Create Org</h2>
+    <form action="/createOrganization">
+        Name:<br />
+        <div class="formRow">
+            <input type="text" name="name" value="" />
+            <input type="submit" value="Create" />
+        </div>
+    </form>
+    <br />
+
+</body>
+
+</html>

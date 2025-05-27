@@ -1,0 +1,47 @@
+@use '../../_variables.module.css';
+
+.root {
+  display: inline-block;
+  padding-left: 0;
+  padding-right: 0;
+  text-decoration: inherit;
+  white-space: nowrap;
+  width: 100%;
+
+  &.innerLeftRoot {
+    padding-left: 0;
+    color: var(--color-neutral-600);
+  }
+
+  &.innerRightRoot {
+    padding-right: 0;
+  }
+
+  &:hover .wrapper,
+  &:focus .wrapper {
+    border-color: var(--color-neutral-600);
+  }
+}
+
+.text {
+  display: inline-block;
+  margin: 0 var(--space-1) 0 0;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0;
+  text-align: left;
+  text-decoration: inherit;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.root button {
+  display: inline-block;
+  width: fit-content;
+  padding: 1px 2px;
+}
+
+.copyIcon {
+  color: var(--color-blue-900);
+}

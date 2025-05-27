@@ -1,0 +1,88 @@
+{
+  "data": [
+    {
+      "id": "1f44a215-2590-488f-a254-b6e8e4b67346",
+      "name": "complexPolicy",
+      "description": "",
+      "policy_type": "composite_and",
+      "tag_ids": [],
+      "version": 0,
+      "components": [
+        {
+          "policy": {
+            "id": "3f380e42-0b21-4570-a312-91e1b80386fa",
+            "name": "AllowAll"
+          }
+        },
+        {
+          "policy": {
+            "id": "66dc733c-1e4c-40df-8928-349f80a0775e",
+            "name": "AllowNone"
+          }
+        },
+        {
+          "template": {
+            "id": "aad2bf25-311f-467e-9169-a6a89b6d34a6",
+            "name": "CheckAttribute"
+          },
+          "template_parameters": "{}"
+        },
+        {
+          "template": {
+            "id": "aa412fd1-7c82-4b54-9ffd-b50f589642c6",
+            "name": "checkIfEven"
+          },
+          "template_parameters": "{}"
+        }
+      ],
+      "required_context": {}
+    },
+    {
+      "id": "3f380e42-0b21-4570-a312-91e1b80386fa",
+      "name": "AllowAll",
+      "description": "This policy allows all access.",
+      "policy_type": "composite_or",
+      "tag_ids": null,
+      "version": 0,
+      "components": [],
+      "required_context": {}
+    },
+    {
+      "id": "66dc733c-1e4c-40df-8928-349f80a0775e",
+      "name": "AllowNone",
+      "description": "",
+      "policy_type": "composite_and",
+      "tag_ids": [],
+      "version": 0,
+      "components": [],
+      "required_context": {}
+    },
+    {
+      "id": "f5265005-0d32-44d9-a382-06efe47399f3",
+      "name": "CheckIfEven",
+      "description": "",
+      "policy_type": "composite_and",
+      "tag_ids": [],
+      "version": 0,
+      "components": [
+        {
+          "policy": {
+            "id": "3f380e42-0b21-4570-a312-91e1b80386fa",
+            "name": "AllowAll"
+          }
+        },
+        {
+          "template": {
+            "id": "aa412fd1-7c82-4b54-9ffd-b50f589642c6",
+            "name": "checkIfEven"
+          },
+          "template_parameters": "{}"
+        }
+      ],
+      "required_context": {}
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": false
+}

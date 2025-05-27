@@ -1,0 +1,63 @@
+@use '../src/shared/_mixin' as mixin;
+@use '../src/_variables.module.css';
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(calc(100% + var(--space-5)));
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.inner {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  min-width: 100%;
+  padding: var(--space-5) var(--space-3) 0 calc(var(--space-3) + 230px);
+
+  @include mixin.respond-above(768px) {
+    padding: var(--space-3) var(--space-6) 0 calc(var(--space-6) + 230px);
+  }
+}
+
+.toastNotifications {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  right: var(--space-5);
+  position: fixed;
+  bottom: var(--space-3);
+  z-index: 4;
+}
+
+.toastNotifications > li {
+  position: relative;
+  left: 0;
+}
+
+.toastNotifications > li.animate {
+  animation: slide-in 0.3s;
+  animation-timing-function: ease-in;
+}

@@ -1,0 +1,215 @@
+/*
+NOTE: this is copy-pasted from `auth/public/login.js` and should
+eventually be shared in one place or deleted.
+*/
+
+body {
+  font-family: Arial;
+  height: 100%;
+  margin: 0px;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  height: fit-content;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+}
+
+.login form {
+  margin: 0px 50px;
+  padding: 50px;
+  width: 100%;
+  height: 100vh;
+  border: none;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+@media (min-width: 601px) {
+  .login form {
+    margin: 50px auto;
+    padding: 30px;
+    width: 450px;
+    height: 100%;
+    border: 2px solid #1090ff;
+    border-radius: 20px;
+  }
+}
+
+.login fieldset {
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.login .heading {
+  font-size: 25px;
+  color: #505060;
+  text-align: center;
+}
+
+.login .field {
+  margin: 5px 0px;
+  width: 100%;
+}
+
+.login .statusText {
+  margin: 20px 0px;
+  font-size: 15px;
+  height: 10px;
+}
+
+.login .statusInfo {
+  color: #80a080;
+}
+
+.login .statusError {
+  color: #a02020;
+}
+
+.login label,
+.login input {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+
+.login label {
+  top: 25px;
+  color: gray;
+  transition: all 0.15s ease-in-out;
+  height: 25px;
+  font-size: 20px;
+}
+
+.login input[type='text']:focus-visible,
+.login input[type='password']:focus-visible {
+  outline: none;
+  border-bottom: 2px solid #1090ff;
+  margin-bottom: 9px;
+}
+
+.login input[type='text'],
+.login input[type='password'] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #1090ff;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.noPlaceholder label {
+  top: 0;
+  font-size: 15px;
+  color: #1090ff;
+}
+
+.login input[type='submit'] {
+  height: 50px;
+  width: 100%;
+  background-color: #1090ff;
+  color: #ffffff;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 20px;
+  margin: 24px 0px 0px 0px;
+  padding: 0px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.login input[type='submit']:hover {
+  background-color: #1070f0;
+  transition: all 0.15s ease-in-out;
+}
+
+.login .createAcct,
+.login .forgotCred {
+  padding: 15px 0px 10px 0px;
+  font-size: 15px;
+  height: 10px;
+  color: #1090ff;
+  cursor: pointer;
+}
+
+.login .createAcct:hover,
+.login .forgotCred:hover {
+  color: #1070f0;
+  transition: all 0.15s ease-in-out;
+}
+
+.login .divider {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 15px;
+  margin: 24px 0px;
+}
+
+.login .dividerText {
+  text-align: center;
+  flex: 0.2 0 auto;
+  width: auto;
+}
+
+.login .divider::before,
+.login .divider::after {
+  height: 0.5em;
+  border-bottom: 1px solid #1090ff;
+  flex: 1 0 auto;
+  content: '';
+}
+
+.login .socialField {
+  width: 100%;
+  border: 1px solid #1090ff;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 5px 0px;
+  margin: 5px 0px;
+  font-size: 18px;
+  color: #505060;
+  background-color: #f8f8ff;
+  text-align: left;
+}
+
+.login .socialField:hover {
+  background-color: #b0e0ff;
+  transition: all 0.15s ease-in-out;
+}
+
+.logoImg {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 5px 10px;
+  padding: 0px 0px 0px 0px;
+  background-size: contain;
+  vertical-align: middle;
+}
+
+.linkedInImg {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' height='512' width='512'%3E%3Crect width='512' height='512' fill='%230077b5' rx='15%25'/%3E%3Ccircle cx='142' cy='138' r='37'/%3E%3Cpath stroke='%23fff' stroke-width='66' d='M244 194v198M142 194v198'/%3E%3Cpath d='M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32'/%3E%3C/svg%3E");
+}
+
+.msftImg {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='221' height='221' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cpath fill='%23F1511B' d='M104.868 104.868H0V0h104.868z'/%3E%3Cpath fill='%2380CC28' d='M220.654 104.868H115.788V0h104.866z'/%3E%3Cpath fill='%2300ADEF' d='M104.865 220.695H0V115.828h104.865z'/%3E%3Cpath fill='%23FBBC09' d='M220.654 220.695H115.788V115.828h104.866z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.googleImg {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'%3E%3Cdefs%3E%3Cpath id='a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/%3E%3C/defs%3E%3CclipPath id='b'%3E%3Cuse xlink:href='%23a' overflow='visible'/%3E%3C/clipPath%3E%3Cpath clip-path='url(%23b)' fill='%23FBBC05' d='M0 37V11l17 13z'/%3E%3Cpath clip-path='url(%23b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/%3E%3Cpath clip-path='url(%23b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/%3E%3Cpath clip-path='url(%23b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/%3E%3C/svg%3E");
+}
+
+.socialText {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0px 0px 0px 20px;
+}

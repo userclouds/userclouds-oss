@@ -1,0 +1,8 @@
+db:
+  user: uc_pg_root
+  password: env://PG_PASSWORD
+  dbname: defaultdb
+  host: localhost
+  dbdriver: postgres
+  dbproduct: postgres
+  port: 5477

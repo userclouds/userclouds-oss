@@ -1,0 +1,28 @@
+:global(#root) {
+  .propertiesRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    gap: 8px;
+    width: 100%;
+  }
+  .propertiesElement {
+    min-width: 24rem;
+    max-width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    resize: horizontal;
+    margin-right: 8px;
+  }
+  .providerauth0apps,
+  .providercognitoapps {
+    grid-template-columns: 1fr 1fr 1fr 1fr 60px;
+  }
+  .providerucapps {
+    grid-template-columns: 1fr 1fr 60px;
+  }
+}

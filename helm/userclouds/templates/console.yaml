@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ template "console.serviceAccount" . }}
+  labels:
+     {{- include "userclouds.labels" . | nindent 4 }}
+  annotations:
+    eks.amazonaws.com/role-arn: {{ .Values.roles.console }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: console
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.console.replicas | default .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "console.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "console.selectorLabels" . | nindent 8 }}
+    spec:
+      nodeSelector:
+        {{- include "userclouds.nodeSelector" . | nindent 8 }}
+      serviceAccountName: {{ template "console.serviceAccount" . }}
+      volumes:
+        - name: configmap
+          configMap:
+            name: userclouds-configs
+            items:
+              - key: base
+                path: {{ printf "base_%s.yaml" .Values.uc_universe }}
+              - key: console
+                path: {{ printf "console/%s.yaml" .Values.uc_universe }}
+      containers:
+        - name: console
+          image: "{{ include "userclouds.image" . }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - console
+          {{- include "userclouds.envConfigMap" . | nindent 10 }}
+          env:
+            {{- include "userclouds.envVars" . | nindent 12 }}
+          resources:
+            limits:
+              cpu: 0.2
+              memory: 256Mi
+            requests:
+              cpu: 0.1
+              memory: 128Mi
+          volumeMounts:
+            - name: configmap
+              mountPath: /userclouds/configmaps
+          ports:
+            - name: console
+              containerPort: 5000
+              protocol: TCP
+            - name: internal
+              containerPort: 5001
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: console
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: console
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: console
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+      {{- include "console.selectorLabels" . | nindent 6 }}
+  ports:
+    - name: service
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+    - name: internal
+      protocol: TCP
+      port: 5001
+
+

@@ -1,0 +1,8 @@
+db:
+  user: postgres
+  password: aws://secrets/staging/aurora_db_password
+  dbname: rootdb
+  host: aurora-global-staging.global-ghfsmzcj8xvp.global.rds.amazonaws.com
+  dbdriver: postgres
+  dbproduct: aws-aurora-postgres
+  port: 5432

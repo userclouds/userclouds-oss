@@ -1,0 +1,22 @@
+static_assets_path: console/consoleui/build
+log_db:
+  user: unused
+  password: dev-literal://unused
+  dbname: unused
+  host: unused
+  port: 1234
+  dbdriver: postgres
+  dbproduct: postgres
+
+tenant_sub_domain: tenant.dev.userclouds.tools:3333
+tenant_protocol: https
+console_url: https://console.dev.userclouds.tools:3333
+console_tenant_id: 41ab79a8-0dff-418e-9d42-e1694469120a
+
+svc_listener:
+  protocol: http
+  host: localhost
+  port: 5300
+
+worker_client:
+  type: test

@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ template "plex.serviceAccount" . }}
+  labels:
+     {{- include "userclouds.labels" . | nindent 4 }}
+  annotations:
+    eks.amazonaws.com/role-arn: {{ .Values.roles.plex }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plex
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.plex.replicas | default .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "plex.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "plex.selectorLabels" . | nindent 8 }}
+        userclouds.sla: critical
+    spec:
+      nodeSelector:
+        {{- include "userclouds.nodeSelector" . | nindent 8 }}
+      serviceAccountName: {{ template "plex.serviceAccount" . }}
+      volumes:
+        - name: configmap
+          configMap:
+            name: userclouds-configs
+            items:
+              - key: base
+                path: {{ printf "base_%s.yaml" .Values.uc_universe }}
+              - key: plex
+                path: {{ printf "plex/%s.yaml" .Values.uc_universe }}
+      containers:
+        - name: plex
+          image: "{{ include "userclouds.image" . }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - plex
+          {{- include "userclouds.envConfigMap" . | nindent 10 }}
+          env:
+            {{- include "userclouds.envVars" . | nindent 12 }}
+          resources:
+            limits:
+              cpu: 0.2
+              memory: 256Mi
+            requests:
+              cpu: 0.1
+              memory: 128Mi
+          {{- include "userclouds.lifecycleDrain" . | nindent 10 }}
+          volumeMounts:
+            - name: configmap
+              mountPath: /userclouds/configmaps
+          ports:
+            - name: plex
+              containerPort: 5000
+              protocol: TCP
+            - name: internal
+              containerPort: 5001
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: plex
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: plex
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: plex
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+      {{- include "plex.selectorLabels" . | nindent 6 }}
+  ports:
+    - name: service
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+    - name: internal
+      protocol: TCP
+      port: 5001

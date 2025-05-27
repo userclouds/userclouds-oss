@@ -1,0 +1,16 @@
+name: SDK Version Check
+on:
+  pull_request: {}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+jobs:
+  compatibility:
+    name: Check for empty or re-used SDK version
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout PR source code
+        uses: actions/checkout@v4
+      - name: Verify sdkVersion is not empty and is not existing tag
+        uses: ./.github/actions/check-sdkversion

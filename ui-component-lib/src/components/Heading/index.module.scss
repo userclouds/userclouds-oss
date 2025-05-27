@@ -1,0 +1,28 @@
+@use '../../_variables.module.css';
+
+.root {
+  font-family: var(--font-family);
+  font-weight: 600;
+}
+
+.heading1 {
+  font-size: var(--heading-1-font-size);
+  line-height: var(--heading-1-line-height);
+  letter-spacing: -0.25px;
+}
+
+.heading2 {
+  font-size: var(--heading-2-font-size);
+  line-height: var(--heading-2-line-height);
+}
+
+.heading3 {
+  font-size: var(--heading-3-font-size);
+  line-height: var(--heading-3-line-height);
+}
+
+.headingnew {
+  font-size: var(--new-text-1-font-size);
+  line-height: var(--text-1-line-height);
+  letter-spacing: -0.25px;
+}

@@ -1,0 +1,1 @@
+select id, email from raw_users

@@ -1,0 +1,42 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowWritingToLogs",
+      "Action": ["logs:*"],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowReadKinesisInputStream",
+      "Effect": "Allow",
+      "Action": "kinesis:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowWriteS3OutputBucket",
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": ["arn:aws:s3:::kinesis-application-code/output/*"]
+    },
+    {
+      "Sid": "AllowReadS3CodeInput",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:GetObjectVersion"],
+      "Resource": [
+        "arn:aws:s3:::kinesis-application-code",
+        "arn:aws:s3:::kinesis-application-code/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "arn:aws:iam::*:role/aws-service-role/events.amazonaws.com/AWSServiceRoleForCloudWatchEvents*",
+      "Condition": {
+        "StringLike": {
+          "iam:AWSServiceName": "events.amazonaws.com"
+        }
+      }
+    }
+  ]
+}

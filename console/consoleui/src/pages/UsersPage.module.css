@@ -1,0 +1,16 @@
+:global(#root) {
+  .usertable {
+    grid-template-columns:
+      50px 80px minmax(120px, 1fr) minmax(120px, 1fr)
+      1fr 60px;
+  }
+
+  .profileimg {
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 4px;
+  }
+}

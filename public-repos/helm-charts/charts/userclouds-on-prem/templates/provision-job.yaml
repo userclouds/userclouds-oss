@@ -1,0 +1,76 @@
+{{- $dummy := required "You must set config.companyName" .Values.config.companyName }}
+{{- $dummy := required "You must set image.repository" .Values.image.repository }}
+{{- $dummy := required "You must set image.tag" .Values.image.tag }}
+{{- $dummy := required "You must set provisionJob.image.repository" .Values.provisionJob.image.repository }}
+{{- $dummy := required "You must set config.companyName" .Values.config.companyName }}
+{{- $dummy := required "You must set config.customerDomain" .Values.config.customerDomain }}
+{{- $dummy := required "You must set config.adminUserEmail" .Values.config.adminUserEmail }}
+{{- $dummy := required "You must set serviceAccount.iamRoleARN" .Values.serviceAccount.iamRoleARN }}
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: userclouds-provision
+  labels:
+    app.kubernetes.io/component: provision
+    {{- include "userclouds.labels" . | nindent 4 }}
+  {{- if .Values.provisionJob.additionalAnnotations }}
+  annotations:
+    {{ toYaml .Values.provisionJob.additionalAnnotations | nindent 8 }}
+  {{- end }}
+spec:
+  ttlSecondsAfterFinished: 300
+  backoffLimit: 0  # prevent retries
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: provision
+        {{- include "userclouds.labels" . | nindent 8 }}
+    spec:
+      restartPolicy: Never
+      {{- if .Values.userclouds.nodeSelector }}
+      nodeSelector:
+        {{ toYaml .Values.userclouds.nodeSelector | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+      - name: automatedprovisioner
+        image: "{{ include "userclouds.automated_provisioner_image" . }}"
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+        env:
+          - name: UC_BASE_PROVISION_FILES_PATH
+            value: /userclouds/provisioning
+            {{- if and .Values.config.downMigrateTenantDBVersion (ne .Values.config.downMigrateTenantDBVersion "") }}
+          - name: TENANT_DB_DOWN_MIGRATE_DB_VERSION
+            value: '{{ .Values.config.downMigrateTenantDBVersion }}'
+          {{- end }}
+          - name: COMPANY_NAME
+            value: {{ .Values.config.companyName }}
+          - name: CUSTOMER_DOMAIN
+            value: {{ .Values.config.customerDomain }}
+          - name: ADMIN_USER_EMAIL
+            value: {{ .Values.config.adminUserEmail }}
+          {{- include "userclouds.envVars" . | nindent 10 }}
+          {{- include "userclouds.envVars.googleAuth" . | nindent 10 }}
+          {{- if .Values.config.skipEnsureAWSSecretsAccess }}
+          - name: SKIP_ENSURE_AWS_SECRETS_ACCESS
+            value: "true"
+          {{- end }}
+        volumeMounts:
+          - name: configmap
+            mountPath: /userclouds/configmaps
+      volumes:
+        - name: configmap
+          configMap:
+            name: userclouds-configs
+            items:
+              - key: rootdb
+                path: rootdb/onprem.yaml
+              - key: base
+                path: base_onprem.yaml
+              - key: rootdbstatus
+                path: rootdbstatus/onprem.yaml
+              - key: logserver
+                path: logserver/onprem.yaml
+              - key: idp
+                path: idp/onprem.yaml

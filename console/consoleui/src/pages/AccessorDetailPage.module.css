@@ -1,0 +1,51 @@
+:global(#root) {
+  .cardrow {
+    display: grid;
+    grid-template-columns: 32% 57%;
+    grid-gap: 5%;
+  }
+
+  .matchselectheight > p {
+    /* InputReadOnly is meant to match the height
+       * of text inputs, so as to avoid jumpiness,
+       * but Selects are taller.
+      /* this should use variables */
+    line-height: 40px;
+  }
+
+  .whereText {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .nameText {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .accessorcolumnstable {
+    grid-template-columns:
+      repeat(4, minmax(max-content, 1fr))
+      60px;
+
+    overflow-x: auto;
+  }
+
+  .accessorpurposestable {
+    grid-template-columns: fit-content(80px) fit-content(30%) 1fr 60px;
+  }
+
+  .columnpoliciestable {
+    grid-template-columns: 60px 1fr 1fr;
+  }
+
+  .executionratelimitingtable {
+    grid-template-columns:
+      fit-content(25%) fit-content(25%) fit-content(25%)
+      1fr;
+  }
+
+  .resultratelimitingtable {
+    grid-template-columns: fit-content(25%) fit-content(25%) 1fr;
+  }
+}

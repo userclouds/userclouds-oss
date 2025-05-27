@@ -1,0 +1,24 @@
+{
+  "id": "2ee4497e-c326-4068-94ed-3dcdaaaa53bc",
+  "name": "My_Mutator",
+  "version": 2,
+  "description": "This is a simple mutator",
+  "columns": [
+    {
+      "id": "175565bf-4d3e-4b01-9908-529933dfbc5e",
+      "name": "baz_column",
+      "data_type_id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+      "data_type_name": "string",
+      "is_array": false,
+      "normalizer_id": "00000000-e881-40a3-8e53-f76b502d2d76",
+      "normalizer_name": "Always_foo"
+    }
+  ],
+  "access_policy": {
+    "id": "0c0b7371-5175-405b-a17c-fec5969914b8",
+    "name": "hello2_policy"
+  },
+  "selector_config": {
+    "where_clause": "{id} = ?"
+  }
+}

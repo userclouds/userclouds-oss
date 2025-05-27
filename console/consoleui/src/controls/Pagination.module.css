@@ -1,0 +1,10 @@
+:global(#root) {
+  .root {
+    margin-left: auto;
+  }
+
+  .root svg {
+    display: inline-block;
+    margin-bottom: 0px;
+  }
+}

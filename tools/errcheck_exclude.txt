@@ -1,0 +1,29 @@
+// these are used in defer and would require panic anyway
+(*os.File).Close
+syscall.Kill
+os.Remove
+
+// Used in FileLogger and we're unable to do anything with them anyway
+(*bufio.Writer).Flush
+(*bufio.Writer).Write
+(*os.File).Sync
+(io.Closer).Close
+
+// used almost entirely in tests
+os.Chdir
+
+// not really actionable
+(*encoding/json.Encoder).Encode
+encoding/json.Marshal
+(net/http.ResponseWriter).Write
+userclouds.com/infra/ucjson.Marshal
+
+// test only, obvi
+(*net/http/httptest.ResponseRecorder).Write
+
+io.Copy
+
+// we don't use these much, but clearly ignore
+fmt.Fprint
+fmt.Fprintf
+fmt.Fprintln

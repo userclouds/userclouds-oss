@@ -1,0 +1,15 @@
+@use '../../_variables.module.css';
+
+.root {
+  font-size: var(--text-2-font-size);
+  line-height: var(--text-2-line-height);
+  color: var(--color-neutral-700);
+  margin-top: var(--space-1);
+  font-weight: 400;
+  display: block;
+  font-family: var(--font-family);
+
+  &.hasError {
+    color: var(--color-red-700);
+  }
+}

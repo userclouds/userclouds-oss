@@ -1,0 +1,137 @@
+{
+  "protocol": "https",
+  "sub_domain": "tenant.dev.userclouds.tools:3333",
+  "tenant": {
+    "id": "476b575c-dbe0-4f21-b3c9-9bc29f0bae03",
+    "name": "Contoso - Dev",
+    "company_id": "60b2f286-f051-444f-9b08-4b67129dcb7b",
+    "tenant_url": "https://contoso-dev.tenant.dev.userclouds.tools:3333",
+    "state": "active"
+  },
+  "plex_config": {
+    "plex_map": {
+      "telephony_provider": {
+        "type": "none",
+        "properties": {}
+      },
+      "providers": [
+        {
+          "id": "d6fd41dc-5788-4fdc-9318-d2e1211205f1",
+          "name": "Contoso IDP dev",
+          "type": "uc",
+          "uc": {
+            "idp_url": "https://contoso-dev.tenant.dev.userclouds.tools:3333",
+            "apps": [
+              {
+                "id": "251281d9-31b7-4c3c-b450-04059c304976",
+                "name": "dev"
+              }
+            ]
+          }
+        }
+      ],
+      "apps": [
+        {
+          "id": "2c8d8149-2670-4318-a284-fe51290812bf",
+          "name": "Contoso plex dev",
+          "client_id": "test_plex_client_id123",
+          "client_secret": "not_used",
+          "provider_app_ids": ["251281d9-31b7-4c3c-b450-04059c304976"],
+          "grant_types": [
+            "authorization_code",
+            "refresh_token",
+            "client_credentials"
+          ],
+          "token_validity": {
+            "access": 86400,
+            "refresh": 2592000,
+            "impersonate_user": 3600
+          }
+        }
+      ],
+      "policy": {
+        "active_provider_id": "d6fd41dc-5788-4fdc-9318-d2e1211205f1"
+      }
+    },
+    "oidc_providers": {
+      "providers": [
+        {
+          "type": "facebook",
+          "name": "facebook",
+          "description": "Facebook",
+          "issuer_url": "https://www.facebook.com",
+          "client_id": "",
+          "client_secret": "",
+          "can_use_local_host_redirect": true,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid public_profile email",
+          "is_native": true
+        },
+        {
+          "type": "google",
+          "name": "google",
+          "description": "Google",
+          "issuer_url": "https://accounts.google.com",
+          "client_id": "",
+          "client_secret": "",
+          "can_use_local_host_redirect": false,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid profile email",
+          "is_native": true
+        },
+        {
+          "type": "linkedin",
+          "name": "linkedin",
+          "description": "LinkedIn",
+          "issuer_url": "https://www.linkedin.com",
+          "client_id": "",
+          "client_secret": "",
+          "can_use_local_host_redirect": false,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid profile email",
+          "is_native": true
+        },
+        {
+          "additional_scopes": "",
+          "can_use_local_host_redirect": false,
+          "client_id": "",
+          "client_secret": "",
+          "default_scopes": "openid profile email",
+          "description": "Microsoft",
+          "is_native": true,
+          "issuer_url": "https://login.microsoftonline.com/common/v2.0",
+          "name": "microsoft",
+          "type": "microsoft",
+          "use_local_host_redirect": false
+        }
+      ]
+    },
+    "keys": {
+      "key_id": "81532920",
+      "private_key": "dev-literal://-----BEGIN RSA PRIVATE KEY-----\n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\n-----END RSA PRIVATE KEY-----",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA61hdA8fRvjRynndI/oXc\nlnom45Ro04hYkShC4UFZnPh97yFtDQbfgtEfylG9AJdrq8a3FF1mjU0o4SQMpSn5\naX+44bUeWu1Qn+vEKKKr1TD6Iy9/3vYljEM/EQDv8NIhXmwSm9yTE40IZ2Qm3qjX\nO4aJBgmZZqozyOrZt4/NGa7VzrxurLhKwoU1g21NK3Rnve8+QyrUQIkyF4BO+u5g\nz/fDwBqnwPnq3PW7j5aFZ5u1SpyEQwKIg2EgIt75E7Q7RKtAC/w783BPS61l+gC5\nzdRnv2g8urATfxQbn3xu4xjWXg8t9grQtLHY0sK1r0LpPN4gDFTVQg3CipWxYfGQ\nIHVpolyEOmsMnOp7PJSvcA3rVTfH9EOugg64rnsbuppoqUq3KHsLQkNk3Kb9DREL\nyP3yUKLoLSg1JeEo6zo1k8YFeCYXplToO2FZ6HOwVSQ6rjSQCKH2JMr9HK8f9Ir5\n3sEc39WHIVoUOTqRLlYxdhkmUX3UdBgJvqkQ7i7T7HD7HUA0LS2NItwginZ3bFjW\nVywGpKmIZLNZR86jc+7q2BuMNzg2ZRrhV3u98OjrvkPr5sqDcY6ruzlHb4bwByZJ\nVumF0PF1M/bFzWZq1+YIZnjur/y2WBeHJ0uN31HVtXVOc1h+sP+5WiCU24v88W5P\n02rDPQ85lr3JGAaQbhGXGacCAwEAAQ==\n-----END PUBLIC KEY-----"
+    },
+    "logger": {
+      "filelogger": {
+        "filename": "/tmp/user_cloud_log_plex",
+        "required": false,
+        "max_log_level": 5
+      },
+      "gologger": {
+        "required": true,
+        "max_log_level": 5
+      },
+      "serverlogger": {
+        "required": false,
+        "max_log_level": 5,
+        "tenant_id": "476b575c-dbe0-4f21-b3c9-9bc29f0bae03",
+        "service": "plex",
+        "log_service_url": "https://logserver.dev.userclouds.tools:3333",
+        "send_raw_data": false
+      }
+    }
+  },
+  "user_store_schema": {
+    "fields": []
+  }
+}

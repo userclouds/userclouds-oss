@@ -1,0 +1,87 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userclouds-plex
+  labels:
+    app.kubernetes.io/component: plex
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.config.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: plex
+     {{- include "userclouds.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: plex
+        {{- include "userclouds.labels" . | nindent 8 }}
+    spec:
+      {{- if .Values.userclouds.nodeSelector }}
+      nodeSelector:
+        {{ toYaml .Values.userclouds.nodeSelector | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      volumes:
+        - name: configmap
+          configMap:
+            name: userclouds-configs
+            items:
+              - key: base
+                path: base_onprem.yaml
+              - key: plex
+                path: plex/onprem.yaml
+      containers:
+        - name: plex
+          image: "{{ include "userclouds.image" . }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - plex
+          env:
+            {{- include "userclouds.envVars" . | nindent 10 }}
+            {{- include "userclouds.envVars.googleAuth" . | nindent 10 }}
+          resources:
+            {{- toYaml .Values.plex.resources | nindent 12 }}
+          volumeMounts:
+            - name: configmap
+              mountPath: /userclouds/configmaps
+          ports:
+            - name: plex
+              containerPort: 5000
+              protocol: TCP
+            - name: internal
+              containerPort: 5001
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: plex
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: plex
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userclouds-plex
+  labels:
+    app.kubernetes.io/component: plex
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/component: plex
+    {{- include "userclouds.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: service
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+    - name: internal
+      protocol: TCP
+      port: 5001
+

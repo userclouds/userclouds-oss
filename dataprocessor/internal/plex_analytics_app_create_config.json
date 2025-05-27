@@ -1,0 +1,49 @@
+{
+  "ApplicationName": "{{.ApplicationName}}",
+  "ApplicationDescription": "Basic processing for plex logging stream",
+  "RuntimeEnvironment": "FLINK-1_11",
+  "ServiceExecutionRole": "{{.RoleARN}}",
+  "CloudWatchLoggingOptions": [
+    {
+      "LogStreamARN": "{{.LogSteamARN}}"
+    }
+  ],
+  "ApplicationConfiguration": {
+    "EnvironmentProperties": {
+      "PropertyGroups": [
+        {
+          "PropertyGroupId": "PlexAnalyticsProperties",
+          "PropertyMap": {
+            "region": "{{.Region}}",
+            "bucket_check_interval_in_seconds": "2",
+            "inactivity_interval_in_seconds": "2",
+            "rolling_interval_in_seconds": "2",
+            "s3_output_path": "{{.OutputPath}}",
+            "session_time_out_in_minutes": "10",
+            "input_stream_name": "{{.StreamName}}",
+            "company_id": "{{.CompanyID}}",
+            "debug_mode": "false",
+            "stream_init_position": "TRIM_HORIZON"
+          }
+        }
+      ]
+    },
+    "ApplicationCodeConfiguration": {
+      "CodeContent": {
+        "S3ContentLocation": {
+          "BucketARN": "{{.BucketARN}}",
+          "FileKey": "{{.CodePath}}"
+        }
+      },
+      "CodeContentType": "ZIPFILE"
+    },
+    "FlinkApplicationConfiguration": {
+      "ParallelismConfiguration": {
+        "ConfigurationType": "CUSTOM",
+        "Parallelism": 5,
+        "ParallelismPerKPU": 5,
+        "AutoScalingEnabled": false
+      }
+    }
+  }
+}

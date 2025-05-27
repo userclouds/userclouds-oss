@@ -1,0 +1,4 @@
+flask
+python-jose
+authlib>=0.14.1
+requests

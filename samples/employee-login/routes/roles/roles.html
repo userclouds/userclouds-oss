@@ -1,0 +1,41 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="http://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript"></script>
+
+	<!-- font awesome from BootstrapCDN -->
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/3.4/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<script src="/public/js.cookie.js"></script>
+	<script src="/public/user.js"> </script>
+  <link href="/public/employee-login.css" rel="stylesheet">
+</head>
+<body class="home">
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Here are your Tenant Roles,</h1>
+			<h1>{{.Name}}!</h1>
+			<a href="/"><img class="avatar img-center rounded-circle img-responsive" src="{{.Picture}}"/></a>
+			<a class="btn btn-warning btn-logout" href="/logout" role="button">Logout</a>
+		</div>
+	</div>
+	<div class="container">
+		<table>
+			<tr>
+				<th>Group</th>
+				<th style="padding:10px">Role Type</th>
+				<th>Role</th>
+			</tr>
+			{{range $i, $a := .Roles}}
+			<tr>
+				<td>{{$a.GroupID}}</td>
+				<td style="padding:10px">{{$a.RoleType}}</td>
+				<td>{{$a.Role}}</td>
+			</tr>
+			{{end}}
+		</table>
+        </div>
+</body>
+</html>

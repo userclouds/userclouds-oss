@@ -1,0 +1,25 @@
+@use '../../shared/checkbox-radio-styles';
+
+.inputImage {
+  border-radius: var(--border-radius-full);
+
+  .isChecked & {
+    background-color: var(--color-white);
+    border-color: var(--color-black);
+
+    &:after {
+      content: '';
+      width: calc(var(--checkbox-radio-input-size) / 2);
+      height: calc(var(--checkbox-radio-input-size) / 2);
+      background: var(--color-black);
+      border-radius: var(--border-radius-full);
+    }
+  }
+
+  .disabled & {
+    border-color: var(--color-neutral-200);
+    &:after {
+      background: var(--color-neutral-200);
+    }
+  }
+}

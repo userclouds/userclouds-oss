@@ -1,0 +1,199 @@
+@use '../../shared/button-reset' as button;
+@use '../../_variables.module.css';
+
+.root {
+  @include button.button-reset;
+  font-family: var(--font-family);
+  font-weight: 600;
+  border-radius: var(--border-radius-default);
+  border-width: 1px;
+  border-style: solid;
+  transition:
+    background-color var(--input-transition-default),
+    border-color var(--input-transition-default),
+    box-shadow var(--input-transition-default);
+  padding: 0px;
+  margin: 0px;
+  min-width: 76px; // Custom size
+
+  &:focus-visible {
+    box-shadow: var(--input-focus-visible);
+  }
+}
+
+.secondary {
+  background-color: var(--secondary-button-background);
+  border-color: var(--secondary-button-background);
+  color: var(--button-text-color);
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: var(--secondary-button-background-active);
+    border-color: var(--secondary-button-background-active);
+  }
+
+  &[disabled] {
+    cursor: default;
+    background-color: var(--color-neutral-100);
+    border-color: var(--color-neutral-100);
+    color: var(--color-neutral-300);
+  }
+}
+
+.dangerous {
+  background-color: var(--color-red-700);
+  border-color: var(--color-red-700);
+  color: var(--button-text-color);
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: var(--color-red-600);
+    border-color: var(--color-red-600);
+  }
+
+  &[disabled] {
+    cursor: default;
+    background-color: var(--color-neutral-200);
+    border-color: var(--color-neutral-200);
+    color: var(--color-neutral-400);
+  }
+}
+
+.outline {
+  background-color: var(--color-white);
+  border-color: var(--color-neutral-300);
+  color: var(--color-black);
+  box-shadow: var(--input-box-shadow);
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: var(--color-black);
+    box-shadow: var(--input-box-shadow);
+  }
+
+  &[disabled] {
+    cursor: default;
+    border-color: var(--color-neutral-200);
+    color: var(--color-neutral-300);
+  }
+}
+
+.ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-black);
+  padding: 0px 5px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: var(--color-neutral-100);
+    border-color: var(--color-neutral-100);
+    color: var(--color-black);
+  }
+
+  &[disabled] {
+    cursor: default;
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--color-neutral-300);
+  }
+}
+
+.primary {
+  background-color: var(--primary-button-background);
+  border-color: var(--primary-button-background);
+  color: var(--button-text-color);
+  padding: 7px;
+  width: fit-content;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: var(--input-box-shadow);
+    border-color: var(--color-black);
+  }
+
+  &[disabled] {
+    cursor: default;
+    border-color: var(--color-neutral-200);
+    color: var(--color-neutral-300);
+  }
+}
+
+.medium {
+  height: var(--input-height-medium);
+  line-height: calc(
+    var(--input-height-medium) - 2px
+  ); // Needed to align text in center
+  padding: 0 var(--space-4);
+  font-size: var(--text-1-font-size);
+}
+
+.small {
+  height: var(--input-height-small);
+  line-height: calc(
+    var(--input-height-small) - 1px
+  ); // Needed to align text in center
+  padding: 0 var(--space-3);
+  font-size: var(--text-2-font-size);
+  border-radius: var(--border-radius-medium);
+}
+
+.pagination {
+  height: var(--input-height-small);
+  line-height: calc(
+    var(--input-height-small) - 1px
+  ); // Needed to align text in center
+  padding: 0 var(--space-3);
+  font-size: var(--new-text-1-font-size);
+  border-radius: var(--border-radius-medium);
+  min-width: 0px;
+  width: fit-content;
+  max-width: 30px;
+}
+
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .spaceBetween & {
+    justify-content: space-between;
+  }
+
+  .medium & {
+    gap: var(--space-2);
+  }
+
+  .small & {
+    gap: var(--space-1);
+  }
+}
+
+.full {
+  width: 100%;
+}
+
+.iconLeft,
+.iconRight {
+  display: flex;
+}
+
+.isLoading {
+  position: relative;
+
+  .wrap {
+    visibility: hidden;
+  }
+
+  .loaderDots {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}

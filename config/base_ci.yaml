@@ -1,0 +1,23 @@
+company_db: # Credentials for the root database user. must match what we use in CI, defined in .github/workflows/golang-ci.yml
+  user: uc_root_user
+  password: dev-literal://uc87871fakepw
+  dbname: companyconfig
+  host: localhost
+  dbdriver: postgres
+  dbproduct: postgres
+  port: 5432
+
+internal_server: null # Don't run internal server
+
+logger:
+  transports:
+    - type: file
+      base_filename: /tmp/
+      transportconfig:
+        required: true
+        max_log_level: 5
+    - type: goLogJSON
+      transportconfig:
+        required: true
+        max_log_level: 4
+      supports_color: false

@@ -1,0 +1,88 @@
+{
+  "data": [
+    {
+      "id": "2ee4497e-c326-4068-94ed-3dcdaaaa53bc",
+      "name": "My_Accessor",
+      "version": 2,
+      "description": "This is a simple accessor",
+      "columns": [
+        {
+          "data_type_id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+          "data_type_name": "string",
+          "name": "baz_column",
+          "table": "users",
+          "transformer_id": "405d7cf0-e881-40a3-8e53-f76b502d2d76",
+          "transformer_name": "Passthrough",
+          "token_access_policy_id": "00000000-0000-0000-0000-000000000000",
+          "token_access_policy_name": "",
+          "default_transformer_name": "Passthrough",
+          "default_access_policy_id": "00000000-0000-0000-0000-000000000000",
+          "default_access_policy_name": "AllowAll"
+        }
+      ],
+      "access_policy": {
+        "id": "0c0b7371-5175-405b-a17c-fec5969914b8",
+        "name": "foo policy"
+      },
+      "selector_config": {
+        "where_clause": "{id} = ?"
+      },
+      "purposes": [
+        {
+          "id": "d2a5a78d-fda2-45a5-bf32-123ac6995898",
+          "name": "security"
+        }
+      ]
+    },
+    {
+      "id": "3aa4497e-c326-4068-94ed-3dcdaaaa53bc",
+      "name": "My_Other_Accessor",
+      "version": 1,
+      "description": "This is a not so simple accessor",
+      "columns": [
+        {
+          "data_type_id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+          "data_type_name": "string",
+          "name": "bar_column",
+          "table": "users",
+          "transformer_id": "405d7cf0-e881-40a3-8e53-f76b502d2d76",
+          "transformer_name": "Passthrough",
+          "token_access_policy_id": "00000000-0000-0000-0000-000000000000",
+          "token_access_policy_name": "",
+          "default_transformer_name": "Passthrough",
+          "default_access_policy_id": "00000000-0000-0000-0000-000000000000",
+          "default_access_policy_name": "AllowAll"
+        },
+        {
+          "data_type_id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+          "data_type_name": "string",
+          "name": "foo_column",
+          "table": "users",
+          "transformer_id": "415d7cf0-e881-40a3-8e53-f76b502d2d76",
+          "transformer_name": "Passthrough",
+          "token_access_policy_id": "00000000-0000-0000-0000-000000000000",
+          "token_access_policy_name": "",
+          "default_transformer_name": "Passthrough",
+          "default_access_policy_id": "00000000-0000-0000-0000-000000000000",
+          "default_access_policy_name": "AllowAll"
+        }
+      ],
+      "access_policy": {
+        "id": "6a0b7371-5175-405b-a17c-fec5969914b8",
+        "name": "bar policy"
+      },
+      "selector_config": {
+        "where_clause": "{id} = ?"
+      },
+      "purposes": [
+        {
+          "id": "7f55f479-3822-4976-a8a9-b789d5c6f152",
+          "name": "operational"
+        }
+      ]
+    }
+  ],
+  "has_next": false,
+  "next": "",
+  "has_prev": false
+}

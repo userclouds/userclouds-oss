@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "build/",
+    "declarationDir": "build/",
+    "rootDirs": ["src/", "pages/"],
+    "jsx": "react-jsx",
+    "noEmit": false
+  },
+  "extends": "./tsconfig.json"
+}

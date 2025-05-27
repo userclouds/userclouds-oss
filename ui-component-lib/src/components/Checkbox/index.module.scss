@@ -1,0 +1,17 @@
+@use '../../shared/checkbox-radio-styles';
+@use '../../_variables.module.css';
+
+.inputImage {
+  border-radius: var(--border-radius-small);
+
+  .isChecked & {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border-color: transparent;
+  }
+
+  .disabled & {
+    background-color: var(--color-neutral-200);
+    border-color: var(--color-neutral-200);
+  }
+}

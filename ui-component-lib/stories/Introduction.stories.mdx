@@ -1,0 +1,15 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Introduction" />
+
+# Introduction
+
+This Storybook instance holds the React components for the UserClouds UI. It is divided into Components and Layouts. Components are the smaller building blocks that are used inside the Layouts.
+
+Built out of pages is hosted at https://userclouds-pages.genoni.dev/.
+
+## Component philosophy
+
+Most components are setup to extend their native HTML element so that any valid attribute can be passed through.
+
+Exceptions to this are the `<Button>`, `<Anchor>` and `<IconButton>` components that each output either a `button` or `a` element depending on certain props.

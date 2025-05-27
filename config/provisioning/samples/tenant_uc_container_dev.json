@@ -1,0 +1,124 @@
+{
+  "protocol": "http",
+  "sub_domain": "tenant.test.userclouds.tools:3040",
+  "tenant": {
+    "id": "11111111-dbe0-4f21-b3c9-9bc29f0bae03",
+    "name": "Container Dev Environment",
+    "company_id": "e0b2f216-f051-444f-9b08-4b67129dcb7b",
+    "tenant_url": "http://container-dev.tenant.test.userclouds.tools:3040",
+    "state": "active"
+  },
+  "plex_config": {
+    "plex_map": {
+      "telephony_provider": {
+        "type": "none",
+        "properties": {}
+      },
+      "providers": [
+        {
+          "id": "11111111-5788-4fdc-9318-d2e1211205f1",
+          "name": "UserClouds Container IDP dev",
+          "type": "uc",
+          "uc": {
+            "idp_url": "http://container-dev.tenant.test.userclouds.tools:3040",
+            "apps": [
+              {
+                "id": "11111111-2670-4318-a284-fe51290812bf",
+                "name": "dev"
+              }
+            ]
+          }
+        }
+      ],
+      "apps": [
+        {
+          "id": "11111111-2670-4318-a284-fe51290812bf",
+          "name": "UserClouds Container plex dev",
+          "client_id": "container_dev_client_id",
+          "client_secret": "container_dev_client_secret_fake_dont_use_outside_of_dev",
+          "provider_app_ids": ["11111111-2670-4318-a284-fe51290812bf"],
+          "grant_types": [
+            "authorization_code",
+            "refresh_token",
+            "client_credentials"
+          ],
+          "token_validity": {
+            "access": 86400,
+            "refresh": 2592000,
+            "impersonate_user": 3600
+          }
+        }
+      ],
+      "policy": {
+        "active_provider_id": "11111111-5788-4fdc-9318-d2e1211205f1"
+      }
+    },
+    "oidc_providers": {
+      "providers": [
+        {
+          "type": "facebook",
+          "name": "facebook",
+          "description": "Facebook",
+          "issuer_url": "https://www.facebook.com",
+          "client_id": "",
+          "client_secret": "",
+          "can_use_local_host_redirect": true,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid public_profile email",
+          "is_native": true
+        },
+        {
+          "type": "google",
+          "name": "google",
+          "description": "Google",
+          "issuer_url": "https://accounts.google.com",
+          "client_id": "",
+          "client_secret": "",
+          "can_use_local_host_redirect": false,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid profile email",
+          "is_native": true
+        },
+        {
+          "type": "linkedin",
+          "name": "linkedin",
+          "description": "LinkedIn",
+          "issuer_url": "https://www.linkedin.com",
+          "client_id": "",
+          "client_secret": "",
+          "can_use_local_host_redirect": false,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid profile email",
+          "is_native": true
+        },
+        {
+          "additional_scopes": "",
+          "can_use_local_host_redirect": false,
+          "client_id": "",
+          "client_secret": "",
+          "default_scopes": "openid profile email",
+          "description": "Microsoft",
+          "is_native": true,
+          "issuer_url": "https://login.microsoftonline.com/common/v2.0",
+          "name": "microsoft",
+          "type": "microsoft",
+          "use_local_host_redirect": false
+        }
+      ]
+    },
+    "keys": {
+      "key_id": "81511111",
+      "private_key": "dev-literal://-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEAyVNXUANLUpJzvktwNZ7qhOZ953u10G/szmBDl4DIHxBOprZH\nNkm0H6lH/thssnON4WwjH3bAQpxOPT/7CB69kxZkD5+uBvsBUz6sUNq9MZckeVCm\nLUehhuDyxGhnkthSEp7H/WjgAPQS2c0RYSnQtqAzM29VBu19thNwTLOtcqCZG9x1\n8L/aUrKZZ3r9kQ+zK+Pu96S3bZRVg7D/kUISc9/VxQ7aOiXT0ZEYq4tfDLa55axE\nWvY6RgCOzCRIm5ZAv3INBtCU3PKzURuNTh1Sfcb+ax3+BYewTaN2tQ6BUS8SjZSV\nTqZw/qXxdZOB5nEypMQViwSssQe04929fGjbQwIDAQABAoIBACOV15kM/ANcX5kD\nPJI9xLY5B4gjFcACCJlx6oCdAsJ632wYS/4MiQoPoeop1wyz4CA4PP0SwGkFt86b\nwINu65NUIduhHeGd/F36dfrUrxxU2t2Wo8jdIG/20vJkgeoy0k74QeFI6E9C1RIq\nbSf/fCTLrEErLJxM3iuQxAjKuZ3I9H8dFyFT8OdNScLW2fqngnBrRkCIoOgBVOB1\nfcuxWXw163FhpFJwtRpUoacTA6iKndtI4LJelSIfSvk2r50NSYMVEGuw6zJfD8JX\naGO2B+p+rJT4pZEKQDsKpZEduYgTveHx5r1nyq8z4KQWEYl+4cZInNU0dwx52M2e\nkaq7CAECgYEA/oh7OCKR9zYo7lXtv9+I/D/V4e9dwJL87HXPgzLu57htBobNYIU9\nAYDcK0O0e2NWUexE8k7rhM8UcIrYdKcQxs5jtgSFCGZHIBREpmKUbgfxxVqn6TqS\n8ZVnpOjUxNgcXb6sgmOQQ4J3ouWMup2O5eeXHqX4FMOAKj0AcS2EKlMCgYEAynxc\ngbrXNT/v1SSh0dCb/oaf78bjOEEVW5QELSNLRgM9mgsMqg72zGnzP4ieyOMM0TbH\nlgqktXLvXVwh6LwD6rqiassa9Fi96jCosrJJsj0c2HQO9Axf2uPWrdM5gDv2SYtg\nGlvqJ1HIH1vmejYiZ39r1bSUGgdSYuJ1W6khzVECgYEAiDaBuojFlIZnYSSbFxOJ\nO3TuAPsYMPZ4ZBKn+o5HS7pmnheF0SF8hFFxgbW54E5I446NVx7k6y3mwlOLguHl\nGH9a3Q2OI/CYH5K5KlGXHUsjF3psYWP3P1G1JYt0UeNVStW/fAfMLFSlsYcmyLeI\nwYAuXzhyiqoU7IW4ttik4gECgYEAjkGe0DnPFocr3QgWdAzme4Rjexa07gGzmpo7\n8OZZ7P872SyoIhXPSD+reNhoDeSOTbH5uK0TmLL9/g5LeHIXImMq1nKJJl/uVUkI\nTDs70XBkAqJPGyBSe7sUSR0byb7WwkacJwiqUiN/wKBVJUlBFIuN3B846ax5MiW9\no78Ik3ECgYEA77BfrUGc18ITJafreMUeGAT3AMHQmKItLZkpaFrqFR+Som9eutkK\nsK7Ph1Xsv6/engZH/Ce26Z6RZ4yaD/SF4uOWJp8PT1eBzgopi/yLJqtLLh7R3Kld\n8UflUayo+jK/3j7YBvf0l82b0jP99rDe3+/0YsvCfsBSZy9qN5bJLgM=\n-----END RSA PRIVATE KEY-----",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyVNXUANLUpJzvktwNZ7q\nhOZ953u10G/szmBDl4DIHxBOprZHNkm0H6lH/thssnON4WwjH3bAQpxOPT/7CB69\nkxZkD5+uBvsBUz6sUNq9MZckeVCmLUehhuDyxGhnkthSEp7H/WjgAPQS2c0RYSnQ\ntqAzM29VBu19thNwTLOtcqCZG9x18L/aUrKZZ3r9kQ+zK+Pu96S3bZRVg7D/kUIS\nc9/VxQ7aOiXT0ZEYq4tfDLa55axEWvY6RgCOzCRIm5ZAv3INBtCU3PKzURuNTh1S\nfcb+ax3+BYewTaN2tQ6BUS8SjZSVTqZw/qXxdZOB5nEypMQViwSssQe04929fGjb\nQwIDAQAB\n-----END PUBLIC KEY-----"
+    },
+    "logger": {
+      "gologger": {
+        "required": true,
+        "max_log_level": 5
+      }
+    }
+  },
+  "user_store_schema": {
+    "fields": []
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "appName": {
+    "message": "UserClouds Data Decoder"
+  },
+  "appShortName": {
+    "message": "UC Decoder"
+  },
+  "appDescription": {
+    "message": "This extension decodes data on a web page that was originally encoded using UserClouds Tokenizer"
+  }
+}

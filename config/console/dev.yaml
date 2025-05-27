@@ -1,0 +1,33 @@
+static_assets_path: console/consoleui/build
+tenant_sub_domain: tenant.dev.userclouds.tools:3333
+tenant_protocol: https
+
+console_url: https://console.dev.userclouds.tools:3333
+
+image:
+  host: uc-dev-images.s3.us-west-2.amazonaws.com
+  s3_bucket: uc-dev-images
+
+log_db:
+  user: userclouds
+  dbname: status_00000000000000000000000000000000
+  host: localhost
+  dbdriver: postgres
+  dbproduct: postgres
+  port: 5432
+
+internal_server:
+  protocol: http
+  host: 127.0.0.1
+  port: 5301
+
+svc_listener:
+  protocol: http
+  host: localhost
+  port: 5300
+
+console_tenant_id: 41ab79a8-0dff-418e-9d42-e1694469120a
+
+worker_client:
+  type: http
+  url: http://localhost:3012

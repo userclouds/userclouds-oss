@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1ee4497e-c326-4068-94ed-3dcdaaaa53bc",
+    "created": "2023-01-12T00:33:04.195024Z",
+    "updated": "2023-02-09T16:57:43.172454Z",
+    "deleted": "0001-01-01T00:00:00Z",
+    "name": "UserClouds Dev",
+    "is_admin": "true"
+  },
+  {
+    "id": "50862005-5a77-4256-be38-b51e769de3a3",
+    "created": "2023-01-25T22:30:51.893235Z",
+    "updated": "2023-02-09T16:57:43.230355Z",
+    "deleted": "0001-01-01T00:00:00Z",
+    "name": "Hobart and William and Smith",
+    "is_admin": "true"
+  },
+  {
+    "id": "5ded72de-c606-48ce-9675-df88557d56fe",
+    "created": "2023-01-25T22:21:23.866344Z",
+    "updated": "2023-02-09T16:57:43.287596Z",
+    "deleted": "0001-01-01T00:00:00Z",
+    "name": "Test Test Test",
+    "is_admin": "true"
+  }
+]

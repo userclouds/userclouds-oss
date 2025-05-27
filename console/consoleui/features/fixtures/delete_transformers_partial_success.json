@@ -1,0 +1,147 @@
+{
+  "data": [
+    {
+      "id": "405d7cf0-e881-40a3-8e53-f76b502d2d76",
+      "name": "Passthrough",
+      "description": "Just pass it through",
+      "input_data_type": {
+        "name": "email",
+        "id": "8a84f041-c605-4ebf-b552-9e14f51c9e54"
+      },
+      "output_data_type": {
+        "name": "email",
+        "id": "8a84f041-c605-4ebf-b552-9e14f51c9e54"
+      },
+      "reuse_existing_token": false,
+      "transform_type": "passthrough",
+      "tag_ids": null,
+      "function": "function transform(data, params) {\n  // comment\n  return data;\n}",
+      "parameters": "{}",
+      "is_system": false,
+      "version": 0
+    },
+    {
+      "id": "00000000-e881-40a3-8e53-f76b502d2d76",
+      "name": "Always_foo",
+      "description": "Like the name says: always foo",
+      "input_data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "output_data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "reuse_existing_token": false,
+      "transform_type": "passthrough",
+      "tag_ids": null,
+      "function": "function transform(data, params) {\n  // comment\n  return 'foo';\n}",
+      "parameters": "{}",
+      "is_system": false,
+      "version": 0
+    },
+    {
+      "id": "0cedf7a4-86ab-450a-9426-478ad0a60faa",
+      "name": "EmailToID",
+      "description": "This policy generates an email token for the given email.",
+      "input_data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "output_data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "reuse_existing_token": true,
+      "transform_type": "tokenizebyvalue",
+      "tag_ids": null,
+      "function": "function id(len) {\n\tvar s = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\n\n\treturn Array(len).join().split(',').map(function() {\n\t\treturn s.charAt(Math.floor(Math.random() * s.length));\n\t}).join('');\n}\n\nvar commonValues = [\"gmail\", \"hotmail\", \"yahoo\", \"msn\", \"aol\", \"orange\", \"wanadoo\", \"comcast\", \"live\", \"apple\", \"proton\", \"yandex\", \"ymail\"]\n\nfunction constructSegment(seg, config) {\n\tif (config.PreserveValue) {\n\t\treturn seg\n\t}\n\n\tif (config.PreserveCommonValue \u0026\u0026 (commonValues.includes(seg))) {\n\t\treturn seg\n\t}\n\n\tpreserveCount = Math.min(config.PreserveChars, seg.length);\n\tnewSeg = seg.slice(0, preserveCount)\n\treturn newSeg + id(config.FinalLength - preserveCount)\n}\n\nfunction transform(data, params) {\n\temailParts = data.split('@')\n\n\t// Make sure we have a username and a domain\n\tif (emailParts.length !== 2) {\n\t\tthrow new Error('Invalid Data');\n\t}\n\n\tusername = emailParts[0]\n\tdomainParts = emailParts[1].split('.')\n\n\t// Check if the domain is valid\n\tif (domainParts.length \u003c 2) {\n\t\tthrow new Error('Invalid Data');\n\t}\n\tdomainName = domainParts[0]\n\tdomainExt = domainParts[1]\n\n\tif (params.length != 3) {\n\t\tthrow new Error('Invalid Params');\n\t}\n\treturn constructSegment(username, params[0]) + '@' +\n\t\tconstructSegment(domainName, params[1]) + '.' +\n\t\tconstructSegment(domainExt, params[2]);\n};",
+      "parameters": "[{\n\t\"PreserveValue\": false,\n\t\"PreserveChars\": 0,\n\t\"FinalLength\": 12\n}, {\n\t\"PreserveValue\": false,\n\t\"PreserveCommonValue\": true,\n\t\"PreserveChars\": 0,\n\t\"FinalLength\": 6\n}, {\n\t\"PreserveValue\": true\n}]",
+      "is_system": false,
+      "version": 0
+    },
+    {
+      "id": "618a4ae7-9979-4ee8-bac5-db87335fe4d9",
+      "name": "CreditCardToID",
+      "description": "This policy generates a masked credit card number.",
+      "input_data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "output_data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "reuse_existing_token": false,
+      "transform_type": "transform",
+      "tag_ids": null,
+      "function": "\nfunction id(len, decimalonly) {\n\tvar s = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\n\tvar d = \"0123456789\";\n\n\tif (decimalonly) {\n\t\treturn Array(len).join().split(',').map(function() {\n\t\t\treturn d.charAt(Math.floor(Math.random() * d.length));\n\t\t}).join('');\n\t}\n\n\treturn Array(len).join().split(',').map(function() {\n\t\treturn s.charAt(Math.floor(Math.random() * s.length));\n\t}).join('');\n}\n\nfunction constructSegment(seg, decimalonly, preserveS, preserveT) {\n\tpreserveCountS = Math.min(Math.max(preserveS, 0), seg.length);\n\tpreserveCountT = Math.min(Math.max(preserveT, 0), seg.length);\n\n\tpreserveCount = preserveCountS + preserveCountT\n\tif (preserveCount \u003e= seg.length) {\n\t\treturn seg\n\t}\n\n\tnewSegS = seg.slice(0, preserveCountS)\n\tnewSegT = seg.slice(seg.length - preserveCountT, seg.length)\n\treturn newSegS + id(seg.length - preserveCount, decimalonly) + newSegT;\n}\n\nfunction validate(str) {\n\t// there a lot of different regexes per type of card\n\t// for now just test the length\n\treturn (str.length == 16);\n}\n\nfunction transform(data, params) {\n\t// Strip non numeric characters if present\n\torig_data = data;\n\tdata = data.replace(/\\D/g, '');\n\tif (!validate(data)) {\n\t\tthrow new Error('Invalid Credit Card Number Provided');\n\t}\n\n\tif ((params.PreserveCharsTrailing + params.PreserveCharsStart) \u003e 9 ||\n\t\tparams.PreserveCharsTrailing \u003c 0 ||\n\t\tparams.PreserveCharsStart \u003c 0) {\n\t\tthrow new Error('Invalid Params Provided');\n\t}\n\n\tif (params.PreserveValue) {\n\t\treturn orig_data;\n\t}\n\n\tseg1 = data.slice(0, 4);\n\tseg2 = data.slice(4, 8);\n\tseg3 = data.slice(8, 12);\n\tseg4 = data.slice(12, 16);\n\treturn constructSegment(\n\t\t\tseg1,\n\t\t\tparams.DecimalOnly,\n\t\t\tparams.PreserveCharsStart,\n\t\t\tparams.PreserveCharsTrailing - 12\n\t\t) +\n\t\t'-' +\n\t\tconstructSegment(\n\t\t\tseg2,\n\t\t\tparams.DecimalOnly,\n\t\t\tparams.PreserveCharsStart - 4,\n\t\t\tparams.PreserveCharsTrailing - 8\n\t\t) +\n\t\t'-' +\n\t\tconstructSegment(seg3,\n\t\t\tparams.DecimalOnly,\n\t\t\tparams.PreserveCharsStart - 8,\n\t\t\tparams.PreserveCharsTrailing - 4\n\t\t) +\n\t\t\t'-' +\n\t\tconstructSegment(\n\t\t\tseg4,\n\t\t\tparams.DecimalOnly,\n\t\t\tparams.PreserveCharsStart - 12,\n\t\t\tparams.PreserveCharsTrailing\n\t\t);\n};",
+      "parameters": "{\n\t\"PreserveValue\": false,\n\t\"DecimalOnly\": true,\n\t\"PreserveCharsTrailing\": 0,\n\t\"PreserveCharsStart\": 0\n}",
+      "is_system": false,
+      "version": 0
+    },
+    {
+      "id": "b9bf352f-b1ee-4fb2-a2eb-d0c346c6404b",
+      "name": "FullNameToID",
+      "description": "This policy generates a masked name.",
+      "input_data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "output_data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "reuse_existing_token": false,
+      "transform_type": "transform",
+      "tag_ids": null,
+      "function": "function id(len) {\n\tvar s = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\n\treturn Array(len).join().split(',').map(function() {\n\t\treturn s.charAt(Math.floor(Math.random() * s.length));\n\t}).join('');\n}\n\nfunction constructSegment(seg, config) {\n\tif (config.PreserveValue) {\n\t\treturn seg\n\t}\n\tpreserveCount = Math.min(config.PreserveChars, seg.length);\n\tnewSeg = seg.slice(0, preserveCount)\n\treturn newSeg + id(config.FinalLength - preserveCount)\n}\n\nfunction transform(data, params) {\n\tnameParts = data.split(' ')\n\n\t// Assume that if we have a single name, treat it as a first name\n\tfirstName = data;\n\tlastName = \"\";\n\tif (nameParts.length \u003e 0) {\n\t\tfirstName = nameParts[0]\n\t}\n\n\t// Skip middle name if provided\n\tif (nameParts.length \u003e 1) {\n\t\tlastName = nameParts[nameParts.length - 1]\n\t}\n\n\tif (params.length != 2) {\n\t\tthrow new Error('Invalid Params');\n\t}\n\n\treturn constructSegment(firstName, params[0]) + ' ' +\n\t\tconstructSegment(lastName, params[1]);\n};",
+      "parameters": "[{\n\t\"PreserveValue\": true\n}, {\n\t\"PreserveValue\": false,\n\t\"PreserveChars\": 1,\n\t\"FinalLength\": 12\n}]",
+      "is_system": false,
+      "version": 0
+    },
+    {
+      "id": "c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a",
+      "name": "PassthroughUnchangedData",
+      "description": "This policy returns the data unchanged. This is useful for Accessors that don't need a transformer.",
+      "input_data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "output_data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "reuse_existing_token": false,
+      "transform_type": "passthrough",
+      "tag_ids": null,
+      "function": "function transform(data, params) { return data; }",
+      "parameters": "",
+      "is_system": true,
+      "version": 0
+    },
+    {
+      "id": "e3743f5b-521e-4305-b232-ee82549e1477",
+      "name": "UUID",
+      "description": "This policy generates a UUID token for the data.",
+      "input_data_type": {
+        "name": "string",
+        "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294"
+      },
+      "output_data_type": {
+        "name": "uuid",
+        "id": "d036bbba-6012-4d74-b7c4-9a2bbc09a749"
+      },
+      "reuse_existing_token": false,
+      "transform_type": "tokenizebyvalue",
+      "tag_ids": null,
+      "function": "function uuidv4() {\n\treturn 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\n\t\tvar r = Math.random() * 16 | 0, v = c === 'x' ? r : ((r \u0026 0x3) | 0x8);\n\t\treturn v.toString(16);\n\t});\n};\n\nfunction transform(data, params) {\n\treturn JSON.stringify(uuidv4());\n};",
+      "parameters": "{}",
+      "is_system": false,
+      "version": 0
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": false
+}

@@ -1,0 +1,102 @@
+{{- $dummy := required "You must set image.tag" .Values.image.tag }}
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ template "worker.serviceAccount" . }}
+  labels:
+     {{- include "userclouds.labels" . | nindent 4 }}
+  annotations:
+    eks.amazonaws.com/role-arn: {{ .Values.roles.worker }}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "worker.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "worker.selectorLabels" . | nindent 8 }}
+    spec:
+      nodeSelector:
+        {{- include "userclouds.nodeSelector" . | nindent 8 }}
+      serviceAccountName: {{ template "worker.serviceAccount" . }}
+      volumes:
+        - name: configmap
+          configMap:
+            name: userclouds-configs
+            items:
+              - key: base
+                path: {{ printf "base_%s.yaml" .Values.uc_universe }}
+              - key: worker
+                path: {{ printf "worker/%s.yaml" .Values.uc_universe }}
+      containers:
+        - name: worker
+          image: "{{ include "userclouds.image" . }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - worker
+          {{- include "userclouds.envConfigMap" . | nindent 10 }}
+          env:
+            {{- include "userclouds.envVars" . | nindent 12 }}
+          resources:
+            limits:
+              cpu: 0.8
+              memory: 320Mi
+            requests:
+              cpu: 0.4
+              memory: 256Mi
+          volumeMounts:
+            - name: configmap
+              mountPath: /userclouds/configmaps
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+            - name: internal
+              containerPort: 5001
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: http
+            terminationGracePeriodSeconds: 180
+            successThreshold: 1
+            failureThreshold: 10
+          readinessProbe:
+            periodSeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: http
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: worker
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+      {{- include "worker.selectorLabels" . | nindent 6 }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
+    - name: internal
+      protocol: TCP
+      port: 5001

@@ -1,0 +1,5 @@
+:global(#root) {
+  .objectstable {
+    grid-template-columns: 50px fit-content(150px) 1fr fit-content(150px) 60px;
+  }
+}

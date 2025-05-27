@@ -1,0 +1,5 @@
+{
+  "environment": "dev",
+  "uc_admin": false,
+  "is_production": false
+}

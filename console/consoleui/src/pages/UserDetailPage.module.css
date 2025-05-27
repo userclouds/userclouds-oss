@@ -1,0 +1,6 @@
+:global(#root) {
+  .userdetailstable {
+    grid-template-columns: fit-content(200px) 2fr 1fr;
+    word-break: break-word;
+  }
+}

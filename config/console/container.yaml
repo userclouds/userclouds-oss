@@ -1,0 +1,27 @@
+# Needed since the provisioning logic loads the console config file and we run provisioning logic in the container
+static_assets_path: /userclouds/uiassets/console/
+console_url: http://console.test.userclouds.tools:3040
+
+log_db:
+  user: uc_root_user
+  password: dev-literal://uc87871fakepw
+  dbname: status_fake
+  host: postgres
+  dbdriver: postgres
+  dbproduct: postgres
+  port: 5432
+
+svc_listener:
+  protocol: http
+  host: localhost
+  port: 5300
+
+# Should match config/provisioning/container/tenant_console.json
+console_tenant_id: 41ab79a8-0dff-418e-9d42-e1694469120a
+
+tenant_sub_domain: console-dev.tenant.test.userclouds.tools:3040
+tenant_protocol: http
+
+worker_client:
+  type: http
+  url: http://localhost:3012

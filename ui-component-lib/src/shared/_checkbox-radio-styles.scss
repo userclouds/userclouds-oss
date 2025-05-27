@@ -1,0 +1,49 @@
+@use '../_variables.module.css';
+
+.label {
+  display: flex;
+  cursor: pointer;
+  position: relative;
+
+  &.disabled {
+    cursor: default;
+    .text {
+      color: var(--color-neutral-300);
+    }
+  }
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  width: 1px;
+  height: 1px;
+
+  &:focus-visible ~ .inputImage {
+    box-shadow: var(--input-focus-visible-outer);
+  }
+}
+
+.inputImage {
+  width: var(--checkbox-radio-input-size);
+  height: var(--checkbox-radio-input-size);
+  background: #fff;
+  flex: none;
+  border: 1px solid var(--color-neutral-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 2px;
+}
+
+.text {
+  font-family: var(--font-family);
+  padding-left: 8px;
+  font-size: var(--text-1-font-size);
+  line-height: var(--text-1-line-height);
+  flex: 1;
+  color: var(--color-black);
+  font-weight: 400;
+}

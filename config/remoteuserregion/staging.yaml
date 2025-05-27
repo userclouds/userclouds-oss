@@ -1,0 +1,25 @@
+remote_user_region_bootstrap_db_configs:
+  aws-eu-west-1:
+    user: userclouds
+    password: aws://secrets/staging/aurora_eu_userclouds_password
+    dbname: postgres
+    host: aurora-eu-global-staging.global-ghfsmzcj8xvp.global.rds.amazonaws.com
+    dbdriver: postgres
+    dbproduct: aws-aurora-postgres
+    port: 5432
+    regional_hosts:
+      aws-us-west-2: aurora-eu-cluster-staging-us-west-2.cluster-ro-crjyptgsmywz.us-west-2.rds.amazonaws.com
+      aws-us-east-1: aurora-eu-cluster-staging-us-east-1.cluster-ro-cly2gyqwkgwv.us-east-1.rds.amazonaws.com
+      aws-eu-west-1: aurora-eu-cluster-staging-eu-west-1.cluster-ro-czuwq4cws4zt.eu-west-1.rds.amazonaws.com
+  aws-us-west-2:
+    user: userclouds
+    password: aws://secrets/staging/aurora_west_userclouds_password
+    dbname: postgres
+    host: aurora-west-global-staging.global-ghfsmzcj8xvp.global.rds.amazonaws.com
+    dbdriver: postgres
+    dbproduct: aws-aurora-postgres
+    port: 5432
+    regional_hosts:
+      aws-us-west-2: aurora-west-cluster-staging-us-west-2.cluster-ro-crjyptgsmywz.us-west-2.rds.amazonaws.com
+      aws-us-east-1: aurora-west-cluster-staging-us-east-1.cluster-ro-cly2gyqwkgwv.us-east-1.rds.amazonaws.com
+      aws-eu-west-1: aurora-west-cluster-staging-eu-west-1.cluster-ro-czuwq4cws4zt.eu-west-1.rds.amazonaws.com

@@ -1,0 +1,79 @@
+@use '../src/shared/_mixin' as mixin;
+@use '../src/_variables.module.css';
+
+.root {
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-neutral-200);
+  display: flex;
+  flex: none;
+  flex-wrap: nowrap;
+  gap: var(--space-3);
+  height: var(--header-height);
+  justify-content: space-between;
+  line-height: 31px;
+  padding: var(--space-3);
+  position: relative;
+  white-space: nowrap;
+
+  @include mixin.respond-above(768px) {
+    padding: var(--space-2) var(--space-4);
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+
+  @include mixin.respond-above(768px) {
+    flex-direction: row;
+    gap: var(--space-5);
+  }
+}
+
+.dropdowns {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+
+  @include mixin.respond-above(768px) {
+    flex-direction: row;
+    gap: var(--space-4);
+  }
+
+  select {
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+.dropdownLabel {
+  font-weight: 400;
+}
+
+.dropdownLabel > select {
+  color: var(--color-black);
+  margin-left: var(--space-2);
+}
+
+.menuBtn {
+  position: relative;
+  left: -12px;
+  top: -6px;
+
+  @include mixin.respond-above(768px) {
+    display: none;
+  }
+}
+
+.logo {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @include mixin.respond-above(768px) {
+    position: static;
+  }
+}

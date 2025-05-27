@@ -1,0 +1,37 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="http://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript"></script>
+
+	<!-- font awesome from BootstrapCDN -->
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/3.4/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<script src="/public/js.cookie.js"></script>
+	<script src="/public/user.js"> </script>
+  <link href="/public/events.css" rel="stylesheet">
+</head>
+<body class="home">
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Here are your events, {{.name}}!</h1>
+			<p class="lead">You can view, edit, or create events here.</p>
+			<a href="/"><img class="avatar img-center rounded-circle img-responsive" src="{{.picture}}"/></a>
+			<a class="btn btn-warning btn-logout" href="/logout" role="button">Logout</a>
+		</div>
+	</div>
+	<div class="container" id="table_parent"></div>
+	<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+	<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+	<!-- I couldn't find a CDN-hosted stylesheet for React Bootstrap Typeahead, so... -->
+	<style>
+		.rbt .rbt-input-main::-ms-clear{display:none}.rbt-menu{margin-bottom:2px}.rbt-menu>.dropdown-item{overflow:hidden;text-overflow:ellipsis}.rbt-menu>.dropdown-item:focus{outline:none}.rbt-menu-pagination-option{text-align:center}.rbt-input-multi{cursor:text;overflow:hidden;position:relative}.rbt-input-multi.focus{border-color:#80bdff;box-shadow:0 0 0 .2rem rgba(0,123,255,.25);color:#495057;outline:0}.rbt-input-multi.form-control{height:auto}.rbt-input-multi.form-control[disabled]{background-color:#e9ecef;opacity:1}.rbt-input-multi.is-invalid.focus{border-color:#dc3545;box-shadow:0 0 0 .2rem rgba(220,53,69,.25)}.rbt-input-multi.is-valid.focus{border-color:#28a745;box-shadow:0 0 0 .2rem rgba(40,167,69,.25)}.rbt-input-multi input::-moz-placeholder{color:#6c757d;opacity:1}.rbt-input-multi input:-ms-input-placeholder{color:#6c757d}.rbt-input-multi input::-webkit-input-placeholder{color:#6c757d}.rbt-input-multi .rbt-input-wrapper{align-items:flex-start;display:flex;flex-wrap:wrap;margin-bottom:-4px;margin-top:-1px;overflow:hidden}.rbt-input-multi .rbt-input-main{margin:1px 0 4px}.rbt-close{z-index:1}.rbt-close-lg{font-size:24px}.rbt-token{background-color:#e7f4ff;border:0;border-radius:.25rem;color:#007bff;display:inline-block;line-height:1em;margin:1px 3px 2px 0;padding:4px 7px;position:relative}.rbt-token-disabled{background-color:rgba(0,0,0,.1);color:#495057;pointer-events:none}.rbt-token-removeable{cursor:pointer;padding-right:21px}.rbt-token-active{background-color:#007bff;color:#fff;outline:none;text-decoration:none}.rbt-token .rbt-token-remove-button{bottom:0;color:inherit;font-size:inherit;font-weight:normal;opacity:1;outline:none;padding:3px 7px;position:absolute;right:0;text-shadow:none;top:-2px}.rbt-aux{align-items:center;display:flex;bottom:0;justify-content:center;pointer-events:none;position:absolute;right:0;top:0;width:34px}.rbt-aux-lg{width:46px}.rbt-aux .rbt-close{margin-top:-4px;pointer-events:auto}.has-aux .rbt-input{padding-right:34px}.rbt-highlight-text{background-color:inherit;color:inherit;font-weight:bold;padding:0}.input-group>.rbt{flex:1}.input-group>.rbt .rbt-input-hint,.input-group>.rbt .rbt-aux{z-index:5}.input-group>.rbt:not(:first-child) .form-control{border-top-left-radius:0;border-bottom-left-radius:0}.input-group>.rbt:not(:last-child) .form-control{border-top-right-radius:0;border-bottom-right-radius:0}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap-typeahead/5.1.4/react-bootstrap-typeahead.js", type="module" crossorigin></script>
+	<script type="text/javascript">
+		var MyUserID = "{{.userid}}"
+	</script>
+	<script src="/public/events.js" type="module"> </script>
+</body>
+</html>

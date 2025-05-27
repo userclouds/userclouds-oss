@@ -1,0 +1,78 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="/public/login.css" rel="stylesheet">
+	<script src="/public/login.js" type="text/javascript"></script>
+	<script src="https://cdn.auth0.com/js/auth0/9.16.2/auth0.min.js"></script>
+	<script type="text/javascript">
+		var webAuth = new auth0.WebAuth({
+			domain: 'kuttas.us.auth0.com',
+			clientID: '2u0NpFen6RcxQj7MN5E1bLObU9zbh9EZ'
+		});
+
+		function onLogin(e) {
+			e.preventDefault();
+			var username = document.getElementById('form_username').value;
+			var password = document.getElementById('form_password').value;
+			var databaseConnection = 'Username-Password-Authentication';
+
+			webAuth.login(
+				{
+					realm: databaseConnection,
+					username: username,
+					password: password,
+					redirectUri: 'http://127.0.0.1:3000/callback',
+					responseType: 'code',
+				},
+				function (err) {
+					if (err) {
+						console.log("Login error: " + JSON.stringify(err))
+						setStatusError(err.description)
+					}
+				},
+			);
+			return false
+		}
+	</script>
+</head>
+<body>
+	<main class="login" id="login_parent">
+		<form onsubmit="return onLogin(event)">
+			<fieldset id="login_fieldset">
+				<div class="heading">Sign in with UserClouds</div>
+				<div class="statusText" id="statusText"></div>
+				<div class="field">
+					<label for="form_username">Username</label>
+					<input type="text" id="form_username" onblur="return onFieldBlur(event)" onfocus="return onFieldFocus(event)"></input>
+				</div>
+				<div class="field">
+					<label for="form_password">Password</label>
+					<input type="password" id="form_password" onblur="return onFieldBlur(event)" onfocus="return onFieldFocus(event)"></input>
+				</div>
+				<div class="field">
+					<input id="loginButton" type="submit" value="Sign in">
+				</div>
+				<div class="field">
+					<div class="createAcct" onclick="return onCreateAcct(event)">Create an account</div>
+					<div class="forgotCred" onclick="return onForgotCred(event)">Forgot username or password?</div>
+				</div>
+				<div class="divider">
+					<span class="dividerText">OR</span>
+				</div>
+				<button class="socialField" type="submit" onclick="return onSocialLogin('msft', event)">
+					<div class="logoImg msftImg"></div>
+					<div class="socialText">Sign in with Microsoft</div>
+				</button>
+				<button class="socialField" type="submit" onclick="return onSocialLogin('google-oauth2', event)">
+					<div class="logoImg googleImg"></div>
+					<div class="socialText">Sign in with Google</div>
+				</button>
+				<button class="socialField" type="submit" onclick="return onSocialLogin('linkedin', event)">
+					<div class="logoImg linkedInImg"></div>
+					<div class="socialText">Sign in with Linkedin</div>
+				</button>
+			</fieldset>
+		</form>
+	</main>
+</body>
+</html>

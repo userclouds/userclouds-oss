@@ -1,0 +1,153 @@
+:global(#root) {
+  .paramChooser {
+    background: #fbfcfd;
+    border: 1px solid #c1c9d1;
+    border-radius: 8px;
+    margin: 4px 0 24px;
+    padding: 8px 12px;
+  }
+
+  .paramChooser > ul {
+    list-style: none;
+  }
+
+  .paramChooser > ul > li {
+    display: inline-block;
+    margin: 4px;
+  }
+
+  .paramChooser button {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    height: 30px;
+    line-height: 1em;
+    list-style: none;
+    padding: 0 8px;
+  }
+
+  .propertiesRow {
+    display: inline-block;
+    align-items: left;
+    max-width: 100%;
+  }
+
+  .propertiesElement {
+    gap: 0px;
+    display: inline-block;
+    width: 24rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    resize: horizontal;
+    padding: 0 8px 5px 0;
+  }
+
+  .colorInput {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    height: 20px;
+    width: 20px;
+  }
+
+  /*
+   * apparently we can't just use ID selectors
+   */
+  .loginSettingsCard {
+    max-height: calc(100vh - 100px);
+  }
+
+  .loginSettingsCard > main {
+    flex-direction: row;
+  }
+
+  .loginSettingsForm {
+    width: 50%;
+  }
+
+  .loginSettingsForm[aria-busy='true'] {
+    opacity: 0.6;
+  }
+
+  .loginSettingsForm .blockLabel {
+    font-weight: bold;
+  }
+
+  .loginPagePreview {
+    max-width: 50%;
+    position: sticky;
+    top: 24px;
+  }
+
+  .loginPreviewFrame {
+    border: 1px solid #dbe2e6;
+    border-radius: 12px;
+    margin-top: 8px;
+  }
+  .loginPreviewFrame > main {
+    /* override min-height from Ple */
+    min-height: auto;
+  }
+  .loginPreviewFrame > main > form {
+    /* override top and bottom margins from Plex */
+    margin: 0 auto;
+    transform: scale(75%);
+  }
+
+  .logoImagePreview {
+    border: 1px solid #8a96a0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 16px;
+    max-height: 80px;
+    max-width: 200px;
+    min-height: 60px;
+    min-width: 60px;
+    position: relative;
+  }
+
+  .logoImagePreview[src='']:after {
+    background: rgba(30, 30, 30, 0.5);
+    color: #eee;
+    content: '+';
+    display: inline-block;
+    font-size: 48px;
+    height: 100%;
+    left: 0;
+    line-height: 60px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    vertical-align: middle;
+    width: 100%;
+  }
+
+  .accordion {
+    width: 100%;
+  }
+
+  .buttonGroup {
+    padding-top: 10px;
+  }
+
+  .singleButton {
+    max-width: fit-content;
+  }
+
+  .publicKey {
+    white-space: break-spaces;
+  }
+}
+
+/* for some reason this breaks in chrome if it's scoped within root,
+ * presumably because of the colon used to declare :global */
+.colorInput::-webkit-color-swatch,
+.colorInput::-moz-color-swatch {
+  border-radius: 50%;
+  border-width: 2px;
+}

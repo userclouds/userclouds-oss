@@ -1,0 +1,11 @@
+:global(#root) {
+  .edgestable {
+    display: grid;
+    grid-template-columns: repeat(6, fit-content(100%));
+  }
+
+  .attributestable {
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "environment": "dev",
+  "uc_admin": true,
+  "company_admin": [
+    "1e01c626-4f69-44ae-822d-a76741e54bab",
+    "1ee4497e-c326-4068-94ed-3dcdaaaa53bc"
+  ],
+  "is_production": false
+}

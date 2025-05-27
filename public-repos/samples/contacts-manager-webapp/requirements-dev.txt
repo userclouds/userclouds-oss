@@ -1,0 +1,6 @@
+black
+ruff
+isort
+pyupgrade
+ipython
+ipdb

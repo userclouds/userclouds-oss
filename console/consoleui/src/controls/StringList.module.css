@@ -1,0 +1,21 @@
+:global(#root) {
+  .stringtable {
+    display: grid;
+    grid-template-columns: 1fr fit-content(40px);
+  }
+
+  .delete {
+    padding: 0px 5px;
+  }
+
+  .row {
+    display: contents;
+  }
+
+  .row div {
+    font-size: 15px;
+    line-height: 32px;
+    margin: 2px 0;
+    white-space: nowrap;
+  }
+}

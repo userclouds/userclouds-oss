@@ -1,0 +1,29 @@
+{
+  "id": "032cae17-df3a-4e87-82a0-c706ed0679ee",
+  "name": "email_verified",
+  "data_type": {
+    "id": "123abc45-df3a-4e87-82a0-c706ed0679ee",
+    "name": "boolean"
+  },
+  "default_transformer": {
+    "id": "c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a",
+    "name": "PassthroughUnchangedData"
+  },
+  "default_token_access_policy": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": ""
+  },
+  "access_policy": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": ""
+  },
+  "is_array": false,
+  "default_value": "",
+  "index_type": "none",
+  "constraints": {
+    "immutable_required": false,
+    "partial_updates": false,
+    "unique_id_required": false,
+    "unique_required": false
+  }
+}

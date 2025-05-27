@@ -1,0 +1,7 @@
+# This file is used by envtest ro run the tests against the userclouds SW in the headless container.
+tenants:
+  - id: 11111111-dbe0-4f21-b3c9-9bc29f0bae03
+    name: Container Dev Environment
+    url: http://container-dev.tenant.test.userclouds.tools:3040
+    client_id: container_dev_client_id
+    client_secret: container_dev_client_secret_fake_dont_use_outside_of_dev

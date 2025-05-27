@@ -1,0 +1,100 @@
+@use '../src/shared/_mixin' as mixin;
+@use '../src/_variables.module.css';
+
+.root {
+  --sidebar-width: 200px;
+
+  transition: transform var(--input-transition-default) ease-out;
+  transform: translateX(0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  background: white;
+  border-right: 1px solid var(--color-neutral-200);
+  padding: 13px; // Custom value
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: var(--sidebar-width);
+  font-family: var(--font-family);
+  font-size: var(--text-1-font-size);
+
+  &:not(.isOpen) {
+    transform: translateX(-var(--sidebar-width));
+  }
+
+  @include mixin.respond-above(768px) {
+    position: static !important;
+    display: flex !important;
+    transform: translateX(0) !important;
+  }
+
+  .sectionButton {
+    width: 100%;
+  }
+
+  .sectionTitle {
+    font-weight: 500;
+    color: var(--color-neutral-700);
+    padding: var(--space-1) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sectionIcon {
+    transition: transform var(--input-transition-default);
+    &.isOpen {
+      transform: rotate(180deg);
+    }
+  }
+
+  .sideBarLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sideBarLink {
+    padding: 6px 8px;
+    border-radius: var(--border-radius-small);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2); // Width between icon and text
+    color: var(--color-black);
+    font-weight: 400;
+    white-space: nowrap;
+
+    .icon {
+      color: var(--color-black);
+    }
+
+    &:hover {
+      background-color: var(--color-neutral-200);
+      color: var(--color-black);
+    }
+
+    &:focus-visible {
+      box-shadow: var(--input-focus-visible);
+    }
+
+    &.isActive {
+      font-weight: 600;
+      background-color: var(--color-neutral-200);
+      color: var(--color-black);
+    }
+  }
+  .closeBtn {
+    position: absolute;
+    top: 4px;
+    left: 0;
+
+    @include mixin.respond-above(768px) {
+      display: none;
+    }
+  }
+}

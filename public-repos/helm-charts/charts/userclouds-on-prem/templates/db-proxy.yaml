@@ -1,0 +1,38 @@
+# https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.8/guide/use_cases/nlb_tls_termination/
+{{- if .Values.dbproxy.mysql.ingress.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: userclouds-dbproxy-mysql
+  labels:
+    app.kubernetes.io/component: dbproxy-mysql
+    {{- include "userclouds.labels" . | nindent 4 }}
+  annotations:
+    # https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/service/annotations/
+    external-dns.alpha.kubernetes.io/hostname: mysql-proxy.{{ .Values.config.customerDomain }}
+    # https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/service/annotations/
+    service.beta.kubernetes.io/aws-load-balancer-name: userclouds-dbproxy-mysql
+    service.beta.kubernetes.io/aws-load-balancer-type: external
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+    service.beta.kubernetes.io/aws-load-balancer-ip-address-type: ipv4
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+    service.beta.kubernetes.io/aws-load-balancer-scheme: {{ .Values.dbproxy.mysql.ingress.scheme }}
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: tcp
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "{{ .Values.dbproxy.mysql.healthCheckPort }}"
+    {{- if .Values.dbproxy.mysql.ingress.additionalAnnotations }}
+    {{ toYaml  .Values.dbproxy.mysql.ingress.additionalAnnotations | nindent 4 }}
+      {{- end }}
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/component: userstore
+    {{- include "userclouds.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: dbproxy-health
+      protocol: TCP
+      port: {{ .Values.dbproxy.mysql.healthCheckPort }}
+    {{ range $port := .Values.dbproxy.mysql.ports }}
+    - name: dbp-mysql-{{ $port }}
+      port: {{ $port }}
+      protocol: TCP{{ end }}
+{{- end }}

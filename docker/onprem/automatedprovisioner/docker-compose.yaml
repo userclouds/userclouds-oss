@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:14.9
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: uc_pg_root
+      POSTGRES_PASSWORD: vileweed
+    volumes:
+      - postgres-on-prem-data:/var/lib/postgresql/data
+    ports:
+      - 5477:5432
+volumes:
+  postgres-on-prem-data:

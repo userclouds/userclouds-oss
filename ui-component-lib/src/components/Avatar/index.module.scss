@@ -1,0 +1,60 @@
+@use '../../_variables.module.css';
+
+// UserAvatar
+
+.picture,
+.img {
+  display: block;
+  box-shadow: var(--input-box-shadow);
+  flex: none;
+}
+
+.picture {
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+}
+
+.img {
+  object-fit: cover;
+  object-position: center center;
+}
+
+// EntityAvatar
+
+.initialWrap {
+  display: block;
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+  background-color: var(--color-blue-900);
+  box-shadow: var(--input-box-shadow);
+  flex: none;
+}
+
+.initial {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around !important;
+  align-items: center;
+  line-height: normal;
+  font-weight: 600;
+  font-size: 18px; // Custom size
+  color: var(--color-white);
+  opacity: 0.9;
+
+  .small & {
+    font-size: 16px; // Custom size
+  }
+}
+
+.medium,
+.medium .img {
+  width: var(--input-height-medium);
+  height: var(--input-height-medium);
+}
+
+.small,
+.small .img {
+  width: var(--input-height-small);
+  height: var(--input-height-small);
+}

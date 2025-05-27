@@ -1,0 +1,181 @@
+resources:
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_email_verified
+      resource_uuids:
+        __DEFAULT: 12b3f133-4ad1-4f11-9d7d-313eb7cb95fa
+        usercloudsdev-demotenant: 12b3f133-4ad1-4f11-9d7d-313eb7cb95fa
+      attributes:
+        index_type: none
+        is_array: false
+        name: email_verified
+        type: boolean
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_email
+      resource_uuids:
+        __DEFAULT: 2c7a7c9b-90e8-47e4-8f6e-ec73bd2dec16
+        usercloudsdev-demotenant: 2c7a7c9b-90e8-47e4-8f6e-ec73bd2dec16
+      attributes:
+        index_type: indexed
+        is_array: false
+        name: email
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_external_alias
+      resource_uuids:
+        __DEFAULT: 2ee3d57d-9756-464e-a5e9-04244936cb9e
+        usercloudsdev-demotenant: 2ee3d57d-9756-464e-a5e9-04244936cb9e
+      attributes:
+        index_type: unique
+        is_array: false
+        name: external_alias
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_picture
+      resource_uuids:
+        __DEFAULT: 4d4d0757-3bc2-424d-9caf-a930edb49b69
+        usercloudsdev-demotenant: 4d4d0757-3bc2-424d-9caf-a930edb49b69
+      attributes:
+        index_type: none
+        is_array: false
+        name: picture
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_nickname
+      resource_uuids:
+        __DEFAULT: 83cc42b0-da8c-4a61-9db1-da70f21bab60
+        usercloudsdev-demotenant: 83cc42b0-da8c-4a61-9db1-da70f21bab60
+      attributes:
+        index_type: none
+        is_array: false
+        name: nickname
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_name
+      resource_uuids:
+        __DEFAULT: fe20fd48-a006-4ad8-9208-4aad540d8794
+        usercloudsdev-demotenant: fe20fd48-a006-4ad8-9208-4aad540d8794
+      attributes:
+        index_type: indexed
+        is_array: false
+        name: name
+        type: string
+    - uc_terraform_type: userstore_column_soft_deleted_retention_duration
+      manifest_id: 6af3794c-0741-4011-ba8f-761f4cacae72
+      resource_uuids:
+        __DEFAULT: 6af3794c-0741-4011-ba8f-761f4cacae72
+        usercloudsdev-demotenant: 6af3794c-0741-4011-ba8f-761f4cacae72
+      attributes:
+        column_id: '@UC_MANIFEST_ID("userstore_column_email").id'
+        duration:
+            duration: 30
+            unit: day
+        duration_type: softdeleted
+        purpose_id: '@UC_SYSTEM_OBJECT("userstore_purpose", "operational")'
+    - uc_terraform_type: userstore_accessor
+      manifest_id: userstore_accessor_DemoAccessor
+      resource_uuids:
+        __DEFAULT: 6b4fb958-83d2-4271-81c5-4a832db3f4f1
+        usercloudsdev-demotenant: 6b4fb958-83d2-4271-81c5-4a832db3f4f1
+      attributes:
+        access_policy: '@UC_SYSTEM_OBJECT("access_policy", "AllowAll")'
+        columns:
+            - column: '@UC_MANIFEST_ID("userstore_column_email").id'
+              transformer: '@UC_SYSTEM_OBJECT("transformer", "PassthroughUnchangedData")'
+        data_life_cycle_state: live
+        description: Sample description
+        name: DemoAccessor
+        purposes:
+            - '@UC_SYSTEM_OBJECT("userstore_purpose", "operational")'
+        selector_config:
+            where_clause: '{id} = ANY(?)'
+    - uc_terraform_type: transformer
+      manifest_id: transformer_EmailToID
+      resource_uuids:
+        __DEFAULT: 0cedf7a4-86ab-450a-9426-478ad0a60faa
+        usercloudsdev-demotenant: 0cedf7a4-86ab-450a-9426-478ad0a60faa
+      attributes:
+        description: This policy generates an email token for the given email.
+        function: '@FILE("./sample_values/transformer_EmailToID_function.js")'
+        input_type: string
+        name: EmailToID
+        parameters: |-
+            [{
+            	"PreserveValue": false,
+            	"PreserveChars": 0,
+            	"FinalLength": 12
+            }, {
+            	"PreserveValue": false,
+            	"PreserveCommonValue": true,
+            	"PreserveChars": 0,
+            	"FinalLength": 6
+            }, {
+            	"PreserveValue": true
+            }]
+        transform_type: tokenizebyvalue
+    - uc_terraform_type: transformer
+      manifest_id: transformer_SSNToID
+      resource_uuids:
+        __DEFAULT: 3f65ee22-2241-4694-bbe3-72cefbe59ff2
+        usercloudsdev-demotenant: 3f65ee22-2241-4694-bbe3-72cefbe59ff2
+      attributes:
+        description: This policy generates a masked SSN.
+        function: '@FILE("./sample_values/transformer_SSNToID_function.js")'
+        input_type: string
+        name: SSNToID
+        parameters: |-
+            {
+            	"PreserveValue": false,
+            	"DecimalOnly": true,
+            	"PreserveCharsTrailing": 0,
+            	"PreserveCharsStart": 3
+            }
+        transform_type: transform
+    - uc_terraform_type: transformer
+      manifest_id: transformer_CreditCardToID
+      resource_uuids:
+        __DEFAULT: 618a4ae7-9979-4ee8-bac5-db87335fe4d9
+        usercloudsdev-demotenant: 618a4ae7-9979-4ee8-bac5-db87335fe4d9
+      attributes:
+        description: This policy generates a masked credit card number.
+        function: '@FILE("./sample_values/transformer_CreditCardToID_function.js")'
+        input_type: string
+        name: CreditCardToID
+        parameters: |-
+            {
+            	"PreserveValue": false,
+            	"DecimalOnly": true,
+            	"PreserveCharsTrailing": 0,
+            	"PreserveCharsStart": 0
+            }
+        transform_type: transform
+    - uc_terraform_type: transformer
+      manifest_id: transformer_FullNameToID
+      resource_uuids:
+        __DEFAULT: b9bf352f-b1ee-4fb2-a2eb-d0c346c6404b
+        usercloudsdev-demotenant: b9bf352f-b1ee-4fb2-a2eb-d0c346c6404b
+      attributes:
+        description: This policy generates a masked name.
+        function: '@FILE("./sample_values/transformer_FullNameToID_function.js")'
+        input_type: string
+        name: FullNameToID
+        parameters: |-
+            [{
+            	"PreserveValue": true
+            }, {
+            	"PreserveValue": false,
+            	"PreserveChars": 1,
+            	"FinalLength": 12
+            }]
+        transform_type: transform
+    - uc_terraform_type: transformer
+      manifest_id: transformer_UUID
+      resource_uuids:
+        __DEFAULT: e3743f5b-521e-4305-b232-ee82549e1477
+        usercloudsdev-demotenant: e3743f5b-521e-4305-b232-ee82549e1477
+      attributes:
+        description: This policy generates a UUID token for the data.
+        function: '@FILE("./sample_values/transformer_UUID_function.js")'
+        input_type: string
+        name: UUID
+        parameters: '{}'
+        transform_type: tokenizebyvalue

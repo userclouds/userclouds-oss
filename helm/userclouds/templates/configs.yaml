@@ -1,0 +1,108 @@
+{{- $baseEnvFile := printf "base_configs/base_%s.yaml" .Values.uc_universe }}
+{{- $uc_universe := .Values.uc_universe }}
+{{- $console_tenant_id := .Values.config.common.console_tenant_id }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: userclouds-configs
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+data:
+  base: |
+  {{- .Files.Get $baseEnvFile | nindent 4 }}
+  checkattribute: |
+    console_tenant_id: {{ $console_tenant_id }}
+    check_attribute_service_map: {{ .Values.config.checkattribute.service_map | toYaml | nindent 6 }}
+  authz: |
+    console_tenant_id: {{ $console_tenant_id }}
+    check_attribute_service_map: {{ .Values.config.checkattribute.service_map | toYaml | nindent 6 }}
+  logserver: |
+    log_db: {{ .Values.config.common.log_db | toYaml | nindent 6 }}
+    console_tenant_id: {{ $console_tenant_id }}
+    {{- with .Values.config.logserver }}
+    {{- if .kinesis_aws_region }}
+    kinesis_aws_region: {{ .kinesis_aws_region }}
+    {{- end }}
+    {{- if .kinesis_shard_count }}
+    logger:
+      transports:
+      - type: kinesis
+        aws_region: 'us-west-2'
+        stream_name: '{{ printf "%s-log" $uc_universe }}'
+        shard_count: {{ .kinesis_shard_count }}
+        transportconfig:
+        required: true
+        max_log_level: 5
+    {{- end }}
+    {{- end }}
+  idp: |
+    console_tenant_id: {{ $console_tenant_id }}
+    {{- if and (hasKey .Values.config "userstore") .Values.config.userstore.data_import_s3_bucket }}
+    data_import_config:
+      data_import_s3_bucket: {{ .Values.config.userstore.data_import_s3_bucket }}
+      url_expiration_minutes: 60
+    {{- end }}
+    {{- include "userclouds.workerClientConfig" . | nindent 4 }}
+    {{- include "userclouds.openSearchConfig" . | nindent 4 }}
+  worker: |
+    dns:
+      host_and_port: 1.1.1.1:53
+    {{- include "userclouds.workerClientConfig" . | nindent 4 }}
+    {{- include "userclouds.openSearchConfig" . | nindent 4 }}
+    {{- with  .Values.config.common }}
+    log_db: {{ .log_db | toYaml | nindent 6 }}
+    console_tenant_id: {{ .console_tenant_id }}
+    acme:
+        account_url: 'https://acme-v02.api.letsencrypt.org/acme/acct/1002479787'
+        directory_url: 'https://acme-v02.api.letsencrypt.org/directory'
+        private_key: '{{ .acme_private_key }}'
+    {{- end }}
+  console: |
+    static_assets_path: /userclouds/uiassets/console/
+    log_db: {{ .Values.config.common.log_db | toYaml | nindent 6 }}
+    console_tenant_id: {{ $console_tenant_id }}
+    tenant_protocol: https
+    {{- include "userclouds.workerClientConfig" . | nindent 4 }}
+    console_url: {{ .Values.config.common.console_url }}
+    {{- with .Values.config.console }}
+    tenant_sub_domain: {{.tenant_sub_domain }}
+    {{- with .image}}
+    image:
+      host: {{.host}}
+      s3_bucket: {{.s3_bucket}}
+    {{- end }}
+    {{- end }}
+  plex: |
+    static_assets_path: /userclouds/uiassets/plex/
+    {{- include "userclouds.workerClientConfig" . | nindent 4 }}
+    {{- with  .Values.config.common }}
+    console_tenant_id: {{ .console_tenant_id }}
+    console_url: {{ .console_url }}
+    acme:
+      account_url: 'https://acme-v02.api.letsencrypt.org/acme/acct/1002479787'
+      directory_url: 'https://acme-v02.api.letsencrypt.org/directory'
+      private_key: {{ .acme_private_key }}
+    {{- end}}
+  {{- if .Values.dbproxy.enabled }}
+  dbproxy: |
+    console_tenant_id: {{ $console_tenant_id }}
+    {{- include "userclouds.workerClientConfig" . | nindent 4 }}
+    sqlshim_config:
+    {{- with  .Values.config.dbproxy }}
+      health_check_port: {{ .health_check_port }}
+      mysql_ports:
+      {{- range $port := .mysql_ports }}
+        - {{ $port }}{{- end }}
+      postgres_ports:
+      {{- range $port := .postgres_ports }}
+        - {{ $port }}{{- end }}
+    {{- end }}
+    {{- if .Values.config.common.opensearch}}
+    {{- with  .Values.config.common.opensearch }}
+    opensearch:
+      url: {{ .url }}
+      region: {{ .region }}
+      max_results: 1000
+    {{- end }}
+    {{- end }}
+  {{- end }}

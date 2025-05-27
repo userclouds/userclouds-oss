@@ -1,0 +1,40 @@
+import param from './PageParameterNames';
+
+const loginPageRequest = {
+  pageType: 'plex_login_page',
+  parameterNames: [
+    param.ActionButtonBorderColor,
+    param.ActionButtonFillColor,
+    param.ActionButtonTextColor,
+    param.ActionSubmitButtonText,
+    param.AllowCreation,
+    param.AuthenticationMethods,
+    param.CustomLoginPagePostFieldsetHTMLCSS,
+    param.CustomLoginPagePreFieldsetHTMLCSS,
+    param.CustomLoginPagePostFormHTMLCSS,
+    param.CustomLoginPagePreFormHTMLCSS,
+    param.CustomLoginPagePreMainHTMLCSS,
+    param.CreateAccountText,
+    param.FooterHTML,
+    param.ForgotPasswordText,
+    param.HeadingText,
+    param.LoginFailStatusText,
+    param.LoginStartStatusText,
+    param.LoginSuccessStatusText,
+    param.LogoImageFile,
+    param.MFAMethods,
+    param.MFARequired,
+    param.OIDCAuthenticationSettings,
+    param.PageBackgroundColor,
+    param.PageOrderSocialFirst,
+    param.PageTextColor,
+    param.PasswordLabel,
+    param.PasswordlessLoginText,
+    param.PasswordResetEnabled,
+    param.SocialRedirectStatusText,
+    param.SubheadingText,
+    param.UserNameLabel,
+  ],
+};
+
+export default loginPageRequest;

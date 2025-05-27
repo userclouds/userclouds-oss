@@ -1,0 +1,18 @@
+{
+  "id": "d2685634-ac22-4ce8-bdae-64892f17f4e9",
+  "name": "Foo",
+  "description": "Do Kung Fu",
+  "input_data_type": {
+    "name": "phonenumber",
+    "id": "ae962c31-2ca7-42e1-814b-32e6493dba82"
+  },
+  "output_data_type": {
+    "name": "boolean",
+    "id": "e16b5ead-54db-4b42-a55f-f21907cda9e4"
+  },
+  "transform_type": "transform",
+  "reuse_existing_token": false,
+  "function": "function transform(data, params) {\n  return true;\n}",
+  "parameters": "{}",
+  "version": 0
+}

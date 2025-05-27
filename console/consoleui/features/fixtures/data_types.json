@@ -1,0 +1,307 @@
+{
+  "data": [
+    {
+      "id": "92efcc03-91b4-483d-a1d7-eb8908cd436f",
+      "name": "address_eu",
+      "description": "address formatted for eu",
+      "is_composite_field_type": false,
+      "is_native": false,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": [
+          {
+            "data_type": {
+              "id": "e16b5ead-54db-4b42-a55f-f21907cda9e4",
+              "name": "boolean"
+            },
+            "name": "Asdfasdf",
+            "camel_case_name": "Asdfasdf",
+            "struct_name": "asdfasdf",
+            "required": false,
+            "ignore_for_uniqueness": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "76f0685b-dd42-4b3f-8c33-4c72e4eff73e",
+      "name": "birthdate",
+      "description": "a birthdate",
+      "is_composite_field_type": true,
+      "is_native": true,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "677dee28-68e6-4400-b152-f4b67577f5a7",
+      "name": "birthdate_composite",
+      "description": "composite birthdate",
+      "is_composite_field_type": false,
+      "is_native": false,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": [
+          {
+            "data_type": {
+              "id": "76f0685b-dd42-4b3f-8c33-4c72e4eff73e",
+              "name": "birthdate"
+            },
+            "name": "Sdf",
+            "camel_case_name": "Sdf",
+            "struct_name": "sdf",
+            "required": false,
+            "ignore_for_uniqueness": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "e16b5ead-54db-4b42-a55f-f21907cda9e4",
+      "name": "boolean",
+      "description": "a boolean",
+      "is_composite_field_type": true,
+      "is_native": true,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "33dc5de6-94b6-4f08-94b6-e04d1f981671",
+      "name": "canonical_address",
+      "description": "a canonical address",
+      "is_composite_field_type": false,
+      "is_native": false,
+      "composite_attributes": {
+        "include_id": true,
+        "fields": [
+          {
+            "data_type": {
+              "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+              "name": "string"
+            },
+            "name": "Administrative_Area",
+            "camel_case_name": "AdministrativeArea",
+            "struct_name": "administrative_area",
+            "required": false,
+            "ignore_for_uniqueness": false
+          },
+          {
+            "data_type": {
+              "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+              "name": "string"
+            },
+            "name": "Country",
+            "camel_case_name": "Country",
+            "struct_name": "country",
+            "required": false,
+            "ignore_for_uniqueness": false
+          },
+          {
+            "data_type": {
+              "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+              "name": "string"
+            },
+            "name": "Dependent_Locality",
+            "camel_case_name": "DependentLocality",
+            "struct_name": "dependent_locality",
+            "required": false,
+            "ignore_for_uniqueness": false
+          },
+          {
+            "data_type": {
+              "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+              "name": "string"
+            },
+            "name": "ID",
+            "camel_case_name": "ID",
+            "struct_name": "id",
+            "required": true,
+            "ignore_for_uniqueness": true
+          },
+          {
+            "data_type": {
+              "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+              "name": "string"
+            },
+            "name": "Locality",
+            "camel_case_name": "Locality",
+            "struct_name": "locality",
+            "required": false,
+            "ignore_for_uniqueness": false
+          },
+          {
+            "data_type": {
+              "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+              "name": "string"
+            },
+            "name": "Name",
+            "camel_case_name": "Name",
+            "struct_name": "name",
+            "required": false,
+            "ignore_for_uniqueness": false
+          },
+          {
+            "data_type": {
+              "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+              "name": "string"
+            },
+            "name": "Organization",
+            "camel_case_name": "Organization",
+            "struct_name": "organization",
+            "required": false,
+            "ignore_for_uniqueness": false
+          },
+          {
+            "data_type": {
+              "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+              "name": "string"
+            },
+            "name": "Post_Code",
+            "camel_case_name": "PostCode",
+            "struct_name": "post_code",
+            "required": false,
+            "ignore_for_uniqueness": false
+          },
+          {
+            "data_type": {
+              "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+              "name": "string"
+            },
+            "name": "Sorting_Code",
+            "camel_case_name": "SortingCode",
+            "struct_name": "sorting_code",
+            "required": false,
+            "ignore_for_uniqueness": false
+          },
+          {
+            "data_type": {
+              "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+              "name": "string"
+            },
+            "name": "Street_Address_Line_1",
+            "camel_case_name": "StreetAddressLine1",
+            "struct_name": "street_address_line_1",
+            "required": false,
+            "ignore_for_uniqueness": false
+          },
+          {
+            "data_type": {
+              "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+              "name": "string"
+            },
+            "name": "Street_Address_Line_2",
+            "camel_case_name": "StreetAddressLine2",
+            "struct_name": "street_address_line_2",
+            "required": false,
+            "ignore_for_uniqueness": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "3e2546c0-14d6-49d3-8b95-a5000bb4ad6a",
+      "name": "date",
+      "description": "a date",
+      "is_composite_field_type": true,
+      "is_native": true,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "97f0ab8a-f2fd-43da-9feb-3d1f8aacc042",
+      "name": "e164_phonenumber",
+      "description": "an E.164 phone number",
+      "is_composite_field_type": true,
+      "is_native": true,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "8a84f041-c605-4ebf-b552-9e14f51c9e54",
+      "name": "email",
+      "description": "an email address",
+      "is_composite_field_type": true,
+      "is_native": true,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "22b8a1b6-e5a2-4c3c-9a99-746f0345b727",
+      "name": "integer",
+      "description": "an integer",
+      "is_composite_field_type": true,
+      "is_native": true,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "ae962c31-2ca7-42e1-814b-32e6493dba82",
+      "name": "phonenumber",
+      "description": "a phone number",
+      "is_composite_field_type": true,
+      "is_native": true,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "fba9f9bb-b9e0-4258-9fb8-6777792dbeba",
+      "name": "ssn",
+      "description": "a social security number",
+      "is_composite_field_type": true,
+      "is_native": true,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+      "name": "string",
+      "description": "a string",
+      "is_composite_field_type": true,
+      "is_native": true,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "66a87f97-32c4-4ccc-91da-d8c880e21e5a",
+      "name": "timestamp",
+      "description": "a timestamp",
+      "is_composite_field_type": true,
+      "is_native": true,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": null
+      }
+    },
+    {
+      "id": "d036bbba-6012-4d74-b7c4-9a2bbc09a749",
+      "name": "uuid",
+      "description": "a UUID",
+      "is_composite_field_type": true,
+      "is_native": true,
+      "composite_attributes": {
+        "include_id": false,
+        "fields": null
+      }
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": false
+}

@@ -1,0 +1,44 @@
+{
+  "id": "1f44a215-2590-488f-a254-b6e8e4b67346",
+  "name": "complexPolicy",
+  "description": "",
+  "policy_type": "composite_and",
+  "tag_ids": [],
+  "version": 1,
+  "components": [
+    {
+      "policy": {
+        "id": "3f380e42-0b21-4570-a312-91e1b80386fa",
+        "name": "AllowAll"
+      }
+    },
+    {
+      "policy": {
+        "id": "66dc733c-1e4c-40df-8928-349f80a0775e",
+        "name": "AllowNone"
+      }
+    },
+    {
+      "template": {
+        "id": "aad2bf25-311f-467e-9169-a6a89b6d34a6",
+        "name": "CheckAttribute"
+      },
+      "template_parameters": "{}"
+    },
+    {
+      "template": {
+        "id": "aa412fd1-7c82-4b54-9ffd-b50f589642c6",
+        "name": "checkIfEven"
+      },
+      "template_parameters": "{a:1}"
+    }
+  ],
+  "required_context": {},
+  "thresholds": {
+    "announce_max_execution_failure": false,
+    "announce_max_result_failure": false,
+    "max_executions": 10,
+    "max_execution_duration_seconds": 5,
+    "max_results_per_execution": 0
+  }
+}

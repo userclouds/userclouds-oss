@@ -1,0 +1,17 @@
+{{- if and ($.Capabilities.APIVersions.Has "monitoring.coreos.com/v1/ServiceMonitor") .Values.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  endpoints:
+    - port: internal
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "userclouds.labels" . | nindent 6 }}
+{{- end }}

@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <title>Sample App</title>
+    <base href="/" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Organization "<%= organization.name %>"</h1>
+
+    <h2>Active Fires in this Organization</h2>
+    <table>
+        <tr>
+            <td>Name</td>
+        </tr>
+        <% fires && fires.forEach(function(fire) { %>
+            <tr>
+                <td><a href="/org/<%= organization.id %>/fires/<%= fire.id %>"><%= fire.alias %></a></td>
+            </tr>
+        <% }); %>
+    </table>
+
+    <h2>Users in this Organization</h2>
+    <table>
+        <tr>
+            <td>Name</td>
+        </tr>
+        <% users && users.forEach(function(user) { %>
+            <tr>
+                <td><a href="/org/<%= organization.id %>/users/<%= user.id %>"><%= user.profile.name %></a>
+                    <% if(adminIDs.find((id) => id === user.id )) { %>
+                        (admin)
+                    <% } %>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <% if(isEmployee) { %>
+        <h2>Invite User</h2>
+        <form action="/inviteUser" id="invite">
+            <input type="hidden" name="orgID" value="<%= organization.id %>" />
+            Email:<br />
+            <div class="formRow">
+                <input type="text" name="email" value="" />
+                <input type="submit" value="Send Invite" />
+            </div>
+        </form>
+
+        <br />
+        <a href="/home">&lt; Back to Home</a>
+    <% } %>
+
+</body>
+
+</html>

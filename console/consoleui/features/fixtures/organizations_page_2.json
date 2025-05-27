@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "id": "7e88776c-7f90-4bc6-994e-7eb09e812c51",
+      "created": "2023-02-15T23:22:02.726013Z",
+      "updated": "2023-02-15T23:22:02.726013Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "Bar Org",
+      "region": "aws-us-west-2"
+    },
+    {
+      "id": "87c88c1c-c564-41fb-a8d6-d4106a4207ba",
+      "created": "2023-02-15T23:22:02.785234Z",
+      "updated": "2023-02-15T23:22:02.785234Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "FizzBuzz Org",
+      "region": "aws-us-west-2"
+    },
+    {
+      "id": "a353a10e-ae74-4250-9556-6e882c8739c4",
+      "created": "2023-02-15T23:22:02.838873Z",
+      "updated": "2023-02-15T23:22:02.838873Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "Foo Org",
+      "region": "aws-us-west-2"
+    },
+    {
+      "id": "a50f8b82-8d2e-46e0-9a8c-ee16806c30bd",
+      "created": "2023-02-15T23:22:02.891625Z",
+      "updated": "2023-02-15T23:22:02.891625Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "The Gates Foundation",
+      "region": "aws-us-west-2"
+    },
+    {
+      "id": "b340832c-291e-4f33-8d95-c0a83e03ed79",
+      "created": "2023-02-15T23:22:02.942083Z",
+      "updated": "2023-02-15T23:22:02.942083Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "Test Org",
+      "region": "aws-us-east-1"
+    }
+  ],
+  "has_next": true,
+  "next": "id:b340832c-291e-4f33-8d95-c0a83e03ed79",
+  "has_prev": true,
+  "prev": "id:7e88776c-7f90-4bc6-994e-7eb09e812c51"
+}

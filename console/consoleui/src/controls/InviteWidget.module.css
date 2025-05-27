@@ -1,0 +1,23 @@
+:global(#root) {
+  .invitewidget {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .roleselector {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0px;
+  }
+
+  .rolelabel {
+    line-height: 30px;
+    margin-right: 10px;
+  }
+
+  .selecteditemtext {
+    color: #000000;
+  }
+}

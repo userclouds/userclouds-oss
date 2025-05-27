@@ -1,0 +1,12 @@
+db:
+  user: userclouds
+  password: aws://secrets/prod/console/cdb_password
+  dbname: companyconfig
+  host: aurora-global-prod.global-ghfomme6jzsd.global.rds.amazonaws.com
+  dbdriver: postgres
+  dbproduct: aws-aurora-postgres
+  port: 5432
+  regional_hosts:
+    aws-us-west-2: aurora-cluster-prod-us-west-2.cluster-ro-cwpdhxjckvkp.us-west-2.rds.amazonaws.com
+    aws-us-east-1: aurora-cluster-prod-us-east-1.cluster-ro-ct6ec80g6lbb.us-east-1.rds.amazonaws.com
+    aws-eu-west-1: aurora-cluster-prod-eu-west-1.cluster-ro-c562w2o4qhpk.eu-west-1.rds.amazonaws.com

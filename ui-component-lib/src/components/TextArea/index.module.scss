@@ -1,0 +1,54 @@
+@use '../../_variables.module.css';
+
+.root {
+  font-family: var(--font-family);
+  font-size: var(--text-1-font-size);
+  line-height: var(--text-1-line-height);
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--border-radius-default);
+  padding: var(--space-2) var(--input-padding-default);
+  vertical-align: middle;
+  resize: vertical;
+  height: 152px; // Custom default height
+  min-height: 104px; // Custom min-height
+  outline: none;
+  border-color: var(--color-neutral-300);
+  color: var(--color-black);
+  background-color: var(--color-white);
+
+  &:hover {
+    border-color: var(--color-neutral-600);
+  }
+
+  &:focus {
+    color: var(--color-black);
+    border-color: var(--color-black);
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: var(--input-focus-visible);
+  }
+
+  ::-webkit-input-placeholder,
+  ::-moz-placeholder,
+  :-ms-input-placeholder {
+    color: var(--color-neutral-300);
+  }
+
+  &.monospace {
+    font-family: var(--font-family-monospace);
+  }
+
+  &.disabled {
+    border-color: var(--color-neutral-200);
+    color: var(--color-neutral-300);
+    background-color: var(--color-neutral-50);
+  }
+
+  &.error {
+    border-color: var(--color-red-700);
+  }
+}

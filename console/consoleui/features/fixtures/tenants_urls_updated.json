@@ -1,0 +1,28 @@
+[
+  {
+    "id": "437b4726-87e6-446a-b075-0f5624a7a722",
+    "created": "2024-08-29T21:03:00.581398Z",
+    "updated": "2024-08-29T21:03:06.305491Z",
+    "deleted": "0001-01-01T00:00:00Z",
+    "tenant_id": "41ab79a8-0dff-418e-9d42-e1694469120a",
+    "tenant_url": "https://bar.domain.com",
+    "validated": true,
+    "system": false,
+    "active": false,
+    "dns_verifier": "ATmbav4r-c1vOTG3boBgja0LUX9_NzBbzVIBwuMWw18",
+    "certificate_valid_until": "0001-01-01T00:00:00Z"
+  },
+  {
+    "id": "85df862c-1192-448c-9585-6b1034285512",
+    "created": "2024-08-29T21:03:18.523561Z",
+    "updated": "2024-08-29T21:03:18.523561Z",
+    "deleted": "0001-01-01T00:00:00Z",
+    "tenant_id": "41ab79a8-0dff-418e-9d42-e1694469120a",
+    "tenant_url": "https://othercustomurl.com",
+    "validated": true,
+    "system": false,
+    "active": false,
+    "dns_verifier": "",
+    "certificate_valid_until": "0001-01-01T00:00:00Z"
+  }
+]

@@ -1,0 +1,17 @@
+name: SDK Version Check
+description: 'Ensures sdkVersion is not empty and is not an existing tag'
+inputs:
+  repo-path:
+    description: 'Path to sdk-golang repo'
+    required: true
+    default: './'
+runs:
+  using: composite
+  steps:
+    - name: Verify sdkVersion is not empty and is not existing tag
+      shell: bash
+      working-directory: ${{ inputs.repo-path }}
+      run: |
+        git fetch -a -t
+        TOKEN=`cat infra/sdkclient/version.go | grep -o 'sdkVersion = "[^"]*' | grep -o '[^"]*$'`
+        test -n $TOKEN && test "`git tag -l | grep $TOKEN`" = ""

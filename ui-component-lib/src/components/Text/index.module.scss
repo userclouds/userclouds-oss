@@ -1,0 +1,31 @@
+@use '../../_variables.module.css';
+
+.root {
+  font-family: var(--font-family);
+}
+
+.error {
+  color: var(--color-red-700);
+}
+
+.success {
+  color: var(--color-green-800);
+}
+
+.text1 {
+  font-size: var(--text-1-font-size);
+  line-height: var(--text-1-line-height);
+}
+
+.text2 {
+  font-size: var(--text-2-font-size);
+  line-height: var(--text-2-line-height);
+}
+
+.monospace {
+  font-family: var(--font-family-monospace);
+}
+
+.noWrap {
+  white-space: nowrap;
+}

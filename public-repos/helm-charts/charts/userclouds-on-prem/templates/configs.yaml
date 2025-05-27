@@ -1,0 +1,110 @@
+# Should match config/provisioning/onprem/tenant_console.json to ensure consistent tenant configuration across the system.
+{{- $console_tenant_id := "41ab79a8-0dff-418e-9d42-e1694469120a" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: userclouds-configs
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+data:
+  rootdb: |
+     db:
+      user: {{ .Values.config.db.user }}
+      password: env://PG_PASSWORD
+      dbname: defaultdb
+      host: {{ .Values.config.db.host }}
+      dbdriver: postgres
+      dbproduct: aws-rds-postgres
+      port: {{ .Values.config.db.port }}
+  base: |
+    {{- if .Values.config.openTelemetryEndpoint }}
+    tracing:
+      collector_host: {{ .Values.config.openTelemetryEndpoint }}
+    {{- end }}
+    {{- if .Values.config.sentry.enabled }}
+    sentry:
+      dsn: {{ .Values.config.sentry.dsn }}
+      traces_sample_rate: {{ .Values.config.sentry.sample_rate }}
+    {{- end }}
+    company_db:
+      user: {{ .Values.config.db.user }}
+      password: env://PG_PASSWORD
+      dbname: companyconfig
+      host: {{ .Values.config.db.host }}
+      dbdriver: postgres
+      dbproduct: aws-rds-postgres
+      port: {{ .Values.config.db.port }}
+    svc_listener:
+      protocol: http
+      host: 0.0.0.0
+      port: 5000
+    internal_server:
+      protocol: http
+      host: 0.0.0.0
+      port: 5001
+    logger:
+      transports:
+        - type: goLogJSON
+          transportconfig:
+            required: true
+            max_log_level: 5
+        - type: server
+          transportconfig:
+            required: true
+            max_log_level: 5
+          tenant_id: {{ $console_tenant_id }}
+          log_service_url: 'http://userclouds-logserver.{{ .Release.Namespace }}.svc.cluster.local'
+          send_raw_data: false
+    cache:
+      redis_caches:
+        - region: customerlocal
+          host: userclouds-redis.{{ .Release.Namespace }}.svc.cluster.local
+          port: 6379
+          dbname: 0
+  rootdbstatus: |
+     db:
+      user: {{ .Values.config.db.user }}
+      password: env://PG_PASSWORD
+      dbname: rootdbstatus
+      host: {{ .Values.config.db.host }}
+      dbdriver: postgres
+      dbproduct: aws-rds-postgres
+      port: {{ .Values.config.db.port }}
+  authz: |
+    console_tenant_id: {{ $console_tenant_id }}
+  checkattribute: |
+    console_tenant_id: {{ $console_tenant_id }}
+  logserver: |
+    {{- include "userclouds.logdb_config" . | nindent 4 }}
+    console_tenant_id: {{ $console_tenant_id }}
+  console: |
+    tenant_sub_domain: tenant.{{ .Values.config.customerDomain }}
+    tenant_protocol: https
+    console_url: https://console.{{ .Values.config.customerDomain }}
+    {{- include "userclouds.logdb_config" . | nindent 4 }}
+    static_assets_path: /userclouds/uiassets/console/
+    console_tenant_id: {{ $console_tenant_id }}
+    worker_client:
+      type: http
+    onprem_sqlshim_ports: {{ range $port := .Values.dbproxy.mysql.ports }}
+      - {{ $port }}{{ end }}
+  idp: |
+    console_tenant_id: {{ $console_tenant_id }}
+    sqlshim_config:
+      health_check_port: {{ .Values.dbproxy.mysql.healthCheckPort }}
+      mysql_ports:{{ range $port := .Values.dbproxy.mysql.ports }}
+        - {{ $port }}{{ end }}
+  worker: |
+    {{- include "userclouds.logdb_config" . | nindent 4 }}
+    dns:
+      host_and_port: 1.1.1.1:53
+    console_tenant_id: {{ $console_tenant_id }}
+    worker_client:
+      type: http
+  plex: |
+    static_assets_path: /userclouds/uiassets/plex/
+    console_tenant_id: {{ $console_tenant_id }}
+    disable_email: true
+    worker_client:
+      type: http
+

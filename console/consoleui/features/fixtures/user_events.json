@@ -1,0 +1,64 @@
+[
+  {
+    "id": "11131d0c-2964-4e9a-8abf-b9c6841221a8",
+    "created": "2023-01-04T20:19:19.753762Z",
+    "updated": "2023-01-04T20:19:19.753762Z",
+    "deleted": "0001-01-01T00:00:00Z",
+    "type": "save_tenant_user_store_config",
+    "user_alias": "047f23f6-b1e1-4694-b7b8-1783f0d17e67",
+    "payload": { "TenantID": "03c1d5f7-50ef-4723-9a37-3bf0dc301842" }
+  },
+  {
+    "id": "19031e94-3b81-4811-8424-6ff41273e93f",
+    "created": "2023-02-15T16:51:30.090083Z",
+    "updated": "2023-02-15T16:51:30.090083Z",
+    "deleted": "0001-01-01T00:00:00Z",
+    "type": "save_tenant_user_store_config",
+    "user_alias": "047f23f6-b1e1-4694-b7b8-1783f0d17e67",
+    "payload": { "TenantID": "03c1d5f7-50ef-4723-9a37-3bf0dc301842" }
+  },
+  {
+    "id": "4371aa6d-89fc-45be-9a27-306d8db5e198",
+    "created": "2023-02-10T22:08:43.842094Z",
+    "updated": "2023-02-10T22:08:43.842094Z",
+    "deleted": "0001-01-01T00:00:00Z",
+    "type": "invite",
+    "user_alias": "047f23f6-b1e1-4694-b7b8-1783f0d17e67",
+    "payload": {
+      "Company": "74f313fc-806c-4ae2-abfd-76a972c29a2d",
+      "InviteType": "existingcompany",
+      "InviteeEmail": "james+memberstaging@userclouds.com"
+    }
+  },
+  {
+    "id": "4537c4d1-713d-46e7-9f07-48d442d9f3b6",
+    "created": "2023-01-15T22:55:09.31976Z",
+    "updated": "2023-01-15T22:55:09.31976Z",
+    "deleted": "0001-01-01T00:00:00Z",
+    "type": "invite",
+    "user_alias": "047f23f6-b1e1-4694-b7b8-1783f0d17e67",
+    "payload": {
+      "InviteType": "existingorg",
+      "InviteeEmail": "james+test3@userclouds.com",
+      "Organization": "74f313fc-806c-4ae2-abfd-76a972c29a2d"
+    }
+  },
+  {
+    "id": "b55a6b32-744b-4e01-863c-2082aa9ef162",
+    "created": "2023-02-15T16:51:42.958173Z",
+    "updated": "2023-02-15T16:51:42.958173Z",
+    "deleted": "0001-01-01T00:00:00Z",
+    "type": "save_tenant_user_store_config",
+    "user_alias": "047f23f6-b1e1-4694-b7b8-1783f0d17e67",
+    "payload": { "TenantID": "03c1d5f7-50ef-4723-9a37-3bf0dc301842" }
+  },
+  {
+    "id": "e39ef5c5-d581-4ce0-8df4-4dae7f405096",
+    "created": "2023-02-15T16:51:58.737312Z",
+    "updated": "2023-02-15T16:51:58.737312Z",
+    "deleted": "0001-01-01T00:00:00Z",
+    "type": "save_tenant_user_store_config",
+    "user_alias": "047f23f6-b1e1-4694-b7b8-1783f0d17e67",
+    "payload": { "TenantID": "03c1d5f7-50ef-4723-9a37-3bf0dc301842" }
+  }
+]

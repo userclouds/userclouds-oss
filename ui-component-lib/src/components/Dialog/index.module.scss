@@ -1,0 +1,98 @@
+@use '../../_variables.module.css';
+
+.root {
+  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.2);
+
+  &[open] {
+    animation: 0.2s linear slidein;
+    background: var(--dialog-background);
+    display: flex;
+    margin-top: 80px;
+    max-height: 80%;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+  }
+
+  &[open].fullPage {
+    height: 80%;
+    inset: 0;
+    min-width: 50%;
+  }
+
+  &[open]:has(footer) {
+    padding-bottom: 60px;
+  }
+
+  &:not([open]) {
+    display: none;
+  }
+
+  &::backdrop {
+    animation: 0.4s ease fadein;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .closeButton {
+    margin-top: -3px;
+    margin-right: -3px;
+    position: absolute;
+    right: var(--space-2);
+    top: var(--space-2);
+  }
+}
+
+.header {
+  display: flex;
+  flex-grow: 0;
+  justify-content: space-between;
+}
+
+.heading {
+  text-align: start;
+}
+
+.description {
+  color: var(--color-neutral-700);
+  flex-grow: 0;
+  margin-top: calc(-1 * var(--space-4));
+  text-align: start;
+}
+
+.dialogBody {
+  background-color: #fff;
+  border-radius: var(--border-radius-small);
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px;
+  text-align: start;
+}
+
+.root footer {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@keyframes slidein {
+  from {
+    transform: translate3d(0, var(--space-1), 0);
+  }
+
+  to {
+    transfrom: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

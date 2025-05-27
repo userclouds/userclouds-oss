@@ -1,0 +1,36 @@
+:global(#root) {
+  .dialog {
+    max-width: max(60vw, 800px);
+  }
+
+  .dialogNotification {
+    display: flex;
+    gap: 10px;
+    margin-block: 20px;
+    place-items: center;
+
+    & > div {
+      display: flex;
+      place-items: center;
+      gap: 10px;
+    }
+  }
+
+  .cellWithTooltip {
+    display: flex;
+    gap: 10px;
+    place-items: center;
+  }
+
+  .tenantdatabasetable {
+    grid-template-columns: 1fr 1fr 1fr fit-content(200px);
+  }
+
+  .tenanturlstable {
+    grid-template-columns: 1fr 1fr fit-content(200px);
+  }
+
+  .trustedissuerstable {
+    grid-template-columns: 1fr fit-content(200px);
+  }
+}

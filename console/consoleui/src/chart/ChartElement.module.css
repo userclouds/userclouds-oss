@@ -1,0 +1,10 @@
+:global(#root) {
+  .querySetSelector {
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .querySetSelector .button {
+    width: 100%;
+  }
+}

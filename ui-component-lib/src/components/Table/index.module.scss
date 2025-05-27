@@ -1,0 +1,323 @@
+@use '../../shared/_mixin' as mixin;
+@use '../../_variables.module.css';
+
+.table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  break-inside: avoid;
+  color: var(--color-black);
+  display: grid;
+  font-family: var(--font-family);
+  grid-template-columns: repeat(10, 1fr);
+  overflow-x: hidden;
+  width: 100%;
+
+  .packed & {
+    padding: 2px var(--space-4) 2px 0;
+    text-overflow: ellipsis;
+  }
+
+  .nowrap & {
+    padding: 2px var(--space-4) 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.thead,
+.tbody,
+.tr {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+.thead {
+  box-shadow:
+    inset 0 -2px 0 var(--table-border-color),
+    -1px 0 0 var(--color-white);
+  white-space: normal;
+}
+
+.theadfloating {
+  background-color: var(--color-white);
+  position: sticky;
+  z-index: var(--table-controls-z-index);
+}
+
+.theadfloating > tr {
+  height: var(--table-header-row-height);
+}
+
+.tr {
+  align-items: center;
+  color: inherit;
+  min-height: 50px;
+  height: fit-content;
+  outline: 0;
+
+  .hasLines & {
+    border: 1px solid transparent;
+    border-bottom-color: var(--color-neutral-200);
+  }
+
+  .minimal & {
+    height: auto;
+  }
+}
+
+.trextended {
+  color: inherit;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  outline: 0;
+}
+
+.trextendedline {
+  .hasLines & {
+    border: 1px solid transparent;
+    border-bottom-color: var(--color-neutral-200);
+  }
+}
+
+.packed tbody > .tr:hover,
+.nowrap tbody > .tr:hover,
+.packed tbody > .trextended:hover,
+.nowrap tbody > .trextended:hover {
+  border-color: var(--color-neutral-200);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.trextendedcontent {
+  border-bottom: 1px solid var(--color-neutral-200);
+  display: grid;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  height: fit-content;
+  overflow-wrap: break-word;
+  white-space: unset;
+  word-wrap: break-word;
+}
+
+.th {
+  display: block;
+  color: var(--color-neutral-700);
+  font-size: var(--text-1-font-size);
+  font-weight: 400;
+  line-height: var(--text-1-line-height);
+  padding: 0 var(--space-4) var(--space-1) 0;
+  text-align: left;
+
+  &[align='right'] {
+    text-align: right;
+  }
+
+  .packed &,
+  .minimal & {
+    overflow: hidden;
+    padding: 2px var(--space-4) 2px 10px;
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+
+  .nowrap & {
+    padding: 2px var(--space-4) 2px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* https://remixicon.com/icon/arrow-up-s-fill color: textColor viewbox: 24x24 */
+  &.sorted-asc {
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzQwNDA0MCI+PHBhdGggZD0iTTEyIDhMMTggMTRINkwxMiA4WiI+PC9wYXRoPjwvc3ZnPg==')
+      no-repeat calc(100% - 10px) 2px;
+  }
+  /* https://remixicon.com/icon/arrow-down-s-fill color: textColor viewbox: 24x24 */
+  &.sorted-desc {
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzQwNDA0MCI+PHBhdGggZD0iTTEyIDE2TDYgMTBIMThMMTIgMTZaIj48L3BhdGg+PC9zdmc+')
+      no-repeat calc(100% - 10px) 1px;
+  }
+  /* https://remixicon.com/icon/expand-up-down-fill color: #c4c4c4 viewbox: 32x32 */
+  &.sortable {
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0iI2M0YzRjNCI+PHBhdGggZD0iTTE4IDkgMTIgMyA2IDlIMThaTTE4IDE1IDEyIDIxIDYgMTVIMThaIj48L3BhdGg+PC9zdmc+')
+      no-repeat calc(100% - 10px) 4px;
+  }
+  a[href] {
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+.td {
+  display: block;
+  font-size: var(--text-1-font-size);
+  font-weight: 400;
+  vertical-align: inherit;
+
+  .default & {
+    padding: 10px var(--space-4) 10px 0;
+  }
+
+  .tight & {
+    padding: 5px var(--space-4) 5px 0;
+  }
+
+  .packed &,
+  .minimal & {
+    overflow: hidden;
+    padding: 2px var(--space-4) 2px 10px;
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+
+  .nowrap & {
+    padding: 2px var(--space-4) 2px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nowrap .trextended & {
+    padding: 15px var(--space-4) 15px 10px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: clip;
+    vertical-align: top;
+    word-wrap: break-word;
+  }
+}
+
+.th[colspan='1'],
+.td[colspan='1'] {
+  grid-column: span 1;
+}
+
+.th[colspan='2'],
+.td[colspan='2'] {
+  grid-column: span 2;
+}
+
+.th[colspan='3'],
+.td[colspan='3'] {
+  grid-column: span 3;
+}
+
+.th[colspan='4'],
+.td[colspan='4'] {
+  grid-column: span 4;
+}
+
+.th[colspan='5'],
+.td[colspan='5'] {
+  grid-column: span 5;
+}
+
+.th[colspan='6'],
+.td[colspan='6'] {
+  grid-column: span 6;
+}
+
+.th[colspan='7'],
+.td[colspan='7'] {
+  grid-column: span 7;
+}
+
+.th[colspan='8'],
+.td[colspan='8'] {
+  grid-column: span 8;
+}
+
+.expansionIndicator {
+  opacity: 0;
+}
+
+.tr:hover > .expansionIndicator,
+.tr:focus > .expansionIndicator,
+.trextended:hover > .expansionIndicator,
+.trextended:focus > .expansionIndicator {
+  opacity: 1;
+}
+
+.th:last-child,
+.td:last-child {
+  padding-right: 0; // Remove padding from last table-cell in row
+}
+
+// Responsive table kicks in below medium breakpoint if `isResponsive` prop exists
+
+@include mixin.respond-below(768px) {
+  .isResponsive {
+    width: 100%;
+    border-spacing: 0;
+
+    thead {
+      // Accessibly hide <thead> on narrow viewports
+      position: absolute;
+      clip: rect(1px 1px 1px 1px);
+      padding: 0;
+      border: 0;
+      height: 1px;
+      width: 1px;
+      overflow: hidden;
+
+      th {
+        &:first-of-type {
+          text-align: left;
+        }
+      }
+    }
+
+    tbody,
+    tr,
+    th,
+    td {
+      padding: 0;
+      text-align: left;
+      white-space: normal;
+    }
+
+    tbody {
+      td {
+        padding: var(--space-2) 0 !important;
+
+        // Add extra padding around table cells for better visual separation on mobile
+        &:first-child {
+          padding-top: var(--space-4) !important;
+        }
+
+        &:last-child {
+          padding-bottom: var(--space-4) !important;
+        }
+      }
+
+      // Add extra border to top of mobile table
+      tr:first-child {
+        border-top: 1px solid var(--color-neutral-200);
+      }
+
+      td[data-title]:before {
+        content: attr(data-title);
+        display: block;
+        margin-bottom: var(--space-2);
+        font-size: var(--text-2-font-size);
+        color: var(--color-neutral-700);
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.tableTitle {
+  border-bottom: var(--space-1) solid var(--table-border-color);
+  display: block;
+  font-weight: bold;
+  font-size: var(--text-0-font-size);
+  margin: 0 0 var(--space-2);
+  padding: var(--space-2) 0 var(--space-1);
+
+  .subText {
+    font-style: italic;
+    font-weight: normal;
+  }
+}

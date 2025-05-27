@@ -1,0 +1,23 @@
+company_db: # Using postgres in container env, user/pw must match docker/userclouds-headless/docker-compose.yaml
+  user: uc_root_user
+  password: dev-literal://uc87871fakepw
+  dbname: companyconfig
+  host: postgres
+  dbdriver: postgres
+  dbproduct: postgres
+  port: 5432
+
+internal_server: null # Don't run internal server in container
+
+logger:
+  transports:
+    - type: file
+      # see: docker/userclouds-headless/docker-compose.yaml (we mount /userclouds/logs to the host)
+      base_filename: /userclouds/logs/
+      transportconfig:
+        required: true
+        max_log_level: 5
+    - type: goLogJSON
+      transportconfig:
+        required: true
+        max_log_level: 5

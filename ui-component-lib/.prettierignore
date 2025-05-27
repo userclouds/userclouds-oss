@@ -1,0 +1,6 @@
+build
+.rollup.cache
+.next
+
+# ignore storybook static files
+storybook-static/**

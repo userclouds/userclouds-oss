@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="centered"><h3>UserClouds Data Decoder</h3></div>
+      <div id="loginSection">
+        <div id="loginSettings">
+          <label>
+            Tenant URL
+            <br />
+            <input type="text" id="tenantURL" />
+          </label>
+          <label>
+            Client ID
+            <br />
+            <input type="text" id="clientID" />
+          </label>
+        </div>
+        <button id="login" class="primary">Log In</button>
+      </div>
+      <div id="findTokenSection" style="display: none">
+        <div class="centered">
+          <p id="loginInfo">You are logged in</p>
+          <p></p>
+        </div>
+        <div id="tokenConfig" style="display: none">
+          <label>
+            Selector for tokens
+            <br />
+            <input type="text" id="selector" value="" />
+          </label>
+          <label>
+            HTML attribute for tokens
+            <br />
+            <input type="text" id="tag" value="" />
+          </label>
+          <label>
+            <input type="checkbox" id="separateLink" />
+            Separate link to resolve token
+          </label>
+        </div>
+        <div class="logged-in-buttons">
+          <button id="saveTokenConfig" class="primary">Save config</button>
+          <button id="cancelEditTokenConfig" class="outline">Cancel</button>
+          <button id="findTokens" class="primary">Find tokens</button>
+          <button id="showTokenConfig" class="outline">Edit config</button>
+        </div>
+      </div>
+    </div>
+    <button id="logout" class="ghost">Log out</button>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+:global(#root) {
+  .logentrysyncstable {
+    grid-template-columns:
+      1fr 1fr 1fr fit-content(200px) fit-content(20%)
+      fit-content(20%);
+  }
+}

@@ -1,0 +1,108 @@
+/* triplebeat and ellipsis are adapted from https://loading.io/css/ (creative commons license) */
+
+.triplebeat {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 40px;
+}
+
+.triplebeat div {
+  display: inline-block;
+  position: absolute;
+  left: 10%;
+  width: 20%;
+  background: #202020;
+  animation: triplebeat 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.triplebeat div:nth-child(1) {
+  left: 10%;
+  animation-delay: -0.24s;
+}
+
+.triplebeat div:nth-child(2) {
+  left: 40%;
+  animation-delay: -0.12s;
+}
+
+.triplebeat div:nth-child(3) {
+  left: 70%;
+  animation-delay: 0;
+}
+
+@keyframes triplebeat {
+  0% {
+    top: 20%;
+    height: 160%;
+  }
+  50%,
+  100% {
+    top: 60%;
+    height: 80%;
+  }
+}
+
+.ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 40px;
+}
+
+.ellipsis div {
+  position: absolute;
+  top: 32%;
+  width: 16%;
+  height: 32%;
+  border-radius: 50%;
+  background: #202020;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.ellipsis div:nth-child(1) {
+  left: 10%;
+  animation: ellipsis1 0.6s infinite;
+}
+
+.ellipsis div:nth-child(2) {
+  left: 10%;
+  animation: ellipsis2 0.6s infinite;
+}
+
+.ellipsis div:nth-child(3) {
+  left: 40%;
+  animation: ellipsis2 0.6s infinite;
+}
+
+.ellipsis div:nth-child(4) {
+  left: 70%;
+  animation: ellipsis3 0.6s infinite;
+}
+
+@keyframes ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(187.5%, 0);
+  }
+}

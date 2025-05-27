@@ -1,0 +1,127 @@
+{
+  "name": "@userclouds/consoleui",
+  "version": "0.1.0",
+  "homepage": "/",
+  "private": true,
+  "engines": {
+    "node": "18.18.0"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "@babel/core": "^7.16.0",
+    "@cucumber/cucumber": "8.10.0",
+    "@cucumber/messages": "^27.0.0",
+    "@playwright/test": "^1.48.1",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
+    "@reduxjs/toolkit": "^1.9.1",
+    "@sentry/browser": "^7.74.0",
+    "@sentry/react": "^7.73.0",
+    "@svgr/webpack": "^5.5.0",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^12.20.29",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/uuid": "^8.3.3",
+    "@userclouds/sharedui": "0.1.0",
+    "@userclouds/ui-component-lib": "0.1.0",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-named-asset-import": "^0.3.8",
+    "babel-preset-react-app": "^10.0.1",
+    "bfj": "^7.0.2",
+    "browserslist": "^4.18.1",
+    "camelcase": "^6.2.1",
+    "case-sensitive-paths-webpack-plugin": "^2.4.0",
+    "clsx": "^1.2.1",
+    "css-loader": "^6.5.1",
+    "css-minimizer-webpack-plugin": "^3.2.0",
+    "dotenv": "^10.0.0",
+    "dotenv-expand": "^5.1.0",
+    "file-loader": "^6.2.0",
+    "fs-extra": "^10.0.0",
+    "history": "^5.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "jasmine": "^4.5.0",
+    "mini-css-extract-plugin": "^2.4.5",
+    "path-to-regexp": "^6.3.0",
+    "playwright": "^1.27.1",
+    "postcss": "^8.4.31",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-loader": "^6.2.1",
+    "postcss-normalize": "^10.0.1",
+    "postcss-preset-env": "^7.0.1",
+    "react": "^18.2.0",
+    "react-dev-utils": "^12.0.0",
+    "react-dom": "^18.2.0",
+    "react-google-charts": "4.0.5",
+    "react-redux": "^8.0.5",
+    "react-refresh": "^0.14.0",
+    "recharts": "^2.15.1",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.2",
+    "resolve": "^1.20.0",
+    "resolve-url-loader": "^4.0.0",
+    "sass-loader": "^12.3.0",
+    "semver": "^7.5.2",
+    "source-map-loader": "^3.0.0",
+    "style-loader": "^3.3.1",
+    "tailwindcss": "^3.0.2",
+    "terser-webpack-plugin": "^5.2.5",
+    "ts-node": "10.9.2",
+    "typescript": "5.2.2",
+    "uuid": "^8.3.2",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "dev": "PORT=3010 HOST=console.dev.userclouds.tools HTTPS=true SSL_CRT_FILE=../../cert/devlb.crt SSL_KEY_FILE=../../cert/devlb.key NODE_EXTRA_CA_CERTS=../../cert/devlb-CA.crt node scripts/start.js",
+    "build": "node scripts/build.js",
+    "test": "yarn run test:unit && yarn run test:func",
+    "test:unit": "ts-node-esm --project tsconfig.json ../../node_modules/.bin/jasmine --config=./jasmine.json",
+    "test:func": "PORT=3057 NODE_ENV=test node --loader ts-node/esm ../../node_modules/.bin/cucumber-js",
+    "test:func:debug": "DEBUG=true PORT=3057 NODE_ENV=test node inspect ../../node_modules/.bin/cucumber-js",
+    "test:func:debug-ide": "DEBUG=true PORT=3057 NODE_ENV=test node --inspect ../../node_modules/.bin/cucumber-js",
+    "lint": "yarn run eslint --max-warnings=0 src/ features/",
+    "lintfix": "yarn run eslint --max-warnings=0 --fix --quiet src/ features/",
+    "format": "yarn run prettier --write './{src,features,scripts}/**/*.{ts,tsx,js,mjs,json,css,scss,feature}'"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ],
+    "test": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^9.23.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-webpack-plugin": "^5.0.0",
+    "http-proxy-middleware": "^2.0.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-gherkin": "^3.1.2",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "webpack": "^5.64.4",
+    "webpack-dev-server": "^4.6.0",
+    "webpack-manifest-plugin": "^4.0.2",
+    "workbox-webpack-plugin": "^6.4.1"
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "plugin:jsx-a11y/recommended"
+    ]
+  }
+}

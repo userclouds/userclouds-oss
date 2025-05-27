@@ -1,0 +1,17 @@
+:global(#root) {
+  .companyRoleTable {
+    grid-template-columns:
+      minmax(130px, 160px)
+      minmax(max-content, 1fr)
+      minmax(max-content, 1fr)
+      60px;
+  }
+
+  .tenantRoleTable {
+    grid-template-columns:
+      minmax(130px, 160px)
+      minmax(max-content, 1fr)
+      minmax(max-content, 1fr)
+      minmax(max-content, 1fr);
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "id": "0b112683-aa23-4269-b098-ae6fdc1a9d8d",
+      "name": "marketing",
+      "description": "barraging you with emails and such"
+    },
+    {
+      "id": "7f55f479-3822-4976-a8a9-b789d5c6f152",
+      "name": "operational",
+      "description": "Purpose is for basic operation of the site"
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": false
+}

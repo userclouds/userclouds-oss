@@ -1,0 +1,236 @@
+:global(#root) {
+  :global(dialog) {
+    min-width: 600px;
+  }
+
+  .link {
+    display: contents;
+    cursor: pointer;
+    color: var(--primary-button-background);
+  }
+
+  .row {
+    display: contents;
+  }
+
+  .link:hover,
+  .link:focus {
+    color: #8080ff;
+  }
+
+  .link div,
+  .row div {
+    font-size: 13px;
+    line-height: 32px;
+    margin: 2px 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .header {
+    margin: 5px 5px 10px 5px;
+    color: #202020;
+    font-size: 13px;
+    border-bottom: 1px solid #202020;
+    box-sizing: border-box;
+  }
+
+  #progress {
+    width: 80px;
+    height: 40px;
+  }
+
+  .logoImg {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 5px 5px 5px 0;
+    padding: 0 0 0 0;
+    background-size: contain;
+    vertical-align: middle;
+  }
+
+  .socialprovidername {
+    display: inline-block;
+    font-size: 13px;
+    color: #404040;
+  }
+
+  .propertytable {
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+  }
+
+  .propertyname {
+    font-size: 13px;
+    color: #808080;
+    min-width: 100px;
+    margin: 12px 5px;
+  }
+
+  .propertyvalue {
+    font-size: 13px;
+    margin: 5px;
+  }
+
+  .unorderedlist {
+    display: block;
+  }
+
+  .unorderedlist > li {
+    display: list-item;
+    list-style: disc;
+    margin-left: 1em;
+  }
+
+  .queuedfordelete > td {
+    text-decoration: line-through;
+  }
+
+  .propertiesRow {
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 50%;
+    justify-content: center;
+    vertical-align: center;
+  }
+
+  .propertiesElement {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: top;
+    margin-right: 20px;
+    max-width: 100%;
+    min-width: 24rem;
+    resize: horizontal;
+    vertical-align: center;
+  }
+
+  .cardrow {
+    display: grid;
+    grid-template-columns: 47% 47%;
+    grid-gap: 6%;
+  }
+
+  .carddetailsrow {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 3%;
+    margin: 1rem 0;
+    row-gap: 1.5rem;
+    width: 100%;
+
+    label {
+      font-weight: 400;
+      color: #283354;
+    }
+  }
+
+  .selectDetails {
+    width: 100%;
+  }
+
+  .tabledetailsrow {
+    display: grid;
+    grid-template-columns: 15% 25% 25% 26%;
+    grid-gap: 3%;
+    width: 100%;
+  }
+
+  .uuidtablecell {
+    word-wrap: anywhere;
+  }
+
+  .tablecontrols {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .listviewtablecontrols {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 5px;
+    height: fit-content;
+    min-width: 900px;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+  }
+
+  .listviewtablecontrolsTitle {
+    font-weight: 400;
+  }
+
+  .listviewtablecontrolsToolTip {
+    margin-left: auto;
+    margin-right: 0;
+    width: 40px;
+  }
+
+  .listviewtablecontrolsButton {
+    padding: 0 20px;
+    margin: 0;
+  }
+
+  .listviewtablecontrolsButtonGroup > button {
+    padding: 0 20px;
+    margin: 0;
+  }
+
+  .listviewpaginationcontrols {
+    background-color: white;
+    position: sticky;
+    top: 0;
+    padding: 5px 0;
+    margin: 0;
+    gap: 0;
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    height: 40px; /* $table-header-row-height */
+    width: 100%;
+    z-index: 2;
+  }
+
+  /* help us win a specificity race without using !important */
+  .listviewpaginationcontrols > div.listviewpaginationcontrolsdelete {
+    margin-left: 0;
+    /* table cells have 10px left padding, but trash can icon has 2px of overhang from the lid, so this aligns the body */
+    padding-left: 2px;
+  }
+
+  .listviewtabledeletecell {
+    opacity: 0;
+  }
+
+  .listviewtablerow:hover > .listviewtabledeletecell,
+  .listviewtablerow:focus > .listviewtabledeletecell {
+    opacity: 1;
+  }
+
+  .tablePrimaryColumn {
+    font-weight: 600;
+  }
+
+  .emptyState {
+    margin-top: 100px;
+  }
+
+  .tableNotification {
+    margin-block: 10px;
+    width: 100%;
+  }
+
+  .tableNotificationButton {
+    text-decoration: underline;
+  }
+}

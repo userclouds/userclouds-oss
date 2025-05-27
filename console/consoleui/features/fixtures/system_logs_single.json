@@ -1,0 +1,22 @@
+{
+  "has_next": false,
+  "next": "end",
+  "has_prev": false,
+  "data": [
+    {
+      "id": "7cafc9f2-05d5-4fe1-94e7-86c626b5c19c",
+      "created": "2023-06-12T23:33:24.400562Z",
+      "updated": "2023-06-12T23:33:25.105857Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "Type": "app",
+      "ActiveProviderID": "80a2ed23-15bc-46cb-aae6-11ee61b61697",
+      "FollowerProviderIDs": [],
+      "Since": "0001-01-01T00:00:00Z",
+      "Until": "0001-01-01T00:00:00Z",
+      "Error": "",
+      "TotalRecords": 7,
+      "FailedRecords": 0,
+      "WarningRecords": 0
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+image:
+  repository: 'ghcr.io/userclouds/userclouds'
+  tag: ''
+  imagePullPolicy: IfNotPresent
+
+provisionJob:
+  repository: 'ghcr.io/userclouds/automatedprovisioner'
+  additionalAnnotations: {}
+
+# We only need IAM since we write secrets to AWS Secrets Manager
+serviceAccount:
+  name: userclouds-onprem
+  iamRoleARN: ''
+
+config:
+  openTelemetryEndpoint: ''
+  sentry:
+    enabled: false
+    dsn: ''
+    sample_rate: 0
+  replicas: 3
+  db:
+    user: ''
+    host: ''
+    port: 5432
+  companyName: ''
+  customerDomain: ''
+  adminUserEmail: ''
+  skipEnsureAWSSecretsAccess: false
+
+serviceMonitor:
+  enabled: true
+
+userclouds:
+  nodeSelector: {}
+
+redis:
+  nodeSelector: {}
+  resources: {}
+
+userstore:
+  resources: {}
+
+authz:
+  resources: {}
+
+plex:
+  resources: {}
+
+logserver:
+  resources: {}
+
+worker:
+  resources: {}
+
+console:
+  resources: {}
+  ingress:
+    enabled: true
+    scheme: internet-facing
+    additionalAnnotations: {}
+
+webapp:
+  ingress:
+    enabled: true
+    scheme: internet-facing
+    additionalAnnotations: {}
+
+dbproxy:
+  mysql:
+    healthCheckPort: 1200
+    ports: [3306, 3307, 3308, 3309, 3310, 3311, 3312, 3313, 3314, 3315]
+    ingress:
+      enabled: true
+      scheme: internal
+      additionalAnnotations: {}

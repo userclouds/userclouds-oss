@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  background: #fbfcfd;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+body {
+  color: #1b1c1e;
+}
+
+/* DELETE ME SOON */
+textarea {
+  border: 1px solid #6b7280;
+  border-radius: 4px;
+}

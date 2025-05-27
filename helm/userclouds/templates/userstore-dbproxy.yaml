@@ -1,0 +1,109 @@
+
+{{- if .Values.dbproxy.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dbproxy
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "dbproxy.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "dbproxy.selectorLabels" . | nindent 8 }}
+    spec:
+      nodeSelector:
+        {{- include "userclouds.nodeSelector" . | nindent 8 }}
+      serviceAccountName: {{ template "userstore.serviceAccount" . }}
+      volumes:
+        - name: configmap
+          configMap:
+            name: userclouds-configs
+            items:
+              - key: base
+                path: {{ printf "base_%s.yaml" .Values.uc_universe }}
+              - key: dbproxy
+                path: {{ printf "dbproxy/%s.yaml" .Values.uc_universe }}
+      containers:
+        - name: dbproxy
+          image: "{{ include "userclouds.image" . }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - idp
+          {{- include "userclouds.envConfigMap" . | nindent 10 }}
+          env:
+            {{- include "userclouds.envVars" . | nindent 12 }}
+          {{- with .Values.dbproxy.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: configmap
+              mountPath: /userclouds/configmaps
+          ports:
+            - name: userstore
+              containerPort: 5000
+              protocol: TCP
+            - name: internal
+              containerPort: 5001
+              protocol: TCP
+            - name: dbproxy-health
+              containerPort: {{ .Values.config.dbproxy.health_check_port }}
+              protocol: TCP
+          {{ range $port := .Values.config.dbproxy.mysql_ports }}
+            - name: dbp-mysql-{{ $port }}
+              containerPort: {{ $port }}
+              protocol: TCP{{ end }}
+          {{ range $port := .Values.config.dbproxy.postgres_ports }}
+            - name: dbp-pg-{{ $port }}
+              containerPort: {{ $port }}
+              protocol: TCP{{ end }}
+          livenessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: userstore
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: userclouds-dbproxy
+  labels:
+    app.kubernetes.io/component: dbproxy
+    {{- include "userclouds.labels" . | nindent 4 }}
+  annotations:
+    # https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/service/annotations/
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.dbproxy.ingress.domain }}
+    # https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/service/annotations/
+    service.beta.kubernetes.io/aws-load-balancer-name: userclouds-dbproxy
+    service.beta.kubernetes.io/aws-load-balancer-type: external
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+    service.beta.kubernetes.io/aws-load-balancer-ip-address-type: ipv4
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+    service.beta.kubernetes.io/aws-load-balancer-scheme: {{ .Values.dbproxy.ingress.scheme }}
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: tcp
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "{{ .Values.config.dbproxy.health_check_port }}"
+spec:
+  type: LoadBalancer
+  selector:
+    {{- include "dbproxy.selectorLabels" . | nindent 6 }}
+  ports:
+    - name: dbproxy-health
+      protocol: TCP
+      port: {{ .Values.config.dbproxy.health_check_port }}
+    {{ range $port := .Values.config.dbproxy.mysql_ports }}
+    - name: dbp-mysql-{{ $port }}
+      port: {{ $port }}
+      protocol: TCP{{ end }}
+    {{ range $port := .Values.config.dbproxy.postgres_ports }}
+    - name: dbp-pg-{{ $port }}
+      port: {{ $port }}
+      protocol: TCP{{ end }}
+{{- end }}

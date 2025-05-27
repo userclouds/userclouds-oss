@@ -1,0 +1,11 @@
+:global(#root) {
+  .transformerstable {
+    /* grid-template-columns: 50px 1fr fit-content(180px) fit-content(30%) 60px; */
+    grid-template-columns:
+      50px
+      minmax(240px, 1fr)
+      minmax(max-content, 1fr)
+      minmax(max-content, 1fr)
+      60px;
+  }
+}

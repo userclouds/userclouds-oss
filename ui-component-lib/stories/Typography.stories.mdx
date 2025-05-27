@@ -1,0 +1,72 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import Heading from '../src/components/Heading';
+import Text from '../src/components/Text';
+
+<Meta title="Typography" />
+
+# Typography
+
+The `<Heading>` and `<Text>` components are the root for all type in UserClouds UI. Any text used in the UI should use one of these components. Complete documentation for each of these components is available in the Components section.
+
+- [Heading](/docs/components-heading--size-1)
+- [Text](/docs/components-text--size-1)
+
+## Headlines
+
+Uses the `<Heading>` component with a `size` prop. If for page structure and SEO reasons the element should be a `h1`, `h2`, etc., this component takes an optional `headingLevel` prop. Otherwise the element is a `<div>`.
+
+<Canvas>
+  <Story name="Heading 1">
+    <Heading size={1}>
+      UserClouds was born out of problems we’ve been solving, together and
+      separately, for almost two decades, from Microsoft to startups to
+      Facebook.
+    </Heading>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Heading 2">
+    <Heading size={2}>
+      UserClouds was born out of problems we’ve been solving, together and
+      separately, for almost two decades, from Microsoft to startups to
+      Facebook.
+    </Heading>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Heading 3">
+    <Heading size={3}>
+      UserClouds was born out of problems we’ve been solving, together and
+      separately, for almost two decades, from Microsoft to startups to
+      Facebook.
+    </Heading>
+  </Story>
+</Canvas>
+
+## Text
+
+Uses the `<Text>` component with a `size` prop. This component defaults to `<p>` element but has an optional `elementName` for other elements like `<span>`, `<code>`, etc.
+
+<Canvas>
+  <Story name="Text 1">
+    <Text size={1}>
+      UserClouds was born out of problems we’ve been solving, together and
+      separately, for almost two decades, from Microsoft to startups to
+      Facebook. that understands the world of trade management for
+      indirect-heavy businesses
+    </Text>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Text 2">
+    <Text size={2}>
+      UserClouds was born out of problems we’ve been solving, together and
+      separately, for almost two decades, from Microsoft to startups to
+      Facebook. that understands the world of trade management for
+      indirect-heavy businesses
+    </Text>
+  </Story>
+</Canvas>

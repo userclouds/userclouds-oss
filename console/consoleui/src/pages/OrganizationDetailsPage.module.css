@@ -1,0 +1,5 @@
+:global(#root) {
+  .orgloginappstable {
+    grid-template-columns: 1fr;
+  }
+}

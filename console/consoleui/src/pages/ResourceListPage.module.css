@@ -1,0 +1,7 @@
+:global(#root) {
+  .resourcestatustable {
+    grid-template-columns:
+      max-content repeat(4, minmax(max-content, 1fr))
+      repeat(3, 100px);
+  }
+}

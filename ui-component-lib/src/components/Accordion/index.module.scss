@@ -1,0 +1,54 @@
+@use '../../_variables.module.css';
+
+// Places accordion in column with no gap
+.accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordionItem {
+  border-top: 1px solid var(--color-neutral-300);
+
+  &[open] {
+    .icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.summary {
+  outline: none;
+  cursor: pointer;
+  list-style: none;
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+
+  &::marker,
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
+.title {
+  color: var(--color-black);
+  font-family: var(--font-family);
+  line-height: var(--heading-3-line-height);
+  font-size: var(--heading-3-font-size);
+  font-weight: 400;
+}
+
+.content {
+  padding-bottom: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.icon {
+  transition: transform var(--input-transition-default);
+  color: var(--color-neutral-700);
+  flex: none;
+}

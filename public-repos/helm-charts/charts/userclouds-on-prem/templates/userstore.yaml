@@ -1,0 +1,93 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userclouds-userstore
+  labels:
+    app.kubernetes.io/component: userstore
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.config.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: userstore
+     {{- include "userclouds.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: userstore
+        {{- include "userclouds.labels" . | nindent 8 }}
+    spec:
+      {{- if .Values.userclouds.nodeSelector }}
+      nodeSelector:
+        {{ toYaml .Values.userclouds.nodeSelector | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      volumes:
+        - name: configmap
+          configMap:
+            name: userclouds-configs
+            items:
+              - key: base
+                path: base_onprem.yaml
+              - key: idp
+                path: idp/onprem.yaml
+      containers:
+        - name: userstore
+          image: "{{ include "userclouds.image" . }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - idp
+          env:
+            {{- include "userclouds.envVars" . | nindent 10 }}
+          resources:
+             {{- toYaml .Values.userstore.resources | nindent 12 }}
+          volumeMounts:
+            - name: configmap
+              mountPath: /userclouds/configmaps
+          ports:
+            - name: userstore
+              containerPort: 5000
+              protocol: TCP
+            - name: internal
+              containerPort: 5001
+              protocol: TCP
+            - name: dbproxy-health
+              containerPort: {{ .Values.dbproxy.mysql.healthCheckPort }}
+              protocol: TCP
+          {{ range $port := .Values.dbproxy.mysql.ports }}
+            - name: dbp-mysql-{{ $port }}
+              containerPort: {{ $port }}
+              protocol: TCP{{ end }}
+          livenessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: userstore
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: userstore
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userclouds-userstore
+  labels:
+    app.kubernetes.io/component: userstore
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/component: userstore
+    {{- include "userclouds.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: service
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+    - name: internal
+      protocol: TCP
+      port: 5001
+

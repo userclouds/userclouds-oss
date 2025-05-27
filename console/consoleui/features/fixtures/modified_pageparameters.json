@@ -1,0 +1,451 @@
+{
+  "tenant_id": "41ab79a8-0dff-418e-9d42-e1694469120a",
+  "app_id": "90ffb499-2549-470e-99cd-77f7008e2735",
+  "page_type_parameters": {
+    "every_page": {
+      "actionButtonBorderColor": {
+        "parameter_name": "actionButtonBorderColor",
+        "current_value": "#ff0000",
+        "default_value": "#1090FF"
+      },
+      "actionButtonFillColor": {
+        "parameter_name": "actionButtonFillColor",
+        "current_value": "#00ff00",
+        "default_value": "#1090FF"
+      },
+      "actionButtonTextColor": {
+        "parameter_name": "actionButtonTextColor",
+        "current_value": "#FFFFFF",
+        "default_value": "#FFFFFF"
+      },
+      "authenticationMethods": {
+        "parameter_name": "authenticationMethods",
+        "current_value": "passwordless,facebook,linkedin,password",
+        "default_value": "password,passwordless"
+      },
+      "disabledAuthenticationMethods": {
+        "parameter_name": "disabledAuthenticationMethods",
+        "current_value": "",
+        "default_value": ""
+      },
+      "disabledMFAMethods": {
+        "parameter_name": "disabledMFAMethods",
+        "current_value": "sms",
+        "default_value": "sms"
+      },
+      "enabledAuthenticationMethods": {
+        "parameter_name": "enabledAuthenticationMethods",
+        "current_value": "password,passwordless,facebook,google,linkedin",
+        "default_value": "password,passwordless,facebook,google,linkedin"
+      },
+      "enabledMFAMethods": {
+        "parameter_name": "enabledMFAMethods",
+        "current_value": "email,authenticator,recovery_code",
+        "default_value": "email,authenticator,recovery_code"
+      },
+      "logoImageFile": {
+        "parameter_name": "logoImageFile",
+        "current_value": "",
+        "default_value": ""
+      },
+      "mfaMethods": {
+        "parameter_name": "mfaMethods",
+        "current_value": "authenticator",
+        "default_value": "authenticator"
+      },
+      "mfaRequired": {
+        "parameter_name": "mfaRequired",
+        "current_value": "false",
+        "default_value": "false"
+      },
+      "oidcAuthenticationSettings": {
+        "parameter_name": "oidcAuthenticationSettings",
+        "current_value": "facebook:Facebook:Sign in with Facebook:Sign in to existing account with Facebook,google:Google:Sign in with Google:Sign in to existing account with Google,linkedin:LinkedIn:Sign in with LinkedIn:Sign in to existing account with LinkedIn",
+        "default_value": "facebook:Facebook:Sign in with Facebook:Sign in to existing account with Facebook,google:Google:Sign in with Google:Sign in to existing account with Google,linkedin:LinkedIn:Sign in with LinkedIn:Sign in to existing account with LinkedIn"
+      },
+      "pageBackgroundColor": {
+        "parameter_name": "pageBackgroundColor",
+        "current_value": "#F8F8F8",
+        "default_value": "#F8F8F8"
+      },
+      "pageOrderSocialFirst": {
+        "parameter_name": "pageOrderSocialFirst",
+        "current_value": "true",
+        "default_value": "true"
+      },
+      "pageTextColor": {
+        "parameter_name": "pageTextColor",
+        "current_value": "#505060",
+        "default_value": "#505060"
+      }
+    },
+    "plex_create_user_page": {
+      "actionSubmitButtonText": {
+        "parameter_name": "actionSubmitButtonText",
+        "current_value": "Create",
+        "default_value": "Create"
+      },
+      "allowCreation": {
+        "parameter_name": "allowCreation",
+        "current_value": "false",
+        "default_value": "false"
+      },
+      "createUserDisabledText": {
+        "parameter_name": "createUserDisabledText",
+        "current_value": "Account creation not allowed",
+        "default_value": "Account creation not allowed"
+      },
+      "createUserFailStatusText": {
+        "parameter_name": "createUserFailStatusText",
+        "current_value": "Create user failed",
+        "default_value": "Create user failed"
+      },
+      "createUserStartStatusText": {
+        "parameter_name": "createUserStartStatusText",
+        "current_value": "Creating user...",
+        "default_value": "Creating user..."
+      },
+      "emailLabel": {
+        "parameter_name": "emailLabel",
+        "current_value": "Email",
+        "default_value": "Email"
+      },
+      "footerHTML": {
+        "parameter_name": "footerHTML",
+        "current_value": "Some restrictions apply",
+        "default_value": "Some restrictions apply"
+      },
+      "headingText": {
+        "parameter_name": "headingText",
+        "current_value": "Sign up for Insta",
+        "default_value": "Sign up for Insta"
+      },
+      "loginFailStatusText": {
+        "parameter_name": "loginFailStatusText",
+        "current_value": "Login failed",
+        "default_value": "Login failed"
+      },
+      "loginSuccessStatusText": {
+        "parameter_name": "loginSuccessStatusText",
+        "current_value": "Redirecting...",
+        "default_value": "Redirecting..."
+      },
+      "passwordLabel": {
+        "parameter_name": "passwordLabel",
+        "current_value": "Password",
+        "default_value": "Password"
+      },
+      "requireName": {
+        "parameter_name": "requireName",
+        "current_value": "false",
+        "default_value": "false"
+      },
+      "subheadingText": {
+        "parameter_name": "subheadingText",
+        "current_value": "",
+        "default_value": ""
+      }
+    },
+    "plex_email_exists_page": {
+      "actionSubmitButtonText": {
+        "parameter_name": "actionSubmitButtonText",
+        "current_value": "Sign in to existing account",
+        "default_value": "Sign in to existing account"
+      },
+      "emailExistsCreateAccountText": {
+        "parameter_name": "emailExistsCreateAccountText",
+        "current_value": "No, create a new, separate account",
+        "default_value": "No, create a new, separate account"
+      },
+      "emailExistsLoginText": {
+        "parameter_name": "emailExistsLoginText",
+        "current_value": "No, sign in to my account without adding this method",
+        "default_value": "No, sign in to my account without adding this method"
+      },
+      "footerHTML": {
+        "parameter_name": "footerHTML",
+        "current_value": "",
+        "default_value": ""
+      },
+      "headingText": {
+        "parameter_name": "headingText",
+        "current_value": "Email already in use",
+        "default_value": "Email already in use"
+      },
+      "loginFailStatusText": {
+        "parameter_name": "loginFailStatusText",
+        "current_value": "Login failed",
+        "default_value": "Login failed"
+      },
+      "loginStartStatusText": {
+        "parameter_name": "loginStartStatusText",
+        "current_value": "Signing in...",
+        "default_value": "Signing in..."
+      },
+      "loginSuccessStatusText": {
+        "parameter_name": "loginSuccessStatusText",
+        "current_value": "Redirecting...",
+        "default_value": "Redirecting..."
+      },
+      "passwordLabel": {
+        "parameter_name": "passwordLabel",
+        "current_value": "Password",
+        "default_value": "Password"
+      },
+      "socialRedirectStatusText": {
+        "parameter_name": "socialRedirectStatusText",
+        "current_value": "Redirecting you to sign-in page...",
+        "default_value": "Redirecting you to sign-in page..."
+      },
+      "subheadingText": {
+        "parameter_name": "subheadingText",
+        "current_value": "Your email address is already associated with a UserClouds Console account, using the login method(s) below.\nWould you like to sign in to your existing account, and add this sign in method to that account?",
+        "default_value": "Your email address is already associated with a UserClouds Console account, using the login method(s) below.\nWould you like to sign in to your existing account, and add this sign in method to that account?"
+      },
+      "userNameLabel": {
+        "parameter_name": "userNameLabel",
+        "current_value": "Username",
+        "default_value": "Username"
+      }
+    },
+    "plex_finish_reset_password_page": {
+      "actionSubmitButtonText": {
+        "parameter_name": "actionSubmitButtonText",
+        "current_value": "Sign in",
+        "default_value": "Sign in"
+      },
+      "headingText": {
+        "parameter_name": "headingText",
+        "current_value": "Reset Password",
+        "default_value": "Reset Password"
+      },
+      "missingOTPCodeText": {
+        "parameter_name": "missingOTPCodeText",
+        "current_value": "Missing required 'otp_code' parameter",
+        "default_value": "Missing required 'otp_code' parameter"
+      },
+      "newPasswordLabel": {
+        "parameter_name": "newPasswordLabel",
+        "current_value": "New Password",
+        "default_value": "New Password"
+      },
+      "resetPasswordFailStatusText": {
+        "parameter_name": "resetPasswordFailStatusText",
+        "current_value": "Password change failed",
+        "default_value": "Password change failed"
+      },
+      "resetPasswordStartStatusText": {
+        "parameter_name": "resetPasswordStartStatusText",
+        "current_value": "Changing password...",
+        "default_value": "Changing password..."
+      },
+      "resetPasswordSuccessStatusText": {
+        "parameter_name": "resetPasswordSuccessStatusText",
+        "current_value": "Redirecting...",
+        "default_value": "Redirecting..."
+      }
+    },
+    "plex_login_page": {
+      "actionSubmitButtonText": {
+        "parameter_name": "actionSubmitButtonText",
+        "current_value": "Sign in",
+        "default_value": "Sign in"
+      },
+      "allowCreation": {
+        "parameter_name": "allowCreation",
+        "current_value": "false",
+        "default_value": "false"
+      },
+      "createAccountText": {
+        "parameter_name": "createAccountText",
+        "current_value": "Create an account",
+        "default_value": "Create an account"
+      },
+      "footerHTML": {
+        "parameter_name": "footerHTML",
+        "current_value": "(Taylor's Version)",
+        "default_value": "(Taylor's Version)"
+      },
+      "forgotPasswordText": {
+        "parameter_name": "forgotPasswordText",
+        "current_value": "Forgot username or password?",
+        "default_value": "Forgot username or password?"
+      },
+      "headingText": {
+        "parameter_name": "headingText",
+        "current_value": "Abracadabra",
+        "default_value": "Abracadabra"
+      },
+      "loginFailStatusText": {
+        "parameter_name": "loginFailStatusText",
+        "current_value": "Login failed",
+        "default_value": "Login failed"
+      },
+      "loginStartStatusText": {
+        "parameter_name": "loginStartStatusText",
+        "current_value": "Signing in...",
+        "default_value": "Signing in..."
+      },
+      "loginSuccessStatusText": {
+        "parameter_name": "loginSuccessStatusText",
+        "current_value": "Redirecting...",
+        "default_value": "Redirecting..."
+      },
+      "passwordLabel": {
+        "parameter_name": "passwordLabel",
+        "current_value": "Password",
+        "default_value": "Password"
+      },
+      "passwordResetEnabled": {
+        "parameter_name": "passwordResetEnabled",
+        "current_value": "true",
+        "default_value": "true"
+      },
+      "passwordlessLoginText": {
+        "parameter_name": "passwordlessLoginText",
+        "current_value": "Hate Passwords?...",
+        "default_value": "Hate Passwords?..."
+      },
+      "socialRedirectStatusText": {
+        "parameter_name": "socialRedirectStatusText",
+        "current_value": "Redirecting you to sign-in page...",
+        "default_value": "Redirecting you to sign-in page..."
+      },
+      "subheadingText": {
+        "parameter_name": "subheadingText",
+        "current_value": "...is the password",
+        "default_value": "...is the password"
+      },
+      "userNameLabel": {
+        "parameter_name": "userNameLabel",
+        "current_value": "Username",
+        "default_value": "Username"
+      }
+    },
+    "plex_mfa_channel_page": {
+      "headingText": {
+        "parameter_name": "headingText",
+        "current_value": "Choose a Multifactor authentication method",
+        "default_value": "Choose a Multifactor authentication method"
+      }
+    },
+    "plex_mfa_recovery_code_page": {
+      "headingText": {
+        "parameter_name": "headingText",
+        "current_value": "New Multifactor Recovery Code",
+        "default_value": "New Multifactor Recovery Code"
+      }
+    },
+    "plex_mfa_submit_page": {
+      "actionSubmitButtonText": {
+        "parameter_name": "actionSubmitButtonText",
+        "current_value": "Sign in",
+        "default_value": "Sign in"
+      },
+      "headingText": {
+        "parameter_name": "headingText",
+        "current_value": "Multifactor authentication required",
+        "default_value": "Multifactor authentication required"
+      },
+      "loginFailStatusText": {
+        "parameter_name": "loginFailStatusText",
+        "current_value": "Login failed",
+        "default_value": "Login failed"
+      },
+      "loginStartStatusText": {
+        "parameter_name": "loginStartStatusText",
+        "current_value": "Signing in...",
+        "default_value": "Signing in..."
+      },
+      "loginSuccessStatusText": {
+        "parameter_name": "loginSuccessStatusText",
+        "current_value": "Redirecting...",
+        "default_value": "Redirecting..."
+      },
+      "mfaCodeLabel": {
+        "parameter_name": "mfaCodeLabel",
+        "current_value": "MFA Code",
+        "default_value": "MFA Code"
+      }
+    },
+    "plex_passwordless_login_page": {
+      "actionSubmitButtonText": {
+        "parameter_name": "actionSubmitButtonText",
+        "current_value": "Sign in",
+        "default_value": "Sign in"
+      },
+      "emailLabel": {
+        "parameter_name": "emailLabel",
+        "current_value": "Email",
+        "default_value": "Email"
+      },
+      "headingText": {
+        "parameter_name": "headingText",
+        "current_value": "Sign in to UserClouds Console",
+        "default_value": "Sign in to UserClouds Console"
+      },
+      "loginFailStatusText": {
+        "parameter_name": "loginFailStatusText",
+        "current_value": "Login failed",
+        "default_value": "Login failed"
+      },
+      "loginStartStatusText": {
+        "parameter_name": "loginStartStatusText",
+        "current_value": "Signing in...",
+        "default_value": "Signing in..."
+      },
+      "loginSuccessStatusText": {
+        "parameter_name": "loginSuccessStatusText",
+        "current_value": "Redirecting...",
+        "default_value": "Redirecting..."
+      },
+      "otpCodeLabel": {
+        "parameter_name": "otpCodeLabel",
+        "current_value": "Code",
+        "default_value": "Code"
+      },
+      "passwordlessSendEmailStartStatusText": {
+        "parameter_name": "passwordlessSendEmailStartStatusText",
+        "current_value": "Validating email...",
+        "default_value": "Validating email..."
+      },
+      "passwordlessSendEmailSuccessStatusText": {
+        "parameter_name": "passwordlessSendEmailSuccessStatusText",
+        "current_value": "Email sent! Check for instructions at email address",
+        "default_value": "Email sent! Check for instructions at email address"
+      }
+    },
+    "plex_start_reset_password_page": {
+      "actionSubmitButtonText": {
+        "parameter_name": "actionSubmitButtonText",
+        "current_value": "Reset Password",
+        "default_value": "Reset Password"
+      },
+      "emailLabel": {
+        "parameter_name": "emailLabel",
+        "current_value": "Email",
+        "default_value": "Email"
+      },
+      "headingText": {
+        "parameter_name": "headingText",
+        "current_value": "Reset Password",
+        "default_value": "Reset Password"
+      },
+      "resetPasswordFailStatusText": {
+        "parameter_name": "resetPasswordFailStatusText",
+        "current_value": "Reset password failed",
+        "default_value": "Reset password failed"
+      },
+      "resetPasswordStartStatusText": {
+        "parameter_name": "resetPasswordStartStatusText",
+        "current_value": "Validating email...",
+        "default_value": "Validating email..."
+      },
+      "resetPasswordSuccessStatusText": {
+        "parameter_name": "resetPasswordSuccessStatusText",
+        "current_value": "Please check further instructions at email address",
+        "default_value": "Please check further instructions at email address"
+      }
+    }
+  }
+}

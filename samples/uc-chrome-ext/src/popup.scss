@@ -1,0 +1,56 @@
+@import './_variables.scss';
+
+body {
+  background-color: #eaf1fb;
+  color: #333;
+  margin: 3px;
+  min-width: 240px;
+  padding: 10px;
+}
+
+.container {
+  background: $color-white;
+  border-radius: 10px;
+  height: 100%;
+  padding: 10px;
+}
+
+.centered {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 1em;
+}
+input[type='text'] {
+  border: 1px solid #333;
+  border-radius: 2px;
+  margin-top: 2px;
+  padding: 2px;
+  width: 220px;
+}
+
+input[type='checkbox'] {
+  margin: 0;
+  vertical-align: text-top;
+}
+
+button#logout {
+  display: none;
+  margin: 10px -10px 0 auto;
+}
+button#login {
+  display: block;
+  margin-left: auto;
+}
+button#saveTokenConfig,
+button#cancelEditTokenConfig {
+  display: none;
+}
+
+.logged-in-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

@@ -1,0 +1,10 @@
+{
+  "id": "41ab79a8-0dff-418e-9d42-e1694469120a",
+  "name": "Foo",
+  "company_id": "1ee4497e-c326-4068-94ed-3dcdaaaa53bc",
+  "created": "2023-01-12T00:33:04.195024Z",
+  "updated": "2023-02-09T16:57:43.172454Z",
+  "deleted": "0001-01-01T00:00:00Z",
+  "use_organizations": false,
+  "state": "creating"
+}

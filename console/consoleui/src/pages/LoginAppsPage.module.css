@@ -1,0 +1,5 @@
+:global(#root) {
+  .loginappstable {
+    grid-template-columns: fit-content(60%) 1fr;
+  }
+}

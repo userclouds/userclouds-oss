@@ -1,0 +1,66 @@
+:global(#root) {
+  .querySetSelectorContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-block-end: 20px;
+  }
+
+  .tabGroup {
+    margin-block-end: 1rem;
+  }
+
+  .tooltip {
+    background-color: white;
+    border: 1px solid #a3a3a3;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .tooltipItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .tooltipItemKey {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .tooltipItemValue {
+    font-weight: normal;
+  }
+
+  .legendContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .legendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .legendItemColor {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 2px;
+    background-color: var(--secondary-button-background);
+  }
+
+  .timeSelection {
+    font-size: 1.2rem;
+    margin-top: -0.5rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

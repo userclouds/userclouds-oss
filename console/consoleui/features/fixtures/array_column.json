@@ -1,0 +1,11 @@
+{
+  "id": "123abc45-df3a-4e87-82a0-c706ed0679ee",
+  "name": "phonenumbers",
+  "data_type": {
+    "id": "123abc45-df3a-4e87-82a0-c706ed0679ee",
+    "name": "phonenumber"
+  },
+  "is_array": true,
+  "default_value": "",
+  "index_type": "indexed"
+}

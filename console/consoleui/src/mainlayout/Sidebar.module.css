@@ -1,0 +1,103 @@
+:global(#root) {
+  /*
+  #283354 — Text & Icons
+  #428ED3 — CTAs & Links
+  #F6F8FC — Side Menu & top control bkgd
+  #EAF1FB — Header bar background
+  #979797 — disabled contol
+  #E5E5E5 — Dividers and Rules
+  #FFFFFF — Table bkgd
+  */
+
+  .root {
+    background: #f6f8fc;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif,
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol';
+    font-size: 14px;
+    gap: 16px;
+    left: 0;
+    overflow-y: auto;
+    padding: 10px 13px;
+    position: fixed;
+    top: 55px;
+    width: 230px;
+    z-index: 10;
+  }
+
+  .sectionTitle {
+    font-weight: 500;
+    color: #283354;
+    padding: 4px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sectionIcon {
+    transition: transform 150ms;
+
+    &.isOpen {
+      transform: rotate(180deg);
+    }
+  }
+
+  .sideBarLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sideBarSubLink {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sideBarLink {
+    padding: 6px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #283354;
+    font-weight: 400;
+    white-space: nowrap;
+
+    > svg {
+      /* these icons are all on a 20px-tall canvas inside a 24x24px space. */
+      margin-bottom: -4px;
+    }
+
+    &.isActive {
+      font-weight: 600;
+    }
+
+    &:hover {
+      background-color: #eaf1fb;
+      color: #283354;
+      cursor: pointer;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    }
+  }
+
+  .invisible {
+    visibility: hidden;
+  }
+}

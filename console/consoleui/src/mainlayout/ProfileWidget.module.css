@@ -1,0 +1,86 @@
+:global(#root) {
+  .loginwidgetnavmenu {
+    background: #eaf1fb;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #283354;
+    float: right;
+    font-size: 14px;
+    height: 40px;
+    justify-content: space-between;
+    padding: 0;
+    position: relative;
+    transition: all 0.2s ease;
+    width: fit-content;
+    z-index: 4;
+  }
+
+  .loginwidget:hover,
+  .loginwidget:focus,
+  .loginwidgetnavmenu:hover,
+  .loginwidgetnavmenu:focus {
+    background-color: #f1f2f4;
+    transition: all 0.2s ease;
+  }
+
+  .loginwidget > button,
+  .loginwidgetnavmenu > button {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .loginwidgetdropdown {
+    padding: 0;
+  }
+
+  .loginwidgetdropdown {
+    padding: 15px;
+    top: 40px;
+  }
+  .loginwidgetcontent {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    gap: 5px;
+
+    dt {
+      font-weight: 600;
+    }
+
+    dd {
+      font-weight: 400;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .profilename {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 4px 0;
+    line-height: 16px;
+    box-sizing: border-box;
+  }
+
+  .profileimg {
+    border-radius: 50%;
+    height: 30px;
+    margin: 0 5px 0 10px;
+    width: 30px;
+  }
+
+  .loginwidgetnavmenu hr {
+    margin-top: 5px;
+  }
+
+  .loginwidgetimpersonationbutton {
+    all: revert;
+    color: red;
+  }
+
+  .loginwidgetimpersonationbutton:hover {
+    cursor: pointer;
+  }
+}

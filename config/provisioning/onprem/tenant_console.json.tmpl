@@ -1,0 +1,171 @@
+{
+  "protocol": "https",
+  "sub_domain": "console.{{ .CustomerDomain }}",
+  "tenant": {
+    "id": "41ab79a8-0dff-418e-9d42-e1694469120a",
+    "name": "Console - On Prem",
+    "company_id": "c8564de2-6d04-4706-aef0-4e905b7d7196",
+    "tenant_url": "https://console.tenant.{{ .CustomerDomain }}",
+    "use_organizations": true,
+    "state": "active"
+  },
+  "plex_config": {
+    "plex_map": {
+      "apps": [
+        {
+          "id": "90ffb499-2549-470e-99cd-77f7008e2735",
+          "organization_id": "c8564de2-6d04-4706-aef0-4e905b7d7196",
+          "name": "{{ .CompanyName }} UserClouds Console - On Prem",
+          "client_id": "",
+          "client_secret": "env://UC_API_CLIENT_SECRET",
+          "provider_app_ids": ["3e3de5b2-f789-412b-8df9-859b73acbb98"],
+          "token_validity": {
+            "access": 86400,
+            "refresh": 2592000,
+            "impersonate_user": 3600
+          },
+          "allowed_redirect_uris": [
+            "https://console.{{ .CustomerDomain }}/auth/callback",
+            "https://console.{{ .CustomerDomain }}/auth/invitecallback"
+          ],
+          "allowed_logout_uris": ["https://console.{{ .CustomerDomain }}/"],
+          "grant_types": [
+            "authorization_code",
+            "refresh_token",
+            "client_credentials"
+          ],
+          "page_parameters": {
+            "every_page": {
+              "authenticationMethods": {
+                "parameter_name": "authenticationMethods",
+                "parameter_type": "selected_authentication_methods",
+                "parameter_value": "google"
+              }
+            }
+          }
+        }
+      ],
+      "employee_app": {
+        "id": "6ed14815-2e9f-420e-8954-92396e21363f",
+        "organization_id": "c8564de2-6d04-4706-aef0-4e905b7d7196",
+        "name": "Employee Plex App",
+        "client_id": "",
+        "client_secret": "env://UC_API_CLIENT_SECRET",
+        "provider_app_ids": ["e892e032-bb2f-4ed5-80b3-9bdb4d2b3f80"],
+        "token_validity": {
+          "access": 86400,
+          "refresh": 2592000,
+          "impersonate_user": 3600
+        },
+        "grant_types": [
+          "authorization_code",
+          "refresh_token",
+          "client_credentials"
+        ],
+        "allowed_redirect_uris": [
+          "https://console.{{ .CustomerDomain }}/auth/callback",
+          "https://console.{{ .CustomerDomain }}/auth/invitecallback"
+        ],
+        "allowed_logout_uris": ["https://console.{{ .CustomerDomain }}/"]
+      },
+      "employee_provider": {
+        "id": "b590db57-48ab-4390-8bb2-0f72f6dd8a6a",
+        "name": "Employee IDP Provider",
+        "type": "employee",
+        "uc": {
+          "idp_url": "https://console.tenant.{{ .CustomerDomain }}",
+          "apps": [
+            {
+              "id": "e892e032-bb2f-4ed5-80b3-9bdb4d2b3f80",
+              "name": "Employee IDP App"
+            }
+          ]
+        }
+      },
+      "policy": {
+        "active_provider_id": "a83f8eed-0b5e-4f3f-bcff-ad695d502849"
+      },
+      "providers": [
+        {
+          "id": "a83f8eed-0b5e-4f3f-bcff-ad695d502849",
+          "name": "{{ .CompanyName }} IDP (Console)",
+          "type": "uc",
+          "uc": {
+            "idp_url": "https://console.tenant.{{ .CustomerDomain }}",
+            "apps": [
+              {
+                "id": "3e3de5b2-f789-412b-8df9-859b73acbb98",
+                "name": "UC IDP Console App (dev)"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "oidc_providers": {
+      "providers": [
+        {
+          "type": "facebook",
+          "name": "facebook",
+          "description": "Facebook",
+          "issuer_url": "https://www.facebook.com",
+          "client_id": "",
+          "client_secret": "",
+          "can_use_local_host_redirect": true,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid public_profile email",
+          "is_native": true
+        },
+        {
+          "type": "google",
+          "name": "google",
+          "description": "Google",
+          "issuer_url": "https://accounts.google.com",
+          "client_id": "{{ .GoogleClientID }}",
+          "client_secret": "env://GOOGLE_CLIENT_SECRET",
+          "can_use_local_host_redirect": false,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid profile email",
+          "is_native": true
+        },
+        {
+          "type": "linkedin",
+          "name": "linkedin",
+          "description": "LinkedIn",
+          "issuer_url": "https://www.linkedin.com",
+          "client_id": "",
+          "client_secret": "",
+          "can_use_local_host_redirect": false,
+          "use_local_host_redirect": false,
+          "default_scopes": "openid profile email",
+          "is_native": true
+        },
+        {
+          "additional_scopes": "",
+          "can_use_local_host_redirect": false,
+          "client_id": "",
+          "client_secret": "",
+          "default_scopes": "openid profile email",
+          "description": "Microsoft",
+          "is_native": true,
+          "issuer_url": "https://login.microsoftonline.com/common/v2.0",
+          "name": "microsoft",
+          "type": "microsoft",
+          "use_local_host_redirect": false
+        }
+      ]
+    },
+    "verify_emails": false,
+    "disable_sign_ups": true,
+    "bootstrap_account_emails": ["{{ .AdminUserEmail }}"],
+    "logger": {
+      "gologger": {
+        "required": true,
+        "max_log_level": 5
+      }
+    }
+  },
+  "user_store_schema": {
+    "fields": []
+  }
+}

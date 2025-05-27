@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "id": "daa5334c-a2c6-4a71-b5b1-a40c844797f2",
+      "created": "2023-09-11T23:41:10.672256Z",
+      "updated": "2023-09-11T23:41:10.672256Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "type_name": "new edge type",
+      "source_object_type_id": "f5bce640-f866-4464-af1a-9e7474c4a90c",
+      "target_object_type_id": "1bf2b775-e521-41d3-8b7e-78e89427e6fe",
+      "attributes": [
+        {
+          "name": "attribute0",
+          "direct": false,
+          "inherit": true,
+          "propagate": false
+        },
+        {
+          "name": "attribute1",
+          "direct": true,
+          "inherit": false,
+          "propagate": false
+        }
+      ],
+      "organization_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "has_next": false,
+  "next": "end",
+  "has_prev": false
+}

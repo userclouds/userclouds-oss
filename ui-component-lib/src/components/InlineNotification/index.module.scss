@@ -1,0 +1,56 @@
+@use '../../_variables.module.css';
+
+.root {
+  /* normally a component shouldn't be thinking about it's own alignment
+   * but here we know this component is designed to appear inside cards,
+   * and we know we want it to be full-width, and we know cards set
+   * align-items to "start" by default, so this is necessary and
+   * reasonable
+   */
+  align-self: stretch;
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-family);
+  font-size: var(--text-2-font-size);
+  line-height: var(--text-2-line-height);
+  border-radius: var(--border-radius-small);
+
+  a {
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: inherit;
+    color: inherit;
+  }
+}
+
+.icon {
+  flex: none;
+  position: relative;
+  top: -1px; // Slight horizontal adjustment
+}
+
+// Themes
+
+.info {
+  color: var(--color-black);
+  background-color: var(--color-neutral-100);
+}
+
+.alert {
+  color: var(--color-red-700);
+  background-color: var(--color-red-100);
+}
+
+.success {
+  // Color of text is darker
+  color: var(--color-green-800);
+  background-color: var(--color-green-100);
+
+  // Override icon color for success theme to make it lighter green
+  .icon {
+    color: var(--color-green-600);
+  }
+}

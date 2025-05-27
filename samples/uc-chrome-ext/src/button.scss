@@ -1,0 +1,165 @@
+@import './_variables.scss';
+@import './button-reset.scss';
+
+button {
+  @include button-reset;
+  font-family: $font-family;
+  font-weight: 600;
+  border-radius: $border-radius-default;
+  border-width: 1px;
+  border-style: solid;
+  transition:
+    background-color $input-transition-default,
+    border-color $input-transition-default,
+    box-shadow $input-transition-default;
+  padding: 0px;
+  margin: 0px;
+  min-width: 76px; // Custom size
+
+  &:focus-visible {
+    box-shadow: $input-focus-visible;
+  }
+}
+
+button.dangerous {
+  background-color: $color-red-700;
+  border-color: $color-red-700;
+  color: $color-white;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $color-red-600;
+    border-color: $color-red-600;
+  }
+
+  &[disabled] {
+    cursor: default;
+    background-color: $color-neutral-200;
+    border-color: $color-neutral-200;
+    color: $color-neutral-400;
+  }
+}
+
+button.outline {
+  background-color: $color-white;
+  border-color: $color-neutral-300;
+  color: $color-black;
+  box-shadow: $input-box-shadow;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: $color-black;
+    box-shadow: $input-box-shadow;
+  }
+
+  &[disabled] {
+    cursor: default;
+    border-color: $color-neutral-200;
+    color: $color-neutral-300;
+  }
+}
+
+button.ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: $color-black;
+  padding: 0px 5px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $color-neutral-100;
+    border-color: $color-neutral-100;
+    color: $color-black;
+  }
+
+  &[disabled] {
+    cursor: default;
+    background-color: transparent;
+    border-color: transparent;
+    color: $color-neutral-300;
+  }
+}
+
+button.primary {
+  background-color: #428ed3;
+  color: $color-white;
+  padding: 7px;
+  width: fit-content;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: $color-black;
+    box-shadow: $input-box-shadow;
+  }
+
+  &[disabled] {
+    cursor: default;
+    border-color: $color-neutral-200;
+    color: $color-neutral-300;
+  }
+}
+
+button.secondary {
+  background-color: $color-neutral-200;
+  border-color: $color-neutral-200;
+  color: $color-black;
+  padding: 7px;
+  width: fit-content;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $color-neutral-100;
+    border-color: $color-neutral-100;
+  }
+
+  &[disabled] {
+    cursor: default;
+    background-color: $color-neutral-100;
+    border-color: $color-neutral-100;
+    color: $color-neutral-300;
+  }
+}
+
+button.medium {
+  height: $input-height-medium;
+  line-height: $input-height-medium - 2; // Needed to align text in center
+  padding: 0 $space-4;
+  font-size: $text-1-font-size;
+}
+
+button.small {
+  height: $input-height-small;
+  line-height: $input-height-small - 1; // Needed to align text in center
+  padding: 0 $space-3;
+  font-size: $text-2-font-size;
+  border-radius: $border-radius-medium;
+}
+
+button.full {
+  width: 100%;
+}
+
+button.iconLeft,
+button.iconRight {
+  display: flex;
+}
+
+button.isLoading {
+  position: relative;
+
+  .wrap {
+    visibility: hidden;
+  }
+
+  .loaderDots {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}

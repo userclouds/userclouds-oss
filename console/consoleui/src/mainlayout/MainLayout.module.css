@@ -1,0 +1,73 @@
+:global(#root) {
+  .maingrid {
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas:
+      'topnav topnav'
+      'sidenav navbody';
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .topnav {
+    grid-area: topnav;
+    display: flex;
+    flex-direction: row;
+    background-color: #202020;
+    padding: 15px;
+    box-shadow: 0px 0px 10px 10px rgb(0 0 0 / 10%);
+    overflow: hidden;
+  }
+
+  .heading {
+    display: inline-block;
+    color: #ffffff;
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    overflow: hidden;
+  }
+
+  .divider {
+    display: inline-block;
+    height: 100%;
+    width: 0px;
+    margin: 0px 10px;
+    border-right: 2px solid #808080;
+  }
+
+  .topnav svg {
+    color: #ffffff;
+  }
+
+  .label {
+    display: inline-block;
+    color: #ffffff;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    margin: 0px 10px;
+  }
+
+  #companyselector {
+    min-width: 50px;
+  }
+
+  #tenantselector {
+    min-width: 50px;
+  }
+
+  .sidenav {
+    grid-area: sidenav;
+    border-right: 1px solid #808080;
+    padding: 20px;
+  }
+
+  .navbody {
+    grid-area: navbody;
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}

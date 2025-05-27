@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ template "logserver.serviceAccount" . }}
+  labels:
+     {{- include "userclouds.labels" . | nindent 4 }}
+  annotations:
+    eks.amazonaws.com/role-arn: {{ .Values.roles.logserver }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logserver
+  labels:
+    userclouds.sla: critical
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.logserver.replicas | default .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "logserver.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "logserver.selectorLabels" . | nindent 8 }}
+    spec:
+      nodeSelector:
+        {{- include "userclouds.nodeSelector" . | nindent 8 }}
+      serviceAccountName: {{ template "logserver.serviceAccount" . }}
+      volumes:
+        - name: configmap
+          configMap:
+            name: userclouds-configs
+            items:
+              - key: base
+                path: {{ printf "base_%s.yaml" .Values.uc_universe }}
+              - key: logserver
+                path: {{ printf "logserver/%s.yaml" .Values.uc_universe }}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  {{- include "logserver.selectorLabels" . | nindent 18 }}
+      containers:
+        - name: logserver
+          image: "{{ include "userclouds.image" . }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - logserver
+          {{- include "userclouds.envConfigMap" . | nindent 10 }}
+          env:
+            {{- include "userclouds.envVars" . | nindent 12 }}
+          resources:
+            limits:
+              cpu: 0.2
+              memory: 512Mi
+            requests:
+              cpu: 0.1
+              memory: 256Mi
+          {{- include "userclouds.lifecycleDrain" . | nindent 10 }}
+          volumeMounts:
+            - name: configmap
+              mountPath: /userclouds/configmaps
+          ports:
+            - name: logserver
+              containerPort: 5000
+              protocol: TCP
+            - name: internal
+              containerPort: 5001
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: /healthcheck
+              port: logserver
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: logserver
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: logserver
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+      {{- include "logserver.selectorLabels" . | nindent 6 }}
+  ports:
+    - name: service
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+    - name: internal
+      protocol: TCP
+      port: 5001
+
+

@@ -1,0 +1,15 @@
+{
+  "oidc_provider": {
+    "type": "custom",
+    "name": "greatUniqueName",
+    "description": "wonderful description",
+    "issuer_url": "myurl.com",
+    "client_id": "aclientid",
+    "client_secret": "secret",
+    "can_use_local_host_redirect": false,
+    "use_local_host_redirect": false,
+    "default_scopes": "openid profile email",
+    "additional_scopes": "",
+    "is_native": false
+  }
+}

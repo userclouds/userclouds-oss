@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "id": "1e742248-fdde-4c88-9ea7-2c2106ec7aa8",
+      "created": "2023-06-23T23:03:04.644028Z",
+      "updated": "2023-06-23T23:03:04.644028Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "AllowAll",
+      "description": "This template allows all access.",
+      "function": "function policy(context, params) {\n\t\treturn true;\n\t}",
+      "version": 0
+    },
+    {
+      "id": "aad2bf25-311f-467e-9169-a6a89b6d34a6",
+      "created": "2023-06-23T23:03:04.6563Z",
+      "updated": "2023-06-23T23:03:04.6563Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "CheckAttribute",
+      "description": "This template returns the value of checkAttribute on the given parameters.",
+      "function": "function policy(context, params) {\n\t\tconst id1 = params.userIDUsage === \"id1\" ? context.user.id : params.id1;\n\t\tconst id2 = params.userIDUsage === \"id2\" ? context.user.id : params.id2;\n\t\tconst attribute = params.attribute;\n\t\tif (!id1 || !id2 || !attribute) {\n\t\t\treturn false;\n\t\t}\n\t\treturn checkAttribute(id1, id2, attribute);\n\t}",
+      "version": 0
+    },
+    {
+      "id": "c9cfe092-dbc2-4aca-a68d-85eb85126526",
+      "created": "2023-06-27T00:47:15.077853Z",
+      "updated": "2023-06-27T00:47:15.077853Z",
+      "deleted": "0001-01-01T00:00:00Z",
+      "name": "foo",
+      "description": "bar",
+      "function": "function policy(context, params) {\n  return !!true;\n}",
+      "version": 0
+    }
+  ],
+  "has_next": true,
+  "next": "id:8def2e9f-0c6a-489a-8549-4a673ad001e9",
+  "has_prev": false
+}

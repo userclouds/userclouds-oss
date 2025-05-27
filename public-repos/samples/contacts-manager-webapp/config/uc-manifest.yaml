@@ -1,0 +1,244 @@
+resources:
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_email
+      resource_uuids:
+        __DEFAULT: 2c7a7c9b-90e8-47e4-8f6e-ec73bd2dec16
+        seinfeldenterprises-contacts: 2c7a7c9b-90e8-47e4-8f6e-ec73bd2dec16
+      attributes:
+        index_type: indexed
+        is_array: false
+        name: email
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_picture
+      resource_uuids:
+        __DEFAULT: 4d4d0757-3bc2-424d-9caf-a930edb49b69
+        seinfeldenterprises-contacts: 4d4d0757-3bc2-424d-9caf-a930edb49b69
+      attributes:
+        index_type: none
+        is_array: false
+        name: picture
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_nickname
+      resource_uuids:
+        __DEFAULT: 83cc42b0-da8c-4a61-9db1-da70f21bab60
+        seinfeldenterprises-contacts: 83cc42b0-da8c-4a61-9db1-da70f21bab60
+      attributes:
+        index_type: none
+        is_array: false
+        name: nickname
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_phone_number
+      resource_uuids:
+        __DEFAULT: f9cbaf45-32fd-43e2-a771-d130c13da940
+        seinfeldenterprises-contacts: f9cbaf45-32fd-43e2-a771-d130c13da940
+      attributes:
+        index_type: none
+        is_array: false
+        name: phone_number
+        type: phonenumber
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_name
+      resource_uuids:
+        __DEFAULT: fe20fd48-a006-4ad8-9208-4aad540d8794
+        seinfeldenterprises-contacts: fe20fd48-a006-4ad8-9208-4aad540d8794
+      attributes:
+        index_type: indexed
+        is_array: false
+        name: name
+        type: string
+    - uc_terraform_type: userstore_column_soft_deleted_retention_duration
+      manifest_id: a016eb24-bef9-4b8a-a96d-7330c9739824
+      resource_uuids:
+        __DEFAULT: a016eb24-bef9-4b8a-a96d-7330c9739824
+        seinfeldenterprises-contacts: a016eb24-bef9-4b8a-a96d-7330c9739824
+      attributes:
+        column_id: '@UC_MANIFEST_ID("userstore_column_email").id'
+        duration:
+            duration: 1
+            unit: year
+        duration_type: softdeleted
+        purpose_id: '@UC_MANIFEST_ID("userstore_purpose_fraud").id'
+    - uc_terraform_type: userstore_column_soft_deleted_retention_duration
+      manifest_id: e96b2248-8860-4784-b98e-cc08c5f30457
+      resource_uuids:
+        __DEFAULT: e96b2248-8860-4784-b98e-cc08c5f30457
+        seinfeldenterprises-contacts: e96b2248-8860-4784-b98e-cc08c5f30457
+      attributes:
+        column_id: '@UC_MANIFEST_ID("userstore_column_phone_number").id'
+        duration:
+            duration: 5
+            unit: year
+        duration_type: softdeleted
+        purpose_id: '@UC_MANIFEST_ID("userstore_purpose_fraud").id'
+    - uc_terraform_type: userstore_accessor
+      manifest_id: userstore_accessor_GetTokenizedUserData
+      resource_uuids:
+        __DEFAULT: 8a83be40-59be-4a8a-89d8-dd82c1f83412
+        seinfeldenterprises-contacts: 8a83be40-59be-4a8a-89d8-dd82c1f83412
+      attributes:
+        access_policy: '@UC_SYSTEM_OBJECT("access_policy", "AllowAll")'
+        columns:
+            - column: '@UC_MANIFEST_ID("userstore_column_email").id'
+              transformer: '@UC_MANIFEST_ID("transformer_RandomizeEmail").id'
+            - column: '@UC_MANIFEST_ID("userstore_column_name").id'
+              transformer: '@UC_MANIFEST_ID("transformer_StringToID").id'
+            - column: '@UC_MANIFEST_ID("userstore_column_nickname").id'
+              transformer: '@UC_MANIFEST_ID("transformer_MaskString").id'
+            - column: '@UC_MANIFEST_ID("userstore_column_phone_number").id'
+              transformer: '@UC_MANIFEST_ID("transformer_RandomizePhonePreserveAreaCodes2").id'
+            - column: '@UC_SYSTEM_OBJECT("userstore_column", "id")'
+              transformer: '@UC_SYSTEM_OBJECT("transformer", "PassthroughUnchangedData")'
+        data_life_cycle_state: live
+        description: GetTokenizedUserData
+        name: GetTokenizedUserData
+        purposes:
+            - '@UC_SYSTEM_OBJECT("userstore_purpose", "operational")'
+        selector_config:
+            where_clause: '{id} = ANY(?)'
+        token_access_policy: 3f380e42-0b21-4570-a312-91e1b80386fa
+    - uc_terraform_type: userstore_accessor
+      manifest_id: userstore_accessor_GetTokenizedPII
+      resource_uuids:
+        __DEFAULT: 8f3707e5-b0f4-420f-95a5-a6afb4faf11d
+        seinfeldenterprises-contacts: 8f3707e5-b0f4-420f-95a5-a6afb4faf11d
+      attributes:
+        access_policy: '@UC_SYSTEM_OBJECT("access_policy", "AllowAll")'
+        columns:
+            - column: '@UC_MANIFEST_ID("userstore_column_email").id'
+              transformer: '@UC_MANIFEST_ID("transformer_RandomizeEmailByRef").id'
+            - column: '@UC_MANIFEST_ID("userstore_column_phone_number").id'
+              transformer: '@UC_MANIFEST_ID("transformer_RandomizePhonePreserveAreaCodesByRef").id'
+        data_life_cycle_state: live
+        name: GetTokenizedPII
+        purposes:
+            - '@UC_SYSTEM_OBJECT("userstore_purpose", "operational")'
+        selector_config:
+            where_clause: '{id} = ?'
+        token_access_policy: 3f380e42-0b21-4570-a312-91e1b80386fa
+    - uc_terraform_type: userstore_mutator
+      manifest_id: userstore_mutator_SaveUser
+      resource_uuids:
+        __DEFAULT: 17e37de3-c1dc-40d8-9087-e02044ce1470
+        seinfeldenterprises-contacts: 17e37de3-c1dc-40d8-9087-e02044ce1470
+      attributes:
+        access_policy: '@UC_SYSTEM_OBJECT("access_policy", "AllowAll")'
+        columns:
+            - column: '@UC_MANIFEST_ID("userstore_column_email").id'
+              normalizer: '@UC_SYSTEM_OBJECT("transformer", "PassthroughUnchangedData")'
+            - column: '@UC_MANIFEST_ID("userstore_column_nickname").id'
+              normalizer: '@UC_SYSTEM_OBJECT("transformer", "PassthroughUnchangedData")'
+            - column: '@UC_MANIFEST_ID("userstore_column_name").id'
+              normalizer: '@UC_SYSTEM_OBJECT("transformer", "PassthroughUnchangedData")'
+            - column: '@UC_MANIFEST_ID("userstore_column_phone_number").id'
+              normalizer: '@UC_SYSTEM_OBJECT("transformer", "PassthroughUnchangedData")'
+        name: SaveUser
+        selector_config:
+            where_clause: '{id} = ?'
+    - uc_terraform_type: userstore_purpose
+      manifest_id: userstore_purpose_marketing
+      resource_uuids:
+        __DEFAULT: bc8e77f0-3104-4844-8a8c-c791908f947b
+        seinfeldenterprises-contacts: bc8e77f0-3104-4844-8a8c-c791908f947b
+      attributes:
+        description: Purpose is for marketing to users
+        name: marketing
+    - uc_terraform_type: userstore_purpose
+      manifest_id: userstore_purpose_fraud
+      resource_uuids:
+        __DEFAULT: c549d6f8-324b-417f-bbc0-77bd18d7fe9a
+        seinfeldenterprises-contacts: c549d6f8-324b-417f-bbc0-77bd18d7fe9a
+      attributes:
+        description: fraud
+        name: fraud
+    - uc_terraform_type: transformer
+      manifest_id: transformer_RandomizePhonePreserveAreaCodes2
+      resource_uuids:
+        __DEFAULT: 53fe496f-1381-481c-aebc-62c9410bdf87
+        seinfeldenterprises-contacts: 53fe496f-1381-481c-aebc-62c9410bdf87
+      attributes:
+        description: randomizes digits of a phone number except for the area code
+        function: '@FILE("./uc-manifest_values/transformer_RandomizePhonePreserveAreaCodes2_function.js")'
+        input_type: phonenumber
+        name: RandomizePhonePreserveAreaCodes2
+        output_type: phonenumber
+        parameters: '{}'
+        reuse_existing_token: true
+        transform_type: tokenizebyvalue
+    - uc_terraform_type: transformer
+      manifest_id: transformer_StringToID
+      resource_uuids:
+        __DEFAULT: 8c4fc2b1-9eb5-4f2d-8efa-fb65896f70cc
+        seinfeldenterprises-contacts: 8c4fc2b1-9eb5-4f2d-8efa-fb65896f70cc
+      attributes:
+        description: This policy generates a masked string.
+        function: '@FILE("./uc-manifest_values/transformer_StringToID_function.js")'
+        input_type: string
+        name: StringToID
+        output_type: string
+        parameters: |-
+            [{
+                    "PreserveValue": true
+            }, {
+                    "PreserveValue": false,
+                    "PreserveChars": 1,
+                    "FinalLength": 12
+            }]
+        reuse_existing_token: true
+        transform_type: tokenizebyvalue
+    - uc_terraform_type: transformer
+      manifest_id: transformer_RandomizeEmail
+      resource_uuids:
+        __DEFAULT: a731ac0d-2252-419c-8b37-3d9111e32739
+        seinfeldenterprises-contacts: a731ac0d-2252-419c-8b37-3d9111e32739
+      attributes:
+        description: randomizes email keeping the length of the address and the host and the same TLD
+        function: '@FILE("./uc-manifest_values/transformer_RandomizeEmail_function.js")'
+        input_type: string
+        name: RandomizeEmail
+        output_type: string
+        parameters: '{}'
+        transform_type: tokenizebyvalue
+    - uc_terraform_type: transformer
+      manifest_id: transformer_RandomizePhonePreserveAreaCodesByRef
+      resource_uuids:
+        __DEFAULT: a9f70bc2-1fb5-4da6-b96e-2317cfc47758
+        seinfeldenterprises-contacts: a9f70bc2-1fb5-4da6-b96e-2317cfc47758
+      attributes:
+        description: randomizes digits of a phone number except for the area code
+        function: '@FILE("./uc-manifest_values/transformer_RandomizePhonePreserveAreaCodesByRef_function.js")'
+        input_type: phonenumber
+        name: RandomizePhonePreserveAreaCodesByRef
+        output_type: phonenumber
+        parameters: '{}'
+        reuse_existing_token: true
+        transform_type: tokenizebyreference
+    - uc_terraform_type: transformer
+      manifest_id: transformer_MaskString
+      resource_uuids:
+        __DEFAULT: b31f35bf-b015-4b22-8a6c-e98ce3651bd3
+        seinfeldenterprises-contacts: b31f35bf-b015-4b22-8a6c-e98ce3651bd3
+      attributes:
+        description: masks string
+        function: '@FILE("./uc-manifest_values/transformer_MaskString_function.js")'
+        input_type: string
+        name: MaskString
+        output_type: string
+        parameters: '{}'
+        reuse_existing_token: true
+        transform_type: tokenizebyvalue
+    - uc_terraform_type: transformer
+      manifest_id: transformer_RandomizeEmailByRef
+      resource_uuids:
+        __DEFAULT: f08edaa9-0480-449d-bb18-452cf599eba1
+        seinfeldenterprises-contacts: f08edaa9-0480-449d-bb18-452cf599eba1
+      attributes:
+        description: randomizes email keeping the length of the address and the host and the same TLD
+        function: '@FILE("./uc-manifest_values/transformer_RandomizeEmailByRef_function.js")'
+        input_type: string
+        name: RandomizeEmailByRef
+        output_type: string
+        parameters: '{}'
+        transform_type: tokenizebyreference

@@ -1,0 +1,88 @@
+{{- if .Values.webapp.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: userclouds-on-prem-webapp
+  annotations:
+    alb.ingress.kubernetes.io/load-balancer-name: userclouds-on-prem-webapp
+    alb.ingress.kubernetes.io/scheme: {{ .Values.webapp.ingress.scheme }}
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS13-1-2-2021-06
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+    alb.ingress.kubernetes.io/healthcheck-path: "/healthcheck"
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "30"
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: "5"
+    alb.ingress.kubernetes.io/success-codes: "200"
+    alb.ingress.kubernetes.io/healthy-threshold-count: "2"
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: "2"
+    {{- if .Values.webapp.ingress.additionalAnnotations }}
+    {{ toYaml  .Values.webapp.ingress.additionalAnnotations | nindent 4 }}
+    {{- end }}
+spec:
+  ingressClassName: alb
+  defaultBackend:
+    service:
+      name: userclouds-plex
+      port:
+        number: 80
+  rules:
+  - host: {{ .Values.config.customerDomain }}
+    http: &uc_http_routes
+      paths:
+      - backend:
+          service:
+            name: userclouds-authz
+            port:
+              number: 80
+        path: /authz/
+        pathType: Prefix
+      - backend:
+          service:
+            name: userclouds-authz
+            port:
+              number: 80
+        path: /auditlog/
+        pathType: Prefix
+      - backend:
+          service:
+            name: userclouds-logserver
+            port:
+              number: 80
+        path: /logserver/
+        pathType: Prefix
+      - backend:
+          service:
+            name: userclouds-userstore
+            port:
+              number: 80
+        path: /authn/
+        pathType: Prefix
+      - backend:
+          service:
+            name: userclouds-userstore
+            port:
+              number: 80
+        path: /userevent/
+        pathType: Prefix
+      - backend:
+          service:
+            name: userclouds-userstore
+            port:
+              number: 80
+        path: /userstore/
+        pathType: Prefix
+      - backend:
+          service:
+            name: userclouds-userstore
+            port:
+              number: 80
+        path: /tokenizer/
+        pathType: Prefix
+  - host: "*.tenant.{{ .Values.config.customerDomain }}"
+    http: *uc_http_routes
+
+{{- end }}

@@ -1,0 +1,146 @@
+@use '../../_variables.module.css';
+
+.root {
+  display: inline-flex;
+  z-index: 0;
+  width: 100%;
+  position: relative;
+  padding-left: var(--input-padding-default);
+  padding-right: var(--input-padding-default);
+  height: 40px;
+
+  &.innerLeftRoot {
+    padding-left: 0;
+    color: var(--color-neutral-600);
+  }
+
+  &.innerRightRoot {
+    padding-right: 0;
+  }
+
+  &:hover .wrapper {
+    border-color: var(--color-neutral-600);
+  }
+}
+
+.input {
+  position: relative;
+  font-family: var(--font-family);
+  flex: 1;
+  border: 0;
+  vertical-align: middle;
+  background: transparent;
+  color: var(--color-black);
+  min-width: 0;
+  width: 100%;
+  z-index: 1;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus ~ .wrapper {
+    border-color: var(--color-black);
+  }
+
+  &:focus-visible ~ .wrapper {
+    box-shadow: var(--input-focus-visible);
+  }
+  &[disabled] {
+    color: var(--color-neutral-400);
+  }
+
+  &::placeholder {
+    font-style: italic;
+    color: var(--color-neutral-600);
+  }
+}
+
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--border-radius-default);
+  z-index: 0;
+  background: var(--color-white);
+  transition: border-color var(--input-transition-default);
+  box-shadow: var(--input-box-shadow);
+}
+
+.innerLeft,
+.innerRight {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.innerLeft {
+  padding-left: var(--space-3);
+  padding-right: var(--space-2);
+  cursor: text;
+}
+
+.innerRight {
+  a,
+  button {
+    padding-right: var(--space-3);
+    padding-left: var(--space-2);
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.hasError {
+  .input {
+    color: var(--color-red-700);
+  }
+  .wrapper {
+    border-color: var(--color-red-700);
+  }
+}
+
+.disabled {
+  .wrapper {
+    background-color: var(--color-neutral-50);
+    border-color: var(--color-neutral-300);
+  }
+
+  &:hover .wrapper {
+    border-color: var(--color-neutral-300);
+  }
+}
+
+.monospace .input {
+  font-family: var(--font-family-monospace);
+}
+
+.auto,
+.auto .input {
+  width: auto;
+}
+
+.large,
+.large .input {
+  height: var(--input-height-large);
+  font-size: var(--text-1-font-size);
+}
+
+.medium,
+.medium .input {
+  height: var(--input-height-medium);
+  font-size: var(--text-1-font-size);
+  width: var(--input-width-medium);
+}
+
+.small,
+.small .input {
+  height: var(--input-height-small);
+  font-size: var(--text-2-font-size);
+  width: var(--input-width-small);
+}

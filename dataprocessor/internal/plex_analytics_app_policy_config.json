@@ -1,0 +1,42 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowWritingToLogs",
+      "Action": ["logs:*"],
+      "Effect": "Allow",
+      "Resource": ["{{.LogStreamARN}}"]
+    },
+    {
+      "Sid": "AllowReadKinesisInputStream",
+      "Effect": "Allow",
+      "Action": ["kinesis:*"],
+      "Resource": ["{{.StreamARN}}"]
+    },
+    {
+      "Sid": "AllowWriteS3OutputBucket",
+      "Effect": "Allow",
+      "Action": ["s3:*"],
+      "Resource": ["{{.OutputPath}}/*"]
+    },
+    {
+      "Sid": "AllowReadS3CodeInput",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:GetObjectVersion"],
+      "Resource": ["{{.CodePath}}/*"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "autoscaling:Describe*",
+        "cloudwatch:*",
+        "logs:*",
+        "sns:*",
+        "iam:GetPolicy",
+        "iam:GetPolicyVersion",
+        "iam:GetRole"
+      ],
+      "Resource": ["*"]
+    }
+  ]
+}

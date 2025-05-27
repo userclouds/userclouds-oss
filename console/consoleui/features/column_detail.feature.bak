@@ -1,0 +1,406 @@
+@userstore
+@columns
+@create_column
+Feature: create column page
+
+  Scenario: edit basic details column
+    Given I am a logged-in user
+    And a mocked "GET" request for "tenants"
+    And a mocked "GET" request for "selectedTenant"
+    And a mocked "GET" request for "dataTypes"
+    And the following mocked requests:
+      | Method | Path                               | Status | Body                          |
+      | GET    | /api/tenants/*/userstore/purposes* | 200    | empty_paginated_response.json |
+
+    When I navigate to the page with path "/columns/create?company_id=1ee4497e-c326-4068-94ed-3dcdaaaa53bc&tenant_id=41ab79a8-0dff-418e-9d42-e1694469120a"
+    Then the page title should be "[dev] UserClouds Console"
+    And I should see a card with the title "Basic Details"
+    And I should see the following inputs within the "Basic Details" card
+      | Type     | Name     | Value | Disabled |
+      | text     | name     |       | false    |
+      | checkbox | is_array | on    | false    |
+    And I should see a dropdown matching selector "[name='data_type']" with the following options
+      | Text                | Value               | Selected |
+      | address_eu          | address_eu          |          |
+      | birthdate           | birthdate           |          |
+      | birthdate_composite | birthdate_composite |          |
+      | boolean             | boolean             |          |
+      | canonical_address   | canonical_address   |          |
+      | date                | date                |          |
+      | e164_phonenumber    | e164_phonenumber    |          |
+      | email               | email               |          |
+      | integer             | integer             |          |
+      | phonenumber         | phonenumber         |          |
+      | ssn                 | ssn                 |          |
+      | string              | string              |          |
+      | timestamp           | timestamp           |          |
+      | uuid                | uuid                |          |
+    And I should see a dropdown matching selector "[name='index_type']" with the following options
+      | Text    | Value   | Selected |
+      | None    | none    | true     |
+      | Indexed | indexed |          |
+      | Unique  | unique  |          |
+    And I should see the following text within the "Basic Details" card
+      | TagName                 | TextContent        |
+      | label                   | Column type        |
+      | label:not(:has(select)) | ID                 |
+      | label                   | Unique or indexed? |
+      | label                   | Array?             |
+      | label:not(:has(select)) | Indexed?           |
+    And I should see a button labeled "Create column"
+    And I should see a button labeled "Cancel"
+    And the button labeled "Create column" should be disabled
+    And the button labeled "Cancel" should be enabled
+
+    When I replace the text in the "name" field with "phonenumbers"
+    Then I should see the following inputs within the "Basic Details" card
+      | Type     | Name     | Value        | Disabled |
+      | text     | name     | phonenumbers | false    |
+      | checkbox | is_array | on           | false    |
+
+@columns
+@column_details
+@userstore
+Feature: column details page
+
+  @array_column
+  Scenario: view details for an array column
+    Given I am a logged-in user
+    And a mocked "GET" request for "tenants"
+    And a mocked "GET" request for "selectedTenant"
+    And a mocked "GET" request for "dataTypes"
+    And the following mocked requests:
+      | Method | Path                                                                                                                                    | Status | Body                          |
+      | GET    | /api/tenants/*/userstore/columns/032cae17-df3a-4e87-82a0-c706ed0679ee                                                                   | 200    | email_verified_column.json    |
+      | GET    | /api/tenants/*/userstore/purposes*                                                                                                      | 200    | empty_paginated_response.json |
+      | POST   | /api/tenants/*/userstore/columns/retentiondurations/actions/get                                                                         | 200    | column_purpose_durations.json |
+      | GET    | /api/tenants/*/userstore/accessors?limit=50&filter=%28%27column_ids%27%2CHAS%2C%27032cae17-df3a-4e87-82a0-c706ed0679ee%27%29&version=3* | 200    | empty_paginated_response.json |
+
+    When I navigate to the page with path "/columns/032cae17-df3a-4e87-82a0-c706ed0679ee?company_id=1ee4497e-c326-4068-94ed-3dcdaaaa53bc&tenant_id=41ab79a8-0dff-418e-9d42-e1694469120a"
+    Then the page title should be "[dev] UserClouds Console"
+    And I should see a card with the title "Basic Details"
+    And I should see a card with the title "Purpose Settings"
+    And I should see the following text within the "Basic Details" card
+      | TagName                              | TextContent        |
+      | label                                | Name               |
+      | label > div > p                      | email_verified     |
+      | label                                | ID                 |
+      | label                                | Column type        |
+      | label > div > p                      | boolean            |
+      | label                                | Unique?            |
+      | label:has-text("Unique?") > div > p  | No                 |
+      | label                                | Indexed?           |
+      | label:has-text("Indexed?") > div > p | No                 |
+      | button                               | Edit basic details |
+    And I should see the following text within the "Purpose Settings" card
+      | TagName  | TextContent                                                                                                            |
+      | header p | Define which purposes are allowed for this column.                                                                     |
+      | header p | Define the lifetime of each purpose for this column (after which the consented purpose will be automatically deleted). |
+      | header p | Configure how long data is retained (soft-deleted) for each purpose after it is deleted.                               |
+      | header p | Data will be hard-deleted X days after the deletion event, where X is the longest duration specified for the column.   |
+      | button   | AddPurpose                                                                                                          |
+
+  Scenario: basic details column for system column
+    Given I am a logged-in user
+    And a mocked "GET" request for "tenants"
+    And a mocked "GET" request for "selectedTenant"
+    And a mocked "GET" request for "dataTypes"
+    And the following mocked requests:
+      | Method | Path                                                                                                                                   | Status | Body                              |
+      | GET    | /api/tenants/*/userstore/columns/032cae17-df3a-4e87-82a0-c706ed0679ee                                                                  | 200    | email_verified_column_system.json |
+      | GET    | /api/tenants/*/userstore/purposes*                                                                                                     | 200    | empty_paginated_response.json     |
+      | POST   | /api/tenants/*/userstore/columns/retentiondurations/actions/get                                                                        | 200    | column_purpose_durations.json     |
+      | GET    | /api/tenants/*/userstore/accessors?limit=50&filter=%28%27column_ids%27%2CHAS%2C%27032cae17-df3a-4e87-82a0-c706ed0679ee%27%29&version=3 | 200    | empty_paginated_response.json     |
+
+    When I navigate to the page with path "/columns/032cae17-df3a-4e87-82a0-c706ed0679ee?company_id=1ee4497e-c326-4068-94ed-3dcdaaaa53bc&tenant_id=41ab79a8-0dff-418e-9d42-e1694469120a"
+    Then the page title should be "[dev] UserClouds Console"
+    And I should see a card with the title "Basic Details"
+    And I should see a card with the title "Purpose Settings"
+    And I should see the following text within the "Basic Details" card
+      | TagName                              | TextContent                          |
+      | label                                | Name                                 |
+      | label > div > p                      | email_verified                       |
+      | label                                | Column type                          |
+      | label > div > p                      | boolean                              |
+      | label                                | ID                                   |
+      | label > div > p                      | 032cae17-df3a-4e87-82a0-c706ed0679ee |
+      | label                                | Unique?                              |
+      | label:has-text("Unique?") > div > p  | No                                   |
+      | label                                | Indexed?                             |
+      | label:has-text("Indexed?") > div > p | No                                   |
+    And I should not see a button labeled "Edit basic details"
+
+  Scenario: edit basic details array column
+    Given I am a logged-in user
+    And a mocked "GET" request for "tenants"
+    And a mocked "GET" request for "selectedTenant"
+    And a mocked "GET" request for "dataTypes"
+    And the following mocked requests:
+      | Method | Path                                                                                                                                   | Status | Body                          |
+      | GET    | /api/tenants/*/userstore/columns/123abc45-df3a-4e87-82a0-c706ed0679ee                                                                  | 200    | array_column.json             |
+      | GET    | /api/tenants/*/userstore/purposes*                                                                                                     | 200    | empty_paginated_response.json |
+      | POST   | /api/tenants/*/userstore/columns/retentiondurations/actions/get                                                                        | 200    | column_purpose_durations.json |
+      | GET    | /api/tenants/*/userstore/accessors?limit=50&filter=%28%27column_ids%27%2CHAS%2C%27123abc45-df3a-4e87-82a0-c706ed0679ee%27%29&version=3 | 200    | empty_paginated_response.json |
+
+    When I navigate to the page with path "/columns/123abc45-df3a-4e87-82a0-c706ed0679ee?company_id=1ee4497e-c326-4068-94ed-3dcdaaaa53bc&tenant_id=41ab79a8-0dff-418e-9d42-e1694469120a"
+    Then the page title should be "[dev] UserClouds Console"
+    And I should see a card with the title "Basic Details"
+    And I should see a card with the title "Purpose Settings"
+    And I should see the following text within the "Basic Details" card
+      | TagName                              | TextContent                          |
+      | label                                | Name                                 |
+      | label > div > p                      | phonenumbers                         |
+      | label                                | Column type                          |
+      | label > div > p                      | phonenumber (array)                  |
+      | label                                | ID                                   |
+      | label > div > p                      | 123abc45-df3a-4e87-82a0-c706ed0679ee |
+      | label                                | Unique?                              |
+      | label:has-text("Unique?") > div > p  | No                                   |
+      | label                                | Indexed?                             |
+      | label:has-text("Indexed?") > div > p | Yes                                  |
+      | button                               | Edit basic details                   |
+
+    When I click the button labeled "Edit basic details" in the "Basic Details" card
+    Then I should see the following inputs within the "Basic Details" card
+      | Type | Name | Value        | Disabled |
+      | text | name | phonenumbers | false    |
+    And I should not see a checkbox labeled "Array?" within the "Basic Details" card
+
+  Scenario: edit basic details of column
+    Given I am a logged-in user
+    And a mocked "GET" request for "tenants"
+    And a mocked "GET" request for "selectedTenant"
+    And a mocked "GET" request for "dataTypes"
+    And the following mocked requests:
+      | Method | Path                                                                                                                                    | Status | Body                          |
+      | GET    | /api/tenants/*/userstore/columns/032cae17-df3a-4e87-82a0-c706ed0679ee                                                                   | 200    | email_verified_column.json    |
+      | GET    | /api/tenants/*/userstore/purposes*                                                                                                      | 200    | empty_paginated_response.json |
+      | POST   | /api/tenants/*/userstore/columns/retentiondurations/actions/get                                                                         | 200    | column_purpose_durations.json |
+      | GET    | /api/tenants/*/userstore/accessors?limit=50&filter=%28%27column_ids%27%2CHAS%2C%27032cae17-df3a-4e87-82a0-c706ed0679ee%27%29&version=3* | 200    | empty_paginated_response.json |
+
+    When I navigate to the page with path "/columns/032cae17-df3a-4e87-82a0-c706ed0679ee?company_id=1ee4497e-c326-4068-94ed-3dcdaaaa53bc&tenant_id=41ab79a8-0dff-418e-9d42-e1694469120a"
+    Then the page title should be "[dev] UserClouds Console"
+    And I should see a card with the title "Basic Details"
+    And I should see a card with the title "Purpose Settings"
+    And I should see the following text within the "Basic Details" card
+      | TagName                              | TextContent                          |
+      | label                                | Name                                 |
+      | label > div > p                      | email_verified                       |
+      | label                                | Column type                          |
+      | label > div > p                      | boolean                              |
+      | label                                | ID                                   |
+      | label > div > p                      | 032cae17-df3a-4e87-82a0-c706ed0679ee |
+      | label                                | Unique?                              |
+      | label:has-text("Unique?") > div > p  | No                                   |
+      | label                                | Indexed?                             |
+      | label:has-text("Indexed?") > div > p | No                                   |
+      | button                               | Edit basic details                   |
+
+    When I click the button labeled "Edit basic details" in the "Basic Details" card
+    Then I should see the following inputs within the "Basic Details" card
+      | Type | Name | Value          | Disabled |
+      | text | name | email_verified | false    |
+    And I should see a dropdown matching selector "[name='index_type']" with the following options
+      | Text   | Value  | Selected |
+      | None   | none   | true     |
+      | Unique | unique |          |
+    And I should see the following text within the "Basic Details" card
+      | TagName                              | TextContent                          |
+      | label                                | Column type                          |
+      | label > div > p                      | boolean                              |
+      | label                                | ID                                   |
+      | label > div > p                      | 032cae17-df3a-4e87-82a0-c706ed0679ee |
+      | label                                | Indexed?                             |
+      | label:has-text("Indexed?") > div > p | No                                   |
+    And I should not see a button labeled "Edit basic details"
+    And I should see a button labeled "Save changes"
+    And I should see a button labeled "Cancel"
+    And the button labeled "Save changes" should be disabled
+    And the button labeled "Cancel" should be enabled
+
+    When I replace the text in the "name" field with "email_verified_by_user"
+    Then I should see the following inputs within the "Basic Details" card
+      | Type | Name | Value                  | Disabled |
+      | text | name | email_verified_by_user | false    |
+    And the button labeled "Save changes" should be enabled
+    And the button labeled "Cancel" should be enabled
+
+  # TODO: we need to actually save this
+  @purposes
+  Scenario: view and edit purposes for column
+    Given I am a logged-in user
+    And a mocked "GET" request for "tenants"
+    And a mocked "GET" request for "selectedTenant"
+    And a mocked "GET" request for "dataTypes"
+    And the following mocked requests:
+      | Method | Path                                                                                                                                    | Status | Body                          |
+      | GET    | /api/tenants/*/userstore/columns/032cae17-df3a-4e87-82a0-c706ed0679ee                                                                   | 200    | email_verified_column.json    |
+      | GET    | /api/tenants/*/userstore/purposes*                                                                                                      | 200    | purposes.json                 |
+      | POST   | /api/tenants/*/userstore/columns/retentiondurations/actions/get                                                                         | 200    | column_purpose_durations.json |
+      | GET    | /api/tenants/*/userstore/accessors?limit=50&filter=%28%27column_ids%27%2CHAS%2C%27032cae17-df3a-4e87-82a0-c706ed0679ee%27%29&version=3* | 200    | empty_paginated_response.json |
+
+    When I navigate to the page with path "/columns/032cae17-df3a-4e87-82a0-c706ed0679ee?company_id=1ee4497e-c326-4068-94ed-3dcdaaaa53bc&tenant_id=41ab79a8-0dff-418e-9d42-e1694469120a"
+    Then the page title should be "[dev] UserClouds Console"
+    And I should see a card with the title "Basic Details"
+    And I should see a card with the title "Purpose Settings"
+    And I should see a button labeled "Edit purposes" within the "Purpose Settings" card
+    And I should see a table within the "Purpose Settings" card with the following data
+      | Access purpose | Retain after deletion for |
+      | marketing      | 3 months                  |
+      | operational    | 1 year                    |
+
+    When I click the button labeled "Edit purposes"
+    Then I should not see a button labeled "Edit purposes"
+    And I should see a button labeled "Save changes"
+    And I should see a button labeled "Cancel"
+    And the button labeled "Save changes" should be disabled
+    And the input in column 2 of row 1 of the table in the "Purpose Settings" card should have the value "3"
+    And I should see a dropdown matching selector "#purposeSettings tbody > tr:first-child [name='retention_quantity_unit']" with the following options
+      | Text   | Value | Selected |
+      | years  | year  |          |
+      | months | month | true     |
+      | weeks  | week  |          |
+      | days   | day   |          |
+      | hours  | hour  |          |
+    And the dropdown in column 2 of row 1 of the table in the "Purpose Settings" card should have the value "month"
+    And the input in column 2 of row 2 of the table in the "Purpose Settings" card should have the value "1"
+    And I should see a dropdown matching selector "#purposeSettings tbody > tr:nth-child(2) [name='retention_quantity_unit']" with the following options
+      | Text   | Value | Selected |
+      | years  | year  | true     |
+      | months | month |          |
+      | weeks  | week  |          |
+      | days   | day   |          |
+      | hours  | hour  |          |
+    And the dropdown in column 2 of row 2 of the table in the "Purpose Settings" card should have the value "year"
+
+    When I select "months" from the dropdown in column 2 of row 2 of the table in the "Purpose Settings" card
+    Then the dropdown in column 2 of row 2 of the table in the "Purpose Settings" card should have the value "month"
+    And the button labeled "Save changes" should be enabled
+
+    Given the following mocked requests:
+      | Method | Path                                                                                                  | Status | Body                                                                  |
+      | POST   | /api/tenants/41ab79a8-0dff-418e-9d42-e1694469120a/userstore/columns/retentiondurations/actions/update | 404    | {"error":"uh-oh","request_id":"9a0f0b22-dabf-40b2-8f82-4a2caab9e605"} |
+
+    When I click the button labeled "Save changes"
+    Then I should see the following text on the page
+      | TagName            | TextContent  |
+      | button             | Save changes |
+      | button             | Cancel       |
+      | #purposeSettings p | uh-oh        |
+    And the button labeled "Save changes" should be enabled
+
+    Given a mocked request to save column retention durations with a 1 "month" retention for the "operational" purpose
+
+    When I click the button labeled "Save changes"
+    Then I should see the following text on the page
+      | TagName            | TextContent                             |
+      | #purposeSettings p | Successfully saved retention durations. |
+    And I should see a button labeled "Edit purposes" within the "Purpose Settings" card
+    And I should see a table within the "Purpose Settings" card with the following data
+      | Access purpose | Retain after deletion for |
+      | marketing      | 3 months                  |
+      | operational    | 1 month                   |
+    And I should not see a button labeled "Save changes"
+    And I should not see a button labeled "Cancel"
+
+  @accessors
+  Scenario: No accessors for column
+    Given I am a logged-in user
+    And a mocked "GET" request for "tenants"
+    And a mocked "GET" request for "selectedTenant"
+    And a mocked "GET" request for "user store schema edit"
+    ##the first one gets display columns. the second one gets all columns - needed for creating accessors and mutators.
+    And a mocked "GET" request for "user store schema edit"
+    And a mocked "GET" request for "dataTypes"
+    And the following mocked requests:
+      | Method | Path                                                                  | Status | Body                          |
+      | GET    | /api/tenants/*/userstore/columns/032cae17-df3a-4e87-82a0-c706ed0679ee | 200    | email_verified_column.json    |
+      | POST   | /api/tenants/*/userstore/columns/retentiondurations/actions/get       | 200    | column_purpose_durations.json |
+      | GET    | /api/tenants/*/userstore/purposes*                                    | 200    | empty_paginated_response.json |
+      | GET    | /api/tenants/*/userstore/accessors*                                   | 200    | empty_paginated_response.json |
+
+    When I navigate to the page with path "/columns/032cae17-df3a-4e87-82a0-c706ed0679ee?company_id=1ee4497e-c326-4068-94ed-3dcdaaaa53bc&tenant_id=41ab79a8-0dff-418e-9d42-e1694469120a"
+    Then the page title should be "[dev] UserClouds Console"
+    And I should not see an element matching selector "#userstoreAccessors table"
+    And I should see the following text on the page
+      | TagName                     | TextContent    |
+      | #userstoreAccessors h2      | No accessors   |
+      | #userstoreAccessors a[href] | AddAccessor |
+
+  @accessors
+  Scenario: view list of accessors for a column
+    Given I am a logged-in user
+    And a mocked "GET" request for "tenants"
+    And a mocked "GET" request for "selectedTenant"
+    And a mocked "GET" request for "user store schema edit"
+    ##the first one gets display columns. the second one gets all columns - needed for creating accessors and mutators.
+    And a mocked "GET" request for "user store schema edit"
+    And a mocked "GET" request for "dataTypes"
+    And the following mocked requests:
+      | Method | Path                                                                  | Status | Body                          |
+      | GET    | /api/tenants/*/userstore/columns/032cae17-df3a-4e87-82a0-c706ed0679ee | 200    | email_verified_column.json    |
+      | POST   | /api/tenants/*/userstore/columns/retentiondurations/actions/get       | 200    | column_purpose_durations.json |
+      | GET    | /api/tenants/*/userstore/purposes*                                    | 200    | empty_paginated_response.json |
+    And a mocked request for all accessors associated with a column
+
+    When I navigate to the page with path "/columns/032cae17-df3a-4e87-82a0-c706ed0679ee?company_id=1ee4497e-c326-4068-94ed-3dcdaaaa53bc&tenant_id=41ab79a8-0dff-418e-9d42-e1694469120a"
+    Then the page title should be "[dev] UserClouds Console"
+    And I should see an element matching selector "#userstoreAccessors table"
+    And I should see a table with ID "accessors" and the following data
+      |  | Name              | Tables | Columns                    | Where Clause | Version | ID           |
+      |  | My_Accessor       | users  | email_verified             | {id} = ?     | 2       | Copy 2ee449… |
+      |  | My_Other_Accessor | users  | bar_column, email_verified | {id} = ?     | 1       | Copy 3aa449… |
+    And the button with title "View previous page" should be disabled
+    And the button with title "View next page" should be disabled
+
+  @purposes
+  Scenario: column durations honor supported units
+    Given I am a logged-in user
+    And a mocked "GET" request for "tenants"
+    And a mocked "GET" request for "selectedTenant"
+    And a mocked "GET" request for "dataTypes"
+    And the following mocked requests:
+      | Method | Path                                                                                                                                    | Status | Body                          |
+      | GET    | /api/tenants/*/userstore/columns/032cae17-df3a-4e87-82a0-c706ed0679ee                                                                   | 200    | email_verified_column.json    |
+      | GET    | /api/tenants/*/userstore/purposes*                                                                                                      | 200    | purposes.json                 |
+      | GET    | /api/tenants/*/userstore/accessors?limit=50&filter=%28%27column_ids%27%2CHAS%2C%27032cae17-df3a-4e87-82a0-c706ed0679ee%27%29&version=3* | 200    | empty_paginated_response.json |
+    And a mocked request for column retention durations with only two supported units
+
+    When I navigate to the page with path "/columns/032cae17-df3a-4e87-82a0-c706ed0679ee?company_id=1ee4497e-c326-4068-94ed-3dcdaaaa53bc&tenant_id=41ab79a8-0dff-418e-9d42-e1694469120a"
+    Then the page title should be "[dev] UserClouds Console"
+    And I should see a card with the title "Basic Details"
+    And I should see a card with the title "Purpose Settings"
+    And I should see a button labeled "Edit purposes" within the "Purpose Settings" card
+    And I should see a table within the "Purpose Settings" card with the following data
+      | Access purpose | Retain after deletion for |
+      | marketing      | 3 months                  |
+      | operational    | 1 year                    |
+
+    When I click the button labeled "Edit purposes"
+    Then I should not see a button labeled "Edit purposes"
+    And I should see a button labeled "Save changes"
+    And I should see a button labeled "Cancel"
+    And the button labeled "Save changes" should be disabled
+    And the input in column 2 of row 1 of the table in the "Purpose Settings" card should have the value "3"
+    And I should see a dropdown in column 2 of row 1 of the table in the "Purpose Settings" card with the following options
+      | Text   | Value | Selected |
+      | years  | year  |          |
+      | months | month | true     |
+      | weeks  | week  |          |
+      | days   | day   |          |
+      | hours  | hour  |          |
+    And the dropdown in column 2 of row 1 of the table in the "Purpose Settings" card should have the value "month"
+    And the input in column 2 of row 2 of the table in the "Purpose Settings" card should have the value "1"
+    And I should see a dropdown in column 2 of row 2 of the table in the "Purpose Settings" card with the following options
+      | Text   | Value | Selected |
+      | years  | year  | true     |
+      | months | month |          |
+      | weeks  | week  |          |
+      | days   | day   |          |
+      | hours  | hour  |          |
+    And the dropdown in column 2 of row 2 of the table in the "Purpose Settings" card should have the value "year"
+
+    When I select "months" from the dropdown in column 2 of row 2 of the table in the "Purpose Settings" card
+    Then the dropdown in column 2 of row 2 of the table in the "Purpose Settings" card should have the value "month"
+    And the button labeled "Save changes" should be enabled
+

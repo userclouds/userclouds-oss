@@ -1,0 +1,100 @@
+{
+    "specs": [
+        {
+            "file": "userstore.yaml",
+            "generated_file_package": "userstore",
+            "schema_overrides": {
+                "UserstoreColumn": {
+                    "immutable_properties": ["type", "is_array"]
+                },
+                "IdpColumnRetentionDuration": {
+                    "readonly_properties": ["default_duration", "purpose_name", "use_default"]
+                }
+            },
+            "resources": [
+                {
+                    "type_name_suffix": "userstore_column_data_type",
+                    "description": "Manages a User Store column data type. For more details, refer to the User Store documentation: https://docs.userclouds.com/docs/introduction",
+                    "markdown_description": "Manages a User Store column data type. For more details, refer to the [User Store documentation](https://docs.userclouds.com/docs/introduction).",
+                    "openapi_schema": "UserstoreColumnDataType",
+                    "rest_collection_path": "/userstore/config/datatypes",
+                    "rest_resource_path": "/userstore/config/datatypes/{id}"
+                },
+                {
+                    "type_name_suffix": "userstore_column",
+                    "description": "Manages a User Store column. For more details, refer to the User Store documentation: https://docs.userclouds.com/docs/introduction",
+                    "markdown_description": "Manages a User Store column. For more details, refer to the [User Store documentation](https://docs.userclouds.com/docs/introduction).",
+                    "openapi_schema": "UserstoreColumn",
+                    "rest_collection_path": "/userstore/config/columns",
+                    "rest_resource_path": "/userstore/config/columns/{id}"
+                },
+                {
+                    "type_name_suffix": "userstore_column_soft_deleted_retention_duration",
+                    "description": "Manages a soft-deleted retention duration setting for a User Store column. For more details, refer to the User Store documentation: https://docs.userclouds.com/docs/introduction",
+                    "markdown_description": "Manages a soft-deleted retention duration setting for a User Store column. For more details, refer to the [User Store documentation](https://docs.userclouds.com/docs/introduction).",
+                    "openapi_schema": "IdpColumnRetentionDuration",
+                    "path_params_to_schema_property": {
+                        "id": "column_id",
+                        "id2": "id"
+                    },
+                    "rest_collection_path": "/userstore/config/columns/{id}/softdeletedretentiondurations",
+                    "rest_resource_path": "/userstore/config/columns/{id}/softdeletedretentiondurations/{id2}"
+                },
+                {
+                    "type_name_suffix": "userstore_accessor",
+                    "description": "Manages a User Store accessor. For more details, refer to the accessors documentation: https://docs.userclouds.com/docs/accessors-read-apis",
+                    "markdown_description": "Manages a User Store accessor. For more details, refer to the [accessors documentation](https://docs.userclouds.com/docs/accessors-read-apis).",
+                    "openapi_schema": "UserstoreAccessor",
+                    "rest_collection_path": "/userstore/config/accessors",
+                    "rest_resource_path": "/userstore/config/accessors/{id}"
+                },
+                {
+                    "type_name_suffix": "userstore_mutator",
+                    "description": "Manages a User Store mutator. For more details, refer to the mutators documentation: https://docs.userclouds.com/docs/mutators-write-apis",
+                    "markdown_description": "Manages a User Store mutator. For more details, refer to the [mutators documentation](https://docs.userclouds.com/docs/mutators-write-apis).",
+                    "openapi_schema": "UserstoreMutator",
+                    "rest_collection_path": "/userstore/config/mutators",
+                    "rest_resource_path": "/userstore/config/mutators/{id}"
+                },
+                {
+                    "type_name_suffix": "userstore_purpose",
+                    "description": "Manages a User Store purpose. For more details, refer to the purposes documentation: https://docs.userclouds.com/docs/purpose-and-consent",
+                    "markdown_description": "Manages a User Store purpose. For more details, refer to the [purposes documentation](https://docs.userclouds.com/docs/purpose-and-consent).",
+                    "openapi_schema": "UserstorePurpose",
+                    "rest_collection_path": "/userstore/config/purposes",
+                    "rest_resource_path": "/userstore/config/purposes/{id}"
+                }
+            ]
+        },
+        {
+            "file": "tokenizer.yaml",
+            "generated_file_package": "tokenizer",
+            "resources": [
+                {
+                    "type_name_suffix": "access_policy",
+                    "description": "Manages a Tokenizer access policy. For more details, refer to the access policy documentation: https://docs.userclouds.com/docs/token-access-policies",
+                    "markdown_description": "Manages a Tokenizer access policy. For more details, refer to the [access policy documentation](https://docs.userclouds.com/docs/token-access-policies).",
+                    "openapi_schema": "PolicyAccessPolicy",
+                    "rest_collection_path": "/tokenizer/policies/access",
+                    "rest_resource_path": "/tokenizer/policies/access/{id}"
+                },
+                {
+                    "type_name_suffix": "access_policy_template",
+                    "description": "Manages a Tokenizer access policy template. For more details, refer to the Tokenizer how-to guide: https://docs.userclouds.com/docs/create-an-access-policy-copy",
+                    "markdown_description": "Manages a Tokenizer access policy template. For more details, refer to the [Tokenizer how-to guide](https://docs.userclouds.com/docs/create-an-access-policy-copy).",
+                    "openapi_schema": "PolicyAccessPolicyTemplate",
+                    "rest_collection_path": "/tokenizer/policies/accesstemplate",
+                    "rest_resource_path": "/tokenizer/policies/accesstemplate/{id}"
+                },
+                {
+                    "type_name_suffix": "transformer",
+                    "description": "Manages a Tokenizer transformer. For more details refer to the transformer documentation: https://docs.userclouds.com/docs/token-transformers",
+                    "markdown_description": "Manages a Tokenizer transformer. For more details refer to the [transformer documentation](https://docs.userclouds.com/docs/token-transformers).",
+                    "openapi_schema": "PolicyTransformer",
+                    "rest_collection_path": "/tokenizer/policies/transformation",
+                    "rest_resource_path": "/tokenizer/policies/transformation/{id}"
+                }
+            ]
+        }
+    ]
+}

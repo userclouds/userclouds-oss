@@ -1,0 +1,156 @@
+@use '../../shared/_mixin' as mixin;
+@use '../../_variables.module.css';
+
+.card {
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--border-radius-default);
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4);
+  gap: var(--space-5);
+}
+
+.listcard {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-default);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0;
+  padding: 0 var(--new-space-4) var(--new-space-4);
+  min-width: var(--new-min-card-width);
+  height: calc(
+    100vh - var(--header-height) - var(--footer-height) - var(
+        --card-control-view-height
+      )
+  );
+  white-space: nowrap;
+}
+
+.detailcard {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-white);
+  border-radius: var(--border-radius-default);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: var(--new-space-1);
+  padding: 0 var(--new-space-2) var(--new-space-2);
+  height: calc(
+    100vh - var(--header-height) - var(--footer-height) - var(
+        --card-control-view-height
+      )
+  );
+}
+
+.detailcard h1 {
+  margin-top: 16px;
+}
+
+.content {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.description {
+  margin-top: var(--space-1);
+  color: var(--color-neutral-700);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row {
+  width: 100%; // the flex-start on .content means children aren't full width
+}
+
+.cardrowtitle {
+  align-items: center;
+  display: grid;
+  font-weight: 600;
+  grid-template-columns: 25% 70% 5%;
+  margin-top: 10px;
+  min-height: 40px;
+  padding-top: 10px;
+  width: 100%;
+}
+
+// the caret for triggering collapse
+.cardrowtitle > :last-child {
+  margin-left: auto;
+}
+
+.cardrowtitle > .iconButton {
+  height: 20px;
+}
+
+.detailrowcontent {
+  border-top: 1px solid #e5e5e5;
+  display: block;
+  padding-left: 25%;
+  padding-right: 10%;
+  padding-top: 5px;
+}
+
+.columns {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.footer {
+  padding-top: var(--space-3);
+}
+
+.isDirty {
+  border-color: var(--color-blue-900);
+}
+
+.hasError {
+  border-color: var(--color-red-700);
+}
+
+.icon {
+  transition: transform var(--input-transition-default);
+}
+
+.isClosed .icon {
+  transform: rotate(-180deg);
+}
+
+.isLocked {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--border-radius-medium) var(--border-radius-medium) 0 0;
+  border: 1px solid var(--color-neutral-300);
+  border-bottom: none;
+  background-color: var(--color-neutral-200);
+
+  @include mixin.respond-above(768px) {
+    padding: var(--space-2) var(--space-5);
+  }
+
+  + .card {
+    border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
+  }
+}
+
+.isLockedText {
+  font-size: var(--text-2-font-size);
+  line-height: var(--text-2-line-height);
+}

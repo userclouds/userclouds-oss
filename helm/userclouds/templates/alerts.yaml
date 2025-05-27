@@ -1,0 +1,47 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    {{- include "userclouds.labels" . | nindent 4 }}
+spec:
+  groups:
+  - name: UserCloudLatency
+    rules:
+      - alert: AuthzLatencyHigh
+        expr: histogram_quantile(0.9, sum by (handler, tenant_id) (rate(uc_http_request_duration_seconds{container="authz"}[1m]))) > 0.1
+        for:  "15m"
+        labels:
+          severity: warning
+        annotations:
+          description: 'High latency in Authz service'
+          summary: High latency in Authz service more than 100ms for 90th percentile
+      - alert: UserStoreLatencyHigh
+        expr: histogram_quantile(0.9, sum by (handler, tenant_id) (rate(uc_http_request_duration_seconds{container="userstore"}[1m]))) > 0.2
+        for:  "15m"
+        labels:
+          severity: warning
+        annotations:
+          description: 'High latency in UserStore service'
+          summary: High latency in UserStore service more than 200ms for 90th percentile
+  - name: UserCloudsHealth
+    rules:
+        - alert: TraceProviderConnectionFailure
+          expr: count by (service) (uc_trace_provider_connection_failure == 1)
+          for: 30m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Trace provider connection failure"
+            description: |-
+              The trace provider has been unable to connect to the collector at {{`{{ $labels.collector_host }}`}} for more than 30 minutes.
+  - name: UserCloudsEventAlerts
+    rules:
+      - alert: HighHTTP4xxErrors
+        expr: 'sum by (tenant_id,event_name,service) (rate(uc_event_count{event_name=~`Event.HTTPResponse_4\d\d`, tenant_id=~".+"}[5m])) > 0.5'
+        for: 20m
+        labels:
+          severity: warning
+        annotations:
+          description: 'High HTTP 4xx errors responses by {{`{{ $labels.service }}`}} for tenant: {{`{{ $labels.tenant_id }}`}}'
+          summary: 'High HTTP 4xx errors responses by {{`{{ $labels.service }}`}}'

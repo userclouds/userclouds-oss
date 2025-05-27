@@ -1,0 +1,42 @@
+{
+  "id": "2ee4497e-c326-4068-94ed-3dcdaaaa53bc",
+  "name": "Our_Accessor",
+  "version": 3,
+  "data_life_cycle_state": "live",
+  "description": "Foo",
+  "columns": [
+    {
+      "id": "175565aa-4d3e-4b01-9908-529933dfbc5e",
+      "name": "foo_column",
+      "data_type_id": "d26b6d52-a8d7-4c2f-9efc-394eb90a3294",
+      "data_type_name": "string",
+      "type": "string",
+      "is_array": false,
+      "transformer_id": "00000000-e881-40a3-8e53-f76b502d2d76",
+      "transformer_name": "Always_foo",
+      "token_access_policy_id": "0c0b7371-5175-405b-a17c-fec5969914b8",
+      "token_access_policy_name": "hello2_policy",
+      "default_transformer_name": "Passthrough",
+      "default_access_policy_id": "00000000-0000-0000-0000-000000000000",
+      "default_access_policy_name": "AllowAll"
+    }
+  ],
+  "access_policy": {
+    "id": "00000000-5175-405b-a17c-fec5969914b8",
+    "name": "Dont_Allow_Any"
+  },
+  "selector_config": {
+    "where_clause": "{id} LIKE ?"
+  },
+  "is_system": false,
+  "is_audit_logged": true,
+  "are_column_access_policies_overridden": false,
+  "use_search_index": false,
+  "purposes": [
+    {
+      "id": "0b112683-aa23-4269-b098-ae6fdc1a9d8d",
+      "name": "marketing",
+      "description": "barraging you with emails and such"
+    }
+  ]
+}

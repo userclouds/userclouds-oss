@@ -1,0 +1,38 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "usercloudssdk"
+version = "1.11.0"
+description = "Python SDK for UserClouds"
+readme = "README.md"
+authors = [{ name = "UserClouds", email = "info@userclouds.com" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11"
+]
+license = { file = "LICENSE" }
+dependencies = [
+  "certifi >= 2023.7.2",
+  "charset-normalizer >= 2.1.1",
+  "idna >= 3.4",
+  "iso8601 >= 1.1.0",
+  "pycparser >= 2.21",
+  "PyJWT >= 2.6.0",
+  "httpx >= 0.25.0",
+  "urllib3 >= 1.26.12"
+]
+
+[project.urls]
+Homepage = "https://github.com/userclouds/sdk-python"
+Documentation = "https://docs.userclouds.com/"
+Source = "https://github.com/userclouds/sdk-python"
+Changelog = "https://github.com/userclouds/sdk-python/blob/main/CHANGELOG.md"
+

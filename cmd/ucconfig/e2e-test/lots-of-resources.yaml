@@ -1,0 +1,375 @@
+resources:
+    - uc_terraform_type: userstore_column_data_type
+      manifest_id: userstore_column_data_type_us_address
+      resource_uuids:
+        __DEFAULT: b31f35bf-b015-4b22-8a6c-e98ce3651bd3
+        <<TARGET_FQTN>>: b31f35bf-b015-4b22-8a6c-e98ce3651bd3
+      attributes:
+        composite_attributes:
+            fields:
+                - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+                  name: City
+                - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+                  ignore_for_uniqueness: true
+                  name: ID
+                  required: true
+                - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+                  name: State
+                - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+                  name: Street
+                - data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+                  name: Zip_Code
+            include_id: true
+        description: a us style address
+        name: us_address
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_email_verified
+      resource_uuids:
+        __DEFAULT: 12b3f133-4ad1-4f11-9d7d-313eb7cb95fa
+        <<TARGET_FQTN>>: 12b3f133-4ad1-4f11-9d7d-313eb7cb95fa
+      attributes:
+        access_policy: 3f380e42-0b21-4570-a312-91e1b80386fa
+        data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "boolean")'
+        default_transformer: c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a
+        index_type: none
+        is_array: false
+        name: email_verified
+        table: users
+        type: boolean
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_email
+      resource_uuids:
+        __DEFAULT: 2c7a7c9b-90e8-47e4-8f6e-ec73bd2dec16
+        <<TARGET_FQTN>>: 2c7a7c9b-90e8-47e4-8f6e-ec73bd2dec16
+      attributes:
+        access_policy: 3f380e42-0b21-4570-a312-91e1b80386fa
+        data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        default_transformer: c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a
+        index_type: indexed
+        is_array: false
+        name: email
+        table: users
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_external_alias
+      resource_uuids:
+        __DEFAULT: 2ee3d57d-9756-464e-a5e9-04244936cb9e
+        <<TARGET_FQTN>>: 2ee3d57d-9756-464e-a5e9-04244936cb9e
+      attributes:
+        access_policy: 3f380e42-0b21-4570-a312-91e1b80386fa
+        data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        default_transformer: c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a
+        index_type: unique
+        is_array: false
+        name: external_alias
+        table: users
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_testunique
+      resource_uuids:
+        __DEFAULT: 349d3861-f91c-4489-a7f2-4c06a57cb0de
+        <<TARGET_FQTN>>: 349d3861-f91c-4489-a7f2-4c06a57cb0de
+      attributes:
+        access_policy: 3f380e42-0b21-4570-a312-91e1b80386fa
+        data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "email")'
+        default_transformer: c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a
+        index_type: unique
+        is_array: false
+        name: testunique
+        table: users
+        type: email
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_picture
+      resource_uuids:
+        __DEFAULT: 4d4d0757-3bc2-424d-9caf-a930edb49b69
+        <<TARGET_FQTN>>: 4d4d0757-3bc2-424d-9caf-a930edb49b69
+      attributes:
+        access_policy: 3f380e42-0b21-4570-a312-91e1b80386fa
+        data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        default_transformer: c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a
+        index_type: none
+        is_array: false
+        name: picture
+        table: users
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_nickname
+      resource_uuids:
+        __DEFAULT: 83cc42b0-da8c-4a61-9db1-da70f21bab60
+        <<TARGET_FQTN>>: 83cc42b0-da8c-4a61-9db1-da70f21bab60
+      attributes:
+        access_policy: 3f380e42-0b21-4570-a312-91e1b80386fa
+        data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        default_transformer: c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a
+        index_type: none
+        is_array: false
+        name: nickname
+        table: users
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_us_address
+      resource_uuids:
+        __DEFAULT: a9f70bc2-1fb5-4da6-b96e-2317cfc47758
+        <<TARGET_FQTN>>: a9f70bc2-1fb5-4da6-b96e-2317cfc47758
+      attributes:
+        access_policy: 3f380e42-0b21-4570-a312-91e1b80386fa
+        constraints:
+            fields:
+                - name: City
+                  type: string
+                - ignore_for_uniqueness: true
+                  name: ID
+                  required: true
+                  type: string
+                - name: State
+                  type: string
+                - name: Street
+                  type: string
+                - name: Zip_Code
+                  type: string
+            partial_updates: true
+            unique_id_required: true
+        data_type: '@UC_MANIFEST_ID("userstore_column_data_type_us_address").id'
+        default_transformer: c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a
+        index_type: indexed
+        is_array: true
+        name: us_address
+        table: users
+        type: composite
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_testcol1
+      resource_uuids:
+        __DEFAULT: ec449fd6-f76e-48fb-b19d-29a2e6b60ac6
+        <<TARGET_FQTN>>: ec449fd6-f76e-48fb-b19d-29a2e6b60ac6
+      attributes:
+        access_policy: 3f380e42-0b21-4570-a312-91e1b80386fa
+        data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        default_transformer: c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a
+        index_type: none
+        is_array: false
+        name: testcol1
+        table: users
+        type: string
+    - uc_terraform_type: userstore_column
+      manifest_id: userstore_column_name
+      resource_uuids:
+        __DEFAULT: fe20fd48-a006-4ad8-9208-4aad540d8794
+        <<TARGET_FQTN>>: fe20fd48-a006-4ad8-9208-4aad540d8794
+      attributes:
+        access_policy: 3f380e42-0b21-4570-a312-91e1b80386fa
+        data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        default_transformer: c0b5b2a1-0b1f-4b9f-8b1a-1b1f4b9f8b1a
+        index_type: indexed
+        is_array: false
+        name: name
+        table: users
+        type: string
+    - uc_terraform_type: userstore_column_soft_deleted_retention_duration
+      manifest_id: 6af3794c-0741-4011-ba8f-761f4cacae72
+      resource_uuids:
+        __DEFAULT: 6af3794c-0741-4011-ba8f-761f4cacae72
+        <<TARGET_FQTN>>: 6af3794c-0741-4011-ba8f-761f4cacae72
+      attributes:
+        column_id: '@UC_MANIFEST_ID("userstore_column_email").id'
+        duration:
+            duration: 3
+            unit: month
+        duration_type: softdeleted
+        purpose_id: '@UC_SYSTEM_OBJECT("userstore_purpose", "operational")'
+    - uc_terraform_type: userstore_column_soft_deleted_retention_duration
+      manifest_id: 749d4f25-db41-40e2-a015-579846d94301
+      resource_uuids:
+        __DEFAULT: 749d4f25-db41-40e2-a015-579846d94301
+        <<TARGET_FQTN>>: 749d4f25-db41-40e2-a015-579846d94301
+      attributes:
+        column_id: '@UC_MANIFEST_ID("userstore_column_testcol1").id'
+        duration:
+            duration: 30
+            unit: day
+        duration_type: softdeleted
+        purpose_id: '@UC_MANIFEST_ID("userstore_purpose_testing").id'
+    - uc_terraform_type: userstore_accessor
+      manifest_id: userstore_accessor_DemoAccessor
+      resource_uuids:
+        __DEFAULT: 6b4fb958-83d2-4271-81c5-4a832db3f4f1
+        <<TARGET_FQTN>>: 6b4fb958-83d2-4271-81c5-4a832db3f4f1
+      attributes:
+        access_policy: '@UC_SYSTEM_OBJECT("access_policy", "AllowAll")'
+        columns:
+            - column: '@UC_MANIFEST_ID("userstore_column_email").id'
+              transformer: '@UC_SYSTEM_OBJECT("transformer", "PassthroughUnchangedData")'
+        data_life_cycle_state: live
+        description: Sample description
+        name: DemoAccessor
+        purposes:
+            - '@UC_SYSTEM_OBJECT("userstore_purpose", "operational")'
+        selector_config:
+            where_clause: '{id} = ANY(?)'
+    - uc_terraform_type: userstore_mutator
+      manifest_id: userstore_mutator_BasicMutator
+      resource_uuids:
+        __DEFAULT: 74a77964-6e28-47d7-80e5-abdb73d91abc
+        <<TARGET_FQTN>>: 74a77964-6e28-47d7-80e5-abdb73d91abc
+      attributes:
+        access_policy: '@UC_MANIFEST_ID("access_policy_TestPolicy").id'
+        columns:
+            - column: '@UC_MANIFEST_ID("userstore_column_name").id'
+              normalizer: '@UC_SYSTEM_OBJECT("transformer", "PassthroughUnchangedData")'
+            - column: '@UC_MANIFEST_ID("userstore_column_testcol1").id'
+              normalizer: '@UC_SYSTEM_OBJECT("transformer", "PassthroughUnchangedData")'
+        description: Hello world
+        name: BasicMutator
+        selector_config:
+            where_clause: '{id} = ?'
+    - uc_terraform_type: userstore_purpose
+      manifest_id: userstore_purpose_testing
+      resource_uuids:
+        __DEFAULT: ff921db7-2cff-47b6-8e71-2469e0ec0020
+        <<TARGET_FQTN>>: ff921db7-2cff-47b6-8e71-2469e0ec0020
+      attributes:
+        description: Test purpose
+        name: testing
+    - uc_terraform_type: access_policy
+      manifest_id: access_policy_TestPolicy
+      resource_uuids:
+        __DEFAULT: 2777248a-5883-4a42-9668-63716b640e70
+        <<TARGET_FQTN>>: 2777248a-5883-4a42-9668-63716b640e70
+      attributes:
+        components:
+            - template: '@UC_MANIFEST_ID("access_policy_template_BasicTestTemplate").id'
+              template_parameters: '{}'
+            - template: '@UC_SYSTEM_OBJECT("access_policy_template", "AllowAll")'
+              template_parameters: '{}'
+        name: TestPolicy
+        policy_type: composite_or
+        required_context: {}
+        tag_ids: []
+    - uc_terraform_type: access_policy_template
+      manifest_id: access_policy_template_BasicTestTemplate
+      resource_uuids:
+        __DEFAULT: 3d974d48-1e52-4c3f-801c-6d3c4f0fbbe9
+        <<TARGET_FQTN>>: 3d974d48-1e52-4c3f-801c-6d3c4f0fbbe9
+      attributes:
+        description: Hello world
+        function: '@FILE("./lots-of-resources_values/access_policy_template_BasicTestTemplate_function.js")'
+        name: BasicTestTemplate
+    - uc_terraform_type: transformer
+      manifest_id: transformer_EmailToID
+      resource_uuids:
+        __DEFAULT: 0cedf7a4-86ab-450a-9426-478ad0a60faa
+        <<TARGET_FQTN>>: 0cedf7a4-86ab-450a-9426-478ad0a60faa
+      attributes:
+        description: This policy generates an email token for the given email.
+        function: '@FILE("./lots-of-resources_values/transformer_EmailToID_function.js")'
+        input_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        input_type: string
+        name: EmailToID
+        output_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        output_type: string
+        parameters: |-
+            [{
+            	"PreserveValue": false,
+            	"PreserveChars": 0,
+            	"FinalLength": 12
+            }, {
+            	"PreserveValue": false,
+            	"PreserveCommonValue": true,
+            	"PreserveChars": 0,
+            	"FinalLength": 6
+            }, {
+            	"PreserveValue": true
+            }]
+        transform_type: tokenizebyvalue
+    - uc_terraform_type: transformer
+      manifest_id: transformer_SSNToID
+      resource_uuids:
+        __DEFAULT: 3f65ee22-2241-4694-bbe3-72cefbe59ff2
+        <<TARGET_FQTN>>: 3f65ee22-2241-4694-bbe3-72cefbe59ff2
+      attributes:
+        description: This policy generates a masked SSN.
+        function: '@FILE("./lots-of-resources_values/transformer_SSNToID_function.js")'
+        input_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        input_type: string
+        name: SSNToID
+        output_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        output_type: string
+        parameters: |-
+            {
+            	"PreserveValue": false,
+            	"DecimalOnly": true,
+            	"PreserveCharsTrailing": 0,
+            	"PreserveCharsStart": 3
+            }
+        transform_type: transform
+    - uc_terraform_type: transformer
+      manifest_id: transformer_TestTransformer
+      resource_uuids:
+        __DEFAULT: 59821f4d-03a4-4843-be7d-7cf16f227e59
+        <<TARGET_FQTN>>: 59821f4d-03a4-4843-be7d-7cf16f227e59
+      attributes:
+        description: hello
+        function: '@FILE("./lots-of-resources_values/transformer_TestTransformer_function.js")'
+        input_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        input_type: string
+        name: TestTransformer
+        output_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        output_type: string
+        transform_type: tokenizebyreference
+    - uc_terraform_type: transformer
+      manifest_id: transformer_CreditCardToID
+      resource_uuids:
+        __DEFAULT: 618a4ae7-9979-4ee8-bac5-db87335fe4d9
+        <<TARGET_FQTN>>: 618a4ae7-9979-4ee8-bac5-db87335fe4d9
+      attributes:
+        description: This policy generates a masked credit card number.
+        function: '@FILE("./lots-of-resources_values/transformer_CreditCardToID_function.js")'
+        input_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        input_type: string
+        name: CreditCardToID
+        output_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        output_type: string
+        parameters: |-
+            {
+            	"PreserveValue": false,
+            	"DecimalOnly": true,
+            	"PreserveCharsTrailing": 0,
+            	"PreserveCharsStart": 0
+            }
+        transform_type: transform
+    - uc_terraform_type: transformer
+      manifest_id: transformer_FullNameToID
+      resource_uuids:
+        __DEFAULT: b9bf352f-b1ee-4fb2-a2eb-d0c346c6404b
+        <<TARGET_FQTN>>: b9bf352f-b1ee-4fb2-a2eb-d0c346c6404b
+      attributes:
+        description: This policy generates a masked name.
+        function: '@FILE("./lots-of-resources_values/transformer_FullNameToID_function.js")'
+        input_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        input_type: string
+        name: FullNameToID
+        output_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        output_type: string
+        parameters: |-
+            [{
+            	"PreserveValue": true
+            }, {
+            	"PreserveValue": false,
+            	"PreserveChars": 1,
+            	"FinalLength": 12
+            }]
+        transform_type: transform
+    - uc_terraform_type: transformer
+      manifest_id: transformer_UUID
+      resource_uuids:
+        __DEFAULT: e3743f5b-521e-4305-b232-ee82549e1477
+        <<TARGET_FQTN>>: e3743f5b-521e-4305-b232-ee82549e1477
+      attributes:
+        description: This policy generates a UUID token for the data.
+        function: '@FILE("./lots-of-resources_values/transformer_UUID_function.js")'
+        input_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        input_type: string
+        name: UUID
+        output_data_type: '@UC_SYSTEM_OBJECT("userstore_column_data_type", "string")'
+        output_type: string
+        parameters: '{}'
+        transform_type: tokenizebyvalue

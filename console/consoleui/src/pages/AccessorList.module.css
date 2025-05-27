@@ -1,0 +1,52 @@
+:global(#root) {
+  .accessorlisttable {
+    grid-template-columns:
+      50px 150px fit-content(200px) minmax(250px, 1fr) fit-content(120px)
+      fit-content(260px)
+      75px 50px;
+  }
+
+  .accessorstable {
+    grid-template-columns: 1fr 1fr 60px;
+  }
+
+  .accessorExpandedTable {
+    margin-top: 10px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 60% 15% 25%;
+    gap: 10px;
+  }
+
+  .expandedTableItem {
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-wrap: wrap;
+    white-space: normal;
+    flex-wrap: wrap;
+  }
+
+  .primaryCol {
+    font-weight: bold;
+  }
+
+  [data-extended='false'] .columnsCountText {
+    display: none;
+  }
+
+  [data-extended='true'] .accessorList {
+    display: none;
+  }
+
+  [data-extended='true'] .accessorTagsContainer {
+    display: flex;
+  }
+
+  .accessorTagsContainer {
+    display: none;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}

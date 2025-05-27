@@ -1,0 +1,39 @@
+{
+  "name": "@userclouds/sharedui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "build/index.js",
+  "module": "build/index.js",
+  "types": "build/index.d.ts",
+  "engines": {
+    "node": "18.18.0"
+  },
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
+    "lint": "yarn run eslint --max-warnings=0 src/ --config ../eslint.config.mjs",
+    "lintfix": "yarn run eslint --max-warnings=0 --fix --quiet src/ --config ../eslint.config.mjs",
+    "format": "yarn run prettier ."
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "eslint": "^9.23.0",
+    "postcss": "^8.4.31",
+    "prettier": "^3.3.3",
+    "rollup": "^3.29.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/uuid": "^8.3.4",
+    "dangerously-set-html-content": "^1.0.13",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

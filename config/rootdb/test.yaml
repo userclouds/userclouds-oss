@@ -1,0 +1,8 @@
+db:
+  user: unused
+  password: dev-literal://unused
+  dbname: unused
+  host: unused
+  port: 1234
+  dbdriver: postgres
+  dbproduct: postgres

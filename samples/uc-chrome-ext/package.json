@@ -1,0 +1,75 @@
+{
+  "name": "uc-chrome-ext",
+  "description": "This extension decodes data on a web page that was originally encoded using UserClouds Tokenizer",
+  "version": "0.0.1",
+  "homepage": "https://www.userclouds.com/",
+  "author": "UserClouds",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/userclouds/userclouds"
+  },
+  "scripts": {
+    "start": "xt-build -e dev -w",
+    "start:firefox": "xt-build -e dev -p firefox -w",
+    "build": "xt-build -e prod",
+    "build:firefox": "xt-build -e prod -p firefox",
+    "clean": "xt-clean",
+    "docs": "xt-docs",
+    "test": "xt-test",
+    "coverage": "nyc --reporter=lcov npm run test",
+    "sync": "xt-sync",
+    "lint": "yarn run eslint --max-warnings=0 src/",
+    "lintfix": "yarn run eslint --max-warnings=0 --fix --quiet src/",
+    "format": "yarn run prettier ."
+  },
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "eslintIgnore": [
+    "test/**/*",
+    "dist/**/*"
+  ],
+  "xtdocs": {
+    "source": {
+      "include": [
+        "README.md",
+        "src"
+      ]
+    }
+  },
+  "xtbuild": {
+    "js_bundles": [
+      {
+        "name": "service_worker",
+        "src": "./src/service_worker.js"
+      },
+      {
+        "name": "popup",
+        "src": "./src/popup.js"
+      },
+      {
+        "name": "content",
+        "src": "./src/content.js"
+      }
+    ],
+    "scss_bundles": [
+      {
+        "src": [
+          "./src/*.scss"
+        ],
+        "name": "styles"
+      }
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "extension-cli": "latest",
+    "prettier": "^3.0.3"
+  },
+  "dependencies": {
+    "@userclouds/sdk-typescript": "^1.0.16"
+  }
+}
