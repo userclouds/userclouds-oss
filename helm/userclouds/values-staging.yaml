@@ -1,0 +1,46 @@
+roles:
+  authz: arn:aws:iam::XXXXXXXXXXX:role/staging-eks-serviceaccount-authz
+  checkattribute: arn:aws:iam::XXXXXXXXXXX:role/staging-eks-serviceaccount-checkattribute
+  worker: arn:aws:iam::XXXXXXXXXXX:role/staging-eks-serviceaccount-worker
+  userstore: arn:aws:iam::XXXXXXXXXXX:role/staging-eks-serviceaccount-userstore
+  plex: arn:aws:iam::XXXXXXXXXXX:role/staging-eks-serviceaccount-plex
+  console: arn:aws:iam::XXXXXXXXXXX:role/staging-eks-serviceaccount-console
+  logserver: arn:aws:iam::XXXXXXXXXXX:role/staging-eks-serviceaccount-logserver
+image:
+  repository: XXXXXXXXXXX.dkr.ecr.us-west-2.amazonaws.com/userclouds
+  tag: null
+domain: staging.userclouds.com
+uc_universe: staging
+config:
+  common:
+    acme_private_key: aws://secrets/staging/acme/private_key
+    console_url: https://console.staging.userclouds.com
+    console_tenant_id: 03c1d5f7-50ef-4723-9a37-3bf0dc301842
+    worker_queue_url: https://sqs.us-west-2.amazonaws.com/XXXXXXXXXXX/staging-worker
+    log_db:
+      user: usercloudstage
+      password: aws://secrets/staging/logserver/rdb_password_only
+      dbname: status_00000000000000000000000000000000
+      dbdriver: postgres
+      dbproduct: aws-rds-postgres
+      host: XXXXXXXXXX.rds.amazonaws.com
+      port: 5432
+  userstore:
+    data_import_s3_bucket: userclouds-data-import-staging
+  logserver:
+    kinesis_shard_count: 1
+    kinesis_aws_region: us-west-2
+  console:
+    tenant_sub_domain: tenant.staging.userclouds.com
+    image:
+      host: XXXXXXXXX.cloudfront.net
+      s3_bucket: userclouds-login-app-images-staging
+  checkattribute:
+    service_map:
+      7b68a37e-ba9c-471c-8a57-f58bf3f21aa3:
+        - region: aws-us-east-1
+          service_name: checkattribute-envtest
+        - region: aws-us-west-2
+          service_name: checkattribute-envtest
+        - region: aws-eu-west-1
+          service_name: checkattribute-envtest

@@ -1,0 +1,42 @@
+roles:
+  authz: arn:aws:iam::XXXXXXXXXXX:role/debug-eks-serviceaccount-authz
+  checkattribute: arn:aws:iam::XXXXXXXXXXX:role/debug-eks-serviceaccount-checkattribute
+  worker: arn:aws:iam::XXXXXXXXXXX:role/debug-eks-serviceaccount-worker
+  userstore: arn:aws:iam::XXXXXXXXXXX:role/debug-eks-serviceaccount-userstore
+  plex: arn:aws:iam::XXXXXXXXXXX:role/debug-eks-serviceaccount-plex
+  console: arn:aws:iam::XXXXXXXXXXX:role/debug-eks-serviceaccount-console
+  logserver: arn:aws:iam::XXXXXXXXXXX:role/debug-eks-serviceaccount-logserver
+image:
+  repository: XXXXXXXXXXX.dkr.ecr.us-west-2.amazonaws.com/userclouds
+  tag: null
+domain: debug.userclouds.com
+uc_universe: debug
+config:
+  common:
+    acme_private_key: aws://secrets/debug/acme/private_key
+    console_url: https://console.debug.userclouds.com
+    console_tenant_id: db1ea454-92ea-4738-8ab2-ddafc980ee44
+    worker_queue_url: https://sqs.us-west-2.amazonaws.com/XXXXXXXXXXX/debug-worker
+    log_db:
+      user: userclouddebug
+      password: aws://secrets/debug/logserver/rdb_password_only
+      dbname: status_00000000000000000000000000000000
+      dbdriver: postgres
+      dbproduct: aws-rds-postgres
+      host: XXXXXXXXXX.rds.amazonaws.com
+      port: 5432
+  userstore:
+    data_import_s3_bucket: userclouds-data-import-debug
+  logserver:
+    kinesis_shard_count: 1
+    kinesis_aws_region: us-west-2
+  console:
+    tenant_sub_domain: tenant.debug.userclouds.com
+  checkattribute:
+    service_map:
+      db1ea454-92ea-4738-8ab2-ddafc980ee44:
+        - region: aws-us-west-2
+          service_name: checkattribute-console
+      73121ece-6fe4-4a69-b34f-f93de5bb534c:
+        - region: aws-us-west-2
+          service_name: checkattribute-envtest

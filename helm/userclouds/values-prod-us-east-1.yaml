@@ -1,0 +1,49 @@
+waf_acl_arn: arn:aws:wafv2:us-east-1:XXXXXXX
+# Created by terraform/configurations/aws/eks-cluster.hcl and terraform/modules/aws/eks-cluster/main.tf (alb_logs_bucket)
+alb_logs_bucket: userclouds-prod-us-east-1-alb-logs
+replicas: 3
+pdb:
+  minAvailable: 3
+region: aws-us-east-1
+# This is only enabled for us-west-2 workers
+enableCronJobs: false
+preStopSleepSeconds: 15
+plex:
+  replicas: 5
+dbproxy:
+  enabled: false
+userstore:
+  replicas: 4
+  dont_allow_t3: true
+  resources:
+    limits:
+      cpu: 0.7
+      memory: 320Mi
+    requests:
+      cpu: 0.3
+      memory: 256Mi
+console: {}
+logserver:
+  replicas: 4
+authz:
+  replicas: 6
+  dont_allow_t3: true
+  resources:
+    limits:
+      cpu: 1.0
+      memory: 768Mi
+    requests:
+      cpu: 0.8
+      memory: 384Mi
+checkattribute:
+  enabled: true
+  deployments:
+    - name: union
+      replicas: 3
+      resources:
+        limits:
+          cpu: 2.0
+          memory: 1536Mi # 1.5Gi
+        requests:
+          cpu: 1.5
+          memory: 1Gi

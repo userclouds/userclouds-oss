@@ -1,0 +1,80 @@
+company_db:
+  user: userclouds
+  password: aws://secrets/debug/console/cdb_password
+  dbname: companyconfig
+  host: XXXXXXXXX.global.rds.amazonaws.com
+  dbdriver: postgres
+  dbproduct: aws-aurora-postgres
+  port: 5432
+  regional_hosts:
+    aws-us-west-2: XXXXXXX.us-west-2.rds.amazonaws.com
+    aws-us-east-1: XXXXXXX.us-east-1.rds.amazonaws.com
+    aws-eu-west-1: XXXXXXX.eu-west-1.rds.amazonaws.com
+
+svc_listener:
+  protocol: http
+  host: 0.0.0.0
+  port: 5000
+
+internal_server:
+  protocol: http
+  host: 0.0.0.0
+  port: 5001
+
+tracing:
+  # see terraform/modules/userclouds/grafana-alloy/main.tf
+  collector_host: alloy.observability.svc.cluster.local:4317
+
+cache:
+  redis_caches:
+    - region: aws-us-east-1
+      host: XXXXXXXXX.cache.amazonaws.com
+      port: 6379
+      dbname: 0
+      username: debug-user
+      password: aws://secrets/debug/redis_user_password
+    - region: aws-us-west-2
+      host: XXXXXXXXX.cache.amazonaws.com
+      port: 6379
+      dbname: 0
+      username: debug-user
+      password: aws://secrets/debug/redis_user_password
+    - region: aws-eu-west-1
+      host: XXXXXXXXX.cache.amazonaws.com
+      port: 6379
+      dbname: 0
+      username: debug-user
+      password: aws://secrets/debug/redis_user_password
+
+featureflags:
+  api_key: aws://secrets/debug/statsig/v1
+  verbose: false
+
+sentry:
+  dsn: https://XXXXXXX.ingest.sentry.io/XXXXXXXX
+  traces_sample_rate: 0.1
+
+logger:
+  transports:
+    - type: goLogJSON
+      transportconfig:
+        required: true
+        max_log_level: 5
+    - type: kinesis
+      aws_region: 'us-west-2'
+      stream_name: 'debug'
+      shard_count: 1
+      transportconfig:
+        required: true
+        max_log_level: 5
+    - type: server
+      transportconfig:
+        required: true
+        max_log_level: 5
+      tenant_id: db1ea454-92ea-4738-8ab2-ddafc980ee44
+      log_service_url: 'http://logserver.userclouds.svc.cluster.local'
+      send_raw_data: false
+    - type: eventMetrics
+      transportconfig:
+        required: false
+        max_log_level: 5

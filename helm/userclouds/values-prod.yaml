@@ -1,0 +1,47 @@
+roles:
+  authz: arn:aws:iam::XXXXXXXXXXX:role/prod-eks-serviceaccount-authz
+  checkattribute: arn:aws:iam::XXXXXXXXXXX:role/prod-eks-serviceaccount-checkattribute
+  worker: arn:aws:iam::XXXXXXXXXXX:role/prod-eks-serviceaccount-worker
+  userstore: arn:aws:iam::XXXXXXXXXXX:role/prod-eks-serviceaccount-userstore
+  plex: arn:aws:iam::XXXXXXXXXXX:role/prod-eks-serviceaccount-plex
+  console: arn:aws:iam::XXXXXXXXXXX:role/prod-eks-serviceaccount-console
+  logserver: arn:aws:iam::XXXXXXXXXXX:role/prod-eks-serviceaccount-logserver
+image:
+  repository: XXXXXXXXXXX.dkr.ecr.us-west-2.amazonaws.com/userclouds
+  tag: null
+domain: userclouds.com
+uc_universe: prod
+config:
+  common:
+    acme_private_key: aws://secrets/prod/acme/private_key
+    console_url: https://console.userclouds.com
+    console_tenant_id: 804718b8-5788-4c31-9f5e-1ac55782728c
+    worker_queue_url: https://sqs.us-west-2.amazonaws.com/XXXXXXXXXXX/prod-worker
+    log_db:
+      user: usercloud
+      password: aws://secrets/prod/logserver/rdb_password_only
+      dbname: status_00000000000000000000000000000000
+      dbdriver: postgres
+      dbproduct: aws-rds-postgres
+      host: XXXXXXXXXX.rds.amazonaws.com
+      port: 5432
+  userstore:
+    data_import_s3_bucket: userclouds-data-import-prod
+  logserver:
+    kinesis_shard_count: 2
+    kinesis_aws_region: us-west-2
+  console:
+    tenant_sub_domain: tenant.userclouds.com
+    image:
+      host: dpxsz5sum816s.cloudfront.net
+      s3_bucket: userclouds-login-app-images-prod
+  checkattribute:
+    service_map:
+      9eb68c73-4bd3-43c1-840f-547e4e211c7f: # prod tenant for union
+        - region: aws-us-east-1
+          service_name: checkattribute-union
+        - region: aws-us-west-2
+          service_name: checkattribute-union
+      de6187f5-85dd-4bb1-97fb-63400f8ac1b2: # staging tenant for union
+        - region: aws-us-west-2
+          service_name: checkattribute-union

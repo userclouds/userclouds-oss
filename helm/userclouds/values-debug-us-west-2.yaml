@@ -1,0 +1,69 @@
+waf_acl_arn: arn:aws:wafv2:us-west-2:XXXXXX
+# Created by terraform/configurations/aws/eks-cluster.hcl and terraform/modules/aws/eks-cluster/main.tf (alb_logs_bucket)
+alb_logs_bucket: userclouds-debug-us-west-2-alb-logs
+replicas: 3
+pdb:
+  minAvailable: 1
+region: aws-us-west-2
+# This is only enabled for us-west-2 workers
+enableCronJobs: true
+preStopSleepSeconds: 15
+config:
+  dbproxy:
+    health_check_port: 8080
+    mysql_ports: [3311, 3312]
+    postgres_ports: [5437, 5438]
+plex: {}
+dbproxy:
+  enabled: true
+  resources:
+    limits:
+      cpu: 0.5
+      memory: 512Mi
+    requests:
+      cpu: 0.4
+      memory: 256Mi
+  ingress:
+    scheme: internet-facing
+    domain: dbproxy.debug.userclouds.com
+userstore:
+  resources:
+    limits:
+      cpu: 0.5
+      memory: 512Mi
+    requests:
+      cpu: 0.4
+      memory: 256Mi
+console:
+  replicas: 1
+logserver:
+  replicas: 2
+authz:
+  resources:
+    limits:
+      cpu: 0.5
+      memory: 256Mi
+    requests:
+      cpu: 0.4
+      memory: 128Mi
+checkattribute:
+  enabled: true
+  deployments:
+    - name: console
+      replicas: 1
+      resources:
+        limits:
+          cpu: 0.5
+          memory: 256Mi
+        requests:
+          cpu: 0.4
+          memory: 128Mi
+    - name: envtest
+      replicas: 1
+      resources:
+        limits:
+          cpu: 0.5
+          memory: 256Mi
+        requests:
+          cpu: 0.4
+          memory: 128Mi

@@ -1,0 +1,43 @@
+waf_acl_arn: arn:aws:wafv2:eu-west-1:XXXXX
+# Created by terraform/configurations/aws/eks-cluster.hcl and terraform/modules/aws/eks-cluster/main.tf (alb_logs_bucket)
+alb_logs_bucket: userclouds-staging-eu-west-1-alb-logs
+replicas: 3
+pdb:
+  minAvailable: 2
+region: aws-eu-west-1
+# This is only enabled for us-west-2 workers
+enableCronJobs: false
+preStopSleepSeconds: 15
+plex: {}
+dbproxy:
+  enabled: false
+userstore:
+  resources:
+    limits:
+      cpu: 0.5
+      memory: 256Mi
+    requests:
+      cpu: 0.4
+      memory: 128Mi
+console: {}
+logserver: {}
+authz:
+  resources:
+    limits:
+      cpu: 0.5
+      memory: 256Mi
+    requests:
+      cpu: 0.4
+      memory: 128Mi
+checkattribute:
+  enabled: true
+  deployments:
+    - name: envtest
+      replicas: 1
+      resources:
+        limits:
+          cpu: 0.5
+          memory: 256Mi
+        requests:
+          cpu: 0.4
+          memory: 128Mi
