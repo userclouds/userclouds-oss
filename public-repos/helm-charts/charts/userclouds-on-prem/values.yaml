@@ -4,7 +4,8 @@ image:
   imagePullPolicy: IfNotPresent
 
 provisionJob:
-  repository: 'ghcr.io/userclouds/automatedprovisioner'
+  image:
+    repository: 'ghcr.io/userclouds/automatedprovisioner'
   additionalAnnotations: {}
 
 # We only need IAM since we write secrets to AWS Secrets Manager
