@@ -1,0 +1,39 @@
+serviceAccount:
+  name: userclouds-onprem
+  # https://us-east-1.console.aws.amazon.com/iam/home?region=us-west-2#/roles/details/debug-eks-serviceaccount-userclouds-onprem
+  iamRoleARN: arn:aws:iam::XXXXXXXXX:role/XXXXXXXX
+config:
+  replicas: 2
+  openTelemetryEndpoint: alloy.observability.svc.cluster.local:4317
+  sentry:
+    enabled: true
+    dsn: https://XXX.ingest.us.sentry.io/XXX
+    sample_rate: 0
+  db:
+    user: uc_pg_root
+    host: XXXXXXX.rds.amazonaws.com
+    port: 5432
+  companyName: UserClouds
+  customerDomain: debug.XXXXXXX.io
+  adminUserEmail: XXXXX@XXXXXXX.com
+  skipEnsureAWSSecretsAccess: true
+  ingress:
+    enabled: true
+    scheme: internet-facing
+    additionalAnnotations:
+      # Annotation are here to make sure we render them correctly (mostly when running test-charts.sh)
+      dummy: 'testing'
+webapp:
+  ingress:
+    enabled: true
+    scheme: internet-facing
+    additionalAnnotations:
+      # Annotation are here to make sure we render them correctly (mostly when running test-charts.sh)
+      dummy: 'testing'
+dbproxy:
+  mysql:
+    ingress:
+      scheme: internet-facing
+      additionalAnnotations:
+        # Annotation are here to make sure we render them correctly (mostly when running test-charts.sh)
+        dummy: 'testing'

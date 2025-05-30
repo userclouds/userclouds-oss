@@ -25,7 +25,7 @@ for uv in "${UVS[@]}"; do
 done
 
 MANIFESTS=.k8s-manifests/userclouds-on-prem.yaml
-helm template public-repos/helm-charts/charts/userclouds-on-prem --values helm/userclouds-on-prem/values_on_prem_userclouds_io.yaml --set image.tag=fake --debug --namespace uc-on-prem >"${MANIFESTS}"
+helm template public-repos/helm-charts/charts/userclouds-on-prem --values public-repos/helm-charts/charts/userclouds-on-prem/values.yaml --values helm/userclouds-on-prem/values_on_prem_userclouds_io.yaml --set image.tag=fake --debug --namespace uc-on-prem >"${MANIFESTS}"
 if [ "${VERBOSE}" = true ]; then
   yq "${MANIFESTS}"
 fi
