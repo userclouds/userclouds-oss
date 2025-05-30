@@ -1,0 +1,22 @@
+name: User Clouds NodeJS Setup
+description: 'Sets up the NodeJS environment for User Clouds CI runs'
+runs:
+  using: composite
+  steps:
+    - name: Enable Yarn
+      shell: bash
+      run: corepack enable
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: './.node-version'
+        cache: 'yarn'
+        cache-dependency-path: '**/yarn.lock'
+    - name: Log Node version
+      shell: bash
+      run: node --version
+    - name: Install dependencies
+      shell: bash
+      run: |
+        yarn --version
+        make ui-yarn-build-only-ci

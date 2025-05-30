@@ -1,0 +1,55 @@
+name: helm-charts
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@480f49412651059a414a6a5c96887abb1877de8a # v45.0.7
+        with:
+          files: |
+            .github/workflows/helm-charts.yml
+            tools/sync-to-public-repo.py
+            public-repos/helm-charts/**
+            helm/**
+      - name: List modified files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "One or more files have changed: ${{ steps.changed-files.outputs.all_changed_files }}"
+      - name: KubeConform manifests cache
+        if: steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/kubeconform
+          key: ${{ runner.os }}-kubeconform-v0
+      - name: Check yq version
+        if: steps.changed-files.outputs.any_changed == 'true'
+        # yq is included in GHA, so just log the version
+        run: yq --version
+      - name: Install KubeConform
+        if: steps.changed-files.outputs.any_changed == 'true'
+        # https://github.com/yannh/kubeconform/releases/tag/v0.6.7
+        run: |
+          VERSION="0.6.7"
+          FILENAME="kubeconform-linux-amd64.tar.gz"
+          URL="https://github.com/yannh/kubeconform/releases/download/v${VERSION}/${FILENAME}"
+          curl -L -o "${FILENAME}" "${URL}"
+          tar xzf "${FILENAME}" && chmod +x kubeconform
+          sudo mv kubeconform /usr/local/bin/
+          kubeconform -v
+      - name: Verify Helm Charts
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          ./helm/test-charts.sh
+    outputs:
+      files_changed: ${{ steps.changed-files.outputs.any_changed }}
