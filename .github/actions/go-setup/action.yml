@@ -1,0 +1,16 @@
+name: User Clouds Go Setup
+description: 'Sets up the golang environment for User Clouds CI runs'
+runs:
+  using: composite
+  steps:
+    - name: Setup golang
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: go.mod
+    - name: Log go version
+      shell: bash
+      run: go version
+    - name: Update PATH
+      shell: bash
+      run: |
+        echo "$(pwd)/bin" >> $GITHUB_PATH
