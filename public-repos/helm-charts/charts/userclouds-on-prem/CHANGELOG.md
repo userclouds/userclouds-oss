@@ -3,6 +3,7 @@
 ## 1.1.0 - UNRELEASED
 
 - Remove DNS client type from config.
+- Fix values file, default image repository for provisionJob
 
 ## 1.0.0 - 20-05-2025
 
