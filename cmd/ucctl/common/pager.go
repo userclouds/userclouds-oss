@@ -38,19 +38,19 @@ type PagerConfig[T any] struct {
 
 // pagerModel is the Bubble Tea model for the pager
 type pagerModel[T any] struct {
-	config         PagerConfig[T]
-	items          []T
-	renderedLines  []string
-	columnWidths   []int  // Cached column widths
-	cursor         string
-	scrollOffset   int
-	horizOffset    int // Horizontal scroll offset
-	height         int
-	width          int
-	loading        bool
-	err            error
-	hasMore        bool
-	isFirstPage    bool
+	config        PagerConfig[T]
+	items         []T
+	renderedLines []string
+	columnWidths  []int // Cached column widths
+	cursor        string
+	scrollOffset  int
+	horizOffset   int // Horizontal scroll offset
+	height        int
+	width         int
+	loading       bool
+	err           error
+	hasMore       bool
+	isFirstPage   bool
 }
 
 type itemsLoadedMsg[T any] struct {
@@ -209,7 +209,6 @@ func (m pagerModel[T]) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.hasMore = msg.nextCursor != ""
 		m.isFirstPage = false
 
-		// Render incrementally
 		if oldItemCount == 0 {
 			// First load - render everything and cache column widths
 			m.renderedLines, m.columnWidths = m.renderTableInitial()
@@ -256,14 +255,12 @@ func (m pagerModel[T]) renderTableInitial() ([]string, []int) {
 
 	var lines []string
 
-	// Render header
 	headerParts := make([]string, len(columns))
 	for i, col := range columns {
 		headerParts[i] = padOrTruncate(col.Header, actualWidths[i], col.Width == 0)
 	}
 	lines = append(lines, strings.Join(headerParts, "   "))
 
-	// Render rows
 	for _, row := range rows {
 		rowParts := make([]string, len(columns))
 		for i := range columns {
@@ -291,7 +288,6 @@ func (m pagerModel[T]) renderTableIncremental(newItems []T) []string {
 
 	var lines []string
 
-	// Render new rows only (no header)
 	for _, row := range rows {
 		rowParts := make([]string, len(columns))
 		for i := range columns {
@@ -436,7 +432,6 @@ func runNonInteractive[T any](config PagerConfig[T]) error {
 	limit := 100
 	allItems := []T{}
 
-	// Fetch all data
 	for {
 		items, nextCursor, err := config.FetchFunc(config.Ctx, cursor, limit)
 		if err != nil {
@@ -460,7 +455,6 @@ func runNonInteractive[T any](config PagerConfig[T]) error {
 		return nil
 	}
 
-	// Render all items at once
 	columns, rows := config.TableRenderFunc(allItems)
 
 	// Calculate actual widths (use fixed width or compute max from data)
@@ -483,14 +477,12 @@ func runNonInteractive[T any](config PagerConfig[T]) error {
 		}
 	}
 
-	// Print header
 	headerParts := make([]string, len(columns))
 	for i, col := range columns {
 		headerParts[i] = padOrTruncate(col.Header, actualWidths[i], false)
 	}
 	fmt.Println(strings.Join(headerParts, "   "))
 
-	// Print rows
 	for _, row := range rows {
 		rowParts := make([]string, len(columns))
 		for i := range columns {

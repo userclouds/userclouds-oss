@@ -487,20 +487,16 @@ func (r *resources) fetchEdgeTypes(ctx context.Context, azc *authz.Client) error
 }
 
 func (r *resources) fetchEdges(ctx context.Context, azc *authz.Client) error {
-	var edges []authz.Edge
-	cursor := pagination.CursorBegin
-
-	for {
+	edges, err := common.FetchAllPaginated(ctx, func(ctx context.Context, cursor pagination.Cursor) ([]authz.Edge, pagination.Cursor, bool, error) {
 		resp, err := azc.ListEdges(ctx, authz.Pagination(pagination.StartingAfter(cursor)))
 		if err != nil {
-			return ucerr.Wrap(err)
+			return nil, "", false, ucerr.Wrap(err)
 		}
+		return resp.Data, resp.Next, resp.HasNext, nil
+	})
 
-		edges = append(edges, resp.Data...)
-		if !resp.HasNext {
-			break
-		}
-		cursor = resp.Next
+	if err != nil {
+		return err
 	}
 
 	r.edges = edges
@@ -517,20 +513,16 @@ func (r *resources) fetchObjectTypes(ctx context.Context, azc *authz.Client) err
 }
 
 func (r *resources) fetchObjects(ctx context.Context, azc *authz.Client) error {
-	var objects []authz.Object
-	cursor := pagination.CursorBegin
-
-	for {
+	objects, err := common.FetchAllPaginated(ctx, func(ctx context.Context, cursor pagination.Cursor) ([]authz.Object, pagination.Cursor, bool, error) {
 		resp, err := azc.ListObjects(ctx, authz.Pagination(pagination.StartingAfter(cursor)))
 		if err != nil {
-			return ucerr.Wrap(err)
+			return nil, "", false, ucerr.Wrap(err)
 		}
+		return resp.Data, resp.Next, resp.HasNext, nil
+	})
 
-		objects = append(objects, resp.Data...)
-		if !resp.HasNext {
-			break
-		}
-		cursor = resp.Next
+	if err != nil {
+		return err
 	}
 
 	r.objects = objects

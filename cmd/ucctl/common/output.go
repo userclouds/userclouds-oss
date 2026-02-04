@@ -110,14 +110,14 @@ func OutputCSV(data interface{}) error {
 
 // CSVWriter wraps a CSV writer for streaming output
 type CSVWriter struct {
-	writer        *csv.Writer
+	writer         *csv.Writer
 	headersWritten bool
 }
 
 // NewCSVWriter creates a new streaming CSV writer
 func NewCSVWriter() *CSVWriter {
 	return &CSVWriter{
-		writer:        csv.NewWriter(os.Stdout),
+		writer:         csv.NewWriter(os.Stdout),
 		headersWritten: false,
 	}
 }

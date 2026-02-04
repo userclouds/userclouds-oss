@@ -12,6 +12,7 @@ import (
 	"userclouds.com/infra/uclog"
 )
 
+// GetSecret retrieves a secret and returns the value.
 func GetSecret(ctx context.Context, client kubernetes.Interface, name string, namespace string) (string, error) {
 	secret, err := client.CoreV1().Secrets(namespace).Get(ctx, name, metav1.GetOptions{})
 	if err != nil {
@@ -25,6 +26,8 @@ func GetSecret(ctx context.Context, client kubernetes.Interface, name string, na
 	return "", fmt.Errorf("secret does not contain value field")
 }
 
+// CreateOrUpdateSecret checks for the existence of a secret and then creates or
+// updates the value.
 func CreateOrUpdateSecret(ctx context.Context, client kubernetes.Interface, name string, namespace string, value string) error {
 	secret, err := client.CoreV1().Secrets(namespace).Get(ctx, name, metav1.GetOptions{})
 	if err != nil {
@@ -63,6 +66,7 @@ func CreateOrUpdateSecret(ctx context.Context, client kubernetes.Interface, name
 	return nil
 }
 
+// DeleteSecret removes a secret if it exists.
 func DeleteSecret(ctx context.Context, client kubernetes.Interface, name string, namespace string) error {
 	err := client.CoreV1().Secrets(namespace).Delete(ctx, name, metav1.DeleteOptions{})
 	if errors.IsNotFound(err) {

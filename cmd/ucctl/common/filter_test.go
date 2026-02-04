@@ -216,12 +216,12 @@ func TestFormatFilterString(t *testing.T) {
 
 func TestParseFieldToken(t *testing.T) {
 	tests := []struct {
-		name         string
-		input        string
-		expectedOp   string
-		expectedKey  string
-		expectedVal  string
-		wantErr      bool
+		name        string
+		input       string
+		expectedOp  string
+		expectedKey string
+		expectedVal string
+		wantErr     bool
 	}{
 		{
 			name:        "exact match operator",

@@ -7,7 +7,6 @@ import (
 
 	"github.com/gofrs/uuid"
 	"github.com/spf13/cobra"
-	"userclouds.com/authz"
 	"userclouds.com/cmd/ucctl/common"
 )
 
@@ -18,7 +17,6 @@ type ObjectCommand struct {
 	ClientSecretVar string
 	AuthnType       string
 
-	// credentials holds the loaded credentials
 	credentials *common.Credentials
 }
 
@@ -32,34 +30,16 @@ func (c *ObjectCommand) RunE(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("invalid object ID: %w", err)
 	}
 
-	// Load credentials from context or flags
-	creds, err := common.LoadCredentialsFromContext(
-		
-		
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"", // configPath - use default precedence
-	)
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
-	// Create client credentials option
-	credOpt, err := c.credentials.GetClientCredentials()
+	azClient, err := c.credentials.NewAuthzClient()
 	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
+		return err
 	}
 
-	// Create AuthZ client
-	azClient, err := authz.NewClient(c.credentials.URL, authz.JSONClient(credOpt))
-	if err != nil {
-		return fmt.Errorf("failed to create AuthZ client: %w", err)
-	}
-
-	// Get the object
 	obj, err := azClient.GetObject(cmd.Context(), objectID)
 	if err != nil {
 		return fmt.Errorf("failed to get object: %w", err)
@@ -70,7 +50,6 @@ func (c *ObjectCommand) RunE(cmd *cobra.Command, args []string) error {
 		alias = *obj.Alias
 	}
 
-	// Display the object
 	w := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
 	fmt.Fprintln(w, "ID\tALIAS\tTYPE_ID\tORGANIZATION_ID\tCREATED\tUPDATED")
 	fmt.Fprintf(w, "%s\t%s\t%s\t%s\t%s\t%s\n",

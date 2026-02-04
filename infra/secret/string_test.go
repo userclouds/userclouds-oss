@@ -216,7 +216,7 @@ func TestString_NewString_Kubernetes(t *testing.T) {
 		secret      string
 		fixture     *corev1.Secret
 	}{
-		{"simple creation", "service", "my-secret", "testsecret", "kube://secrets/userclouds/test/service/my-secret", "userclouds.test.service.my-secret", nil},
+		{"simple creation", "service", "my-secret", "testsecret", "kube://secrets/userclouds/test/service/my-secret", "userclouds.test.service.my-secret", &corev1.Secret{}},
 		{"simple update", "service", "my-secret", "testsecret", "kube://secrets/userclouds/test/service/my-secret", "userclouds.test.service.my-secret", &corev1.Secret{
 			ObjectMeta: metav1.ObjectMeta{
 				Name:      "my-secret",

@@ -10,6 +10,7 @@ import (
 	"github.com/spf13/cobra"
 	"userclouds.com/cmd/ucctl/common"
 	"userclouds.com/infra/secret"
+	"userclouds.com/infra/secret/prefix"
 )
 
 // getContextNames returns a sorted list of available context names for completion
@@ -263,25 +264,13 @@ func (c *ShowCommand) RunE(cmd *cobra.Command, args []string) error {
 // isPlainSecret checks if the secret location is a plain secret (no prefix or dev-literal)
 func isPlainSecret(location string) bool {
 	return location == "" ||
-		   !hasSecretPrefix(location) ||
-		   startsWithPrefix(location, "dev-literal://")
+		!hasSecretPrefix(location) ||
+		startsWithPrefix(location, "dev-literal://")
 }
 
-// hasSecretPrefix checks if the location has any secret provider prefix
 func hasSecretPrefix(location string) bool {
-	prefixes := []string{
-		"dev://",
-		"dev-literal://",
-		"env://",
-		"aws://",
-		"kube://",
-	}
-	for _, prefix := range prefixes {
-		if startsWithPrefix(location, prefix) {
-			return true
-		}
-	}
-	return false
+	_, err := prefix.PrefixFromString(location)
+	return err == nil
 }
 
 // startsWithPrefix checks if s starts with prefix

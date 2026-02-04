@@ -1,6 +1,7 @@
 module.exports = {
   default: {
-    import: ['features/**/*.ts'],
+    requireModule: ['ts-node/register'],
+    require: ['features/**/*.ts'],
     format: ['progress', 'json:cucumber-report.json'],
     publishQuiet: true,
     failFast: true,

@@ -148,6 +148,11 @@ func logPolicyDuration(ctx context.Context, eventName string, id uuid.UUID, vers
 
 	ms := int(duration.Milliseconds())
 
+	// TODO: In tests, this fails because the duration is <1m and as a result the event does not get
+	//   logged.  Need to understand why this needs to check.  I know that it will fail validation, but
+	//   are there any assumptions elsewhere that require ms instead of micro?  I'm also assuming that
+	//   a missing event code is acceptable in this case as well.
+
 	// Don't log duration event if the execution took 0ms
 	if ms > 0 {
 		ev := uclog.LogEvent{

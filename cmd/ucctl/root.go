@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/spf13/cobra"
-	"userclouds.com/cmd/ucctl/autoprovision"
 	"userclouds.com/cmd/ucctl/common"
 	"userclouds.com/cmd/ucctl/context"
 	"userclouds.com/cmd/ucctl/create"
@@ -16,21 +15,18 @@ import (
 )
 
 const (
-	RootUsage          = "ucctl"
-	RootShort          = "CLI utility for interacting with userclouds"
-	RootLong           = `CLI utility for interacting with userclouds`
-	AutoProvisionUsage = "autoprovision"
-	AutoProvisionShort = "Autoprovision the console tenant"
-	AutoProvisionLong  = `Autoprovision creates a base company and the console tenant from a template file`
-	SyncUsage          = "sync"
-	SyncShort          = "Sync resources between environments"
-	SyncLong           = `Sync UserClouds resources between different environments`
-	CreateUsage        = "create"
-	CreateShort        = "Create userclouds resources"
-	CreateLong         = `Create userclouds resources`
-	CreateUserUsage    = "user"
-	CreateUserShort    = "Create a new user"
-	CreateUserLong     = `Create a new user with password authentication, OIDC authentication, or without authentication.
+	RootUsage       = "ucctl"
+	RootShort       = "CLI utility for interacting with userclouds"
+	RootLong        = `CLI utility for interacting with userclouds`
+	SyncUsage       = "sync"
+	SyncShort       = "Sync resources between environments"
+	SyncLong        = `Sync UserClouds resources between different environments`
+	CreateUsage     = "create"
+	CreateShort     = "Create userclouds resources"
+	CreateLong      = `Create userclouds resources`
+	CreateUserUsage = "user"
+	CreateUserShort = "Create a new user"
+	CreateUserLong  = `Create a new user with password authentication, OIDC authentication, or without authentication.
 
 The user is created in the tenant specified by the current context.
 - For console employee users: set context to a console tenant context
@@ -38,18 +34,18 @@ The user is created in the tenant specified by the current context.
 
 When creating a user without authentication, the authentication will be automatically
 added when the user logs in for the first time via OIDC (based on email match).`
-	ContextUsage = "context"
-	ContextShort = "Manage userclouds contexts"
-	ContextLong  = `Manage userclouds contexts for different environments`
-	SetUsage     = "set"
-	SetShort     = "Set userclouds resources"
-	SetLong      = `Set userclouds resources such as admin privileges`
-	GetUsage     = "get"
-	GetShort     = "Get userclouds resources"
-	GetLong      = `Get userclouds resources such as users, objects, edges, etc`
-	DeleteUsage  = "delete"
-	DeleteShort  = "Delete userclouds resources"
-	DeleteLong   = `Delete userclouds resources such as objects, edges, object types, and edge types`
+	ContextUsage  = "context"
+	ContextShort  = "Manage userclouds contexts"
+	ContextLong   = `Manage userclouds contexts for different environments`
+	SetUsage      = "set"
+	SetShort      = "Set userclouds resources"
+	SetLong       = `Set userclouds resources such as admin privileges`
+	GetUsage      = "get"
+	GetShort      = "Get userclouds resources"
+	GetLong       = `Get userclouds resources such as users, objects, edges, etc`
+	DeleteUsage   = "delete"
+	DeleteShort   = "Delete userclouds resources"
+	DeleteLong    = `Delete userclouds resources such as objects, edges, object types, and edge types`
 	DescribeUsage = "describe"
 	DescribeShort = "Describe userclouds resources with detailed information"
 	DescribeLong  = `Describe userclouds resources with detailed information including relationships.
@@ -91,7 +87,6 @@ func (r *Root) Command() *cobra.Command {
 	// Add persistent flag for config path
 	rootCmd.PersistentFlags().StringVar(&r.ConfigPath, "uc-context", "", "Path to context config file")
 
-	rootCmd.AddCommand(AutoProvisionCommand())
 	rootCmd.AddCommand(SyncCommand())
 	rootCmd.AddCommand(CreateCommand())
 	rootCmd.AddCommand(DeleteCommand())
@@ -102,18 +97,6 @@ func (r *Root) Command() *cobra.Command {
 	rootCmd.AddCommand(DumpCommand())
 	rootCmd.AddCommand(LoadCommand())
 	return rootCmd
-}
-
-func AutoProvisionCommand() *cobra.Command {
-	ap := autoprovision.AutoProvisionCommand{}
-	cmd := &cobra.Command{
-		Use:   AutoProvisionUsage,
-		Short: AutoProvisionShort,
-		Long:  AutoProvisionLong,
-		RunE:  ap.RunE,
-	}
-
-	return cmd
 }
 
 func SyncCommand() *cobra.Command {
@@ -689,7 +672,7 @@ func DescribeObjectCommand() *cobra.Command {
 		RunE: oc.RunE,
 	}
 
-	common.AddAuthFlags(cmd, &oc.URL, &oc.ClientID, &oc.ClientSecret, &oc.ClientSecretVar, &oc.AutonType)
+	common.AddAuthFlags(cmd, &oc.URL, &oc.ClientID, &oc.ClientSecret, &oc.ClientSecretVar, &oc.AuthnType)
 
 	return cmd
 }
@@ -706,7 +689,7 @@ func DescribeObjectTypeCommand() *cobra.Command {
 		RunE: otc.RunE,
 	}
 
-	common.AddAuthFlags(cmd, &otc.URL, &otc.ClientID, &otc.ClientSecret, &otc.ClientSecretVar, &otc.AutonType)
+	common.AddAuthFlags(cmd, &otc.URL, &otc.ClientID, &otc.ClientSecret, &otc.ClientSecretVar, &otc.AuthnType)
 
 	return cmd
 }
@@ -725,7 +708,7 @@ func DescribeEdgeCommand() *cobra.Command {
 		RunE: ec.RunE,
 	}
 
-	common.AddAuthFlags(cmd, &ec.URL, &ec.ClientID, &ec.ClientSecret, &ec.ClientSecretVar, &ec.AutonType)
+	common.AddAuthFlags(cmd, &ec.URL, &ec.ClientID, &ec.ClientSecret, &ec.ClientSecretVar, &ec.AuthnType)
 
 	return cmd
 }
@@ -742,7 +725,7 @@ func DescribeEdgeTypeCommand() *cobra.Command {
 		RunE: etc.RunE,
 	}
 
-	common.AddAuthFlags(cmd, &etc.URL, &etc.ClientID, &etc.ClientSecret, &etc.ClientSecretVar, &etc.AutonType)
+	common.AddAuthFlags(cmd, &etc.URL, &etc.ClientID, &etc.ClientSecret, &etc.ClientSecretVar, &etc.AuthnType)
 
 	return cmd
 }

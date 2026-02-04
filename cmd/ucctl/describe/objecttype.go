@@ -18,7 +18,7 @@ type ObjectTypeCommand struct {
 	ClientID        string
 	ClientSecret    string
 	ClientSecretVar string
-	AutonType       string
+	AuthnType       string
 
 	credentials *common.Credentials
 }
@@ -32,31 +32,17 @@ func (c *ObjectTypeCommand) RunE(cmd *cobra.Command, args []string) error {
 	ctx := cmd.Context()
 	objectTypeIdentifier := args[0]
 
-	// Load credentials
-	creds, err := common.LoadCredentialsFromContext(
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"",
-	)
+	var err error
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
-	credOpt, err := c.credentials.GetClientCredentials()
+	authzClient, err := c.credentials.NewAuthzClient()
 	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
+		return err
 	}
 
-	// Create AuthZ client
-	authzClient, err := authz.NewClient(c.credentials.URL, authz.JSONClient(credOpt))
-	if err != nil {
-		return fmt.Errorf("failed to create authz client: %w", err)
-	}
-
-	// Try to parse as UUID first
 	var objectType *authz.ObjectType
 	if objectTypeID, err := uuid.FromString(objectTypeIdentifier); err == nil {
 		objectType, err = authzClient.GetObjectType(ctx, objectTypeID)
@@ -71,7 +57,6 @@ func (c *ObjectTypeCommand) RunE(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	// Print formatted output
 	c.printObjectTypeDetails(ctx, objectType, authzClient)
 
 	return nil
@@ -152,23 +137,19 @@ func (c *ObjectTypeCommand) printObjectTypeDetails(ctx stdcontext.Context, objec
 }
 
 func (c *ObjectTypeCommand) getObjectsByType(ctx stdcontext.Context, client *authz.Client, objectTypeID uuid.UUID) []authz.Object {
-	objects := []authz.Object{}
-	cursor := pagination.CursorBegin
+	filterStr := fmt.Sprintf("('type_id',EQ,'%s')", objectTypeID)
 
-	for {
-		filterStr := fmt.Sprintf("('type_id',EQ,'%s')", objectTypeID)
+	objects, err := common.FetchAllPaginated(ctx, func(ctx stdcontext.Context, cursor pagination.Cursor) ([]authz.Object, pagination.Cursor, bool, error) {
 		paginationOpts := []pagination.Option{pagination.StartingAfter(cursor), pagination.Filter(filterStr)}
 		resp, err := client.ListObjects(ctx, authz.Pagination(paginationOpts...))
-
 		if err != nil {
-			return objects
+			return nil, "", false, err
 		}
+		return resp.Data, resp.Next, resp.HasNext, nil
+	})
 
-		objects = append(objects, resp.Data...)
-		if !resp.HasNext {
-			break
-		}
-		cursor = resp.Next
+	if err != nil {
+		return []authz.Object{}
 	}
 
 	return objects

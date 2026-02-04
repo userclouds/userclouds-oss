@@ -35,31 +35,15 @@ func (c *ObjectTypesCommand) RunE(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	// Load credentials from context or flags
-	creds, err := common.LoadCredentialsFromContext(
-		
-		
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"", // configPath - use default precedence
-	)
+	var err error
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
-	// Create client credentials option
-	credOpt, err := c.credentials.GetClientCredentials()
+	azClient, err := c.credentials.NewAuthzClient()
 	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
-	}
-
-	// Create AuthZ client
-	azClient, err := authz.NewClient(c.credentials.URL, authz.JSONClient(credOpt))
-	if err != nil {
-		return fmt.Errorf("failed to create AuthZ client: %w", err)
+		return err
 	}
 
 	// If output format is specified (and not table), fetch all data and output in that format
@@ -85,7 +69,6 @@ func (c *ObjectTypesCommand) outputFormatted(ctx context.Context, azClient *auth
 	cursor := c.Cursor
 	format := common.OutputFormat(c.Output)
 
-	// Create appropriate streaming writer
 	var writer interface{}
 	switch format {
 	case common.OutputFormatJSON:
@@ -139,25 +122,14 @@ func (c *ObjectTypesCommand) outputFormatted(ctx context.Context, azClient *auth
 func (c *ObjectTypesCommand) fetchObjectTypes(ctx context.Context, azClient *authz.Client, cursor string, limit int) ([]authz.ObjectType, string, error) {
 	var paginationOpts []pagination.Option
 
-	// Validate that both filter and raw-filter are not specified
-	if c.Filter != "" && c.RawFilter != "" {
-		return nil, "", fmt.Errorf("cannot specify both --filter and --raw-filter")
+	filterStr, err := common.GetFilterString(c.Filter, c.RawFilter, common.ObjectTypeFilterKeys)
+	if err != nil {
+		return nil, "", err
 	}
-
-	// Add filter if specified
-	if c.RawFilter != "" {
-		// Use raw filter directly
-		paginationOpts = append(paginationOpts, pagination.Filter(c.RawFilter))
-	} else if c.Filter != "" {
-		// Parse and format the filter
-		filterStr, err := common.FormatFilterString(c.Filter, common.ObjectTypeFilterKeys)
-		if err != nil {
-			return nil, "", err
-		}
+	if filterStr != "" {
 		paginationOpts = append(paginationOpts, pagination.Filter(filterStr))
 	}
 
-	// Add cursor and limit
 	if cursor != "" {
 		paginationOpts = append(paginationOpts, pagination.StartingAfter(pagination.Cursor(cursor)))
 	}
@@ -165,13 +137,11 @@ func (c *ObjectTypesCommand) fetchObjectTypes(ctx context.Context, azClient *aut
 		paginationOpts = append(paginationOpts, pagination.Limit(limit))
 	}
 
-	// Build authz options
 	var opts []authz.Option
 	if len(paginationOpts) > 0 {
 		opts = append(opts, authz.Pagination(paginationOpts...))
 	}
 
-	// Use paginated endpoint
 	resp, err := azClient.ListObjectTypesPaginated(ctx, opts...)
 	if err != nil {
 		return nil, "", ucerr.Wrap(err)
@@ -187,10 +157,10 @@ func (c *ObjectTypesCommand) fetchObjectTypes(ctx context.Context, azClient *aut
 
 func (c *ObjectTypesCommand) renderObjectTypesTable(objectTypes []authz.ObjectType) ([]common.TableColumn, []common.TableRow) {
 	columns := []common.TableColumn{
-		{Header: "ID", Width: 36},        // UUIDs are always 36 characters (fixed)
-		{Header: "TYPE_NAME", Width: 0},  // Dynamic width based on content
-		{Header: "CREATED", Width: 19},   // "2006-01-02 15:04:05" is 19 characters (fixed)
-		{Header: "UPDATED", Width: 19},   // "2006-01-02 15:04:05" is 19 characters (fixed)
+		{Header: "ID", Width: 36},       // UUIDs are always 36 characters (fixed)
+		{Header: "TYPE_NAME", Width: 0}, // Dynamic width based on content
+		{Header: "CREATED", Width: 19},  // "2006-01-02 15:04:05" is 19 characters (fixed)
+		{Header: "UPDATED", Width: 19},  // "2006-01-02 15:04:05" is 19 characters (fixed)
 	}
 
 	rows := make([]common.TableRow, len(objectTypes))

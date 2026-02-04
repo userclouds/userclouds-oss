@@ -1,0 +1,60 @@
+services:
+  postgres:
+    image: postgres:14
+    container_name: testdb
+    command: postgres -c max_connections=850
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: testredis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  mysql:
+    image: mysql:8.0
+    container_name: testmysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pmysecretpassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  consoleui:
+    image: node:18.18.0
+    container_name: testconsoleui
+    working_dir: /workspace/console/consoleui
+    command: >
+      sh -c "
+        npm install -g serve &&
+        serve -l 3057 -s build
+      "
+    volumes:
+      - ../../console/consoleui/build:/workspace/console/consoleui/build:ro
+    ports:
+      - "3057:3057"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3057"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+      start_period: 5s

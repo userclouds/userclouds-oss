@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
-	"os/exec"
 	"strings"
 	"testing"
 	"time"
@@ -35,7 +34,6 @@ import (
 	"userclouds.com/internal/tenantmap"
 	"userclouds.com/internal/testhelpers"
 	"userclouds.com/internal/uctest"
-	"userclouds.com/tools/generate/genschemas"
 )
 
 func TestSqlShim(t *testing.T) {
@@ -49,24 +47,22 @@ func TestSqlShim(t *testing.T) {
 
 	jwtVerifier := uctest.JWTVerifier{}
 	wc := workerclient.NewTestClient()
-	// need Mysql to be running for this test (Yext uses mysql not postgres)
-	_, _, name, dbPort := genschemas.StartTemporaryMysql(ctx, "mysql-proxy-test", 336)
-	defer func() {
-		assert.NoErr(t, exec.Command("docker", "rm", "-f", name).Run())
-	}()
+	// Use shared MySQL container from test harness (docker/test/docker-compose.yaml)
+	dbPort := 3306
 
 	proxyPort := 12300 + rand.Intn(100)
 
-	// create the test database
+	// create the test database (idempotent - safe to run multiple times)
 	db, err := sqlx.Open("mysql", fmt.Sprintf("root:mysecretpassword@tcp(127.0.0.1:%d)/sys", dbPort))
 	assert.NoErr(t, err)
-	_, err = db.Exec("CREATE DATABASE test;")
+	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS test;")
 	assert.NoErr(t, err)
 	assert.NoErr(t, db.Close())
 
 	// set up the test database (we need a new connection to that db specifically)
 	db, err = sqlx.Open("mysql", fmt.Sprintf("root:mysecretpassword@tcp(127.0.0.1:%d)/test", dbPort))
 	assert.NoErr(t, err)
+	db.MustExec("DROP TABLE IF EXISTS test")
 	db.MustExec("CREATE TABLE test (id INT PRIMARY KEY, name VARCHAR(255))")
 	db.MustExec("INSERT INTO test (id, name) VALUES (1, 'test')")
 	db.MustExec("INSERT INTO test (id, name) VALUES (2, 'test2')")

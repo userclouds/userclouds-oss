@@ -19,7 +19,7 @@ type EdgeTypeCommand struct {
 	ClientID        string
 	ClientSecret    string
 	ClientSecretVar string
-	AutonType       string
+	AuthnType       string
 
 	credentials *common.Credentials
 }
@@ -33,31 +33,17 @@ func (c *EdgeTypeCommand) RunE(cmd *cobra.Command, args []string) error {
 	ctx := cmd.Context()
 	edgeTypeIdentifier := args[0]
 
-	// Load credentials
-	creds, err := common.LoadCredentialsFromContext(
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"",
-	)
+	var err error
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
-	credOpt, err := c.credentials.GetClientCredentials()
+	authzClient, err := c.credentials.NewAuthzClient()
 	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
+		return err
 	}
 
-	// Create AuthZ client
-	authzClient, err := authz.NewClient(c.credentials.URL, authz.JSONClient(credOpt))
-	if err != nil {
-		return fmt.Errorf("failed to create authz client: %w", err)
-	}
-
-	// Try to parse as UUID first
 	var edgeType *authz.EdgeType
 	if edgeTypeID, err := uuid.FromString(edgeTypeIdentifier); err == nil {
 		edgeType, err = authzClient.GetEdgeType(ctx, edgeTypeID)
@@ -65,14 +51,12 @@ func (c *EdgeTypeCommand) RunE(cmd *cobra.Command, args []string) error {
 			return fmt.Errorf("failed to get edge type: %w", err)
 		}
 	} else {
-		// Search by name
 		edgeType, err = c.findEdgeTypeByName(ctx, authzClient, edgeTypeIdentifier)
 		if err != nil {
 			return err
 		}
 	}
 
-	// Get source and target object types
 	sourceObjType, err := authzClient.GetObjectType(ctx, edgeType.SourceObjectTypeID)
 	if err != nil {
 		return fmt.Errorf("failed to get source object type: %w", err)
@@ -83,7 +67,6 @@ func (c *EdgeTypeCommand) RunE(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to get target object type: %w", err)
 	}
 
-	// Print formatted output
 	c.printEdgeTypeDetails(ctx, edgeType, sourceObjType, targetObjType, authzClient)
 
 	return nil
@@ -174,23 +157,19 @@ func (c *EdgeTypeCommand) printEdgeTypeDetails(ctx stdcontext.Context, edgeType 
 }
 
 func (c *EdgeTypeCommand) getEdgesByType(ctx stdcontext.Context, client *authz.Client, edgeTypeID uuid.UUID) []authz.Edge {
-	edges := []authz.Edge{}
-	cursor := pagination.CursorBegin
+	filterStr := fmt.Sprintf("('edge_type_id',EQ,'%s')", edgeTypeID)
 
-	for {
-		filterStr := fmt.Sprintf("('edge_type_id',EQ,'%s')", edgeTypeID)
+	edges, err := common.FetchAllPaginated(ctx, func(ctx stdcontext.Context, cursor pagination.Cursor) ([]authz.Edge, pagination.Cursor, bool, error) {
 		paginationOpts := []pagination.Option{pagination.StartingAfter(cursor), pagination.Filter(filterStr)}
 		resp, err := client.ListEdges(ctx, authz.Pagination(paginationOpts...))
-
 		if err != nil {
-			return edges
+			return nil, "", false, err
 		}
+		return resp.Data, resp.Next, resp.HasNext, nil
+	})
 
-		edges = append(edges, resp.Data...)
-		if !resp.HasNext {
-			break
-		}
-		cursor = resp.Next
+	if err != nil {
+		return []authz.Edge{}
 	}
 
 	return edges

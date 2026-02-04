@@ -220,6 +220,7 @@ func parseFilterExpression(tokens []filterToken, validKeys []string) (string, in
 //   - & for AND operations
 //   - | for OR operations
 //   - () for grouping
+//
 // Examples:
 //   - "type_name=user" - exact match
 //   - "type_name=~user%" - pattern match (starts with "user")
@@ -256,4 +257,30 @@ func FormatFilterString(filterInput string, validKeys []string) (string, error) 
 	}
 
 	return result, nil
+}
+
+// ValidateFilterFlags validates that filter flags are not both specified
+func ValidateFilterFlags(filter, rawFilter string) error {
+	if filter != "" && rawFilter != "" {
+		return fmt.Errorf("cannot specify both --filter and --raw-filter")
+	}
+	return nil
+}
+
+// GetFilterString returns the appropriate filter string (raw or formatted)
+// Returns error if both are specified or if formatting fails
+func GetFilterString(filter, rawFilter string, validKeys []string) (string, error) {
+	if err := ValidateFilterFlags(filter, rawFilter); err != nil {
+		return "", err
+	}
+
+	if rawFilter != "" {
+		return rawFilter, nil
+	}
+
+	if filter != "" {
+		return FormatFilterString(filter, validKeys)
+	}
+
+	return "", nil
 }

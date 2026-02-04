@@ -22,36 +22,21 @@ type UserCommand struct {
 	ClientSecretVar string
 	AuthnType       string
 
-	// credentials holds the loaded credentials
 	credentials *common.Credentials
 }
 
 func (c *UserCommand) RunE(cmd *cobra.Command, args []string) error {
 	emailOrUuid := args[0]
 
-	// Load credentials from context or flags
-	creds, err := common.LoadCredentialsFromContext(
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"", // configPath - use default precedence
-	)
+	var err error
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
-	// Create client credentials option
-	credOpt, err := c.credentials.GetClientCredentials()
+	mgmtClient, err := c.credentials.NewManagementClient()
 	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
-	}
-
-	// Create IDP management client
-	mgmtClient, err := idp.NewManagementClient(c.credentials.URL, credOpt)
-	if err != nil {
-		return fmt.Errorf("failed to create IDP client: %w", err)
+		return err
 	}
 
 	var profiles []idp.UserBaseProfileAndAuthnResponse
@@ -100,9 +85,9 @@ func (c *UserCommand) RunE(cmd *cobra.Command, args []string) error {
 	}
 
 	// Create AuthZ client to get user's company memberships
-	authzClient, err := authz.NewClient(c.credentials.URL, authz.JSONClient(credOpt))
+	authzClient, err := c.credentials.NewAuthzClient()
 	if err != nil {
-		return fmt.Errorf("failed to create authz client: %w", err)
+		return err
 	}
 	rbacClient := authz.NewRBACClient(authzClient)
 

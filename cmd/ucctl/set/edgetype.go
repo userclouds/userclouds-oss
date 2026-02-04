@@ -65,31 +65,14 @@ func (c *EdgeTypeCommand) RunE(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	// Load credentials from context or flags
-	creds, err := common.LoadCredentialsFromContext(
-		
-		
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"", // configPath - use default precedence
-	)
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
-	// Create client credentials option
-	credOpt, err := c.credentials.GetClientCredentials()
+	azClient, err := c.credentials.NewAuthzClient()
 	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
-	}
-
-	// Create AuthZ client
-	azClient, err := authz.NewClient(c.credentials.URL, authz.JSONClient(credOpt))
-	if err != nil {
-		return fmt.Errorf("failed to create AuthZ client: %w", err)
+		return err
 	}
 
 	// Update the edge type

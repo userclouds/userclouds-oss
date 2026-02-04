@@ -46,7 +46,7 @@ Before(async function (this: CukeWorld) {
   this.page = await this.browserContext.newPage();
 
   this.makeAxeBuilder = () => {
-    const builder = new AxeBuilder({ page: this.page }).withTags(
+    const builder = new AxeBuilder({ page: this.page as any }).withTags(
       axeConfig.tags
     );
 

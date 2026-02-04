@@ -8,6 +8,7 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 )
 
+// NewClient configures and returns a kubernetes client interface
 func NewClient() (kubernetes.Interface, error) {
 	var kubeconfig *rest.Config
 

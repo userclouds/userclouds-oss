@@ -7,7 +7,7 @@
     "node": "18.18.0"
   },
   "dependencies": {
-    "@axe-core/playwright": "^4.10.1",
+    "@axe-core/playwright": "^4.10.2",
     "@babel/core": "^7.16.0",
     "@cucumber/cucumber": "8.10.0",
     "@cucumber/messages": "^27.0.0",
@@ -43,7 +43,8 @@
     "jasmine": "^4.5.0",
     "mini-css-extract-plugin": "^2.4.5",
     "path-to-regexp": "^6.3.0",
-    "playwright": "^1.27.1",
+    "playwright": "^1.48.1",
+    "playwright-core": "^1.48.1",
     "postcss": "^8.4.31",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^6.2.1",
@@ -75,10 +76,10 @@
     "dev": "PORT=3010 HOST=console.dev.userclouds.tools HTTPS=true SSL_CRT_FILE=../../cert/devlb.crt SSL_KEY_FILE=../../cert/devlb.key NODE_EXTRA_CA_CERTS=../../cert/devlb-CA.crt node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "yarn run test:unit && yarn run test:func",
-    "test:unit": "ts-node-esm --project tsconfig.json ../../node_modules/.bin/jasmine --config=./jasmine.json",
-    "test:func": "PORT=3057 NODE_ENV=test node --loader ts-node/esm ../../node_modules/.bin/cucumber-js",
-    "test:func:debug": "DEBUG=true PORT=3057 NODE_ENV=test node inspect ../../node_modules/.bin/cucumber-js",
-    "test:func:debug-ide": "DEBUG=true PORT=3057 NODE_ENV=test node --inspect ../../node_modules/.bin/cucumber-js",
+    "test:unit": "ts-node-esm --project tsconfig.json $(yarn bin jasmine) --config=./jasmine.json",
+    "test:func": "PORT=3057 NODE_ENV=test yarn exec cucumber-js",
+    "test:func:debug": "DEBUG=true PORT=3057 NODE_ENV=test yarn node inspect $(yarn bin cucumber-js)",
+    "test:func:debug-ide": "DEBUG=true PORT=3057 NODE_ENV=test yarn node --inspect $(yarn bin cucumber-js)",
     "lint": "yarn run eslint --max-warnings=0 src/ features/",
     "lintfix": "yarn run eslint --max-warnings=0 --fix --quiet src/ features/",
     "format": "yarn run prettier --write './{src,features,scripts}/**/*.{ts,tsx,js,mjs,json,css,scss,feature}'"

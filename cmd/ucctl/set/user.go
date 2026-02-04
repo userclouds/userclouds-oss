@@ -29,7 +29,6 @@ type UserCommand struct {
 	OIDCSubject     string
 	Verbose         bool
 
-	// credentials holds the loaded credentials
 	credentials *common.Credentials
 }
 
@@ -52,23 +51,15 @@ func (c *UserCommand) RunE(cmd *cobra.Command, args []string) error {
 }
 
 func (c *UserCommand) validate(args []string) error {
-	// User email is required as an argument
 	if len(args) != 1 {
 		return fmt.Errorf("user email is required")
 	}
 
-	// Load credentials from context or flags
-	creds, err := common.LoadCredentialsFromContext(
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"", // configPath - use default precedence
-	)
+	var err error
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
 	// Validate authentication method (optional - can update user without changing authn)
 	hasPassword := c.Username != "" && c.Password != ""
@@ -94,16 +85,10 @@ func (c *UserCommand) validate(args []string) error {
 }
 
 func (c *UserCommand) updateUser(ctx context.Context, cmd *cobra.Command, userEmail string) error {
-	// Create client credentials option
-	credOpt, err := c.credentials.GetClientCredentials()
-	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
-	}
-
 	// Create IDP management client
-	mgmtClient, err := idp.NewManagementClient(c.credentials.URL, credOpt)
+	mgmtClient, err := c.credentials.NewManagementClient()
 	if err != nil {
-		return fmt.Errorf("failed to create IDP client: %w", err)
+		return err
 	}
 
 	// Get single user ID by email
@@ -120,6 +105,7 @@ func (c *UserCommand) updateUser(ctx context.Context, cmd *cobra.Command, userEm
 	if c.Name != "" {
 		profile["name"] = c.Name
 	}
+
 	// Check if email_verified flag was explicitly set
 	if cmd.Flags().Changed("email-verified") {
 		profile["email_verified"] = c.EmailVerified
@@ -130,7 +116,6 @@ func (c *UserCommand) updateUser(ctx context.Context, cmd *cobra.Command, userEm
 		req := idp.UpdateUserRequest{
 			Profile: profile,
 		}
-
 		_, err = mgmtClient.UpdateUser(ctx, userID, req)
 		if err != nil {
 			return fmt.Errorf("failed to update user profile: %w", err)
@@ -151,7 +136,6 @@ func (c *UserCommand) updateUser(ctx context.Context, cmd *cobra.Command, userEm
 		if err := provider.UnmarshalText([]byte(c.OIDCProvider)); err != nil {
 			return fmt.Errorf("invalid OIDC provider: %w", err)
 		}
-
 		// Note: There's no direct update OIDC method in the management client
 		// This would typically require deleting and recreating the OIDC authentication
 		// or using a lower-level API call
@@ -159,6 +143,5 @@ func (c *UserCommand) updateUser(ctx context.Context, cmd *cobra.Command, userEm
 	}
 
 	fmt.Printf("User updated: %s\n", userID)
-
 	return nil
 }

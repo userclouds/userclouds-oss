@@ -37,33 +37,19 @@ type AuthzDump struct {
 func (c *AuthzCommand) RunE(cmd *cobra.Command, args []string) error {
 	ctx := cmd.Context()
 
-	// Load credentials
-	creds, err := common.LoadCredentialsFromContext(
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"",
-	)
+	var err error
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
-	credOpt, err := c.credentials.GetClientCredentials()
+	authzClient, err := c.credentials.NewAuthzClient()
 	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
-	}
-
-	// Create AuthZ client
-	authzClient, err := authz.NewClient(c.credentials.URL, authz.JSONClient(credOpt))
-	if err != nil {
-		return fmt.Errorf("failed to create authz client: %w", err)
+		return err
 	}
 
 	fmt.Println("Dumping authz resources...")
 
-	// Fetch all resources
 	dump := &AuthzDump{}
 
 	fmt.Println("Fetching object types...")
@@ -126,43 +112,23 @@ func (c *AuthzCommand) fetchAllEdgeTypes(ctx context.Context, client *authz.Clie
 }
 
 func (c *AuthzCommand) fetchAllObjects(ctx context.Context, client *authz.Client) ([]authz.Object, error) {
-	objects := []authz.Object{}
-	cursor := pagination.CursorBegin
-
-	for {
+	return common.FetchAllPaginated(ctx, func(ctx context.Context, cursor pagination.Cursor) ([]authz.Object, pagination.Cursor, bool, error) {
 		paginationOpts := []pagination.Option{pagination.StartingAfter(cursor), pagination.Limit(100)}
 		resp, err := client.ListObjects(ctx, authz.Pagination(paginationOpts...))
 		if err != nil {
-			return nil, err
+			return nil, "", false, err
 		}
-
-		objects = append(objects, resp.Data...)
-		if !resp.HasNext {
-			break
-		}
-		cursor = resp.Next
-	}
-
-	return objects, nil
+		return resp.Data, resp.Next, resp.HasNext, nil
+	})
 }
 
 func (c *AuthzCommand) fetchAllEdges(ctx context.Context, client *authz.Client) ([]authz.Edge, error) {
-	edges := []authz.Edge{}
-	cursor := pagination.CursorBegin
-
-	for {
+	return common.FetchAllPaginated(ctx, func(ctx context.Context, cursor pagination.Cursor) ([]authz.Edge, pagination.Cursor, bool, error) {
 		paginationOpts := []pagination.Option{pagination.StartingAfter(cursor), pagination.Limit(100)}
 		resp, err := client.ListEdges(ctx, authz.Pagination(paginationOpts...))
 		if err != nil {
-			return nil, err
+			return nil, "", false, err
 		}
-
-		edges = append(edges, resp.Data...)
-		if !resp.HasNext {
-			break
-		}
-		cursor = resp.Next
-	}
-
-	return edges, nil
+		return resp.Data, resp.Next, resp.HasNext, nil
+	})
 }

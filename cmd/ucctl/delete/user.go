@@ -8,7 +8,6 @@ import (
 	"github.com/spf13/cobra"
 
 	"userclouds.com/cmd/ucctl/common"
-	"userclouds.com/idp"
 )
 
 // UserCommand handles the delete user subcommand
@@ -21,7 +20,6 @@ type UserCommand struct {
 	AutoApprove     bool
 	Verbose         bool
 
-	// credentials holds the loaded credentials
 	credentials *common.Credentials
 }
 
@@ -47,33 +45,21 @@ func (c *UserCommand) RunE(cmd *cobra.Command, args []string) error {
 }
 
 func (c *UserCommand) validate() error {
-	// Load credentials from context or flags
-	creds, err := common.LoadCredentialsFromContext(
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"", // configPath - use default precedence
-	)
+	var err error
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
 	return nil
 }
 
 func (c *UserCommand) deleteUser(ctx context.Context, userIdentifier string) error {
 	// Create client credentials option
-	credOpt, err := c.credentials.GetClientCredentials()
-	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
-	}
-
 	// Create IDP management client
-	mgmtClient, err := idp.NewManagementClient(c.credentials.URL, credOpt)
+	mgmtClient, err := c.credentials.NewManagementClient()
 	if err != nil {
-		return fmt.Errorf("failed to create IDP client: %w", err)
+		return err
 	}
 
 	var userIDs []uuid.UUID

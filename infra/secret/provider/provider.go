@@ -45,9 +45,10 @@ func FromEnv() (Interface, error) {
 	}
 
 	storeMap := map[string]Interface{
-		"aws":        aws.New(),
-		"kubernetes": kubernetes.New(),
-		"dev":        dev.New(),
+		"aws":         aws.New(),
+		"kubernetes":  kubernetes.New(),
+		"dev":         dev.New(),
+		"dev-literal": dev.New().WithLiterals(),
 	}
 
 	provider, found := storeMap[value]

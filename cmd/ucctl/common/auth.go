@@ -11,6 +11,8 @@ import (
 
 	"github.com/spf13/cobra"
 	"golang.org/x/oauth2"
+	"userclouds.com/authz"
+	"userclouds.com/idp"
 	"userclouds.com/infra/jsonclient"
 	"userclouds.com/infra/oidc"
 	"userclouds.com/infra/secret"
@@ -430,6 +432,38 @@ func openBrowser(url string) error {
 	}
 
 	return cmd.Start()
+}
+
+// LoadAndSetCredentials loads credentials using default config path precedence
+// This is a convenience wrapper around LoadCredentialsFromContext with empty configPath
+func LoadAndSetCredentials(url, clientID, clientSecret, clientSecretVar string) (*Credentials, error) {
+	return LoadCredentialsFromContext(url, clientID, clientSecret, clientSecretVar, "")
+}
+
+// NewAuthzClient creates an authenticated authz client
+func (c *Credentials) NewAuthzClient() (*authz.Client, error) {
+	credOpt, err := c.GetClientCredentials()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create client credentials: %w", err)
+	}
+	client, err := authz.NewClient(c.URL, authz.JSONClient(credOpt))
+	if err != nil {
+		return nil, fmt.Errorf("failed to create AuthZ client: %w", err)
+	}
+	return client, nil
+}
+
+// NewManagementClient creates an authenticated IDP management client
+func (c *Credentials) NewManagementClient() (*idp.ManagementClient, error) {
+	credOpt, err := c.GetClientCredentials()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create client credentials: %w", err)
+	}
+	client, err := idp.NewManagementClient(c.URL, credOpt)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create IDP client: %w", err)
+	}
+	return client, nil
 }
 
 // AddAuthFlags adds standard authentication flags to a command

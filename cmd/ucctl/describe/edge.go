@@ -18,7 +18,7 @@ type EdgeCommand struct {
 	ClientID        string
 	ClientSecret    string
 	ClientSecretVar string
-	AutonType       string
+	AuthnType       string
 
 	credentials *common.Credentials
 }
@@ -38,43 +38,26 @@ func (c *EdgeCommand) RunE(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("invalid edge ID: %w", err)
 	}
 
-	// Load credentials
-	creds, err := common.LoadCredentialsFromContext(
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"",
-	)
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
-	credOpt, err := c.credentials.GetClientCredentials()
+	authzClient, err := c.credentials.NewAuthzClient()
 	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
+		return err
 	}
 
-	// Create AuthZ client
-	authzClient, err := authz.NewClient(c.credentials.URL, authz.JSONClient(credOpt))
-	if err != nil {
-		return fmt.Errorf("failed to create authz client: %w", err)
-	}
-
-	// Get edge
 	edge, err := authzClient.GetEdge(ctx, edgeID)
 	if err != nil {
 		return fmt.Errorf("failed to get edge: %w", err)
 	}
 
-	// Get edge type
 	edgeType, err := authzClient.GetEdgeType(ctx, edge.EdgeTypeID)
 	if err != nil {
 		return fmt.Errorf("failed to get edge type: %w", err)
 	}
 
-	// Get source and target objects
 	sourceObj, err := authzClient.GetObject(ctx, edge.SourceObjectID)
 	if err != nil {
 		return fmt.Errorf("failed to get source object: %w", err)
@@ -85,7 +68,6 @@ func (c *EdgeCommand) RunE(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to get target object: %w", err)
 	}
 
-	// Print formatted output
 	c.printEdgeDetails(ctx, edge, edgeType, sourceObj, targetObj, authzClient)
 
 	return nil

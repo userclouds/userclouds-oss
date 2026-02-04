@@ -18,7 +18,7 @@ type ObjectCommand struct {
 	ClientID        string
 	ClientSecret    string
 	ClientSecretVar string
-	AutonType       string
+	AuthnType       string
 
 	credentials *common.Credentials
 }
@@ -32,49 +32,31 @@ func (c *ObjectCommand) RunE(cmd *cobra.Command, args []string) error {
 	ctx := cmd.Context()
 	objectIDStr := args[0]
 
-	// Parse object ID
 	objectID, err := uuid.FromString(objectIDStr)
 	if err != nil {
 		return fmt.Errorf("invalid object ID: %w", err)
 	}
 
-	// Load credentials
-	creds, err := common.LoadCredentialsFromContext(
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"",
-	)
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
-	credOpt, err := c.credentials.GetClientCredentials()
+	authzClient, err := c.credentials.NewAuthzClient()
 	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
+		return err
 	}
 
-	// Create AuthZ client
-	authzClient, err := authz.NewClient(c.credentials.URL, authz.JSONClient(credOpt))
-	if err != nil {
-		return fmt.Errorf("failed to create authz client: %w", err)
-	}
-
-	// Get object
 	object, err := authzClient.GetObject(ctx, objectID)
 	if err != nil {
 		return fmt.Errorf("failed to get object: %w", err)
 	}
 
-	// Get object type
 	objectType, err := authzClient.GetObjectType(ctx, object.TypeID)
 	if err != nil {
 		return fmt.Errorf("failed to get object type: %w", err)
 	}
 
-	// Print formatted output
 	c.printObjectDetails(ctx, object, objectType, authzClient)
 
 	return nil
@@ -137,29 +119,24 @@ func (c *ObjectCommand) printObjectDetails(ctx stdcontext.Context, object *authz
 }
 
 func (c *ObjectCommand) getEdges(ctx stdcontext.Context, client *authz.Client, objectID uuid.UUID, asSource bool) []authz.Edge {
-	edges := []authz.Edge{}
-	cursor := pagination.CursorBegin
+	var filterStr string
+	if asSource {
+		filterStr = fmt.Sprintf("('source_object_id',EQ,'%s')", objectID)
+	} else {
+		filterStr = fmt.Sprintf("('target_object_id',EQ,'%s')", objectID)
+	}
 
-	for {
-		var filterStr string
-		if asSource {
-			filterStr = fmt.Sprintf("('source_object_id',EQ,'%s')", objectID)
-		} else {
-			filterStr = fmt.Sprintf("('target_object_id',EQ,'%s')", objectID)
-		}
-
+	edges, err := common.FetchAllPaginated(ctx, func(ctx stdcontext.Context, cursor pagination.Cursor) ([]authz.Edge, pagination.Cursor, bool, error) {
 		paginationOpts := []pagination.Option{pagination.StartingAfter(cursor), pagination.Filter(filterStr)}
 		resp, err := client.ListEdges(ctx, authz.Pagination(paginationOpts...))
-
 		if err != nil {
-			return edges
+			return nil, "", false, err
 		}
+		return resp.Data, resp.Next, resp.HasNext, nil
+	})
 
-		edges = append(edges, resp.Data...)
-		if !resp.HasNext {
-			break
-		}
-		cursor = resp.Next
+	if err != nil {
+		return []authz.Edge{}
 	}
 
 	return edges

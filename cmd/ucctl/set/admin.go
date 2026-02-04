@@ -10,7 +10,6 @@ import (
 	"userclouds.com/authz"
 	"userclouds.com/authz/ucauthz"
 	"userclouds.com/cmd/ucctl/common"
-	"userclouds.com/idp"
 )
 
 // AdminCommand handles the set admin subcommand
@@ -28,7 +27,6 @@ type AdminCommand struct {
 	CompanyID       string
 	Verbose         bool
 
-	// credentials holds the loaded credentials
 	credentials       *common.Credentials
 	tenantCredentials *common.Credentials
 }
@@ -50,17 +48,11 @@ func (c *AdminCommand) RunE(cmd *cobra.Command, args []string) error {
 
 func (c *AdminCommand) validate() error {
 	// Load console tenant credentials from context or flags (for user lookup)
-	creds, err := common.LoadCredentialsFromContext(
-		c.URL,
-		c.ClientID,
-		c.ClientSecret,
-		c.ClientSecretVar,
-		"", // configPath - use default precedence
-	)
+	var err error
+	c.credentials, err = common.LoadAndSetCredentials(c.URL, c.ClientID, c.ClientSecret, c.ClientSecretVar)
 	if err != nil {
 		return err
 	}
-	c.credentials = creds
 
 	// User must be specified by either email or ID
 	if c.UserEmail == "" && c.UserID == "" {
@@ -135,16 +127,10 @@ func (c *AdminCommand) setAdmin(ctx context.Context) error {
 }
 
 func (c *AdminCommand) getUserIDByEmail(ctx context.Context) (uuid.UUID, error) {
-	// Get client credentials
-	credOpt, err := c.credentials.GetClientCredentials()
+	// Create IDP management client (connects to console tenant by default via context)
+	mgmtClient, err := c.credentials.NewManagementClient()
 	if err != nil {
 		return uuid.Nil, err
-	}
-
-	// Create IDP management client (connects to console tenant by default via context)
-	mgmtClient, err := idp.NewManagementClient(c.credentials.URL, credOpt)
-	if err != nil {
-		return uuid.Nil, fmt.Errorf("failed to create IDP client: %w", err)
 	}
 
 	// Get single user ID by email
@@ -213,16 +199,10 @@ func (c *AdminCommand) setAdminForCompany(ctx context.Context, userID uuid.UUID)
 		return fmt.Errorf("invalid company ID: %w", err)
 	}
 
-	// Get client credentials
-	credOpt, err := c.credentials.GetClientCredentials()
-	if err != nil {
-		return fmt.Errorf("failed to create client credentials: %w", err)
-	}
-
 	// Create authz client connected to console tenant
-	authzClient, err := authz.NewClient(c.credentials.URL, authz.JSONClient(credOpt))
+	authzClient, err := c.credentials.NewAuthzClient()
 	if err != nil {
-		return fmt.Errorf("failed to create authz client: %w", err)
+		return err
 	}
 
 	rbacClient := authz.NewRBACClient(authzClient)

@@ -17,7 +17,7 @@ var baseDirOnce sync.Once
 func BaseDir() string {
 
 	baseDirOnce.Do(func() {
-		// we choose the last case of `userclouds` rather than the first, since we can "guarantee"
+		// we choose the last case of `userclouds` or `userclouds-oss` rather than the first, since we can "guarantee"
 		// that we don't nest userclouds inside our repo, but not outside (eg @kutta.s has org/repo nested)
 		// TODO: there's probably a more elegant / less fragile way to do this?
 		wd, err := os.Getwd()
@@ -30,7 +30,7 @@ func BaseDir() string {
 		dirs := strings.Split(wd, "/")
 		var last int
 		for i, d := range dirs {
-			if d == "userclouds" {
+			if d == "userclouds" || d == "userclouds-oss" {
 				last = i
 			}
 		}

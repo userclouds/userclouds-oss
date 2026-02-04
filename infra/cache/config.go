@@ -47,7 +47,7 @@ func (cfg RedisConfig) CacheKey() string {
 // RegionalRedisConfig holds redis connection info for a specific region
 type RegionalRedisConfig struct {
 	RedisConfig `yaml:",inline" json:",inline"` // embedding this to make it easy to manage
-	Region      region.MachineRegion            `json:"region" yaml:"region"`
+	Region      region.MachineRegion `json:"region" yaml:"region"`
 }
 
 //go:generate genvalidate RegionalRedisConfig
