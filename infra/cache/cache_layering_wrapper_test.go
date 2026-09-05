@@ -4,6 +4,8 @@ import (
 	"context"
 	"testing"
 
+	"github.com/gofrs/uuid"
+
 	"userclouds.com/infra/assert"
 )
 
@@ -127,4 +129,31 @@ func TestLayeringCache(t *testing.T) {
 		lcp := getLayeringCacheProvider(t, "")
 		testSupportedRateLimitsSingleThreaded(ctx, t, lcp)
 	})
+
+	t.Run("TestReadLockReleasedWhenOuterLockFails", func(t *testing.T) {
+		t.Parallel()
+		lcp := getLayeringCacheProvider(t, "")
+		testReadLockReleasedWhenOuterLockFails(ctx, t, lcp)
+	})
+}
+
+// testReadLockReleasedWhenOuterLockFails validates that a read lock taken in the inner cache is released when
+// the outer cache refuses to grant a lock for the same key. Otherwise the inner cache key stays locked until the
+// sentinel expires, blocking reads of that key, and the caller gets back a sentinel that it can't use to set a value.
+func testReadLockReleasedWhenOuterLockFails(ctx context.Context, t *testing.T, l *LayeringWrapper) {
+	key := Key(uuid.Must(uuid.NewV4()).String())
+
+	// Take a read lock on the key in the outer cache only, so the outer cache refuses to grant a lock for it below
+	_, _, outerSentinel, _, err := l.cacheOuter.GetValue(ctx, key, true)
+	assert.NoErr(t, err)
+	assert.NotEqual(t, outerSentinel, NoLockSentinel, assert.Must(), assert.Errorf("Expected to lock key %v in the outer cache", key))
+
+	// The key is missing from the inner cache, so this read takes a lock there, but it can't take one in the outer cache
+	val, _, sentinel, _, err := l.GetValue(ctx, key, true)
+	assert.NoErr(t, err)
+	assert.IsNil(t, val, assert.Errorf("Expected a miss on key %v in both caches", key))
+
+	// Since we couldn't lock the key in both caches, we don't hold a usable lock and the inner cache lock must be released
+	assert.Equal(t, sentinel, NoLockSentinel, assert.Errorf("Expected no lock on key %v after failing to lock the outer cache", key))
+	validateKeyContents(t, l.cacheInner, string(key), "", false, false)
 }

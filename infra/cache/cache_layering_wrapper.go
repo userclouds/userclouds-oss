@@ -84,7 +84,7 @@ func (l *LayeringWrapper) GetValue(ctx context.Context, key Key, lockOnMiss bool
 	}
 
 	// If we didn't get a lock in the cache further away, release the lock we got in the cache closer to the data consumer
-	if lockOnMiss && sentinelInner == NoLockSentinel {
+	if sentinelInner != NoLockSentinel && sentinelOuter == NoLockSentinel {
 		l.cacheInner.ReleaseSentinel(ctx, []Key{key}, sentinelInner)
 		sentinelInner = NoLockSentinel
 	}
